@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IBidListService {
 
-    List<BidList> getAllBidList();
+    List<BidList> getAllBidLists();
 
     BidList getBidListById(Integer id);
 

@@ -1,0 +1,34 @@
+package com.nnk.springboot.services;
+
+import com.nnk.springboot.domain.User;
+import com.nnk.springboot.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.transaction.Transactional;
+import java.util.List;
+
+@Transactional
+public class UserImplService implements IUserService {
+
+    @Autowired
+    UserRepository userRepository;
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        return userRepository.getOne(id);
+    }
+
+    @Override
+    public User saveOrUpdate(User User) {
+        return userRepository.save(User);
+    }
+
+    @Override
+    public void delete (Integer id) {
+        userRepository.deleteById(id);
+    }
+}

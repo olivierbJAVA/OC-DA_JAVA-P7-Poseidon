@@ -8,12 +8,12 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public class BidListService implements IBidListService {
+public class BidListImplService implements IBidListService {
 
     @Autowired
     BidListRepository bidListRepository;
 
-    public List<BidList> getAllBidList() {
+    public List<BidList> getAllBidLists() {
         return bidListRepository.findAll();
     }
 
