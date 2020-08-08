@@ -23,19 +23,15 @@ public class BidList {
     @NotBlank(message = "Type is mandatory")
     private String type;
 
-    @NotBlank(message = "BidQuantity is mandatory")
     @Digits(message = "BidQuantity must be digits number", integer = 6, fraction = 0)
     private Double bidQuantity;
 
-    @NotBlank(message = "AskQuantity is mandatory")
     @Digits(message = "AskQuantity must be digits number", integer = 6, fraction = 0)
     private Double askQuantity;
 
-    @NotBlank(message = "Bid is mandatory")
     @Digits(message = "Bid must be digits number", integer = 3, fraction = 2)
     private Double bid;
 
-    @NotBlank(message = "Ask is mandatory")
     @Digits(message = "Ask must be digits number", integer = 3, fraction = 2)
     private Double ask;
 
