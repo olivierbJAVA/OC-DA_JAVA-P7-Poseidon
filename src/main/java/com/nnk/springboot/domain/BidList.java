@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Required;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -23,22 +24,22 @@ public class BidList {
     @NotBlank(message = "Type is mandatory")
     private String type;
 
-    @Digits(message = "BidQuantity must be digits number", integer = 6, fraction = 0)
+    @Digits(message = "BidQuantity must be digits number", integer = 6, fraction = 2)
     private Double bidQuantity;
 
-    @Digits(message = "AskQuantity must be digits number", integer = 6, fraction = 0)
+    @Digits(message = "AskQuantity must be digits number", integer = 6, fraction = 2)
     private Double askQuantity;
 
-    @Digits(message = "Bid must be digits number", integer = 3, fraction = 2)
+    @Digits(message = "Bid must be digits number", integer = 6, fraction = 2)
     private Double bid;
 
-    @Digits(message = "Ask must be digits number", integer = 3, fraction = 2)
+    @Digits(message = "Ask must be digits number", integer = 6, fraction = 2)
     private Double ask;
 
     @NotBlank(message = "Benchmark is mandatory")
     private String benchmark;
 
-    @NotBlank(message = "BidListDate is mandatory")
+    @NotNull(message = "BidListDate is mandatory")
     private Timestamp bidListDate;
 
     private String commentary;
@@ -58,7 +59,7 @@ public class BidList {
     @NotBlank(message = "CreationName is mandatory")
     private String creationName;
 
-    @NotBlank(message = "CreationDate is mandatory")
+    @NotNull(message = "CreationDate is mandatory")
     private Timestamp creationDate;
 
     private String revisionName;
@@ -80,7 +81,7 @@ public class BidList {
     public BidList() {
     }
 
-    public BidList(@NotBlank(message = "Account is mandatory") String account, @NotBlank(message = "Type is mandatory") String type, @NotBlank(message = "BidQuantity is mandatory") @Digits(message = "BidQuantity must be digits number", integer = 6, fraction = 0) Double bidQuantity, @NotBlank(message = "AskQuantity is mandatory") @Digits(message = "AskQuantity must be digits number", integer = 6, fraction = 0) Double askQuantity, @NotBlank(message = "Bid is mandatory") @Digits(message = "Bid must be digits number", integer = 3, fraction = 2) Double bid, @NotBlank(message = "Ask is mandatory") @Digits(message = "Ask must be digits number", integer = 3, fraction = 2) Double ask, @NotBlank(message = "Benchmark is mandatory") String benchmark, @NotBlank(message = "BidListDate is mandatory") Timestamp bidListDate, String commentary, @NotBlank(message = "Security is mandatory") String security, @NotBlank(message = "Status is mandatory") String status, @NotBlank(message = "Trader is mandatory") String trader, @NotBlank(message = "Book is mandatory") String book, @NotBlank(message = "CreationName is mandatory") String creationName, @NotBlank(message = "CreationDate is mandatory") Timestamp creationDate, String revisionName, Timestamp revisionDate, @NotBlank(message = "DealName is mandatory") String dealName, @NotBlank(message = "DealType is mandatory") String dealType, @NotBlank(message = "SourceListId is mandatory") String sourceListId, @NotBlank(message = "Side is mandatory") String side) {
+    public BidList(@NotBlank(message = "Account is mandatory") String account, @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BidQuantity must be digits number", integer = 6, fraction = 0) Double bidQuantity, @Digits(message = "AskQuantity must be digits number", integer = 6, fraction = 0) Double askQuantity, @Digits(message = "Bid must be digits number", integer = 3, fraction = 2) Double bid, @Digits(message = "Ask must be digits number", integer = 3, fraction = 2) Double ask, @NotBlank(message = "Benchmark is mandatory") String benchmark, @NotNull(message = "BidListDate is mandatory") Timestamp bidListDate, String commentary, @NotBlank(message = "Security is mandatory") String security, @NotBlank(message = "Status is mandatory") String status, @NotBlank(message = "Trader is mandatory") String trader, @NotBlank(message = "Book is mandatory") String book, @NotBlank(message = "CreationName is mandatory") String creationName, @NotNull(message = "CreationDate is mandatory") Timestamp creationDate, String revisionName, Timestamp revisionDate, @NotBlank(message = "DealName is mandatory") String dealName, @NotBlank(message = "DealType is mandatory") String dealType, @NotBlank(message = "SourceListId is mandatory") String sourceListId, @NotBlank(message = "Side is mandatory") String side) {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;

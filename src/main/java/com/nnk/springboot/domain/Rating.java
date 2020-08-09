@@ -1,6 +1,7 @@
 package com.nnk.springboot.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
@@ -23,13 +24,13 @@ public class Rating {
     @NotBlank(message = "FitchRating is mandatory")
     private String fitchRating;
 
-    @NotNull(message = "OrderNumber must not been null")
+    @Digits(message = "OrderNumber must be integer number", integer = 4, fraction = 0)
     private Integer orderNumber;
 
     public Rating() {
     }
 
-    public Rating(@NotBlank(message = "MoodysRating is mandatory") String moodysRating, @NotBlank(message = "SandPRating is mandatory") String sandPRating, @NotBlank(message = "FitchRating is mandatory") String fitchRating, @NotNull(message = "OrderNumber must not been null") Integer orderNumber) {
+    public Rating(@NotBlank(message = "MoodysRating is mandatory") String moodysRating, @NotBlank(message = "SandPRating is mandatory") String sandPRating, @NotBlank(message = "FitchRating is mandatory") String fitchRating, @Digits(message = "OrderNumber must be integer number", integer = 4, fraction = 0) Integer orderNumber) {
         this.moodysRating = moodysRating;
         this.sandPRating = sandPRating;
         this.fitchRating = fitchRating;

@@ -3,10 +3,10 @@ package com.nnk.springboot.domain;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
-
 
 @Entity
 @Table(name = "curvepoint")
@@ -17,25 +17,25 @@ public class CurvePoint {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotNull(message = "CurveId must not been null")
+    @Digits(message = "CurveId must be integer number", integer = 4, fraction = 0)
     private Integer curveId;
 
-    @NotBlank(message = "AsOfDate is mandatory")
+    @NotNull(message = "AsOfDate is mandatory")
     private Timestamp asOfDate;
 
-    @NotNull(message = "Term must not been null")
+    @Digits(message = "Term must be digits number", integer = 3, fraction = 2)
     private Double term;
 
-    @NotNull(message = "Value must not been null")
+    @Digits(message = "Value must be digits number", integer = 3, fraction = 2)
     private Double value;
 
-    @NotBlank(message = "Account is mandatory")
+    @NotNull(message = "CreationDate is mandatory")
     private Timestamp creationDate;
 
     public CurvePoint() {
     }
 
-    public CurvePoint(@NotNull(message = "CurveId must not been null") Integer curveId, @NotBlank(message = "AsOfDate is mandatory") Timestamp asOfDate, @NotNull(message = "Term must not been null") Double term, @NotNull(message = "Value must not been null") Double value, @NotBlank(message = "Account is mandatory") Timestamp creationDate) {
+    public CurvePoint(@Digits(message = "CurveId must be integer number", integer = 4, fraction = 0) Integer curveId, @NotNull(message = "AsOfDate is mandatory") Timestamp asOfDate, @Digits(message = "Term must be digits number", integer = 3, fraction = 2) Double term, @Digits(message = "Value must be digits number", integer = 3, fraction = 2) Double value, @NotNull(message = "CreationDate is mandatory") Timestamp creationDate) {
         this.curveId = curveId;
         this.asOfDate = asOfDate;
         this.term = term;
