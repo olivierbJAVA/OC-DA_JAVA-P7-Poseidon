@@ -10,8 +10,9 @@ public interface IUserService {
 
     User getUserById(Integer id);
 
-    User saveOrUpdate(User user);
+    User saveUser(User user);
 
-    void delete (Integer id);
+    User updateUser(User user);
 
+    void deleteUser(Integer id);
 }

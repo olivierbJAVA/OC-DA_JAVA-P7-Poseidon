@@ -25,12 +25,17 @@ public class CurvePointImplService implements ICurvePointService {
     }
 
     @Override
-    public CurvePoint saveOrUpdate(CurvePoint CurvePoint) {
+    public CurvePoint saveCurvePoint(CurvePoint CurvePoint) {
         return curvePointRepository.save(CurvePoint);
     }
 
     @Override
-    public void delete (Integer id) {
+    public CurvePoint updateCurvePoint(CurvePoint CurvePoint) {
+        return curvePointRepository.save(CurvePoint);
+    }
+
+    @Override
+    public void deleteCurvePoint(Integer id) {
         curvePointRepository.deleteById(id);
     }
 }

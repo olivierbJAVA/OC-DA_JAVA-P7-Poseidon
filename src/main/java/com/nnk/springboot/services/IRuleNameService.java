@@ -10,8 +10,9 @@ public interface IRuleNameService {
 
     RuleName getRuleNameById(Integer id);
 
-    RuleName saveOrUpdate(RuleName ruleName);
+    RuleName saveRuleName(RuleName ruleName);
 
-    void delete (Integer id);
+    RuleName updateRuleName(RuleName ruleName);
 
+    void deleteRuleName(Integer id);
 }

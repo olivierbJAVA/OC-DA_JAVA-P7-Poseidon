@@ -25,12 +25,17 @@ public class BidListImplService implements IBidListService {
     }
 
     @Override
-    public BidList saveOrUpdate(BidList bidList) {
+    public BidList saveBidList(BidList bidList) {
         return bidListRepository.save(bidList);
     }
 
     @Override
-    public void delete (Integer id) {
+    public BidList updateBidList(BidList bidList) {
+        return bidListRepository.save(bidList);
+    }
+
+    @Override
+    public void deleteBidList(Integer id) {
         bidListRepository.deleteById(id);
     }
 }

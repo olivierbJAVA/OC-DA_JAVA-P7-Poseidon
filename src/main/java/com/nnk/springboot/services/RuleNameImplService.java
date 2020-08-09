@@ -25,12 +25,17 @@ public class RuleNameImplService implements IRuleNameService {
     }
 
     @Override
-    public RuleName saveOrUpdate(RuleName RuleName) {
+    public RuleName saveRuleName(RuleName RuleName) {
         return ruleNameRepository.save(RuleName);
     }
 
     @Override
-    public void delete (Integer id) {
+    public RuleName updateRuleName(RuleName RuleName) {
+        return ruleNameRepository.save(RuleName);
+    }
+
+    @Override
+    public void deleteRuleName(Integer id) {
         ruleNameRepository.deleteById(id);
     }
 }

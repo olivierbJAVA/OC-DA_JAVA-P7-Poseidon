@@ -25,12 +25,17 @@ public class TradeImplService implements ITradeService {
     }
 
     @Override
-    public Trade saveOrUpdate(Trade Trade) {
+    public Trade saveTrade(Trade Trade) {
         return tradeRepository.save(Trade);
     }
 
     @Override
-    public void delete (Integer id) {
+    public Trade updateTrade(Trade Trade) {
+        return tradeRepository.save(Trade);
+    }
+
+    @Override
+    public void deleteTrade(Integer id) {
         tradeRepository.deleteById(id);
     }
 }

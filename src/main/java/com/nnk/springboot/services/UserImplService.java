@@ -25,12 +25,17 @@ public class UserImplService implements IUserService {
     }
 
     @Override
-    public User saveOrUpdate(User User) {
+    public User saveUser(User User) {
         return userRepository.save(User);
     }
 
     @Override
-    public void delete (Integer id) {
+    public User updateUser(User User) {
+        return userRepository.save(User);
+    }
+
+    @Override
+    public void deleteUser(Integer id) {
         userRepository.deleteById(id);
     }
 }

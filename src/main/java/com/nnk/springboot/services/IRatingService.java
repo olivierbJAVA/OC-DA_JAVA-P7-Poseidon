@@ -10,8 +10,9 @@ public interface IRatingService {
 
     Rating getRatingById(Integer id);
 
-    Rating saveOrUpdate(Rating rating);
+    Rating saveRating(Rating rating);
 
-    void delete (Integer id);
+    Rating updateRating(Rating rating);
 
+    void deleteRating(Integer id);
 }

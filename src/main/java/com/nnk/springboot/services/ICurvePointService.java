@@ -10,8 +10,9 @@ public interface ICurvePointService {
 
     CurvePoint getCurvePointById(Integer id);
 
-    CurvePoint saveOrUpdate(CurvePoint curvePoint);
+    CurvePoint saveCurvePoint(CurvePoint curvePoint);
 
-    void delete (Integer id);
+    CurvePoint updateCurvePoint(CurvePoint curvePoint);
 
+    void deleteCurvePoint(Integer id);
 }

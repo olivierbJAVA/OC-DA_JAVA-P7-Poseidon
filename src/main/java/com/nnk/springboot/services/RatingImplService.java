@@ -25,12 +25,17 @@ public class RatingImplService implements IRatingService {
     }
 
     @Override
-    public Rating saveOrUpdate(Rating Rating) {
+    public Rating saveRating(Rating Rating) {
         return ratingRepository.save(Rating);
     }
 
     @Override
-    public void delete (Integer id) {
+    public Rating updateRating(Rating Rating) {
+        return ratingRepository.save(Rating);
+    }
+
+    @Override
+    public void deleteRating(Integer id) {
         ratingRepository.deleteById(id);
     }
 }

@@ -10,8 +10,9 @@ public interface ITradeService {
 
     Trade getTradeById(Integer id);
 
-    Trade saveOrUpdate(Trade trade);
+    Trade saveTrade(Trade trade);
 
-    void delete (Integer id);
+    Trade updateTrade(Trade trade);
 
+    void deleteTrade(Integer id);
 }

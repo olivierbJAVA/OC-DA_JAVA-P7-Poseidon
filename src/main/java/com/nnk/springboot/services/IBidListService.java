@@ -10,8 +10,9 @@ public interface IBidListService {
 
     BidList getBidListById(Integer id);
 
-    BidList saveOrUpdate(BidList bidList);
+    BidList saveBidList(BidList bidList);
 
-    void delete (Integer id);
+    BidList updateBidList(BidList bidList);
 
+    void deleteBidList(Integer id);
 }
