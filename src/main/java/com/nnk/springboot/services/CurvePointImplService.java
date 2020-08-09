@@ -1,12 +1,15 @@
 package com.nnk.springboot.services;
 
+import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.exceptions.RecordNotFoundException;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -15,17 +18,25 @@ public class CurvePointImplService implements ICurvePointService {
     @Autowired
     CurvePointRepository curvePointRepository;
 
-    public List<CurvePoint> getAllCurvePoints() {
+    public List<CurvePoint> findAllCurvePoints() {
         return curvePointRepository.findAll();
     }
 
     @Override
-    public CurvePoint getCurvePointById(Integer id) {
-        return curvePointRepository.getOne(id);
+    public CurvePoint findCurvePointById(Integer id) throws RecordNotFoundException {
+        Optional<CurvePoint> curvePoint = curvePointRepository.findById(id);
+
+        if(curvePoint.isPresent()) {
+            return curvePoint.get();
+        } else {
+            throw new RecordNotFoundException("No record exist for given id");
+        }
+
+        //return curvePointRepository.getOne(id);
     }
 
     @Override
-    public CurvePoint saveCurvePoint(CurvePoint CurvePoint) {
+    public CurvePoint createCurvePoint(CurvePoint CurvePoint) {
         return curvePointRepository.save(CurvePoint);
     }
 
@@ -35,7 +46,15 @@ public class CurvePointImplService implements ICurvePointService {
     }
 
     @Override
-    public void deleteCurvePoint(Integer id) {
-        curvePointRepository.deleteById(id);
+    public void deleteCurvePoint(Integer id) throws RecordNotFoundException {
+        Optional<CurvePoint> curvePoint = curvePointRepository.findById(id);
+
+        if(curvePoint.isPresent()) {
+            curvePointRepository.deleteById(id);
+        } else {
+            throw new RecordNotFoundException("No record exist for given id");
+        }
+
+        //curvePointRepository.deleteById(id);
     }
 }

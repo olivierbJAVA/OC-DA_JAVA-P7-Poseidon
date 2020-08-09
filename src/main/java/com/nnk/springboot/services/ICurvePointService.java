@@ -1,18 +1,19 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.exceptions.RecordNotFoundException;
 
 import java.util.List;
 
 public interface ICurvePointService {
 
-    List<CurvePoint> getAllCurvePoints();
+    List<CurvePoint> findAllCurvePoints();
 
-    CurvePoint getCurvePointById(Integer id);
+    CurvePoint findCurvePointById(Integer id) throws RecordNotFoundException;
 
-    CurvePoint saveCurvePoint(CurvePoint curvePoint);
+    CurvePoint createCurvePoint(CurvePoint curvePoint);
 
     CurvePoint updateCurvePoint(CurvePoint curvePoint);
 
-    void deleteCurvePoint(Integer id);
+    void deleteCurvePoint(Integer id) throws RecordNotFoundException;
 }

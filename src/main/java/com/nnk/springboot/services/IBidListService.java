@@ -1,18 +1,19 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.exceptions.RecordNotFoundException;
 
 import java.util.List;
 
 public interface IBidListService {
 
-    List<BidList> getAllBidLists();
+    List<BidList> findAllBidLists();
 
-    BidList getBidListById(Integer id);
+    BidList findBidListById(Integer id) throws RecordNotFoundException;
 
-    BidList saveBidList(BidList bidList);
+    BidList createBidList(BidList bidList);
 
     BidList updateBidList(BidList bidList);
 
-    void deleteBidList(Integer id);
+    void deleteBidList(Integer id) throws RecordNotFoundException;
 }

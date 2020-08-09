@@ -1,18 +1,19 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.exceptions.RecordNotFoundException;
 
 import java.util.List;
 
 public interface ITradeService {
 
-    List<Trade> getAllTrades();
+    List<Trade> findAllTrades();
 
-    Trade getTradeById(Integer id);
+    Trade findTradeById(Integer id) throws RecordNotFoundException;
 
-    Trade saveTrade(Trade trade);
+    Trade createTrade(Trade trade);
 
     Trade updateTrade(Trade trade);
 
-    void deleteTrade(Integer id);
+    void deleteTrade(Integer id) throws RecordNotFoundException;
 }

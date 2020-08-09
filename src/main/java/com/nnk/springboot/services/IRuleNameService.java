@@ -1,18 +1,19 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.exceptions.RecordNotFoundException;
 
 import java.util.List;
 
 public interface IRuleNameService {
 
-    List<RuleName> getAllRuleNames();
+    List<RuleName> findAllRuleNames();
 
-    RuleName getRuleNameById(Integer id);
+    RuleName findRuleNameById(Integer id) throws RecordNotFoundException;
 
-    RuleName saveRuleName(RuleName ruleName);
+    RuleName createRuleName(RuleName ruleName);
 
     RuleName updateRuleName(RuleName ruleName);
 
-    void deleteRuleName(Integer id);
+    void deleteRuleName(Integer id) throws RecordNotFoundException;
 }

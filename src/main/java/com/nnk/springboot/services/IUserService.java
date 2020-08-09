@@ -1,18 +1,20 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.exceptions.RecordNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUserService {
 
-    List<User> getAllUsers();
+    List<User> findAllUsers();
 
-    User getUserById(Integer id);
+    User findUserById(Integer id) throws RecordNotFoundException;
 
-    User saveUser(User user);
+    User createUser(User user);
 
     User updateUser(User user);
 
-    void deleteUser(Integer id);
+    void deleteUser(Integer id) throws RecordNotFoundException;
 }
