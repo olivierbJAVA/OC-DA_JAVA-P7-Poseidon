@@ -63,7 +63,7 @@ public class RatingController {
             return "rating/update";
         }
 
-        rating.setId(id);// fonctionne ?
+        //rating.setId(id);// fonctionne ?
         ratingService.updateRating(rating);
         model.addAttribute("ratings", ratingService.findAllRatings());
         return "redirect:/rating/list";
