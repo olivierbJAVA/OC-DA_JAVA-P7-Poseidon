@@ -6,12 +6,15 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "curvepoint")
-public class CurvePoint {
+public class CurvePoint implements Serializable {
     // TODO: Map columns in data table CURVEPOINT with corresponding java fields
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

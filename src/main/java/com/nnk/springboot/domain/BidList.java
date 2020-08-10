@@ -6,13 +6,16 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "bidlist")
-public class BidList {
+public class BidList implements Serializable {
     // TODO: Map columns in data table BIDLIST with corresponding java fields
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
