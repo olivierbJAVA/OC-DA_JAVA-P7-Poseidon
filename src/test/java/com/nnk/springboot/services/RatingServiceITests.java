@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -22,9 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
-//@SpringBootTest
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@SpringBootTest
 @Sql({"/schema-test.sql"})
 public class RatingServiceITests {
 
@@ -37,7 +36,7 @@ public class RatingServiceITests {
 
         Rating ratingTest = new Rating();
         ratingTest.setMoodysRating("Moodys Rating");
-        ratingTest.setSandPRating("Sand PRating");
+        ratingTest.setSandPRating("SandP Rating");
         ratingTest.setFitchRating("Fitch Rating");
         ratingTest.setOrderNumber(10);
 
@@ -62,14 +61,14 @@ public class RatingServiceITests {
         // Find all
         Rating ratingTest2 = new Rating();
         ratingTest2.setMoodysRating("Moodys Rating");
-        ratingTest2.setSandPRating("Sand PRating");
+        ratingTest2.setSandPRating("SandP Rating");
         ratingTest2.setFitchRating("Fitch Rating");
         ratingTest2.setOrderNumber(10);
         ratingRepositoryUnderTest.save(ratingTest2);
 
         Rating ratingTest3 = new Rating();
         ratingTest3.setMoodysRating("Moodys Rating");
-        ratingTest3.setSandPRating("Sand PRating");
+        ratingTest3.setSandPRating("SandP Rating");
         ratingTest3.setFitchRating("Fitch Rating");
         ratingTest3.setOrderNumber(10);
         ratingRepositoryUnderTest.save(ratingTest3);
