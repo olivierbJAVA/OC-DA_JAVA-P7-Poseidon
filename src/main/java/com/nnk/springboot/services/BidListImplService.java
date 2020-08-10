@@ -45,7 +45,7 @@ public class BidListImplService implements IBidListService {
     }
 
     @Override
-    public void deleteBidList(Integer id) throws RecordNotFoundException {
+    public void deleteBidListById(Integer id) throws RecordNotFoundException {
         Optional<BidList> bidList = bidListRepository.findById(id);
 
         if(bidList.isPresent()) {

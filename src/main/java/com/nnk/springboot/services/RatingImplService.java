@@ -46,7 +46,7 @@ public class RatingImplService implements IRatingService {
     }
 
     @Override
-    public void deleteRating(Integer id) throws RecordNotFoundException {
+    public void deleteRatingById(Integer id) throws RecordNotFoundException {
         Optional<Rating> rating = ratingRepository.findById(id);
 
         if(rating.isPresent()) {

@@ -15,5 +15,5 @@ public interface ITradeService {
 
     Trade updateTrade(Trade trade);
 
-    void deleteTrade(Integer id) throws RecordNotFoundException;
+    void deleteTradeById(Integer id) throws RecordNotFoundException;
 }

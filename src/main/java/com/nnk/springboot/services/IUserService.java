@@ -16,5 +16,5 @@ public interface IUserService {
 
     User updateUser(User user);
 
-    void deleteUser(Integer id) throws RecordNotFoundException;
+    void deleteUserById(Integer id) throws RecordNotFoundException;
 }

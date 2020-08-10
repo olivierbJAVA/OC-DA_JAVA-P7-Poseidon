@@ -15,5 +15,5 @@ public interface IBidListService {
 
     BidList updateBidList(BidList bidList);
 
-    void deleteBidList(Integer id) throws RecordNotFoundException;
+    void deleteBidListById(Integer id) throws RecordNotFoundException;
 }

@@ -15,5 +15,5 @@ public interface IRatingService {
 
     Rating updateRating(Rating rating);
 
-    void deleteRating(Integer id) throws RecordNotFoundException;
+    void deleteRatingById(Integer id) throws RecordNotFoundException;
 }

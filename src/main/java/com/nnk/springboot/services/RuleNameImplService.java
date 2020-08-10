@@ -46,7 +46,7 @@ public class RuleNameImplService implements IRuleNameService {
     }
 
     @Override
-    public void deleteRuleName(Integer id) throws RecordNotFoundException {
+    public void deleteRuleNameById(Integer id) throws RecordNotFoundException {
         Optional<RuleName> ruleName = ruleNameRepository.findById(id);
 
         if(ruleName.isPresent()) {

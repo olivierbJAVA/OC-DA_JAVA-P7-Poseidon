@@ -45,7 +45,7 @@ public class UserImplService implements IUserService {
     }
 
     @Override
-    public void deleteUser(Integer id) throws RecordNotFoundException {
+    public void deleteUserById(Integer id) throws RecordNotFoundException {
         Optional<User> user = userRepository.findById(id);
 
         if(user.isPresent()) {

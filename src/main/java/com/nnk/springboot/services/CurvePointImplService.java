@@ -46,7 +46,7 @@ public class CurvePointImplService implements ICurvePointService {
     }
 
     @Override
-    public void deleteCurvePoint(Integer id) throws RecordNotFoundException {
+    public void deleteCurvePointById(Integer id) throws RecordNotFoundException {
         Optional<CurvePoint> curvePoint = curvePointRepository.findById(id);
 
         if(curvePoint.isPresent()) {

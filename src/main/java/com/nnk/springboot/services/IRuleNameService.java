@@ -15,5 +15,5 @@ public interface IRuleNameService {
 
     RuleName updateRuleName(RuleName ruleName);
 
-    void deleteRuleName(Integer id) throws RecordNotFoundException;
+    void deleteRuleNameById(Integer id) throws RecordNotFoundException;
 }

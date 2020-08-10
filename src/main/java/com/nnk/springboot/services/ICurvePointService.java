@@ -15,5 +15,5 @@ public interface ICurvePointService {
 
     CurvePoint updateCurvePoint(CurvePoint curvePoint);
 
-    void deleteCurvePoint(Integer id) throws RecordNotFoundException;
+    void deleteCurvePointById(Integer id) throws RecordNotFoundException;
 }

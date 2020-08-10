@@ -46,7 +46,7 @@ public class TradeImplService implements ITradeService {
     }
 
     @Override
-    public void deleteTrade (Integer id) throws RecordNotFoundException {
+    public void deleteTradeById(Integer id) throws RecordNotFoundException {
         Optional<Trade> trade = tradeRepository.findById(id);
 
         if(trade.isPresent()) {
