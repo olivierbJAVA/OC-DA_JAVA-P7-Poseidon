@@ -26,7 +26,7 @@ import java.util.Optional;
 //@SpringBootTest
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Sql({"/data-test.sql"})
+@Sql({"/schema-test.sql"})
 public class RuleNameTests {
 
     @Autowired
