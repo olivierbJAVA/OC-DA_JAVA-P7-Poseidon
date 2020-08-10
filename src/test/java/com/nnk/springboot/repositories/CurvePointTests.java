@@ -28,7 +28,7 @@ import java.util.Optional;
 //@SpringBootTest
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Sql({"/schema-test.sql"})
+@Sql({"/data-test.sql"})
 public class CurvePointTests {
 
 	@Autowired
