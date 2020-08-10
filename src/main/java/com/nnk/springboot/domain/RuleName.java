@@ -45,6 +45,10 @@ public class RuleName implements Serializable {
         this.sqlPart = sqlPart;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

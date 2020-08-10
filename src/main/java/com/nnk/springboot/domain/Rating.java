@@ -40,6 +40,10 @@ public class Rating implements Serializable {
         this.orderNumber = orderNumber;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

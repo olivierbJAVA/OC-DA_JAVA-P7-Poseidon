@@ -46,6 +46,10 @@ public class CurvePoint implements Serializable {
         this.creationDate = creationDate;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

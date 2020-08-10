@@ -108,6 +108,10 @@ public class BidList implements Serializable {
         this.side = side;
     }
 
+    public void setBidListId(Integer bidListId) {
+        BidListId = bidListId;
+    }
+
     public Integer getBidListId() {
         return BidListId;
     }
