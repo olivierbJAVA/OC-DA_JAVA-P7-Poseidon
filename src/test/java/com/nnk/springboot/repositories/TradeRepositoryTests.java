@@ -38,7 +38,7 @@ import java.util.Optional;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql({"/schema-test.sql"})
-public class TradeTests {
+public class TradeRepositoryTests {
 
     @Autowired
     private TradeRepository tradeRepositoryUnderTest;

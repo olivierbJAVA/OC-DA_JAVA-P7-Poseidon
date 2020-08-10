@@ -35,7 +35,7 @@ import java.util.Optional;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql({"/schema-test.sql"})
-public class RatingTests {
+public class RatingRepositoryTests {
     /*
         @TestConfiguration
         static class RatingTestsContextConfiguration {

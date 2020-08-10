@@ -34,7 +34,7 @@ import java.util.Optional;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql({"/schema-test.sql"})
-public class CurvePointTests {
+public class CurvePointRepositoryTests {
 
     @Autowired
     private CurvePointRepository curvePointRepositoryUnderTest;

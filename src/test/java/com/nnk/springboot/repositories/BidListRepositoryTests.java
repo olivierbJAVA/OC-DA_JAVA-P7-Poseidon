@@ -1,8 +1,6 @@
 package com.nnk.springboot.repositories;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.repositories.BidListRepository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,13 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,10 +32,10 @@ import java.util.Optional;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql({"/schema-test.sql"})
-public class BidListTests {
+public class BidListRepositoryTests {
 
     @Autowired
-    private BidListRepository bidListRepository;
+    private BidListRepository bidListRepositoryUnderTest;
 
     @Test
     public void bidListTests() {
@@ -70,17 +65,17 @@ public class BidListTests {
         bidListTest.setSide("Side Test");
 
         // Save
-        bidListTest = bidListRepository.save(bidListTest);
+        bidListTest = bidListRepositoryUnderTest.save(bidListTest);
         assertNotNull(bidListTest.getBidListId());
         assertEquals(bidListTest.getBidQuantity(), 10d, 10d);
 
         // Update
         bidListTest.setBidQuantity(20d);
-        bidListTest = bidListRepository.save(bidListTest);
+        bidListTest = bidListRepositoryUnderTest.save(bidListTest);
         assertEquals(bidListTest.getBidQuantity(), 20d, 20d);
 
         // Find by id
-        Optional<BidList> bidListGet = bidListRepository.findById(bidListTest.getBidListId());
+        Optional<BidList> bidListGet = bidListRepositoryUnderTest.findById(bidListTest.getBidListId());
         assertTrue(bidListGet.isPresent());
         assertEquals(bidListTest.getAccount(), bidListGet.get().getAccount());
         assertEquals(bidListTest.getType(), bidListGet.get().getType());
@@ -127,7 +122,7 @@ public class BidListTests {
         bidListTest2.setDealType("DealType Test");
         bidListTest2.setSourceListId("SourceListId Test");
         bidListTest2.setSide("Side Test");
-        bidListRepository.save(bidListTest2);
+        bidListRepositoryUnderTest.save(bidListTest2);
 
         BidList bidListTest3 = new BidList();
         bidListTest3.setAccount("Account Test");
@@ -151,15 +146,15 @@ public class BidListTests {
         bidListTest3.setDealType("DealType Test");
         bidListTest3.setSourceListId("SourceListId Test");
         bidListTest3.setSide("Side Test");
-        bidListRepository.save(bidListTest3);
+        bidListRepositoryUnderTest.save(bidListTest3);
 
-        List<BidList> listResult = bidListRepository.findAll();
+        List<BidList> listResult = bidListRepositoryUnderTest.findAll();
         assertTrue(listResult.size() == 3);
 
         // Delete
         Integer id = bidListTest.getBidListId();
-        bidListRepository.delete(bidListTest);
-        Optional<BidList> bidList = bidListRepository.findById(id);
+        bidListRepositoryUnderTest.delete(bidListTest);
+        Optional<BidList> bidList = bidListRepositoryUnderTest.findById(id);
         assertFalse(bidList.isPresent());
     }
 }

@@ -31,7 +31,7 @@ import java.util.Optional;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql({"/schema-test.sql"})
-public class RuleNameTests {
+public class RuleNameRepositoryTests {
 
     @Autowired
     private RuleNameRepository ruleNameRepositoryUnderTest;
