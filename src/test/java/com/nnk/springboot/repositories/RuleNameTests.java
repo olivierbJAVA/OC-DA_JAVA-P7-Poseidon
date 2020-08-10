@@ -21,6 +21,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class including integration (with the database) tests for the
+ * RuleName Repository.
+ */
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
 //@SpringBootTest
@@ -34,7 +38,15 @@ public class RuleNameTests {
 
     @Test
     public void ruleNameTests() {
-        RuleName ruleNameTest = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
+        //RuleName ruleNameTest = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
+
+        RuleName ruleNameTest = new RuleName();
+        ruleNameTest.setName("Rule Name");
+        ruleNameTest.setDescription("Description");
+        ruleNameTest.setJson("Json");
+        ruleNameTest.setTemplate("Template");
+        ruleNameTest.setSqlStr("SQL ");
+        ruleNameTest.setSqlPart("SQL Part");
 
         // Save
         ruleNameTest = ruleNameRepositoryUnderTest.save(ruleNameTest);
@@ -57,8 +69,26 @@ public class RuleNameTests {
         assertEquals(ruleNameTest.getSqlPart(), ruleNameGet.get().getSqlPart());
 
         // Find all
+        RuleName ruleNameTest2 = new RuleName();
+        ruleNameTest2.setName("Rule Name");
+        ruleNameTest2.setDescription("Description");
+        ruleNameTest2.setJson("Json");
+        ruleNameTest2.setTemplate("Template");
+        ruleNameTest2.setSqlStr("SQL ");
+        ruleNameTest2.setSqlPart("SQL Part");
+        ruleNameRepositoryUnderTest.save(ruleNameTest2);
+
+        RuleName ruleNameTest3 = new RuleName();
+        ruleNameTest3.setName("Rule Name");
+        ruleNameTest3.setDescription("Description");
+        ruleNameTest3.setJson("Json");
+        ruleNameTest3.setTemplate("Template");
+        ruleNameTest3.setSqlStr("SQL ");
+        ruleNameTest3.setSqlPart("SQL Part");
+        ruleNameRepositoryUnderTest.save(ruleNameTest3);
+
         List<RuleName> listResult = ruleNameRepositoryUnderTest.findAll();
-        assertTrue(listResult.size() > 0);
+        assertTrue(listResult.size() == 3);
 
         // Delete
         Integer id = ruleNameTest.getId();
