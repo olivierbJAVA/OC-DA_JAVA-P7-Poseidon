@@ -21,29 +21,28 @@ public class CurvePoint implements Serializable {
     private Integer id;
 
     @Digits(message = "CurveId must be integer number", integer = 4, fraction = 0)
+    @NotNull(message = "CurveId must not been null")
     private Integer curveId;
 
-    @NotNull(message = "AsOfDate is mandatory")
     private Timestamp asOfDate;
 
     @Digits(message = "Term must be digits number", integer = 3, fraction = 2)
+    @NotNull(message = "Term must not been null")
     private Double term;
 
     @Digits(message = "Value must be digits number", integer = 3, fraction = 2)
+    @NotNull(message = "Value must not been null")
     private Double value;
 
-    @NotNull(message = "CreationDate is mandatory")
     private Timestamp creationDate;
 
     public CurvePoint() {
     }
 
-    public CurvePoint(@Digits(message = "CurveId must be integer number", integer = 4, fraction = 0) Integer curveId, @NotNull(message = "AsOfDate is mandatory") Timestamp asOfDate, @Digits(message = "Term must be digits number", integer = 3, fraction = 2) Double term, @Digits(message = "Value must be digits number", integer = 3, fraction = 2) Double value, @NotNull(message = "CreationDate is mandatory") Timestamp creationDate) {
+    public CurvePoint(@Digits(message = "CurveId must be integer number", integer = 4, fraction = 0) @NotNull(message = "CurveId must not been null") Integer curveId, @Digits(message = "Term must be digits number", integer = 3, fraction = 2) @NotNull(message = "Term must not been null") Double term, @Digits(message = "Value must be digits number", integer = 3, fraction = 2) @NotNull(message = "Value must not been null") Double value) {
         this.curveId = curveId;
-        this.asOfDate = asOfDate;
         this.term = term;
         this.value = value;
-        this.creationDate = creationDate;
     }
 
     public void setId(Integer id) {

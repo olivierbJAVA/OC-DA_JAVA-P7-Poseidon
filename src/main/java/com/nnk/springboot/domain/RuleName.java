@@ -19,6 +19,7 @@ public class RuleName implements Serializable {
     @NotBlank(message = "Name is mandatory")
     private String name;
 
+    @NotBlank(message = "Description is mandatory")
     private String description;
 
     @NotBlank(message = "Json is mandatory")
@@ -36,7 +37,7 @@ public class RuleName implements Serializable {
     public RuleName() {
     }
 
-    public RuleName(@NotBlank(message = "Name is mandatory") String name, String description, @NotBlank(message = "Json is mandatory") String json, @NotBlank(message = "Template is mandatory") String template, @NotBlank(message = "SqlStr is mandatory") String sqlStr, @NotBlank(message = "SqlPart is mandatory") String sqlPart) {
+    public RuleName(@NotBlank(message = "Name is mandatory") String name, @NotBlank(message = "Description is mandatory") String description, @NotBlank(message = "Json is mandatory") String json, @NotBlank(message = "Template is mandatory") String template, @NotBlank(message = "SqlStr is mandatory") String sqlStr, @NotBlank(message = "SqlPart is mandatory") String sqlPart) {
         this.name = name;
         this.description = description;
         this.json = json;

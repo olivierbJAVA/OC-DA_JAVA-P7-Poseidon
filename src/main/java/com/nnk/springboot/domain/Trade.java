@@ -26,6 +26,7 @@ public class Trade implements Serializable {
     private String type;
 
     @Digits(message = "BuyQuantity must be digits number", integer = 6, fraction = 0)
+    @NotNull(message = "BuyQuantity must not been null")
     private Double buyQuantity;
 
     @Digits(message = "SellQuantity must be digits number", integer = 6, fraction = 0)
@@ -37,73 +38,41 @@ public class Trade implements Serializable {
     @Digits(message = "SellPrice must be digits number", integer = 3, fraction = 2)
     private Double sellPrice;
 
-    @NotBlank(message = "Benchmark is mandatory")
     private String benchmark;
 
-    @NotNull(message = "TradeDate is mandatory")
     private Timestamp tradeDate;
 
-    @NotBlank(message = "Security is mandatory")
     private String security;
 
-    @NotBlank(message = "Status is mandatory")
     private String status;
 
-    @NotBlank(message = "Trader is mandatory")
     private String trader;
 
-    @NotBlank(message = "Book is mandatory")
     private String book;
 
-    @NotBlank(message = "CreationName is mandatory")
     private String creationName;
 
-    @NotNull(message = "CreationDate is mandatory")
     private Timestamp creationDate;
 
-    @NotBlank(message = "RevisionName is mandatory")
     private String revisionName;
 
-    @NotNull(message = "RevisionDate is mandatory")
     private Timestamp revisionDate;
 
-    @NotBlank(message = "DealName is mandatory")
     private String dealName;
 
-    @NotBlank(message = "DealType is mandatory")
     private String dealType;
 
-    @NotBlank(message = "SourceListId is mandatory")
     private String sourceListId;
 
-    @NotBlank(message = "Side is mandatory")
     private String side;
 
     public Trade() {
     }
 
-    public Trade(Integer tradeId, @NotBlank(message = "Account is mandatory") String account, @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BuyQuantity must be digits number", integer = 6, fraction = 0) Double buyQuantity, @Digits(message = "SellQuantity must be digits number", integer = 6, fraction = 0) Double sellQuantity, @Digits(message = "BuyPrice must be digits number", integer = 3, fraction = 2) Double buyPrice, @Digits(message = "SellPrice must be digits number", integer = 3, fraction = 2) Double sellPrice, @NotBlank(message = "Benchmark is mandatory") String benchmark, @NotBlank(message = "TradeDate is mandatory") Timestamp tradeDate, @NotBlank(message = "Security is mandatory") String security, @NotBlank(message = "Status is mandatory") String status, @NotBlank(message = "Trader is mandatory") String trader, @NotBlank(message = "Book is mandatory") String book, @NotBlank(message = "CreationName is mandatory") String creationName, @NotBlank(message = "CreationDate is mandatory") Timestamp creationDate, @NotBlank(message = "RevisionName is mandatory") String revisionName, @NotBlank(message = "RevisionDate is mandatory") Timestamp revisionDate, @NotBlank(message = "DealName is mandatory") String dealName, @NotBlank(message = "DealType is mandatory") String dealType, @NotBlank(message = "SourceListId is mandatory") String sourceListId, @NotBlank(message = "Side is mandatory") String side) {
-        this.tradeId = tradeId;
+    public Trade(@NotBlank(message = "Account is mandatory") String account, @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BuyQuantity must be digits number", integer = 6, fraction = 0) @NotNull(message = "Buy Quantity must not been null") Double buyQuantity) {
         this.account = account;
         this.type = type;
         this.buyQuantity = buyQuantity;
-        this.sellQuantity = sellQuantity;
-        this.buyPrice = buyPrice;
-        this.sellPrice = sellPrice;
-        this.benchmark = benchmark;
-        this.tradeDate = tradeDate;
-        this.security = security;
-        this.status = status;
-        this.trader = trader;
-        this.book = book;
-        this.creationName = creationName;
-        this.creationDate = creationDate;
-        this.revisionName = revisionName;
-        this.revisionDate = revisionDate;
-        this.dealName = dealName;
-        this.dealType = dealType;
-        this.sourceListId = sourceListId;
-        this.side = side;
     }
 
     public Integer getTradeId() {

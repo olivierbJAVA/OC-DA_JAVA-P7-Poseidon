@@ -28,6 +28,7 @@ public class BidList implements Serializable {
     private String type;
 
     @Digits(message = "BidQuantity must be digits number", integer = 6, fraction = 2)
+    @NotNull(message = "BidQuantity must not been null")
     private Double bidQuantity;
 
     @Digits(message = "AskQuantity must be digits number", integer = 6, fraction = 2)
@@ -39,73 +40,43 @@ public class BidList implements Serializable {
     @Digits(message = "Ask must be digits number", integer = 6, fraction = 2)
     private Double ask;
 
-    @NotBlank(message = "Benchmark is mandatory")
     private String benchmark;
 
-    @NotNull(message = "BidListDate is mandatory")
     private Timestamp bidListDate;
 
     private String commentary;
 
-    @NotBlank(message = "Security is mandatory")
     private String security;
 
-    @NotBlank(message = "Status is mandatory")
     private String status;
 
-    @NotBlank(message = "Trader is mandatory")
     private String trader;
 
-    @NotBlank(message = "Book is mandatory")
     private String book;
 
-    @NotBlank(message = "CreationName is mandatory")
     private String creationName;
 
-    @NotNull(message = "CreationDate is mandatory")
     private Timestamp creationDate;
 
     private String revisionName;
 
     private Timestamp revisionDate;
 
-    @NotBlank(message = "DealName is mandatory")
     private String dealName;
 
-    @NotBlank(message = "DealType is mandatory")
     private String dealType;
 
-    @NotBlank(message = "SourceListId is mandatory")
     private String sourceListId;
 
-    @NotBlank(message = "Side is mandatory")
     private String side;
 
     public BidList() {
     }
 
-    public BidList(@NotBlank(message = "Account is mandatory") String account, @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BidQuantity must be digits number", integer = 6, fraction = 0) Double bidQuantity, @Digits(message = "AskQuantity must be digits number", integer = 6, fraction = 0) Double askQuantity, @Digits(message = "Bid must be digits number", integer = 3, fraction = 2) Double bid, @Digits(message = "Ask must be digits number", integer = 3, fraction = 2) Double ask, @NotBlank(message = "Benchmark is mandatory") String benchmark, @NotNull(message = "BidListDate is mandatory") Timestamp bidListDate, String commentary, @NotBlank(message = "Security is mandatory") String security, @NotBlank(message = "Status is mandatory") String status, @NotBlank(message = "Trader is mandatory") String trader, @NotBlank(message = "Book is mandatory") String book, @NotBlank(message = "CreationName is mandatory") String creationName, @NotNull(message = "CreationDate is mandatory") Timestamp creationDate, String revisionName, Timestamp revisionDate, @NotBlank(message = "DealName is mandatory") String dealName, @NotBlank(message = "DealType is mandatory") String dealType, @NotBlank(message = "SourceListId is mandatory") String sourceListId, @NotBlank(message = "Side is mandatory") String side) {
+    public BidList(@NotBlank(message = "Account is mandatory") String account, @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BidQuantity must be digits number", integer = 6, fraction = 2) @NotBlank(message = "Type is mandatory") Double bidQuantity) {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;
-        this.askQuantity = askQuantity;
-        this.bid = bid;
-        this.ask = ask;
-        this.benchmark = benchmark;
-        this.bidListDate = bidListDate;
-        this.commentary = commentary;
-        this.security = security;
-        this.status = status;
-        this.trader = trader;
-        this.book = book;
-        this.creationName = creationName;
-        this.creationDate = creationDate;
-        this.revisionName = revisionName;
-        this.revisionDate = revisionDate;
-        this.dealName = dealName;
-        this.dealType = dealType;
-        this.sourceListId = sourceListId;
-        this.side = side;
     }
 
     public void setBidListId(Integer bidListId) {
