@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.exceptions.RecordNotFoundException;
 import com.nnk.springboot.services.IRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -62,7 +63,6 @@ public class RatingController {
         if (result.hasErrors()) {
             return "rating/update";
         }
-
         //rating.setId(id);// fonctionne ?
         ratingService.updateRating(rating);
         model.addAttribute("ratings", ratingService.findAllRatings());
@@ -73,7 +73,14 @@ public class RatingController {
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Rating by Id and delete the Rating, return to Rating list
         //Rating rating = ratingService.findRatingById(id);
-        ratingService.deleteRatingById(id);
+
+        try {
+            ratingService.deleteRatingById(id);
+        } catch (RecordNotFoundException e) {
+            System.out.println("Record not found");
+            return "errorRecordNotFound";
+        }
+
         model.addAttribute("ratings", ratingService.findAllRatings());
         return "redirect:/rating/list";
     }
