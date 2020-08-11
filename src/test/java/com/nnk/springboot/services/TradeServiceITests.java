@@ -1,12 +1,10 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.repositories.TradeRepository;
+import com.nnk.springboot.exceptions.RecordNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
@@ -29,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TradeServiceITests {
 
     @Autowired
-    private TradeRepository tradeRepositoryUnderTest;
+    private TradeImplService tradeImplServiceUnderTest;
 
     @Test
     public void tradeTests() {
@@ -58,38 +56,38 @@ public class TradeServiceITests {
         tradeTest.setSide("Side");
 
         // Save
-        tradeTest = tradeRepositoryUnderTest.save(tradeTest);
+        tradeTest = tradeImplServiceUnderTest.createTrade(tradeTest);
         assertNotNull(tradeTest.getTradeId());
         assertTrue(tradeTest.getAccount().equals("Trade Account"));
 
         // Update
         tradeTest.setAccount("Trade Account Update");
-        tradeTest = tradeRepositoryUnderTest.save(tradeTest);
+        tradeTest = tradeImplServiceUnderTest.updateTrade(tradeTest);
         assertTrue(tradeTest.getAccount().equals("Trade Account Update"));
 
         // Find by id
-        Optional<Trade> tradeGet = tradeRepositoryUnderTest.findById(tradeTest.getTradeId());
-        assertTrue(tradeGet.isPresent());
-        assertEquals(tradeTest.getAccount(), tradeGet.get().getAccount());
-        assertEquals(tradeTest.getType(), tradeGet.get().getType());
-        assertEquals(tradeTest.getBuyQuantity(), tradeGet.get().getBuyQuantity());
-        assertEquals(tradeTest.getSellQuantity(), tradeGet.get().getSellQuantity());
-        assertEquals(tradeTest.getBuyPrice(), tradeGet.get().getBuyPrice());
-        assertEquals(tradeTest.getSellPrice(), tradeGet.get().getSellPrice());
-        assertEquals(tradeTest.getTradeDate(), tradeGet.get().getTradeDate());
-        assertEquals(tradeTest.getSecurity(), tradeGet.get().getSecurity());
-        assertEquals(tradeTest.getStatus(), tradeGet.get().getStatus());
-        assertEquals(tradeTest.getTrader(), tradeGet.get().getTrader());
-        assertEquals(tradeTest.getBenchmark(), tradeGet.get().getBenchmark());
-        assertEquals(tradeTest.getBook(), tradeGet.get().getBook());
-        assertEquals(tradeTest.getCreationName(), tradeGet.get().getCreationName());
-        assertEquals(tradeTest.getCreationDate(), tradeGet.get().getCreationDate());
-        assertEquals(tradeTest.getRevisionName(), tradeGet.get().getRevisionName());
-        assertEquals(tradeTest.getRevisionDate(), tradeGet.get().getRevisionDate());
-        assertEquals(tradeTest.getDealName(), tradeGet.get().getDealName());
-        assertEquals(tradeTest.getDealType(), tradeGet.get().getDealType());
-        assertEquals(tradeTest.getSourceListId(), tradeGet.get().getSourceListId());
-        assertEquals(tradeTest.getSide(), tradeGet.get().getSide());
+        Trade tradeGet = tradeImplServiceUnderTest.findTradeById(tradeTest.getTradeId());
+        assertNotNull(tradeGet);
+        assertEquals(tradeTest.getAccount(), tradeGet.getAccount());
+        assertEquals(tradeTest.getType(), tradeGet.getType());
+        assertEquals(tradeTest.getBuyQuantity(), tradeGet.getBuyQuantity());
+        assertEquals(tradeTest.getSellQuantity(), tradeGet.getSellQuantity());
+        assertEquals(tradeTest.getBuyPrice(), tradeGet.getBuyPrice());
+        assertEquals(tradeTest.getSellPrice(), tradeGet.getSellPrice());
+        assertEquals(tradeTest.getTradeDate(), tradeGet.getTradeDate());
+        assertEquals(tradeTest.getSecurity(), tradeGet.getSecurity());
+        assertEquals(tradeTest.getStatus(), tradeGet.getStatus());
+        assertEquals(tradeTest.getTrader(), tradeGet.getTrader());
+        assertEquals(tradeTest.getBenchmark(), tradeGet.getBenchmark());
+        assertEquals(tradeTest.getBook(), tradeGet.getBook());
+        assertEquals(tradeTest.getCreationName(), tradeGet.getCreationName());
+        assertEquals(tradeTest.getCreationDate(), tradeGet.getCreationDate());
+        assertEquals(tradeTest.getRevisionName(), tradeGet.getRevisionName());
+        assertEquals(tradeTest.getRevisionDate(), tradeGet.getRevisionDate());
+        assertEquals(tradeTest.getDealName(), tradeGet.getDealName());
+        assertEquals(tradeTest.getDealType(), tradeGet.getDealType());
+        assertEquals(tradeTest.getSourceListId(), tradeGet.getSourceListId());
+        assertEquals(tradeTest.getSide(), tradeGet.getSide());
 
         // Find all
         Trade tradeTest2 = new Trade();
@@ -114,7 +112,7 @@ public class TradeServiceITests {
         tradeTest2.setSourceListId("SourceListId");
         tradeTest2.setSide("Side");
 
-        tradeRepositoryUnderTest.save(tradeTest2);
+        tradeImplServiceUnderTest.createTrade(tradeTest2);
 
         Trade tradeTest3 = new Trade();
         tradeTest3.setAccount("Trade Account");
@@ -138,15 +136,16 @@ public class TradeServiceITests {
         tradeTest3.setSourceListId("SourceListId");
         tradeTest3.setSide("Side");
 
-        tradeRepositoryUnderTest.save(tradeTest3);
+        tradeImplServiceUnderTest.createTrade(tradeTest3);
 
-        List<Trade> listResult = tradeRepositoryUnderTest.findAll();
+        List<Trade> listResult = tradeImplServiceUnderTest.findAllTrades();
         assertTrue(listResult.size() == 3);
 
         // Delete
         Integer id = tradeTest.getTradeId();
-        tradeRepositoryUnderTest.delete(tradeTest);
-        Optional<Trade> tradeList = tradeRepositoryUnderTest.findById(id);
-        assertFalse(tradeList.isPresent());
+        tradeImplServiceUnderTest.deleteTradeById(id);
+        assertThrows(RecordNotFoundException.class, () -> {
+            tradeImplServiceUnderTest.findTradeById(id);
+        });
     }
 }

@@ -1,12 +1,10 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.repositories.CurvePointRepository;
+import com.nnk.springboot.exceptions.RecordNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
@@ -29,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CurvePointServiceITests {
 
     @Autowired
-    private CurvePointRepository curvePointRepositoryUnderTest;
+    private CurvePointImplService curvePointImplServiceUnderTest;
 
     @Test
     public void curvePointTests() {
@@ -43,23 +41,23 @@ public class CurvePointServiceITests {
         curvePointTest.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
 
         // Save
-        curvePointTest = curvePointRepositoryUnderTest.save(curvePointTest);
+        curvePointTest = curvePointImplServiceUnderTest.createCurvePoint(curvePointTest);
         assertNotNull(curvePointTest.getId());
         assertTrue(curvePointTest.getCurveId() == 10);
 
         // Update
         curvePointTest.setCurveId(20);
-        curvePointTest = curvePointRepositoryUnderTest.save(curvePointTest);
+        curvePointTest = curvePointImplServiceUnderTest.updateCurvePoint(curvePointTest);
         assertTrue(curvePointTest.getCurveId() == 20);
 
         // Find by id
-        Optional<CurvePoint> curvePointGet = curvePointRepositoryUnderTest.findById(curvePointTest.getId());
-        assertTrue(curvePointGet.isPresent());
-        assertEquals(curvePointTest.getCurveId(), curvePointGet.get().getCurveId());
-        assertEquals(curvePointTest.getAsOfDate(), curvePointGet.get().getAsOfDate());
-        assertEquals(curvePointTest.getTerm(), curvePointGet.get().getTerm());
-        assertEquals(curvePointTest.getValue(), curvePointGet.get().getValue());
-        assertEquals(curvePointTest.getCreationDate(), curvePointGet.get().getCreationDate());
+        CurvePoint curvePointGet = curvePointImplServiceUnderTest.findCurvePointById(curvePointTest.getId());
+        assertNotNull(curvePointGet);
+        assertEquals(curvePointTest.getCurveId(), curvePointGet.getCurveId());
+        assertEquals(curvePointTest.getAsOfDate(), curvePointGet.getAsOfDate());
+        assertEquals(curvePointTest.getTerm(), curvePointGet.getTerm());
+        assertEquals(curvePointTest.getValue(), curvePointGet.getValue());
+        assertEquals(curvePointTest.getCreationDate(), curvePointGet.getCreationDate());
 
         // Find all
         CurvePoint curvePointTest2 = new CurvePoint();
@@ -68,7 +66,7 @@ public class CurvePointServiceITests {
         curvePointTest2.setTerm(10d);
         curvePointTest2.setValue(30d);
         curvePointTest2.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
-        curvePointRepositoryUnderTest.save(curvePointTest2);
+        curvePointImplServiceUnderTest.createCurvePoint(curvePointTest2);
 
         CurvePoint curvePointTest3 = new CurvePoint();
         curvePointTest3.setCurveId(10);
@@ -76,16 +74,17 @@ public class CurvePointServiceITests {
         curvePointTest3.setTerm(10d);
         curvePointTest3.setValue(30d);
         curvePointTest3.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
-        curvePointRepositoryUnderTest.save(curvePointTest3);
+        curvePointImplServiceUnderTest.createCurvePoint(curvePointTest3);
 
-        List<CurvePoint> listResult = curvePointRepositoryUnderTest.findAll();
+        List<CurvePoint> listResult = curvePointImplServiceUnderTest.findAllCurvePoints();
         assertTrue(listResult.size() == 3);
 
         // Delete
         Integer id = curvePointTest.getId();
-        curvePointRepositoryUnderTest.delete(curvePointTest);
-        Optional<CurvePoint> curvePointList = curvePointRepositoryUnderTest.findById(id);
-        assertFalse(curvePointList.isPresent());
+        curvePointImplServiceUnderTest.deleteCurvePointById(id);
+        assertThrows(RecordNotFoundException.class, () -> {
+            curvePointImplServiceUnderTest.findCurvePointById(id);
+        });
     }
 
 }
