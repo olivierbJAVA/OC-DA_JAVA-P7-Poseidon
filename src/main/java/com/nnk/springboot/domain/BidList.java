@@ -1,13 +1,10 @@
 package com.nnk.springboot.domain;
 
-import org.springframework.beans.factory.annotation.Required;
-
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -19,7 +16,7 @@ public class BidList implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer BidListId;
+    private Integer bidListId;
 
     @NotBlank(message = "Account is mandatory")
     private String account;
@@ -80,11 +77,11 @@ public class BidList implements Serializable {
     }
 
     public void setBidListId(Integer bidListId) {
-        BidListId = bidListId;
+        this.bidListId = bidListId;
     }
 
     public Integer getBidListId() {
-        return BidListId;
+        return bidListId;
     }
 
     public String getAccount() {
