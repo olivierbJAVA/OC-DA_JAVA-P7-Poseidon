@@ -98,7 +98,7 @@ public class RatingRepositoryTests {
         Integer id = ratingTest.getId();
         //ratingRepositoryUnderTest.delete(ratingTest);
         ratingRepositoryUnderTest.deleteById(id);
-        Optional<Rating> ratingList = ratingRepositoryUnderTest.findById(id);
-        assertFalse(ratingList.isPresent());
+        Optional<Rating> ratingDeleted = ratingRepositoryUnderTest.findById(id);
+        assertFalse(ratingDeleted.isPresent());
     }
 }

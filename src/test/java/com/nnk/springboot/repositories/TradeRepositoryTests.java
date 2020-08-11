@@ -159,7 +159,7 @@ public class TradeRepositoryTests {
         Integer id = tradeTest.getTradeId();
         //tradeRepositoryUnderTest.delete(tradeTest);
         tradeRepositoryUnderTest.deleteById(id);
-        Optional<Trade> tradeList = tradeRepositoryUnderTest.findById(id);
-        assertFalse(tradeList.isPresent());
+        Optional<Trade> tradeDeleted = tradeRepositoryUnderTest.findById(id);
+        assertFalse(tradeDeleted.isPresent());
     }
 }

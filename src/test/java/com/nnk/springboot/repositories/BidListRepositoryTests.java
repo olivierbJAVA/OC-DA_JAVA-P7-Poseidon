@@ -155,8 +155,8 @@ public class BidListRepositoryTests {
         Integer id = bidListTest.getBidListId();
         //bidListRepositoryUnderTest.delete(bidListTest);
         bidListRepositoryUnderTest.deleteById(id);
-        Optional<BidList> bidList = bidListRepositoryUnderTest.findById(id);
-        assertFalse(bidList.isPresent());
+        Optional<BidList> bidListDeleted = bidListRepositoryUnderTest.findById(id);
+        assertFalse(bidListDeleted.isPresent());
     }
 }
 

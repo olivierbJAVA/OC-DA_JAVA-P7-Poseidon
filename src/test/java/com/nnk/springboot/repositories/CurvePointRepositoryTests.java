@@ -93,8 +93,8 @@ public class CurvePointRepositoryTests {
         Integer id = curvePointTest.getId();
         //curvePointRepositoryUnderTest.delete(curvePointTest);
         curvePointRepositoryUnderTest.deleteById(id);
-        Optional<CurvePoint> curvePointList = curvePointRepositoryUnderTest.findById(id);
-        assertFalse(curvePointList.isPresent());
+        Optional<CurvePoint> curvePoint = curvePointRepositoryUnderTest.findById(id);
+        assertFalse(curvePoint.isPresent());
     }
 
 }
