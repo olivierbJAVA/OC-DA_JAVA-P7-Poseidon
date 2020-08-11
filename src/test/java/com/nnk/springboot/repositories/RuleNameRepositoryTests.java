@@ -92,7 +92,8 @@ public class RuleNameRepositoryTests {
 
         // Delete
         Integer id = ruleNameTest.getId();
-        ruleNameRepositoryUnderTest.delete(ruleNameTest);
+        //ruleNameRepositoryUnderTest.delete(ruleNameTest);
+        ruleNameRepositoryUnderTest.deleteById(id);
         Optional<RuleName> ruleList = ruleNameRepositoryUnderTest.findById(id);
         assertFalse(ruleList.isPresent());
     }
