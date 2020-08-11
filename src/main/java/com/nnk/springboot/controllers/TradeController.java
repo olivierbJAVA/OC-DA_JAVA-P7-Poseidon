@@ -51,7 +51,7 @@ public class TradeController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get Trade by Id and to model then show to the form
         Trade trade = tradeService.findTradeById(id);
-        model.addAttribute("trades", trade);
+        model.addAttribute("trade", trade);
         return "trade/update";
     }
 

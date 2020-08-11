@@ -51,7 +51,7 @@ public class RuleNameController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get RuleName by Id and to model then show to the form
         RuleName ruleName = ruleNameService.findRuleNameById(id);
-        model.addAttribute("ruleNames", ruleName);
+        model.addAttribute("ruleName", ruleName);
         return "ruleName/update";
     }
 

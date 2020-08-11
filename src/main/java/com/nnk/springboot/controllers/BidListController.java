@@ -53,7 +53,7 @@ public class BidListController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get Bid by Id and to model then show to the form
         BidList bidList = bidListService.findBidListById(id);
-        model.addAttribute("bidLists", bidList);
+        model.addAttribute("bidList", bidList);
         return "bidList/update";
     }
 

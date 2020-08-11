@@ -51,7 +51,7 @@ public class CurvePointController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get CurvePoint by Id and to model then show to the form
         CurvePoint curvePoint = curvePointService.findCurvePointById(id);
-        model.addAttribute("curvePoints", curvePoint);
+        model.addAttribute("curvePoint", curvePoint);
         return "curvePoint/update";
     }
 
