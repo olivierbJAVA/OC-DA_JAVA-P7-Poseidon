@@ -1,5 +1,7 @@
 package com.nnk.springboot.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -16,28 +18,34 @@ public class RuleName implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Length(max=125, message = "Maximum length = 125 characters")
     @NotBlank(message = "Name is mandatory")
     private String name;
 
+    @Length(max=125, message = "Maximum length = 125 characters")
     @NotBlank(message = "Description is mandatory")
     private String description;
 
+    @Length(max=125, message = "Maximum length = 125 characters")
     @NotBlank(message = "Json is mandatory")
     private String json;
 
+    @Length(max=512, message = "Maximum length = 125 characters")
     @NotBlank(message = "Template is mandatory")
     private String template;
 
+    @Length(max=125, message = "Maximum length = 125 characters")
     @NotBlank(message = "SqlStr is mandatory")
     private String sqlStr;
 
+    @Length(max=125, message = "Maximum length = 125 characters")
     @NotBlank(message = "SqlPart is mandatory")
     private String sqlPart;
 
     public RuleName() {
     }
 
-    public RuleName(@NotBlank(message = "Name is mandatory") String name, @NotBlank(message = "Description is mandatory") String description, @NotBlank(message = "Json is mandatory") String json, @NotBlank(message = "Template is mandatory") String template, @NotBlank(message = "SqlStr is mandatory") String sqlStr, @NotBlank(message = "SqlPart is mandatory") String sqlPart) {
+    public RuleName(@Length(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Name is mandatory") String name, @Length(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Description is mandatory") String description, @Length(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Json is mandatory") String json, @Length(max = 512, message = "Maximum length = 125 characters") @NotBlank(message = "Template is mandatory") String template, @Length(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "SqlStr is mandatory") String sqlStr, @Length(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "SqlPart is mandatory") String sqlPart) {
         this.name = name;
         this.description = description;
         this.json = json;

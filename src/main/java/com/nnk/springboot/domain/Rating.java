@@ -1,5 +1,7 @@
 package com.nnk.springboot.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
@@ -18,12 +20,15 @@ public class Rating implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Length(max=125, message = "Maximum length = 125 characters")
     @NotBlank(message = "MoodysRating is mandatory")
     private String moodysRating;
 
+    @Length(max=125, message = "Maximum length = 125 characters")
     @NotBlank(message = "SandPRating is mandatory")
     private String sandPRating;
 
+    @Length(max=125, message = "Maximum length = 125 characters")
     @NotBlank(message = "FitchRating is mandatory")
     private String fitchRating;
 
@@ -33,7 +38,7 @@ public class Rating implements Serializable {
     public Rating() {
     }
 
-    public Rating(@NotBlank(message = "MoodysRating is mandatory") String moodysRating, @NotBlank(message = "SandPRating is mandatory") String sandPRating, @NotBlank(message = "FitchRating is mandatory") String fitchRating, @Digits(message = "OrderNumber must be integer number", integer = 4, fraction = 0) Integer orderNumber) {
+    public Rating(@Length(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "MoodysRating is mandatory") String moodysRating, @Length(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "SandPRating is mandatory") String sandPRating, @Length(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "FitchRating is mandatory") String fitchRating, @Digits(message = "OrderNumber must be integer number", integer = 4, fraction = 0) Integer orderNumber) {
         this.moodysRating = moodysRating;
         this.sandPRating = sandPRating;
         this.fitchRating = fitchRating;

@@ -1,5 +1,7 @@
 package com.nnk.springboot.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -14,15 +16,19 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Length(max=125, message = "Maximum length = 125 characters")
     @NotBlank(message = "Username is mandatory")
     private String username;
 
+    @Length(max=125, message = "Maximum length = 125 characters")
     @NotBlank(message = "Password is mandatory")
     private String password;
 
+    @Length(max=125, message = "Maximum length = 125 characters")
     @NotBlank(message = "FullName is mandatory")
     private String fullname;
 
+    @Length(max=125, message = "Maximum length = 125 characters")
     @NotBlank(message = "Role is mandatory")
     private String role;
 
