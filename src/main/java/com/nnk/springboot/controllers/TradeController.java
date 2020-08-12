@@ -60,7 +60,7 @@ public class TradeController {
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Trade and return Trade list
         if (result.hasErrors()) {
-            return "curvePoint/update";
+            return "trade/update";
         }
         trade.setTradeId(id);
         tradeService.updateTrade(trade);
