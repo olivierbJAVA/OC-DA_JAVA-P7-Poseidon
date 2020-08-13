@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * Class including integration (with the database) tests for the
  * CurvePoint Service.
  */
-@ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
 @SpringBootTest
 @Sql({"/schema-test.sql"})

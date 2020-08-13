@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * Class including integration (with the database) tests for the
  * BidList Service.
  */
-@ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
 @SpringBootTest//(classes={com.nnk.springboot.repositories.BidListRepository.class, com.nnk.springboot.services.BidListImplService.class})
 //@ContextConfiguration(classes = {BidListRepository.class, BidListImplService.class})
