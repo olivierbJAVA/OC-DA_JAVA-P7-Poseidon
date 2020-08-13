@@ -1,6 +1,5 @@
 package com.nnk.springboot.domain;
 
-import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

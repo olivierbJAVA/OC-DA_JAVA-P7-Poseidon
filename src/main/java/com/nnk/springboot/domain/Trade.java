@@ -1,11 +1,10 @@
 package com.nnk.springboot.domain;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -21,11 +20,11 @@ public class Trade implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer tradeId;
 
-    @Length(max=30, message = "Maximum length = 30 characters")
+    @Size(max=30, message = "Maximum length = 30 characters")
     @NotBlank(message = "Account is mandatory")
     private String account;
 
-    @Length(max=30, message = "Maximum length = 30 characters")
+    @Size(max=30, message = "Maximum length = 30 characters")
     @NotBlank(message = "Type is mandatory")
     private String type;
 
@@ -46,44 +45,44 @@ public class Trade implements Serializable {
 
     private Timestamp tradeDate;
 
-    @Length(max=125, message = "Maximum length = 125 characters")
+    @Size(max=125, message = "Maximum length = 125 characters")
     private String security;
 
-    @Length(max=10, message = "Maximum length = 10 characters")
+    @Size(max=10, message = "Maximum length = 10 characters")
     private String status;
 
-    @Length(max=125, message = "Maximum length = 125 characters")
+    @Size(max=125, message = "Maximum length = 125 characters")
     private String trader;
 
-    @Length(max=125, message = "Maximum length = 125 characters")
+    @Size(max=125, message = "Maximum length = 125 characters")
     private String book;
 
-    @Length(max=125, message = "Maximum length = 125 characters")
+    @Size(max=125, message = "Maximum length = 125 characters")
     private String creationName;
 
     private Timestamp creationDate;
 
-    @Length(max=125, message = "Maximum length = 125 characters")
+    @Size(max=125, message = "Maximum length = 125 characters")
     private String revisionName;
 
     private Timestamp revisionDate;
 
-    @Length(max=125, message = "Maximum length = 125 characters")
+    @Size(max=125, message = "Maximum length = 125 characters")
     private String dealName;
 
-    @Length(max=125, message = "Maximum length = 125 characters")
+    @Size(max=125, message = "Maximum length = 125 characters")
     private String dealType;
 
-    @Length(max=125, message = "Maximum length = 125 characters")
+    @Size(max=125, message = "Maximum length = 125 characters")
     private String sourceListId;
 
-    @Length(max=125, message = "Maximum length = 125 characters")
+    @Size(max=125, message = "Maximum length = 125 characters")
     private String side;
 
     public Trade() {
     }
 
-    public Trade(@Length(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Account is mandatory") String account, @Length(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BuyQuantity must be digits number", integer = 6, fraction = 0) @NotNull(message = "BuyQuantity must not been null") Double buyQuantity) {
+    public Trade(@Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Account is mandatory") String account, @Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BuyQuantity must be digits number", integer = 6, fraction = 0) @NotNull(message = "BuyQuantity must not been null") Double buyQuantity) {
         this.account = account;
         this.type = type;
         this.buyQuantity = buyQuantity;
