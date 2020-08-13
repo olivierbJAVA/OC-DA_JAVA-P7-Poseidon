@@ -123,7 +123,6 @@ public class TradeRepositoryTests {
         tradeTest2.setDealType("DealType");
         tradeTest2.setSourceListId("SourceListId");
         tradeTest2.setSide("Side");
-
         tradeRepositoryUnderTest.save(tradeTest2);
 
         Trade tradeTest3 = new Trade();
@@ -147,7 +146,6 @@ public class TradeRepositoryTests {
         tradeTest3.setDealType("DealType");
         tradeTest3.setSourceListId("SourceListId");
         tradeTest3.setSide("Side");
-
         tradeRepositoryUnderTest.save(tradeTest3);
 
         List<Trade> listResult = tradeRepositoryUnderTest.findAll();
