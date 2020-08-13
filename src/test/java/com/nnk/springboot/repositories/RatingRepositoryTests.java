@@ -29,9 +29,7 @@ import java.util.Optional;
  * Class including integration (with the database) tests for the
  * Rating Repository.
  */
-@ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
-//@SpringBootTest
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql({"/schema-test.sql"})

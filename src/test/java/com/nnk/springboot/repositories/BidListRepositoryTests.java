@@ -26,9 +26,8 @@ import java.util.Optional;
  * Class including integration (with the database) tests for the
  * BidList Repository.
  */
-@ExtendWith(SpringExtension.class)
-@ActiveProfiles("test")
 //@SpringBootTest
+@ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql({"/schema-test.sql"})
