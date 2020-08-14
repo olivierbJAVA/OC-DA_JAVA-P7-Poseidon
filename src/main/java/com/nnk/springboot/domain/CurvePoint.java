@@ -1,10 +1,7 @@
 package com.nnk.springboot.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -24,8 +21,6 @@ public class CurvePoint implements Serializable {
     @NotNull(message = "CurveId must not been null")
     private Integer curveId;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    //@Temporal(TemporalType.TIMESTAMP)
     private Timestamp asOfDate;
 
     @Digits(message = "Term must be digits number", integer = 3, fraction = 2)
@@ -36,8 +31,6 @@ public class CurvePoint implements Serializable {
     @NotNull(message = "Value must not been null")
     private Double value;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    //@Temporal(TemporalType.TIMESTAMP)
     private Timestamp creationDate;
 
     public CurvePoint() {
