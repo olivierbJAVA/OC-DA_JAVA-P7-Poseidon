@@ -1,10 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.exceptions.RecordNotFoundException;
 import com.nnk.springboot.services.IBidListService;
-import com.nnk.springboot.services.IRatingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -294,6 +292,8 @@ public class BidListControllerTests {
         bidListTest.setSide("Side Test");
 
         doReturn(bidListTest).when(mockBidListService).updateBidList(bidListTest);
+        //***
+        doReturn(bidListTest).when(mockBidListService).findBidListById(anyInt());
 
         List<BidList> listBidLists = new ArrayList<>();
         listBidLists.add(bidListTest);

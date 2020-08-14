@@ -1,10 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.exceptions.RecordNotFoundException;
 import com.nnk.springboot.services.ICurvePointService;
-import com.nnk.springboot.services.IRatingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -198,6 +196,8 @@ public class CurvePointControllerTests {
         curvePointTest.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
 
         doReturn(curvePointTest).when(mockCurvePointService).updateCurvePoint(curvePointTest);
+        //***
+        doReturn(curvePointTest).when(mockCurvePointService).findCurvePointById(anyInt());
 
         List<CurvePoint> listCurvePoints = new ArrayList<>();
         listCurvePoints.add(curvePointTest);

@@ -1,6 +1,5 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.exceptions.RecordNotFoundException;
 import com.nnk.springboot.services.ITradeService;
@@ -287,6 +286,8 @@ public class TradeControllerTests {
         tradeTest.setSide("Side");
 
         doReturn(tradeTest).when(mockTradeService).updateTrade(tradeTest);
+        //***
+        doReturn(tradeTest).when(mockTradeService).findTradeById(anyInt());
 
         List<Trade> listTrades = new ArrayList<>();
         listTrades.add(tradeTest);
