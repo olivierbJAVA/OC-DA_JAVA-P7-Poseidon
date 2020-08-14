@@ -1,8 +1,6 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.services.IRuleNameService;
 import com.nnk.springboot.services.ITradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
+
+import static java.sql.Timestamp.valueOf;
+import static java.time.LocalDateTime.now;
 
 @Controller
 public class TradeController {
@@ -40,6 +41,9 @@ public class TradeController {
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return Trade list
         if (!result.hasErrors()) {
+            trade.setCreationDate(valueOf(now()));
+            trade.setRevisionDate(valueOf(now()));
+            trade.setTradeDate(valueOf(now()));
             tradeService.createTrade(trade);
             model.addAttribute("trades", tradeService.findAllTrades());
             return "redirect:/trade/list";
@@ -63,6 +67,9 @@ public class TradeController {
             return "trade/update";
         }
         trade.setTradeId(id);
+        trade.setCreationDate(tradeService.findTradeById(id).getCreationDate());
+        trade.setRevisionDate(valueOf(now()));
+        trade.setTradeDate(valueOf(now()));
         tradeService.updateTrade(trade);
         model.addAttribute("trades", tradeService.findAllTrades());
         return "redirect:/trade/list";

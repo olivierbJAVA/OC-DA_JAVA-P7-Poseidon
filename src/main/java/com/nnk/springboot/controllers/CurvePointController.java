@@ -1,35 +1,24 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.services.IBidListService;
 import com.nnk.springboot.services.ICurvePointService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+
+import static java.sql.Timestamp.valueOf;
+import static java.time.LocalDateTime.now;
 
 @Controller
 public class CurvePointController {
     // TODO: Inject Curve Point service
     @Autowired
     ICurvePointService curvePointService;
-
-    @InitBinder
-    public void initBinder(WebDataBinder binder){
-        binder.registerCustomEditor(Timestamp.class,
-                new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm"), true));
-    }
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model)
@@ -41,14 +30,16 @@ public class CurvePointController {
     }
 
     @GetMapping("/curvePoint/add")
-    public String addBidForm(@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") CurvePoint curvePoint) {
+    public String addBidForm(CurvePoint curvePoint) {
         return "curvePoint/add";
     }
 
     @PostMapping("/curvePoint/validate")
-    public String validate(@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") @Valid CurvePoint curvePoint, BindingResult result, Model model) {
+    public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return Curve list
         if (!result.hasErrors()) {
+            curvePoint.setCreationDate(valueOf(now()));
+            curvePoint.setAsOfDate(valueOf(now()));
             curvePointService.createCurvePoint(curvePoint);
             model.addAttribute("curvePoints", curvePointService.findAllCurvePoints());
             return "redirect:/curvePoint/list";
@@ -72,6 +63,8 @@ public class CurvePointController {
             return "curvePoint/update";
         }
         curvePoint.setId(id);
+        curvePoint.setCreationDate(curvePointService.findCurvePointById(id).getCreationDate());
+        curvePoint.setAsOfDate(valueOf(now()));
         curvePointService.updateCurvePoint(curvePoint);
         model.addAttribute("curvePoints", curvePointService.findAllCurvePoints());
         return "redirect:/curvePoint/list";

@@ -1,10 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
 import com.nnk.springboot.services.IBidListService;
-import com.nnk.springboot.services.IRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
+
+import static java.sql.Timestamp.valueOf;
+import static java.time.LocalDateTime.now;
 
 
 @Controller
@@ -42,6 +42,9 @@ public class BidListController {
     public String validate(@Valid BidList bidList, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return bid list
         if (!result.hasErrors()) {
+            bidList.setCreationDate(valueOf(now()));
+            bidList.setRevisionDate(valueOf(now()));
+            bidList.setBidListDate(valueOf(now()));
             bidListService.createBidList(bidList);
             model.addAttribute("bidLists", bidListService.findAllBidLists());
             return "redirect:/bidList/list";
@@ -65,6 +68,9 @@ public class BidListController {
             return "bidList/update";
         }
         bidList.setBidListId(id);
+        bidList.setCreationDate(bidListService.findBidListById(id).getCreationDate());
+        bidList.setRevisionDate(valueOf(now()));
+        bidList.setBidListDate(valueOf(now()));
         bidListService.updateBidList(bidList);
         model.addAttribute("bidLists", bidListService.findAllBidLists());
         return "redirect:/bidList/list";
