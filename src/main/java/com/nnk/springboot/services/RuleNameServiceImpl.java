@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class RuleNameImplService implements IRuleNameService {
+public class RuleNameServiceImpl implements IRuleNameService {
 
     @Autowired
     RuleNameRepository ruleNameRepository;

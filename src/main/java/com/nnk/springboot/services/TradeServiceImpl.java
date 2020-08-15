@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class TradeImplService implements ITradeService {
+public class TradeServiceImpl implements ITradeService {
 
     @Autowired
     TradeRepository tradeRepository;

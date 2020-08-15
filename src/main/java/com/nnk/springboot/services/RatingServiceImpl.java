@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class RatingImplService implements IRatingService {
+public class RatingServiceImpl implements IRatingService {
 
     @Autowired
     RatingRepository ratingRepository;

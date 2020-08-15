@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class BidListImplService implements IBidListService {
+public class BidListServiceImpl implements IBidListService {
 
     @Autowired
     BidListRepository bidListRepository;

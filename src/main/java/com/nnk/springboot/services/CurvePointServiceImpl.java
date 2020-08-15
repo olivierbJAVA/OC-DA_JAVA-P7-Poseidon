@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class CurvePointImplService implements ICurvePointService {
+public class CurvePointServiceImpl implements ICurvePointService {
 
     @Autowired
     CurvePointRepository curvePointRepository;

@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class UserImplService implements IUserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     UserRepository userRepository;
