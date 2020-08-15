@@ -120,7 +120,7 @@ public class CurvePointRepositoryTests {
     }
 
     @Test
-    public void deleteCurvePoint() {
+    public void deleteCurvePointById() {
         // ARRANGE
         CurvePoint curvePointToDelete = new CurvePoint(10, 10d, 30d);
         curvePointToDelete.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));

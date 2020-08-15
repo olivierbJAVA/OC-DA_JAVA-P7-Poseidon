@@ -23,7 +23,6 @@ import java.util.Optional;
  * Class including integration (with the database) tests for the
  * BidList Repository.
  */
-//@SpringBootTest
 @ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -58,7 +57,7 @@ public class BidListRepositoryTests {
 
         // ACT
         BidList bidListSaved = bidListRepositoryUnderTest.save(bidListToSave);
-        
+
         // ASSERT
         assertNotNull(bidListSaved.getBidListId());
         assertEquals(bidListToSave.getAccount(), bidListSaved.getAccount());
@@ -111,7 +110,7 @@ public class BidListRepositoryTests {
         // ACT
         bidListToUpdate.setBidQuantity(20d);
         BidList bidListUpdated = bidListRepositoryUnderTest.save(bidListToUpdate);
-        
+
         // ASSERT
         assertEquals(bidListToUpdate.getAccount(), bidListUpdated.getAccount());
         assertEquals(bidListToUpdate.getType(), bidListUpdated.getType());

@@ -51,11 +51,11 @@ public class RatingRepositoryTests {
         // ARRANGE
         Rating ratingToUpdate = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
         ratingRepositoryUnderTest.save(ratingToUpdate);
-        
+
         // ACT
         ratingToUpdate.setOrderNumber(20);
         Rating ratingUpdated = ratingRepositoryUnderTest.save(ratingToUpdate);
-        
+
         // ASSERT
         assertEquals(ratingToUpdate.getOrderNumber(), ratingUpdated.getOrderNumber());
         assertEquals(ratingToUpdate.getFitchRating(), ratingUpdated.getFitchRating());
@@ -93,14 +93,14 @@ public class RatingRepositoryTests {
         ratingRepositoryUnderTest.save(ratingToFind3);
 
         // ACT
-        List<Rating> listRatings= ratingRepositoryUnderTest.findAll();
+        List<Rating> listRatings = ratingRepositoryUnderTest.findAll();
 
         // ASSERT
         assertTrue(listRatings.size() == 3);
     }
-    
+
     @Test
-    public void deleteRating() {
+    public void deleteRatingById() {
         // ARRANGE
         Rating ratingToDelete = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
         ratingToDelete = ratingRepositoryUnderTest.save(ratingToDelete);

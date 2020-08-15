@@ -55,7 +55,7 @@ public class TradeRepositoryTests {
 
         // ACT
         Trade tradeSaved = tradeRepositoryUnderTest.save(tradeToSave);
-        
+
         // ASSERT
         assertNotNull(tradeSaved.getTradeId());
         assertEquals(tradeToSave.getAccount(), tradeSaved.getAccount());
@@ -102,11 +102,11 @@ public class TradeRepositoryTests {
         tradeToUpdate.setSourceListId("SourceListId");
         tradeToUpdate.setSide("Side");
         tradeRepositoryUnderTest.save(tradeToUpdate);
-        
+
         // ACT
         tradeToUpdate.setAccount("Trade Account Update");
         Trade tradeUpdated = tradeRepositoryUnderTest.save(tradeToUpdate);
-        
+
         // ASSERT
         assertEquals(tradeToUpdate.getAccount(), tradeUpdated.getAccount());
         assertEquals(tradeToUpdate.getType(), tradeUpdated.getType());
