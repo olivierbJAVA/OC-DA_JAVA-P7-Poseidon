@@ -31,6 +31,16 @@ public class User implements Serializable {
     @NotBlank(message = "Role is mandatory")
     private String role;
 
+    public User() {
+    }
+
+    public User(@Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Username is mandatory") String username, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Password is mandatory") String password, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "FullName is mandatory") String fullname, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Role is mandatory") String role) {
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.role = role;
+    }
+
     public Integer getId() {
         return id;
     }
