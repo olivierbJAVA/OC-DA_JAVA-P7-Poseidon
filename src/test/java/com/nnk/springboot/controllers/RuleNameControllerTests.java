@@ -1,10 +1,8 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.exceptions.RecordNotFoundException;
 import com.nnk.springboot.services.IRuleNameService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,15 +37,12 @@ public class RuleNameControllerTests {
     @MockBean
     private IRuleNameService mockRuleNameService;
 
-    @BeforeEach
-    private void setUpPerTest() {
-    }
-
     // @RequestMapping(value = "/ruleName/list")
     @Test
     public void home() {
         //ARRANGE
         RuleName ruleNameTest1 = new RuleName();
+        ruleNameTest1.setId(1);
         ruleNameTest1.setName("Rule Name");
         ruleNameTest1.setDescription("Description");
         ruleNameTest1.setJson("Json");
@@ -56,6 +51,7 @@ public class RuleNameControllerTests {
         ruleNameTest1.setSqlPart("SQL Part");
 
         RuleName ruleNameTest2 = new RuleName();
+        ruleNameTest1.setId(2);
         ruleNameTest2.setName("Rule Name");
         ruleNameTest2.setDescription("Description");
         ruleNameTest2.setJson("Json");
@@ -64,6 +60,7 @@ public class RuleNameControllerTests {
         ruleNameTest2.setSqlPart("SQL Part");
 
         RuleName ruleNameTest3 = new RuleName();
+        ruleNameTest1.setId(3);
         ruleNameTest3.setName("Rule Name");
         ruleNameTest3.setDescription("Description");
         ruleNameTest3.setJson("Json");
@@ -120,11 +117,6 @@ public class RuleNameControllerTests {
 
         doReturn(ruleNameTest).when(mockRuleNameService).createRuleName(ruleNameTest);
 
-        List<RuleName> listRuleNames = new ArrayList<>();
-        listRuleNames.add(ruleNameTest);
-
-        doReturn(listRuleNames).when(mockRuleNameService).findAllRuleNames();
-
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/ruleName/validate")
@@ -141,7 +133,6 @@ public class RuleNameControllerTests {
         }
 
         verify(mockRuleNameService, times(1)).createRuleName(any(RuleName.class));
-        verify(mockRuleNameService, times(1)).findAllRuleNames();
     }
 
     // @PostMapping(value = "/ruleName/validate"")
@@ -165,7 +156,6 @@ public class RuleNameControllerTests {
         }
 
         verify(mockRuleNameService, never()).createRuleName(any(RuleName.class));
-        verify(mockRuleNameService, never()).findAllRuleNames();
     }
 
     // @GetMapping(value = "/ruleName/update/{id}"")
@@ -173,6 +163,7 @@ public class RuleNameControllerTests {
     public void showUpdateForm() {
         //ARRANGE
         RuleName ruleNameTest = new RuleName();
+        ruleNameTest.setId(1);
         ruleNameTest.setName("Rule Name");
         ruleNameTest.setDescription("Description");
         ruleNameTest.setJson("Json");
@@ -200,6 +191,7 @@ public class RuleNameControllerTests {
     public void updateRuleName_whenNoError() {
         //ARRANGE
         RuleName ruleNameTest = new RuleName();
+        ruleNameTest.setId(1);
         ruleNameTest.setName("Rule Name");
         ruleNameTest.setDescription("Description");
         ruleNameTest.setJson("Json");
@@ -207,15 +199,13 @@ public class RuleNameControllerTests {
         ruleNameTest.setSqlStr("SQL ");
         ruleNameTest.setSqlPart("SQL Part");
 
+        doReturn(ruleNameTest).when(mockRuleNameService).findRuleNameById(1);
         doReturn(ruleNameTest).when(mockRuleNameService).updateRuleName(ruleNameTest);
-
-        List<RuleName> listRuleNames = new ArrayList<>();
-        listRuleNames.add(ruleNameTest);
-        doReturn(listRuleNames).when(mockRuleNameService).findAllRuleNames();
 
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/ruleName/update/1")
+                    .param("Id", "1")
                     .param("name", "Rule Name")
                     .param("description", "Description")
                     .param("json", "Json")
@@ -229,7 +219,6 @@ public class RuleNameControllerTests {
         }
 
         verify(mockRuleNameService, times(1)).updateRuleName(any(RuleName.class));
-        verify(mockRuleNameService, times(1)).findAllRuleNames();
     }
 
     // @PostMapping(value = "/ruleName/update/{id}"")
@@ -240,6 +229,7 @@ public class RuleNameControllerTests {
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/ruleName/update/1")
+                    .param("Id", "1")
                     .param("name", "")
                     .param("description", "Description")
                     .param("json", "Json")
@@ -253,44 +243,12 @@ public class RuleNameControllerTests {
         }
 
         verify(mockRuleNameService, never()).updateRuleName(any(RuleName.class));
-        verify(mockRuleNameService, never()).findAllRuleNames();
     }
 
     // @GetMapping(value = "/ruleName/delete/{id}"")
     @Test
     public void deleteRuleName_whenRuleNameExist() {
         //ARRANGE
-        RuleName ruleNameTest1 = new RuleName();
-        ruleNameTest1.setName("Rule Name");
-        ruleNameTest1.setDescription("Description");
-        ruleNameTest1.setJson("Json");
-        ruleNameTest1.setTemplate("Template");
-        ruleNameTest1.setSqlStr("SQL ");
-        ruleNameTest1.setSqlPart("SQL Part");
-
-        RuleName ruleNameTest2 = new RuleName();
-        ruleNameTest2.setName("Rule Name");
-        ruleNameTest2.setDescription("Description");
-        ruleNameTest2.setJson("Json");
-        ruleNameTest2.setTemplate("Template");
-        ruleNameTest2.setSqlStr("SQL ");
-        ruleNameTest2.setSqlPart("SQL Part");
-
-        RuleName ruleNameTest3 = new RuleName();
-        ruleNameTest3.setName("Rule Name");
-        ruleNameTest3.setDescription("Description");
-        ruleNameTest3.setJson("Json");
-        ruleNameTest3.setTemplate("Template");
-        ruleNameTest3.setSqlStr("SQL ");
-        ruleNameTest3.setSqlPart("SQL Part");
-
-        List<RuleName> allRuleNamesToFind = new ArrayList<>();
-        allRuleNamesToFind.add(ruleNameTest1);
-        allRuleNamesToFind.add(ruleNameTest1);
-        allRuleNamesToFind.add(ruleNameTest1);
-
-        doReturn(allRuleNamesToFind).when(mockRuleNameService).findAllRuleNames();
-
         doNothing().when(mockRuleNameService).deleteRuleNameById(1);
 
         //ACT & ASSERT
@@ -303,7 +261,6 @@ public class RuleNameControllerTests {
         }
 
         verify(mockRuleNameService, times(1)).deleteRuleNameById(1);
-        verify(mockRuleNameService, times(1)).findAllRuleNames();
     }
 
     // @GetMapping(value = "/ruleName/delete/{id}"")
@@ -322,7 +279,5 @@ public class RuleNameControllerTests {
         }
 
         verify(mockRuleNameService, times(1)).deleteRuleNameById(1);
-        verify(mockRuleNameService, never()).findAllRuleNames();
     }
-
 }

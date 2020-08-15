@@ -48,6 +48,7 @@ public class CurvePointControllerTests {
     public void home() {
         //ARRANGE
         CurvePoint curvePointTest1 = new CurvePoint();
+        curvePointTest1.setId(1);
         curvePointTest1.setCurveId(10);
         curvePointTest1.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
         curvePointTest1.setTerm(10d);
@@ -55,6 +56,7 @@ public class CurvePointControllerTests {
         curvePointTest1.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
 
         CurvePoint curvePointTest2 = new CurvePoint();
+        curvePointTest2.setId(2);
         curvePointTest2.setCurveId(10);
         curvePointTest2.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
         curvePointTest2.setTerm(10d);
@@ -62,6 +64,7 @@ public class CurvePointControllerTests {
         curvePointTest2.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
 
         CurvePoint curvePointTest3 = new CurvePoint();
+        curvePointTest3.setId(3);
         curvePointTest3.setCurveId(10);
         curvePointTest3.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
         curvePointTest3.setTerm(10d);
@@ -116,11 +119,6 @@ public class CurvePointControllerTests {
 
         doReturn(curvePointTest).when(mockCurvePointService).createCurvePoint(curvePointTest);
 
-        List<CurvePoint> listCurvePoints = new ArrayList<>();
-        listCurvePoints.add(curvePointTest);
-
-        doReturn(listCurvePoints).when(mockCurvePointService).findAllCurvePoints();
-
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/curvePoint/validate")
@@ -134,7 +132,6 @@ public class CurvePointControllerTests {
         }
 
         verify(mockCurvePointService, times(1)).createCurvePoint(any(CurvePoint.class));
-        verify(mockCurvePointService, times(1)).findAllCurvePoints();
     }
 
     // @PostMapping(value = "/curvePoint/validate"")
@@ -155,7 +152,6 @@ public class CurvePointControllerTests {
         }
 
         verify(mockCurvePointService, never()).createCurvePoint(any(CurvePoint.class));
-        verify(mockCurvePointService, never()).findAllCurvePoints();
     }
 
     // @GetMapping(value = "/curvePoint/update/{id}"")
@@ -163,6 +159,7 @@ public class CurvePointControllerTests {
     public void showUpdateForm() {
         //ARRANGE
         CurvePoint curvePointTest = new CurvePoint();
+        curvePointTest.setId(1);
         curvePointTest.setCurveId(10);
         curvePointTest.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
         curvePointTest.setTerm(10d);
@@ -189,23 +186,20 @@ public class CurvePointControllerTests {
     public void updateCurvePoint_whenNoError() {
         //ARRANGE
         CurvePoint curvePointTest = new CurvePoint();
+        curvePointTest.setId(1);
         curvePointTest.setCurveId(10);
         curvePointTest.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
         curvePointTest.setTerm(10d);
         curvePointTest.setValue(30d);
         curvePointTest.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
 
+        doReturn(curvePointTest).when(mockCurvePointService).findCurvePointById(curvePointTest.getId());
         doReturn(curvePointTest).when(mockCurvePointService).updateCurvePoint(curvePointTest);
-        //***
-        doReturn(curvePointTest).when(mockCurvePointService).findCurvePointById(anyInt());
-
-        List<CurvePoint> listCurvePoints = new ArrayList<>();
-        listCurvePoints.add(curvePointTest);
-        doReturn(listCurvePoints).when(mockCurvePointService).findAllCurvePoints();
 
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/curvePoint/update/1")
+                    .param("Id", "1")
                     .param("curveId", "10")
                     .param("term", "10")
                     .param("value", "30"))
@@ -216,7 +210,6 @@ public class CurvePointControllerTests {
         }
 
         verify(mockCurvePointService, times(1)).updateCurvePoint(any(CurvePoint.class));
-        verify(mockCurvePointService, times(1)).findAllCurvePoints();
     }
 
     // @PostMapping(value = "/curvePoint/update/{id}"")
@@ -227,6 +220,7 @@ public class CurvePointControllerTests {
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/curvePoint/update/1")
+                    .param("Id", "1")
                     .param("curveId", "")
                     .param("term", "10")
                     .param("value", "30"))
@@ -237,41 +231,12 @@ public class CurvePointControllerTests {
         }
 
         verify(mockCurvePointService, never()).updateCurvePoint(any(CurvePoint.class));
-        verify(mockCurvePointService, never()).findAllCurvePoints();
     }
 
     // @GetMapping(value = "/curvePoint/delete/{id}"")
     @Test
     public void deleteCurvePoint_whenCurvePointExist() {
         //ARRANGE
-        CurvePoint curvePointTest1 = new CurvePoint();
-        curvePointTest1.setCurveId(10);
-        curvePointTest1.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
-        curvePointTest1.setTerm(10d);
-        curvePointTest1.setValue(30d);
-        curvePointTest1.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
-
-        CurvePoint curvePointTest2 = new CurvePoint();
-        curvePointTest2.setCurveId(10);
-        curvePointTest2.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
-        curvePointTest2.setTerm(10d);
-        curvePointTest2.setValue(30d);
-        curvePointTest2.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
-
-        CurvePoint curvePointTest3 = new CurvePoint();
-        curvePointTest3.setCurveId(10);
-        curvePointTest3.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
-        curvePointTest3.setTerm(10d);
-        curvePointTest3.setValue(30d);
-        curvePointTest3.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
-
-        List<CurvePoint> allCurvePointsToFind = new ArrayList<>();
-        allCurvePointsToFind.add(curvePointTest1);
-        allCurvePointsToFind.add(curvePointTest2);
-        allCurvePointsToFind.add(curvePointTest3);
-
-        doReturn(allCurvePointsToFind).when(mockCurvePointService).findAllCurvePoints();
-
         doNothing().when(mockCurvePointService).deleteCurvePointById(1);
 
         //ACT & ASSERT
@@ -284,7 +249,6 @@ public class CurvePointControllerTests {
         }
 
         verify(mockCurvePointService, times(1)).deleteCurvePointById(1);
-        verify(mockCurvePointService, times(1)).findAllCurvePoints();
     }
 
     // @GetMapping(value = "/curvePoint/delete/{id}"")
@@ -303,7 +267,5 @@ public class CurvePointControllerTests {
         }
 
         verify(mockCurvePointService, times(1)).deleteCurvePointById(1);
-        verify(mockCurvePointService, never()).findAllCurvePoints();
     }
-
 }

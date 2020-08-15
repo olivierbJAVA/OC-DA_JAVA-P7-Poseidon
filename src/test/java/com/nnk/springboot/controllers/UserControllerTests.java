@@ -1,11 +1,7 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.User;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
 import com.nnk.springboot.repositories.UserRepository;
-import com.nnk.springboot.services.IUserService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,27 +37,26 @@ public class UserControllerTests {
     @MockBean
     private UserRepository mockUserRepository;
 
-    @BeforeEach
-    private void setUpPerTest() {
-    }
-
     // @RequestMapping(value = "/user/list")
     @Test
     public void home() {
         //ARRANGE
         User userTest1 = new User();
+        userTest1.setId(1);
         userTest1.setUsername("user");
         userTest1.setPassword("password");
         userTest1.setFullname("User");
         userTest1.setRole("USER");
 
         User userTest2 = new User();
+        userTest2.setId(2);
         userTest2.setUsername("user");
         userTest2.setPassword("password");
         userTest2.setFullname("User");
         userTest2.setRole("USER");
 
         User userTest3 = new User();
+        userTest3.setId(3);
         userTest3.setUsername("user");
         userTest3.setPassword("password");
         userTest3.setFullname("User");
@@ -107,17 +102,13 @@ public class UserControllerTests {
     public void validate_whenNoError() {
         //ARRANGE
         User userTest = new User();
+        userTest.setId(1);
         userTest.setUsername("user");
         userTest.setPassword("password");
         userTest.setFullname("User");
         userTest.setRole("USER");
 
         doReturn(userTest).when(mockUserRepository).save(userTest);
-
-        List<User> listUsers = new ArrayList<>();
-        listUsers.add(userTest);
-
-        doReturn(listUsers).when(mockUserRepository).findAll();
 
         //ACT & ASSERT
         try {
@@ -133,7 +124,6 @@ public class UserControllerTests {
         }
 
         verify(mockUserRepository, times(1)).save(any(User.class));
-        verify(mockUserRepository, times(1)).findAll();
     }
 
     // @PostMapping(value = "/user/validate"")
@@ -155,7 +145,6 @@ public class UserControllerTests {
         }
 
         verify(mockUserRepository, never()).save(any(User.class));
-        verify(mockUserRepository, never()).findAll();
     }
 
     // @GetMapping(value = "/user/update/{id}"")
@@ -163,6 +152,7 @@ public class UserControllerTests {
     public void showUpdateForm() {
         //ARRANGE
         User userTest = new User();
+        userTest.setId(1);
         userTest.setUsername("user");
         userTest.setPassword("password");
         userTest.setFullname("User");
@@ -189,6 +179,7 @@ public class UserControllerTests {
     public void updateUser_whenNoError() {
         //ARRANGE
         User userTest = new User();
+        userTest.setId(1);
         userTest.setUsername("user");
         userTest.setPassword("password");
         userTest.setFullname("User");
@@ -196,13 +187,10 @@ public class UserControllerTests {
 
         doReturn(userTest).when(mockUserRepository).save(userTest);
 
-        List<User> listUsers = new ArrayList<>();
-        listUsers.add(userTest);
-        doReturn(listUsers).when(mockUserRepository).findAll();
-
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/user/update/1")
+                    .param("id", "1")
                     .param("username", "user")
                     .param("password", "password")
                     .param("fullname", "User")
@@ -214,7 +202,6 @@ public class UserControllerTests {
         }
 
         verify(mockUserRepository, times(1)).save(any(User.class));
-        verify(mockUserRepository, times(1)).findAll();
     }
 
     // @PostMapping(value = "/user/update/{id}"")
@@ -225,6 +212,7 @@ public class UserControllerTests {
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/user/update/1")
+                    .param("id", "1")
                     .param("username", "")
                     .param("password", "password")
                     .param("fullname", "User")
@@ -236,42 +224,23 @@ public class UserControllerTests {
         }
 
         verify(mockUserRepository, never()).save(any(User.class));
-        verify(mockUserRepository, never()).findAll();
     }
 
     // @GetMapping(value = "/user/delete/{id}"")
     @Test
     public void deleteUser_whenUserExist() {
         //ARRANGE
-        User userTest1 = new User();
-        userTest1.setUsername("user");
-        userTest1.setPassword("password");
-        userTest1.setFullname("User");
-        userTest1.setRole("USER");
+        User userTest = new User();
+        userTest.setId(1);
+        userTest.setUsername("user");
+        userTest.setPassword("password");
+        userTest.setFullname("User");
+        userTest.setRole("USER");
 
-        User userTest2 = new User();
-        userTest2.setUsername("user");
-        userTest2.setPassword("password");
-        userTest2.setFullname("User");
-        userTest2.setRole("USER");
-
-        User userTest3 = new User();
-        userTest3.setUsername("user");
-        userTest3.setPassword("password");
-        userTest3.setFullname("User");
-        userTest3.setRole("USER");
-
-        List<User> allUsersToFind = new ArrayList<>();
-        allUsersToFind.add(userTest1);
-        allUsersToFind.add(userTest2);
-        allUsersToFind.add(userTest3);
-
-        doReturn(allUsersToFind).when(mockUserRepository).findAll();
-
-        Optional<User> optUserTest = Optional.of(userTest1);
+        Optional<User> optUserTest = Optional.of(userTest);
         doReturn(optUserTest).when(mockUserRepository).findById(1);
 
-        doNothing().when(mockUserRepository).delete(userTest1);
+        doNothing().when(mockUserRepository).delete(userTest);
 
         //ACT & ASSERT
         try {
@@ -283,7 +252,6 @@ public class UserControllerTests {
         }
 
         verify(mockUserRepository, times(1)).delete(optUserTest.get());
-        verify(mockUserRepository, times(1)).findAll();
     }
 
     // @GetMapping(value = "/user/delete/{id}"")
@@ -302,7 +270,5 @@ public class UserControllerTests {
         }
 
         verify(mockUserRepository, never()).deleteById(1);
-        verify(mockUserRepository, never()).findAll();
     }
-
 }
