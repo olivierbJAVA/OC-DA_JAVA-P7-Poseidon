@@ -2,6 +2,8 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.services.ITradeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,67 +21,97 @@ import static java.time.LocalDateTime.now;
 
 @Controller
 public class TradeController {
-    // TODO: Inject Trade service
+
+    private static final Logger logger = LoggerFactory.getLogger(TradeController.class);
+
     @Autowired
     ITradeService tradeService;
 
     @RequestMapping("/trade/list")
-    public String home(Model model)
-    {
-        // TODO: find all Trade, add to model
+    public String home(Model model) {
+        logger.info("Request : GET /trade/list");
+
         List<Trade> trades = tradeService.findAllTrades();
-        model.addAttribute("trades", trades );
+        model.addAttribute("trades", trades);
+
+        logger.info("Success : trades found, returning 'trade/list' view");
+
         return "trade/list";
     }
 
     @GetMapping("/trade/add")
     public String addUser(Trade trade) {
+
+        logger.info("Request : GET /trade/add");
+        logger.info("Success : returning 'trade/add' view");
+
         return "trade/add";
     }
 
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Trade list
+
+        logger.info("Request : POST /trade/validate");
+
         if (!result.hasErrors()) {
             trade.setCreationDate(valueOf(now()));
-            trade.setRevisionDate(valueOf(now()));
             trade.setTradeDate(valueOf(now()));
             tradeService.createTrade(trade);
-            model.addAttribute("trades", tradeService.findAllTrades());
+
+            logger.info("Success : new trade created, redirect to '/trade/list' view");
+
             return "redirect:/trade/list";
         }
+
+        logger.error("Error in fields validation : new trade not created, returning '/trade/add' view");
+
         return "trade/add";
     }
 
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Trade by Id and to model then show to the form
+
+        logger.info("Request : GET /trade/update/{}", id);
+
         Trade trade = tradeService.findTradeById(id);
         model.addAttribute("trade", trade);
+
+        logger.info("Success : trade with id {} to update found, returning '/trade/update' view", id);
+
         return "trade/update";
     }
 
     @PostMapping("/trade/update/{id}")
-    public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Trade and return Trade list
+    public String updateTrade(@Valid Trade trade, BindingResult result, Model model) {
+
+        logger.info("Request : POST /trade/update/{}", trade.getTradeId());
+
         if (result.hasErrors()) {
+
+            logger.error("Error in fields : trade with id {} not updated, returning '/trade/update' view", trade.getTradeId());
+
             return "trade/update";
         }
-        trade.setTradeId(id);
-        trade.setCreationDate(tradeService.findTradeById(id).getCreationDate());
+
+        trade.setCreationDate(tradeService.findTradeById(trade.getTradeId()).getCreationDate());
         trade.setRevisionDate(valueOf(now()));
         trade.setTradeDate(valueOf(now()));
         tradeService.updateTrade(trade);
-        model.addAttribute("trades", tradeService.findAllTrades());
+
+        logger.info("Success : trade with id {} updated, redirect to '/trade/list'", trade.getTradeId());
+
         return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Trade by Id and delete the Trade, return to Trade list
+
+        logger.info("Request : GET /trade/delete/{}", id);
+
         tradeService.deleteTradeById(id);
-        model.addAttribute("trades", tradeService.findAllTrades());
+
+        logger.info("Success : trade with id {} deleted, redirect to '/trade/list'", id);
+
         return "redirect:/trade/list";
     }
 }

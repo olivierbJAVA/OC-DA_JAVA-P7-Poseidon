@@ -1,9 +1,9 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.services.ICurvePointService;
 import com.nnk.springboot.services.IRuleNameService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,61 +18,92 @@ import java.util.List;
 
 @Controller
 public class RuleNameController {
-    // TODO: Inject RuleName service
+
+    private static final Logger logger = LoggerFactory.getLogger(RuleNameController.class);
+
     @Autowired
     IRuleNameService ruleNameService;
 
     @RequestMapping("/ruleName/list")
-    public String home(Model model)
-    {
-        // TODO: find all RuleName, add to model
+    public String home(Model model) {
+        logger.info("Request : GET /ruleName/list");
+
         List<RuleName> ruleNames = ruleNameService.findAllRuleNames();
-        model.addAttribute("ruleNames", ruleNames );
+        model.addAttribute("ruleNames", ruleNames);
+
+        logger.info("Success : ruleNames found, returning 'ruleName/list' view");
+
         return "ruleName/list";
     }
 
     @GetMapping("/ruleName/add")
     public String addRuleForm(RuleName ruleName) {
+
+        logger.info("Request : GET /ruleName/add");
+        logger.info("Success : returning 'ruleName/add' view");
+
         return "ruleName/add";
     }
 
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return RuleName list
+
+        logger.info("Request : POST /ruleName/validate");
+
         if (!result.hasErrors()) {
             ruleNameService.createRuleName(ruleName);
-            model.addAttribute("ruleNames", ruleNameService.findAllRuleNames());
+
+            logger.info("Success : new ruleName created, redirect to '/ruleName/list' view");
+
             return "redirect:/ruleName/list";
         }
+
+        logger.error("Error in fields validation : new ruleName not created, returning '/ruleName/add' view");
+
         return "ruleName/add";
     }
 
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get RuleName by Id and to model then show to the form
+
+        logger.info("Request : GET /ruleName/update/{}", id);
+
         RuleName ruleName = ruleNameService.findRuleNameById(id);
         model.addAttribute("ruleName", ruleName);
+
+        logger.info("Success : ruleName with id {} to update found, returning '/ruleName/update' view", id);
+
         return "ruleName/update";
     }
 
     @PostMapping("/ruleName/update/{id}")
-    public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update RuleName and return RuleName list
+    public String updateRuleName(@Valid RuleName ruleName, BindingResult result, Model model) {
+
+        logger.info("Request : POST /rating/update/{}", ruleName.getId());
+
         if (result.hasErrors()) {
+
+            logger.error("Error in fields : ruleName with id {} not updated, returning '/ruleName/update' view", ruleName.getId());
+
             return "ruleName/update";
         }
-        ruleName.setId(id);
+
         ruleNameService.updateRuleName(ruleName);
-        model.addAttribute("ruleNames", ruleNameService.findAllRuleNames());
+
+        logger.info("Success : ruleName with id {} updated, redirect to '/ruleName/list'", ruleName.getId());
+
         return "redirect:/ruleName/list";
     }
 
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
+
+        logger.info("Request : GET /ruleName/delete/{}", id);
+
         ruleNameService.deleteRuleNameById(id);
-        model.addAttribute("ruleNames", ruleNameService.findAllRuleNames());
+
+        logger.info("Success : ruleName with id {} deleted, redirect to '/ruleName/list'", id);
+
         return "redirect:/ruleName/list";
     }
 }
