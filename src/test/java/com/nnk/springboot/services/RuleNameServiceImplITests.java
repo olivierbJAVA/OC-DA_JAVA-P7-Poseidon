@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 @SpringBootTest
 @Sql({"/schema-test.sql"})
-public class RuleNameServiceITests {
+public class RuleNameServiceImplITests {
 
     @Autowired
-    private RuleNameImplService ruleNameImplServiceUnderTest;
+    private RuleNameServiceImpl ruleNameServiceImplUnderTest;
 
     @Test
     public void createRuleName() {
@@ -30,7 +30,7 @@ public class RuleNameServiceITests {
         RuleName ruleNameToSave = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
 
         // ACT
-        RuleName ruleNameSaved = ruleNameImplServiceUnderTest.createRuleName(ruleNameToSave);
+        RuleName ruleNameSaved = ruleNameServiceImplUnderTest.createRuleName(ruleNameToSave);
 
         // ASSERT
         assertNotNull(ruleNameSaved.getId());
@@ -46,11 +46,11 @@ public class RuleNameServiceITests {
     public void updateRuleName() {
         // ARRANGE
         RuleName ruleNameToUpdate = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
-        ruleNameImplServiceUnderTest.createRuleName(ruleNameToUpdate);
+        ruleNameServiceImplUnderTest.createRuleName(ruleNameToUpdate);
 
         // ACT
         ruleNameToUpdate.setName("Rule Name Update");
-        RuleName ruleNameToUpdated = ruleNameImplServiceUnderTest.updateRuleName(ruleNameToUpdate);
+        RuleName ruleNameToUpdated = ruleNameServiceImplUnderTest.updateRuleName(ruleNameToUpdate);
 
         // ASSERT
         assertEquals(ruleNameToUpdate.getName(), ruleNameToUpdated.getName());
@@ -65,10 +65,10 @@ public class RuleNameServiceITests {
     public void findRuleNameById() {
         // ARRANGE
         RuleName ruleNameToFind = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
-        ruleNameToFind = ruleNameImplServiceUnderTest.createRuleName(ruleNameToFind);
+        ruleNameToFind = ruleNameServiceImplUnderTest.createRuleName(ruleNameToFind);
 
         // ACT
-        RuleName ruleNameFound = ruleNameImplServiceUnderTest.findRuleNameById(ruleNameToFind.getId());
+        RuleName ruleNameFound = ruleNameServiceImplUnderTest.findRuleNameById(ruleNameToFind.getId());
 
         // ASSERT
         assertNotNull(ruleNameFound);
@@ -84,16 +84,16 @@ public class RuleNameServiceITests {
     public void findAllRuleNames() {
         // ARRANGE
         RuleName ruleNameToFind = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
-        ruleNameImplServiceUnderTest.createRuleName(ruleNameToFind);
+        ruleNameServiceImplUnderTest.createRuleName(ruleNameToFind);
 
         RuleName ruleNameToFind2 = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
-        ruleNameImplServiceUnderTest.createRuleName(ruleNameToFind2);
+        ruleNameServiceImplUnderTest.createRuleName(ruleNameToFind2);
 
         RuleName ruleNameToFind3 = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
-        ruleNameImplServiceUnderTest.createRuleName(ruleNameToFind3);
+        ruleNameServiceImplUnderTest.createRuleName(ruleNameToFind3);
 
         // ACT
-        List<RuleName> listRuleNames = ruleNameImplServiceUnderTest.findAllRuleNames();
+        List<RuleName> listRuleNames = ruleNameServiceImplUnderTest.findAllRuleNames();
 
         // ASSERT
         assertTrue(listRuleNames.size() == 3);
@@ -103,15 +103,15 @@ public class RuleNameServiceITests {
     public void deleteRuleNameById() {
         // ARRANGE
         RuleName ruleNameToDelete = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
-        ruleNameToDelete = ruleNameImplServiceUnderTest.createRuleName(ruleNameToDelete);
+        ruleNameToDelete = ruleNameServiceImplUnderTest.createRuleName(ruleNameToDelete);
 
         // ACT
         Integer id = ruleNameToDelete.getId();
-        ruleNameImplServiceUnderTest.deleteRuleNameById(id);
+        ruleNameServiceImplUnderTest.deleteRuleNameById(id);
 
         // ASSERT
         assertThrows(RecordNotFoundException.class, () -> {
-            ruleNameImplServiceUnderTest.findRuleNameById(id);
+            ruleNameServiceImplUnderTest.findRuleNameById(id);
         });
     }
 }

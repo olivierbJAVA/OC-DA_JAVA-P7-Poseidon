@@ -20,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 @SpringBootTest
 @Sql({"/schema-test.sql"})
-public class TradeServiceITests {
+public class TradeServiceImplITests {
 
     @Autowired
-    private TradeImplService tradeImplServiceUnderTest;
+    private TradeServiceImpl tradeServiceImplUnderTest;
 
     @Test
     public void createTrade() {
@@ -48,7 +48,7 @@ public class TradeServiceITests {
         tradeToSave.setSide("Side");
 
         // ACT
-        Trade tradeSaved = tradeImplServiceUnderTest.createTrade(tradeToSave);
+        Trade tradeSaved = tradeServiceImplUnderTest.createTrade(tradeToSave);
 
         // ASSERT
         assertNotNull(tradeSaved.getTradeId());
@@ -95,11 +95,11 @@ public class TradeServiceITests {
         tradeToUpdate.setDealType("DealType");
         tradeToUpdate.setSourceListId("SourceListId");
         tradeToUpdate.setSide("Side");
-        tradeImplServiceUnderTest.createTrade(tradeToUpdate);
+        tradeServiceImplUnderTest.createTrade(tradeToUpdate);
 
         // ACT
         tradeToUpdate.setAccount("Trade Account Update");
-        Trade tradeUpdated = tradeImplServiceUnderTest.updateTrade(tradeToUpdate);
+        Trade tradeUpdated = tradeServiceImplUnderTest.updateTrade(tradeToUpdate);
 
         // ASSERT
         assertEquals(tradeToUpdate.getAccount(), tradeUpdated.getAccount());
@@ -145,10 +145,10 @@ public class TradeServiceITests {
         tradeToFind.setDealType("DealType");
         tradeToFind.setSourceListId("SourceListId");
         tradeToFind.setSide("Side");
-        tradeToFind = tradeImplServiceUnderTest.createTrade(tradeToFind);
+        tradeToFind = tradeServiceImplUnderTest.createTrade(tradeToFind);
 
         // ACT
-        Trade tradeFound = tradeImplServiceUnderTest.findTradeById(tradeToFind.getTradeId());
+        Trade tradeFound = tradeServiceImplUnderTest.findTradeById(tradeToFind.getTradeId());
 
         // ASSERT
         assertNotNull(tradeFound);
@@ -194,7 +194,7 @@ public class TradeServiceITests {
         tradeToFind1.setDealType("DealType");
         tradeToFind1.setSourceListId("SourceListId");
         tradeToFind1.setSide("Side");
-        tradeImplServiceUnderTest.createTrade(tradeToFind1);
+        tradeServiceImplUnderTest.createTrade(tradeToFind1);
 
         Trade tradeToFind2 = new Trade("Trade Account", "Type", 1000d);
         tradeToFind2.setSellQuantity(100d);
@@ -214,7 +214,7 @@ public class TradeServiceITests {
         tradeToFind2.setDealType("DealType");
         tradeToFind2.setSourceListId("SourceListId");
         tradeToFind2.setSide("Side");
-        tradeImplServiceUnderTest.createTrade(tradeToFind2);
+        tradeServiceImplUnderTest.createTrade(tradeToFind2);
 
         Trade tradeToFind3 = new Trade("Trade Account", "Type", 1000d);
         tradeToFind3.setSellQuantity(100d);
@@ -234,10 +234,10 @@ public class TradeServiceITests {
         tradeToFind3.setDealType("DealType");
         tradeToFind3.setSourceListId("SourceListId");
         tradeToFind3.setSide("Side");
-        tradeImplServiceUnderTest.createTrade(tradeToFind3);
+        tradeServiceImplUnderTest.createTrade(tradeToFind3);
 
         // ACT
-        List<Trade> listTrades = tradeImplServiceUnderTest.findAllTrades();
+        List<Trade> listTrades = tradeServiceImplUnderTest.findAllTrades();
 
         // ASSERT
         assertTrue(listTrades.size() == 3);
@@ -264,15 +264,15 @@ public class TradeServiceITests {
         tradeToDelete.setDealType("DealType");
         tradeToDelete.setSourceListId("SourceListId");
         tradeToDelete.setSide("Side");
-        tradeToDelete = tradeImplServiceUnderTest.createTrade(tradeToDelete);
+        tradeToDelete = tradeServiceImplUnderTest.createTrade(tradeToDelete);
 
         // ACT
         Integer id = tradeToDelete.getTradeId();
-        tradeImplServiceUnderTest.deleteTradeById(id);
+        tradeServiceImplUnderTest.deleteTradeById(id);
 
         // ASSERT
         assertThrows(RecordNotFoundException.class, () -> {
-            tradeImplServiceUnderTest.findTradeById(id);
+            tradeServiceImplUnderTest.findTradeById(id);
         });
     }
 }

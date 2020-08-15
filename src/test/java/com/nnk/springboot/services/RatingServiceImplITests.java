@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 @SpringBootTest
 @Sql({"/schema-test.sql"})
-public class RatingServiceITests {
+public class RatingServiceImplITests {
 
     @Autowired
-    private RatingImplService ratingImplServiceUnderTest;
+    private RatingServiceImpl ratingServiceImplUnderTest;
 
     @Test
     public void createRating() {
@@ -30,7 +30,7 @@ public class RatingServiceITests {
         Rating ratingToSave = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
 
         // ACT
-        Rating ratingSaved = ratingImplServiceUnderTest.createRating(ratingToSave);
+        Rating ratingSaved = ratingServiceImplUnderTest.createRating(ratingToSave);
 
         // ASSERT
         assertNotNull(ratingSaved.getId());
@@ -44,11 +44,11 @@ public class RatingServiceITests {
     public void updateRating() {
         // ARRANGE
         Rating ratingToUpdate = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
-        ratingImplServiceUnderTest.createRating(ratingToUpdate);
+        ratingServiceImplUnderTest.createRating(ratingToUpdate);
 
         // ACT
         ratingToUpdate.setOrderNumber(20);
-        Rating ratingUpdated = ratingImplServiceUnderTest.updateRating(ratingToUpdate);
+        Rating ratingUpdated = ratingServiceImplUnderTest.updateRating(ratingToUpdate);
 
         // ASSERT
         assertEquals(ratingToUpdate.getOrderNumber(), ratingUpdated.getOrderNumber());
@@ -61,10 +61,10 @@ public class RatingServiceITests {
     public void findRatingById() {
         // ARRANGE
         Rating ratingToFind = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
-        ratingToFind = ratingImplServiceUnderTest.createRating(ratingToFind);
+        ratingToFind = ratingServiceImplUnderTest.createRating(ratingToFind);
 
         // ACT
-        Rating ratingFound = ratingImplServiceUnderTest.findRatingById(ratingToFind.getId());
+        Rating ratingFound = ratingServiceImplUnderTest.findRatingById(ratingToFind.getId());
 
         // ASSERT
         assertNotNull(ratingFound);
@@ -78,16 +78,16 @@ public class RatingServiceITests {
     public void findAllRatings() {
         // ARRANGE
         Rating ratingToFind1 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
-        ratingImplServiceUnderTest.createRating(ratingToFind1);
+        ratingServiceImplUnderTest.createRating(ratingToFind1);
 
         Rating ratingToFind2 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
-        ratingImplServiceUnderTest.createRating(ratingToFind2);
+        ratingServiceImplUnderTest.createRating(ratingToFind2);
 
         Rating ratingToFind3 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
-        ratingImplServiceUnderTest.createRating(ratingToFind3);
+        ratingServiceImplUnderTest.createRating(ratingToFind3);
 
         // ACT
-        List<Rating> listRatings = ratingImplServiceUnderTest.findAllRatings();
+        List<Rating> listRatings = ratingServiceImplUnderTest.findAllRatings();
 
         // ASSERT
         assertTrue(listRatings.size() == 3);
@@ -97,15 +97,15 @@ public class RatingServiceITests {
     public void deleteRatingById() {
         // ARRANGE
         Rating ratingToDelete = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
-        ratingToDelete = ratingImplServiceUnderTest.createRating(ratingToDelete);
+        ratingToDelete = ratingServiceImplUnderTest.createRating(ratingToDelete);
 
         // ACT
         Integer id = ratingToDelete.getId();
-        ratingImplServiceUnderTest.deleteRatingById(id);
+        ratingServiceImplUnderTest.deleteRatingById(id);
 
         // ASSERT
         assertThrows(RecordNotFoundException.class, () -> {
-            ratingImplServiceUnderTest.findRatingById(id);
+            ratingServiceImplUnderTest.findRatingById(id);
         });
     }
 }

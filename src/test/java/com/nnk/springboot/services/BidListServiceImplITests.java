@@ -23,10 +23,10 @@ import static org.junit.jupiter.api.Assertions.*;
 //@DataJpaTest
 //@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql({"/schema-test.sql"})
-public class BidListServiceITests {
+public class BidListServiceImplITests {
 
     @Autowired
-    private BidListImplService bidListImplServiceUnderTest;
+    private BidListServiceImpl bidListServiceImplUnderTest;
 
     @Test
     public void createBidList() {
@@ -52,7 +52,7 @@ public class BidListServiceITests {
         bidListToCreate.setSide("Side Test");
 
         // ACT
-        BidList bidListCreated = bidListImplServiceUnderTest.createBidList(bidListToCreate);
+        BidList bidListCreated = bidListServiceImplUnderTest.createBidList(bidListToCreate);
 
         // ASSERT
         assertNotNull(bidListCreated.getBidListId());
@@ -101,11 +101,11 @@ public class BidListServiceITests {
         bidListToUpdate.setDealType("DealType Test");
         bidListToUpdate.setSourceListId("SourceListId Test");
         bidListToUpdate.setSide("Side Test");
-        bidListImplServiceUnderTest.createBidList(bidListToUpdate);
+        bidListServiceImplUnderTest.createBidList(bidListToUpdate);
 
         // ACT
         bidListToUpdate.setBidQuantity(20d);
-        BidList bidListUpdated = bidListImplServiceUnderTest.updateBidList(bidListToUpdate);
+        BidList bidListUpdated = bidListServiceImplUnderTest.updateBidList(bidListToUpdate);
 
         // ASSERT
         assertEquals(bidListToUpdate.getAccount(), bidListUpdated.getAccount());
@@ -153,10 +153,10 @@ public class BidListServiceITests {
         bidListToFind.setDealType("DealType Test");
         bidListToFind.setSourceListId("SourceListId Test");
         bidListToFind.setSide("Side Test");
-        bidListToFind = bidListImplServiceUnderTest.createBidList(bidListToFind);
+        bidListToFind = bidListServiceImplUnderTest.createBidList(bidListToFind);
 
         // ACT
-        BidList bidListFound = bidListImplServiceUnderTest.findBidListById(bidListToFind.getBidListId());
+        BidList bidListFound = bidListServiceImplUnderTest.findBidListById(bidListToFind.getBidListId());
         assertNotNull(bidListFound);
         assertEquals(bidListToFind.getAccount(), bidListFound.getAccount());
         assertEquals(bidListToFind.getType(), bidListFound.getType());
@@ -203,7 +203,7 @@ public class BidListServiceITests {
         bidListToFind1.setDealType("DealType Test");
         bidListToFind1.setSourceListId("SourceListId Test");
         bidListToFind1.setSide("Side Test");
-        bidListImplServiceUnderTest.createBidList(bidListToFind1);
+        bidListServiceImplUnderTest.createBidList(bidListToFind1);
 
         BidList bidListToFind2 = new BidList("Account Test", "Type Test", 10d);
         bidListToFind2.setAskQuantity(30d);
@@ -224,7 +224,7 @@ public class BidListServiceITests {
         bidListToFind2.setDealType("DealType Test");
         bidListToFind2.setSourceListId("SourceListId Test");
         bidListToFind2.setSide("Side Test");
-        bidListImplServiceUnderTest.createBidList(bidListToFind2);
+        bidListServiceImplUnderTest.createBidList(bidListToFind2);
 
         BidList bidListToFind3 = new BidList("Account Test", "Type Test", 10d);
         bidListToFind3.setAskQuantity(30d);
@@ -245,10 +245,10 @@ public class BidListServiceITests {
         bidListToFind3.setDealType("DealType Test");
         bidListToFind3.setSourceListId("SourceListId Test");
         bidListToFind3.setSide("Side Test");
-        bidListImplServiceUnderTest.createBidList(bidListToFind3);
+        bidListServiceImplUnderTest.createBidList(bidListToFind3);
 
         // ACT
-        List<BidList> listBidLists = bidListImplServiceUnderTest.findAllBidLists();
+        List<BidList> listBidLists = bidListServiceImplUnderTest.findAllBidLists();
 
         // ASSERT
         assertTrue(listBidLists.size() == 3);
@@ -276,15 +276,15 @@ public class BidListServiceITests {
         bidListToDelete.setDealType("DealType Test");
         bidListToDelete.setSourceListId("SourceListId Test");
         bidListToDelete.setSide("Side Test");
-        bidListToDelete = bidListImplServiceUnderTest.createBidList(bidListToDelete);
+        bidListToDelete = bidListServiceImplUnderTest.createBidList(bidListToDelete);
 
         // ACT
         Integer id = bidListToDelete.getBidListId();
-        bidListImplServiceUnderTest.deleteBidListById(id);
+        bidListServiceImplUnderTest.deleteBidListById(id);
 
         // ASSERT
         assertThrows(RecordNotFoundException.class, () -> {
-            bidListImplServiceUnderTest.findBidListById(id);
+            bidListServiceImplUnderTest.findBidListById(id);
         });
     }
 }
