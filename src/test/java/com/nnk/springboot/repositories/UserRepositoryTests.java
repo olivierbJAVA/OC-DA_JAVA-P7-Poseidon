@@ -1,17 +1,13 @@
 package com.nnk.springboot.repositories;
 
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.User;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,54 +27,85 @@ public class UserRepositoryTests {
     private UserRepository userRepositoryUnderTest;
 
     @Test
-    public void ratingTests() {
+    public void saveUser() {
+        // ARRANGE
+        User userToSave = new User("user", "password", "User","USER" );
 
-        User userTest = new User();
-        userTest.setUsername("user");
-        userTest.setPassword("password");
-        userTest.setFullname("User");
-        userTest.setRole("USER");
+        // ACT
+        User userSaved = userRepositoryUnderTest.save(userToSave);
 
-        // Save
-        userTest = userRepositoryUnderTest.save(userTest);
-        assertNotNull(userTest.getId());
-        assertTrue(userTest.getFullname().equals("User"));
+        // ASSERT
+        assertNotNull(userSaved.getId());
+        assertEquals(userToSave.getUsername(), userSaved.getUsername());
+        assertEquals(userToSave.getPassword(), userSaved.getPassword());
+        assertEquals(userToSave.getFullname(), userSaved.getFullname());
+        assertEquals(userToSave.getRole(), userSaved.getRole());
+    }
 
-        // Update
-        userTest.setFullname("User updated");
-        userTest = userRepositoryUnderTest.save(userTest);
-        assertTrue(userTest.getFullname().equals("User updated"));
+    @Test
+    public void updateUser() {
+        // ARRANGE
+        User userToUpdate = new User("user", "password", "User","USER" );
+        userRepositoryUnderTest.save(userToUpdate);
 
-        // Find by id
-        Optional<User> userGet = userRepositoryUnderTest.findById(userTest.getId());
-        assertTrue(userGet.isPresent());
-        assertEquals(userTest.getUsername(), userGet.get().getUsername());
-        assertEquals(userTest.getPassword(), userGet.get().getPassword());
-        assertEquals(userTest.getFullname(), userGet.get().getFullname());
-        assertEquals(userTest.getRole(), userGet.get().getRole());
+        // ACT
+        userToUpdate.setFullname("User updated");
+        User userUpdated = userRepositoryUnderTest.save(userToUpdate);
 
-        // Find all
-        User userTest2 = new User();
-        userTest2.setUsername("user");
-        userTest2.setPassword("password");
-        userTest2.setFullname("User");
-        userTest2.setRole("USER");
-        userRepositoryUnderTest.save(userTest2);
+        // ASSERT
+        assertEquals(userToUpdate.getUsername(), userUpdated.getUsername());
+        assertEquals(userToUpdate.getPassword(), userUpdated.getPassword());
+        assertEquals(userToUpdate.getFullname(), userUpdated.getFullname());
+        assertEquals(userToUpdate.getRole(), userUpdated.getRole());
+    }
 
-        User userTest3 = new User();
-        userTest3.setUsername("user");
-        userTest3.setPassword("password");
-        userTest3.setFullname("User");
-        userTest3.setRole("USER");
-        userRepositoryUnderTest.save(userTest3);
+    @Test
+    public void findUserById() {
+        // ARRANGE
+        User userToFind = new User("user", "password", "User","USER" );
+        userToFind = userRepositoryUnderTest.save(userToFind);
 
-        List<User> listResult = userRepositoryUnderTest.findAll();
-        assertTrue(listResult.size() == 3);
+        // ACT
+        Optional<User> userFound = userRepositoryUnderTest.findById(userToFind.getId());
 
-        // Delete
-        Integer id = userTest.getId();
-        //ratingRepositoryUnderTest.delete(ratingTest);
+        // ASSERT
+        assertTrue(userFound.isPresent());
+        assertEquals(userToFind.getUsername(), userFound.get().getUsername());
+        assertEquals(userToFind.getPassword(), userFound.get().getPassword());
+        assertEquals(userToFind.getFullname(), userFound.get().getFullname());
+        assertEquals(userToFind.getRole(), userFound.get().getRole());
+    }
+
+    @Test
+    public void findAllUsers() {
+        // ARRANGE
+        User userToFind1 = new User("user1", "password", "User","USER" );
+        userRepositoryUnderTest.save(userToFind1);
+
+        User userToFind2 = new User("user2", "password", "User","USER" );
+        userRepositoryUnderTest.save(userToFind2);
+
+        User userToFind3 = new User("user3", "password", "User","USER" );
+        userRepositoryUnderTest.save(userToFind3);
+
+        // ACT
+        List<User> listUsers = userRepositoryUnderTest.findAll();
+
+        // ASSERT
+        assertTrue(listUsers.size() == 3);
+    }
+
+    @Test
+    public void deleteUser() {
+        // ARRANGE
+        User userToDelete = new User("user", "password", "User","USER" );
+        userToDelete = userRepositoryUnderTest.save(userToDelete);
+
+        // ACT
+        Integer id = userToDelete.getId();
         userRepositoryUnderTest.deleteById(id);
+
+        // ASSERT
         Optional<User> userDeleted = userRepositoryUnderTest.findById(id);
         assertFalse(userDeleted.isPresent());
     }

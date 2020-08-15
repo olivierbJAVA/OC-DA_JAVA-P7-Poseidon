@@ -5,22 +5,16 @@ import com.nnk.springboot.domain.CurvePoint;
 import static java.sql.Timestamp.valueOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import com.nnk.springboot.domain.Trade;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,61 +32,108 @@ public class CurvePointRepositoryTests {
     private CurvePointRepository curvePointRepositoryUnderTest;
 
     @Test
-    public void curvePointTests() {
-        //CurvePoint curvePointTest = new CurvePoint(10, 10d, 30d);
+    public void saveCurvePoint() {
+        // ARRANGE
+        CurvePoint curvePointToSave = new CurvePoint(10, 10d, 30d);
+        curvePointToSave.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointToSave.setTerm(10d);
+        curvePointToSave.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
 
-        CurvePoint curvePointTest = new CurvePoint();
-        curvePointTest.setCurveId(10);
-        curvePointTest.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
-        curvePointTest.setTerm(10d);
-        curvePointTest.setValue(30d);
-        curvePointTest.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
+        // ACT
+        CurvePoint curvePointSaved = curvePointRepositoryUnderTest.save(curvePointToSave);
 
-        // Save
-        curvePointTest = curvePointRepositoryUnderTest.save(curvePointTest);
-        assertNotNull(curvePointTest.getId());
-        assertTrue(curvePointTest.getCurveId() == 10);
+        // ASSERT
+        assertNotNull(curvePointSaved.getId());
+        assertEquals(curvePointToSave.getCurveId(), curvePointSaved.getCurveId());
+        assertEquals(curvePointToSave.getAsOfDate(), curvePointSaved.getAsOfDate());
+        assertEquals(curvePointToSave.getTerm(), curvePointSaved.getTerm());
+        assertEquals(curvePointToSave.getValue(), curvePointSaved.getValue());
+        assertEquals(curvePointToSave.getCreationDate(), curvePointSaved.getCreationDate());
 
-        // Update
-        curvePointTest.setCurveId(20);
-        curvePointTest = curvePointRepositoryUnderTest.save(curvePointTest);
-        assertTrue(curvePointTest.getCurveId() == 20);
-
-        // Find by id
-        Optional<CurvePoint> curvePointGet = curvePointRepositoryUnderTest.findById(curvePointTest.getId());
-        assertTrue(curvePointGet.isPresent());
-        assertEquals(curvePointTest.getCurveId(), curvePointGet.get().getCurveId());
-        assertEquals(curvePointTest.getAsOfDate(), curvePointGet.get().getAsOfDate());
-        assertEquals(curvePointTest.getTerm(), curvePointGet.get().getTerm());
-        assertEquals(curvePointTest.getValue(), curvePointGet.get().getValue());
-        assertEquals(curvePointTest.getCreationDate(), curvePointGet.get().getCreationDate());
-
-        // Find all
-        CurvePoint curvePointTest2 = new CurvePoint();
-        curvePointTest2.setCurveId(10);
-        curvePointTest2.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
-        curvePointTest2.setTerm(10d);
-        curvePointTest2.setValue(30d);
-        curvePointTest2.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
-        curvePointRepositoryUnderTest.save(curvePointTest2);
-
-        CurvePoint curvePointTest3 = new CurvePoint();
-        curvePointTest3.setCurveId(10);
-        curvePointTest3.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
-        curvePointTest3.setTerm(10d);
-        curvePointTest3.setValue(30d);
-        curvePointTest3.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
-        curvePointRepositoryUnderTest.save(curvePointTest3);
-
-        List<CurvePoint> listResult = curvePointRepositoryUnderTest.findAll();
-        assertTrue(listResult.size() == 3);
-
-        // Delete
-        Integer id = curvePointTest.getId();
-        //curvePointRepositoryUnderTest.delete(curvePointTest);
-        curvePointRepositoryUnderTest.deleteById(id);
-        Optional<CurvePoint> curvePoint = curvePointRepositoryUnderTest.findById(id);
-        assertFalse(curvePoint.isPresent());
     }
 
+    @Test
+    public void updateCurvePoint() {
+        // ARRANGE
+        CurvePoint curvePointToUpdate = new CurvePoint(10, 10d, 30d);
+        curvePointToUpdate.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointToUpdate.setTerm(10d);
+        curvePointToUpdate.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointRepositoryUnderTest.save(curvePointToUpdate);
+
+        // ACT
+        curvePointToUpdate.setCurveId(20);
+        CurvePoint curvePointUpdated = curvePointRepositoryUnderTest.save(curvePointToUpdate);
+
+        // ASSERT
+        assertEquals(curvePointToUpdate.getCurveId(), curvePointUpdated.getCurveId());
+        assertEquals(curvePointToUpdate.getAsOfDate(), curvePointUpdated.getAsOfDate());
+        assertEquals(curvePointToUpdate.getTerm(), curvePointUpdated.getTerm());
+        assertEquals(curvePointToUpdate.getValue(), curvePointUpdated.getValue());
+        assertEquals(curvePointToUpdate.getCreationDate(), curvePointUpdated.getCreationDate());
+    }
+
+    @Test
+    public void findCurvePointById() {
+        // ARRANGE
+        CurvePoint curvePointToFind = new CurvePoint(10, 10d, 30d);
+        curvePointToFind.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointToFind.setTerm(10d);
+        curvePointToFind.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointToFind = curvePointRepositoryUnderTest.save(curvePointToFind);
+
+        // ACT
+        Optional<CurvePoint> curvePointFound = curvePointRepositoryUnderTest.findById(curvePointToFind.getId());
+
+        // ASSERT
+        assertTrue(curvePointFound.isPresent());
+        assertEquals(curvePointToFind.getCurveId(), curvePointFound.get().getCurveId());
+        assertEquals(curvePointToFind.getAsOfDate(), curvePointFound.get().getAsOfDate());
+        assertEquals(curvePointToFind.getTerm(), curvePointFound.get().getTerm());
+        assertEquals(curvePointToFind.getValue(), curvePointFound.get().getValue());
+        assertEquals(curvePointToFind.getCreationDate(), curvePointFound.get().getCreationDate());
+    }
+
+    @Test
+    public void findAllCurvePoints() {
+        // ARRANGE
+        CurvePoint curvePointToFind1 = new CurvePoint(10, 10d, 30d);
+        curvePointToFind1.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointToFind1.setTerm(10d);
+        curvePointToFind1.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointRepositoryUnderTest.save(curvePointToFind1);
+
+        CurvePoint curvePointToFind2 = new CurvePoint(10, 10d, 30d);
+        curvePointToFind2.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointToFind2.setTerm(10d);
+        curvePointToFind2.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointRepositoryUnderTest.save(curvePointToFind2);
+
+        CurvePoint curvePointToFind3 = new CurvePoint(10, 10d, 30d);
+        curvePointToFind3.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointToFind3.setTerm(10d);
+        curvePointToFind3.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointRepositoryUnderTest.save(curvePointToFind3);
+
+        List<CurvePoint> listCurvePoints = curvePointRepositoryUnderTest.findAll();
+        assertTrue(listCurvePoints.size() == 3);
+    }
+
+    @Test
+    public void deleteCurvePoint() {
+        // ARRANGE
+        CurvePoint curvePointToDelete = new CurvePoint(10, 10d, 30d);
+        curvePointToDelete.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointToDelete.setTerm(10d);
+        curvePointToDelete.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointToDelete = curvePointRepositoryUnderTest.save(curvePointToDelete);
+
+        // ACT
+        Integer id = curvePointToDelete.getId();
+        curvePointRepositoryUnderTest.deleteById(id);
+
+        // ASSERT
+        Optional<CurvePoint> curvePointDeleted = curvePointRepositoryUnderTest.findById(id);
+        assertFalse(curvePointDeleted.isPresent());
+    }
 }

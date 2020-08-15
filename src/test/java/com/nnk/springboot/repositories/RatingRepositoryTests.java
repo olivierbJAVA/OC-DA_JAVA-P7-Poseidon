@@ -1,26 +1,18 @@
 package com.nnk.springboot.repositories;
 
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.repositories.RatingRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -34,68 +26,90 @@ import java.util.Optional;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql({"/schema-test.sql"})
 public class RatingRepositoryTests {
-    /*
-        @TestConfiguration
-        static class RatingTestsContextConfiguration {
-            @Bean
-            public RatingRepository ratingRepository() {
-                return new RatingRepository();
-            }
-        }
-    */
+
     @Autowired
     private RatingRepository ratingRepositoryUnderTest;
 
     @Test
-    public void ratingTests() {
-        //Rating ratingTest = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+    public void saveRating() {
+        // ARRANGE
+        Rating ratingToSave = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
 
-        Rating ratingTest = new Rating();
-        ratingTest.setMoodysRating("Moodys Rating");
-        ratingTest.setSandPRating("Sand PRating");
-        ratingTest.setFitchRating("Fitch Rating");
-        ratingTest.setOrderNumber(10);
+        // ACT
+        Rating ratingSaved = ratingRepositoryUnderTest.save(ratingToSave);
 
-        // Save
-        ratingTest = ratingRepositoryUnderTest.save(ratingTest);
-        assertNotNull(ratingTest.getId());
-        assertTrue(ratingTest.getOrderNumber() == 10);
+        // ASSERT
+        assertNotNull(ratingSaved.getId());
+        assertEquals(ratingToSave.getOrderNumber(), ratingSaved.getOrderNumber());
+        assertEquals(ratingToSave.getFitchRating(), ratingSaved.getFitchRating());
+        assertEquals(ratingToSave.getMoodysRating(), ratingSaved.getMoodysRating());
+        assertEquals(ratingToSave.getSandPRating(), ratingSaved.getSandPRating());
+    }
 
-        // Update
-        ratingTest.setOrderNumber(20);
-        ratingTest = ratingRepositoryUnderTest.save(ratingTest);
-        assertTrue(ratingTest.getOrderNumber() == 20);
+    @Test
+    public void updateRating() {
+        // ARRANGE
+        Rating ratingToUpdate = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        ratingRepositoryUnderTest.save(ratingToUpdate);
+        
+        // ACT
+        ratingToUpdate.setOrderNumber(20);
+        Rating ratingUpdated = ratingRepositoryUnderTest.save(ratingToUpdate);
+        
+        // ASSERT
+        assertEquals(ratingToUpdate.getOrderNumber(), ratingUpdated.getOrderNumber());
+        assertEquals(ratingToUpdate.getFitchRating(), ratingUpdated.getFitchRating());
+        assertEquals(ratingToUpdate.getMoodysRating(), ratingUpdated.getMoodysRating());
+        assertEquals(ratingToUpdate.getSandPRating(), ratingUpdated.getSandPRating());
+    }
 
-        // Find by id
-        Optional<Rating> ratingGet = ratingRepositoryUnderTest.findById(ratingTest.getId());
-        assertTrue(ratingGet.isPresent());
-        assertEquals(ratingTest.getOrderNumber(), ratingGet.get().getOrderNumber());
-        assertEquals(ratingTest.getFitchRating(), ratingGet.get().getFitchRating());
-        assertEquals(ratingTest.getMoodysRating(), ratingGet.get().getMoodysRating());
-        assertEquals(ratingTest.getSandPRating(), ratingGet.get().getSandPRating());
+    @Test
+    public void findRatingById() {
+        // ARRANGE
+        Rating ratingToFind = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        ratingToFind = ratingRepositoryUnderTest.save(ratingToFind);
 
-        // Find all
-        Rating ratingTest2 = new Rating();
-        ratingTest2.setMoodysRating("Moodys Rating");
-        ratingTest2.setSandPRating("Sand PRating");
-        ratingTest2.setFitchRating("Fitch Rating");
-        ratingTest2.setOrderNumber(10);
-        ratingRepositoryUnderTest.save(ratingTest2);
+        // ACT
+        Optional<Rating> ratingFound = ratingRepositoryUnderTest.findById(ratingToFind.getId());
 
-        Rating ratingTest3 = new Rating();
-        ratingTest3.setMoodysRating("Moodys Rating");
-        ratingTest3.setSandPRating("Sand PRating");
-        ratingTest3.setFitchRating("Fitch Rating");
-        ratingTest3.setOrderNumber(10);
-        ratingRepositoryUnderTest.save(ratingTest3);
+        // ASSERT
+        assertTrue(ratingFound.isPresent());
+        assertEquals(ratingToFind.getOrderNumber(), ratingFound.get().getOrderNumber());
+        assertEquals(ratingToFind.getFitchRating(), ratingFound.get().getFitchRating());
+        assertEquals(ratingToFind.getMoodysRating(), ratingFound.get().getMoodysRating());
+        assertEquals(ratingToFind.getSandPRating(), ratingFound.get().getSandPRating());
+    }
 
-        List<Rating> listResult = ratingRepositoryUnderTest.findAll();
-        assertTrue(listResult.size() == 3);
+    @Test
+    public void findAllRatings() {
+        // ARRANGE
+        Rating ratingToFind1 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        ratingRepositoryUnderTest.save(ratingToFind1);
 
-        // Delete
-        Integer id = ratingTest.getId();
-        //ratingRepositoryUnderTest.delete(ratingTest);
+        Rating ratingToFind2 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        ratingRepositoryUnderTest.save(ratingToFind2);
+
+        Rating ratingToFind3 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        ratingRepositoryUnderTest.save(ratingToFind3);
+
+        // ACT
+        List<Rating> listRatings= ratingRepositoryUnderTest.findAll();
+
+        // ASSERT
+        assertTrue(listRatings.size() == 3);
+    }
+    
+    @Test
+    public void deleteRating() {
+        // ARRANGE
+        Rating ratingToDelete = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        ratingToDelete = ratingRepositoryUnderTest.save(ratingToDelete);
+
+        // ACT
+        Integer id = ratingToDelete.getId();
         ratingRepositoryUnderTest.deleteById(id);
+
+        // ASSERT
         Optional<Rating> ratingDeleted = ratingRepositoryUnderTest.findById(id);
         assertFalse(ratingDeleted.isPresent());
     }
