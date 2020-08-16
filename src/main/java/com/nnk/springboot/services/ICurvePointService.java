@@ -13,7 +13,7 @@ public interface ICurvePointService {
 
     CurvePoint createCurvePoint(CurvePoint curvePoint);
 
-    CurvePoint updateCurvePoint(CurvePoint curvePoint);
+    CurvePoint updateCurvePoint(CurvePoint curvePoint) throws ResourceNotFoundException;
 
     void deleteCurvePointById(Integer id) throws ResourceNotFoundException;
 }

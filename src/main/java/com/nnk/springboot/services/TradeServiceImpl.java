@@ -23,33 +23,23 @@ public class TradeServiceImpl implements ITradeService {
 
     @Override
     public Trade findTradeById(Integer id) throws ResourceNotFoundException {
-        Optional<Trade> trade = tradeRepository.findById(id);
-
-        if(trade.isPresent()) {
-            return trade.get();
-        } else {
-            throw new ResourceNotFoundException(id);
-        }
+        return tradeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
     }
 
     @Override
-    public Trade createTrade(Trade Trade) {
-        return tradeRepository.save(Trade);
+    public Trade createTrade(Trade trade) {
+        return tradeRepository.save(trade);
     }
 
     @Override
-    public Trade updateTrade(Trade Trade) {
-        return tradeRepository.save(Trade);
+    public Trade updateTrade(Trade trade) {
+        tradeRepository.findById(trade.getTradeId()).orElseThrow(()-> new ResourceNotFoundException(trade.getTradeId()));
+        return tradeRepository.save(trade);
     }
 
     @Override
     public void deleteTradeById(Integer id) throws ResourceNotFoundException {
-        Optional<Trade> trade = tradeRepository.findById(id);
-
-        if(trade.isPresent()) {
-            tradeRepository.deleteById(id);
-        } else {
-            throw new ResourceNotFoundException(id);
-        }
+        tradeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        tradeRepository.deleteById(id);
     }
 }

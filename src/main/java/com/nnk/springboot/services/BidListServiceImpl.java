@@ -23,13 +23,7 @@ public class BidListServiceImpl implements IBidListService {
 
     @Override
     public BidList findBidListById(Integer id) throws ResourceNotFoundException {
-        Optional<BidList> bidList = bidListRepository.findById(id);
-
-        if(bidList.isPresent()) {
-            return bidList.get();
-        } else {
-            throw new ResourceNotFoundException(id);
-        }
+        return bidListRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
     }
 
     @Override
@@ -39,17 +33,13 @@ public class BidListServiceImpl implements IBidListService {
 
     @Override
     public BidList updateBidList(BidList bidList) {
+        bidListRepository.findById(bidList.getBidListId()).orElseThrow(()-> new ResourceNotFoundException(bidList.getBidListId()));
         return bidListRepository.save(bidList);
     }
 
     @Override
     public void deleteBidListById(Integer id) throws ResourceNotFoundException {
-        Optional<BidList> bidList = bidListRepository.findById(id);
-
-        if(bidList.isPresent()) {
-            bidListRepository.deleteById(id);
-        } else {
-            throw new ResourceNotFoundException(id);
-        }
+        bidListRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        bidListRepository.deleteById(id);
     }
 }

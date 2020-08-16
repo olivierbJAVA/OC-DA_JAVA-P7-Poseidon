@@ -13,7 +13,7 @@ public interface IBidListService {
 
     BidList createBidList(BidList bidList);
 
-    BidList updateBidList(BidList bidList);
+    BidList updateBidList(BidList bidList) throws ResourceNotFoundException;
 
     void deleteBidListById(Integer id) throws ResourceNotFoundException;
 }

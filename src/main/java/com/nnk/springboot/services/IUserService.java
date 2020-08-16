@@ -13,7 +13,7 @@ public interface IUserService {
 
     User createUser(User user);
 
-    User updateUser(User user);
+    User updateUser(User user) throws ResourceNotFoundException;
 
     void deleteUserById(Integer id) throws ResourceNotFoundException;
 }

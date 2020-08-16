@@ -23,33 +23,23 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User findUserById(Integer id) throws ResourceNotFoundException {
-        Optional<User> user = userRepository.findById(id);
-
-        if(user.isPresent()) {
-            return user.get();
-        } else {
-            throw new ResourceNotFoundException(id);
-        }
+        return userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
     }
 
     @Override
-    public User createUser(User User) {
-        return userRepository.save(User);
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 
     @Override
-    public User updateUser(User User) {
-        return userRepository.save(User);
+    public User updateUser(User user) {
+        userRepository.findById(user.getId()).orElseThrow(()-> new ResourceNotFoundException(user.getId()));
+        return userRepository.save(user);
     }
 
     @Override
     public void deleteUserById(Integer id) throws ResourceNotFoundException {
-        Optional<User> user = userRepository.findById(id);
-
-        if(user.isPresent()) {
-            userRepository.deleteById(id);
-        } else {
-            throw new ResourceNotFoundException(id);
-        }
+        userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        userRepository.deleteById(id);
     }
 }

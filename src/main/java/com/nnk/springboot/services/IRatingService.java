@@ -13,7 +13,7 @@ public interface IRatingService {
 
     Rating createRating(Rating rating);
 
-    Rating updateRating(Rating rating);
+    Rating updateRating(Rating rating) throws ResourceNotFoundException;
 
     void deleteRatingById(Integer id) throws ResourceNotFoundException;
 }

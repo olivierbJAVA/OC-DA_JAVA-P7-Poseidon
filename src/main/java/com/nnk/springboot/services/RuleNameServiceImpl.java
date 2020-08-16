@@ -23,33 +23,23 @@ public class RuleNameServiceImpl implements IRuleNameService {
 
     @Override
     public RuleName findRuleNameById(Integer id) throws ResourceNotFoundException {
-        Optional<RuleName> ruleName = ruleNameRepository.findById(id);
-
-        if(ruleName.isPresent()) {
-            return ruleName.get();
-        } else {
-            throw new ResourceNotFoundException(id);
-        }
+        return ruleNameRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
     }
 
     @Override
-    public RuleName createRuleName(RuleName RuleName) {
-        return ruleNameRepository.save(RuleName);
+    public RuleName createRuleName(RuleName ruleName) {
+        return ruleNameRepository.save(ruleName);
     }
 
     @Override
-    public RuleName updateRuleName(RuleName RuleName) {
-        return ruleNameRepository.save(RuleName);
+    public RuleName updateRuleName(RuleName ruleName) {
+        ruleNameRepository.findById(ruleName.getId()).orElseThrow(()-> new ResourceNotFoundException(ruleName.getId()));
+        return ruleNameRepository.save(ruleName);
     }
 
     @Override
     public void deleteRuleNameById(Integer id) throws ResourceNotFoundException {
-        Optional<RuleName> ruleName = ruleNameRepository.findById(id);
-
-        if(ruleName.isPresent()) {
-            ruleNameRepository.deleteById(id);
-        } else {
-            throw new ResourceNotFoundException(id);
-        }
+        ruleNameRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        ruleNameRepository.deleteById(id);
     }
 }

@@ -13,7 +13,7 @@ public interface ITradeService {
 
     Trade createTrade(Trade trade);
 
-    Trade updateTrade(Trade trade);
+    Trade updateTrade(Trade trade) throws ResourceNotFoundException;
 
     void deleteTradeById(Integer id) throws ResourceNotFoundException;
 }

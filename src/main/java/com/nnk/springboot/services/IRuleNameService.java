@@ -13,7 +13,7 @@ public interface IRuleNameService {
 
     RuleName createRuleName(RuleName ruleName);
 
-    RuleName updateRuleName(RuleName ruleName);
+    RuleName updateRuleName(RuleName ruleName) throws ResourceNotFoundException;
 
     void deleteRuleNameById(Integer id) throws ResourceNotFoundException;
 }
