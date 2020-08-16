@@ -2,7 +2,7 @@ package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.BidListRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -130,7 +130,7 @@ public class BidListServiceImplTests {
         doReturn(Optional.empty()).when(mockBidListRepository).findById(anyInt());
 
         // ACT & ASSERT
-        assertThrows(RecordNotFoundException.class, () -> {
+        assertThrows(ResourceNotFoundException.class, () -> {
             bidListServiceImplUnderTest.findBidListById(1);
         });
         verify(mockBidListRepository, times(1)).findById(1);
@@ -252,7 +252,7 @@ public class BidListServiceImplTests {
         doReturn(Optional.empty()).when(mockBidListRepository).findById(anyInt());
 
         // ACT & ASSERT
-        assertThrows(RecordNotFoundException.class, () -> {
+        assertThrows(ResourceNotFoundException.class, () -> {
             bidListServiceImplUnderTest.deleteBidListById(1);
         });
         verify(mockBidListRepository, times(1)).findById(1);

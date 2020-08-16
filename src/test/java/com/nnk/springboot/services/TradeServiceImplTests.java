@@ -1,7 +1,7 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.TradeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -126,7 +126,7 @@ public class TradeServiceImplTests {
         doReturn(Optional.empty()).when(mockTradeRepository).findById(anyInt());
 
         // ACT & ASSERT
-        assertThrows(RecordNotFoundException.class, () -> {
+        assertThrows(ResourceNotFoundException.class, () -> {
             tradeServiceImplUnderTest.findTradeById(1);
         });
         verify(mockTradeRepository, times(1)).findById(1);
@@ -243,7 +243,7 @@ public class TradeServiceImplTests {
         doReturn(Optional.empty()).when(mockTradeRepository).findById(anyInt());
 
         // ACT & ASSERT
-        assertThrows(RecordNotFoundException.class, () -> {
+        assertThrows(ResourceNotFoundException.class, () -> {
             tradeServiceImplUnderTest.deleteTradeById(1);
         });
         verify(mockTradeRepository, times(1)).findById(1);

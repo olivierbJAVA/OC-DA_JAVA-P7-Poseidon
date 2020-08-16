@@ -1,7 +1,7 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.RuleNameRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -74,7 +74,7 @@ public class RuleNameServiceImplTests {
         doReturn(Optional.empty()).when(mockRuleNameRepository).findById(anyInt());
 
         // ACT & ASSERT
-        assertThrows(RecordNotFoundException.class, () -> {
+        assertThrows(ResourceNotFoundException.class, () -> {
             ruleNameServiceImplUnderTest.findRuleNameById(1);
         });
         verify(mockRuleNameRepository, times(1)).findById(1);
@@ -121,7 +121,7 @@ public class RuleNameServiceImplTests {
         doReturn(Optional.empty()).when(mockRuleNameRepository).findById(anyInt());
 
         // ACT & ASSERT
-        assertThrows(RecordNotFoundException.class, () -> {
+        assertThrows(ResourceNotFoundException.class, () -> {
             ruleNameServiceImplUnderTest.deleteRuleNameById(1);
         });
         verify(mockRuleNameRepository, times(1)).findById(1);

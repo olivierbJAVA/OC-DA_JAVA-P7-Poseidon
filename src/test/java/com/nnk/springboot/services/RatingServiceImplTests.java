@@ -1,7 +1,7 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.RatingRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -82,7 +82,7 @@ public class RatingServiceImplTests {
         doReturn(Optional.empty()).when(mockRatingRepository).findById(anyInt());
 
         // ACT & ASSERT
-        assertThrows(RecordNotFoundException.class, () -> {
+        assertThrows(ResourceNotFoundException.class, () -> {
             ratingImplServiceUnderTest.findRatingById(1);
         });
         verify(mockRatingRepository, times(1)).findById(1);
@@ -128,7 +128,7 @@ public class RatingServiceImplTests {
         doReturn(Optional.empty()).when(mockRatingRepository).findById(anyInt());
 
         // ACT & ASSERT
-        assertThrows(RecordNotFoundException.class, () -> {
+        assertThrows(ResourceNotFoundException.class, () -> {
             ratingImplServiceUnderTest.deleteRatingById(1);
         });
         verify(mockRatingRepository, times(1)).findById(1);

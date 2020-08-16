@@ -1,7 +1,7 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -84,7 +84,7 @@ public class CurvePointServiceImplTests {
         doReturn(Optional.empty()).when(mockCurvePointRepository).findById(anyInt());
 
         // ACT & ASSERT
-        assertThrows(RecordNotFoundException.class, () -> {
+        assertThrows(ResourceNotFoundException.class, () -> {
             curvePointServiceImplUnderTest.findCurvePointById(1);
         });
         verify(mockCurvePointRepository, times(1)).findById(1);
@@ -145,7 +145,7 @@ public class CurvePointServiceImplTests {
         doReturn(Optional.empty()).when(mockCurvePointRepository).findById(anyInt());
 
         // ACT & ASSERT
-        assertThrows(RecordNotFoundException.class, () -> {
+        assertThrows(ResourceNotFoundException.class, () -> {
             curvePointServiceImplUnderTest.deleteCurvePointById(1);
         });
         verify(mockCurvePointRepository, times(1)).findById(1);
