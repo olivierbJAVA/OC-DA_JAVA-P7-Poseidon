@@ -1,7 +1,7 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -283,7 +283,7 @@ public class BidListServiceImplITests {
         bidListServiceImplUnderTest.deleteBidListById(id);
 
         // ASSERT
-        assertThrows(RecordNotFoundException.class, () -> {
+        assertThrows(ResourceNotFoundException.class, () -> {
             bidListServiceImplUnderTest.findBidListById(id);
         });
     }
