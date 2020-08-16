@@ -16,7 +16,7 @@ public class CurvePoint implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Digits(message = "CurveId must be integer number with a maximum of 5 digits", integer = 5, fraction = 0)
+    @Digits(message = "CurveId must be integer number with a maximum of 4 digits", integer = 4, fraction = 0)
     @NotNull(message = "CurveId must not been null")
     private Integer curveId;
 
@@ -35,7 +35,7 @@ public class CurvePoint implements Serializable {
     public CurvePoint() {
     }
 
-    public CurvePoint(@Digits(message = "CurveId must be integer number with a maximum of 5 digits", integer = 5, fraction = 0) @NotNull(message = "CurveId must not been null") Integer curveId, @Digits(message = "Term must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2) @NotNull(message = "Term must not been null") Double term, @Digits(message = "Value must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2) @NotNull(message = "Value must not been null") Double value) {
+    public CurvePoint(@Digits(message = "CurveId must be integer number with a maximum of 4 digits", integer = 4, fraction = 0) @NotNull(message = "CurveId must not been null") Integer curveId, @Digits(message = "Term must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2) @NotNull(message = "Term must not been null") Double term, @Digits(message = "Value must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2) @NotNull(message = "Value must not been null") Double value) {
         this.curveId = curveId;
         this.term = term;
         this.value = value;
