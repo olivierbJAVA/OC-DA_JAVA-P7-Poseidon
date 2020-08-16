@@ -1,7 +1,7 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.BidListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,16 +22,14 @@ public class BidListServiceImpl implements IBidListService {
     }
 
     @Override
-    public BidList findBidListById(Integer id) throws RecordNotFoundException {
+    public BidList findBidListById(Integer id) throws ResourceNotFoundException {
         Optional<BidList> bidList = bidListRepository.findById(id);
 
         if(bidList.isPresent()) {
             return bidList.get();
         } else {
-            throw new RecordNotFoundException("No record exist for given id");
+            throw new ResourceNotFoundException(id);
         }
-
-        //return bidListRepository.getOne(id);
     }
 
     @Override
@@ -45,15 +43,13 @@ public class BidListServiceImpl implements IBidListService {
     }
 
     @Override
-    public void deleteBidListById(Integer id) throws RecordNotFoundException {
+    public void deleteBidListById(Integer id) throws ResourceNotFoundException {
         Optional<BidList> bidList = bidListRepository.findById(id);
 
         if(bidList.isPresent()) {
             bidListRepository.deleteById(id);
         } else {
-            throw new RecordNotFoundException("No record exist for given id");
+            throw new ResourceNotFoundException(id);
         }
-
-        //bidListRepository.deleteById(id);
     }
 }

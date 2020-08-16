@@ -1,8 +1,7 @@
 package com.nnk.springboot.services;
 
-import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,15 +22,18 @@ public class RatingServiceImpl implements IRatingService {
     }
 
     @Override
-    public Rating findRatingById(Integer id) throws RecordNotFoundException {
+    public Rating findRatingById(Integer id) throws ResourceNotFoundException {
         Optional<Rating> rating = ratingRepository.findById(id);
 
         if(rating.isPresent()) {
             return rating.get();
         } else {
-            throw new RecordNotFoundException("No record exist for given id");
+            throw new ResourceNotFoundException(id);
         }
-
+    /*
+        return ratingRepository.findById(id)
+                .orElseThrow(()-> new RecordNotFoundException("No record exist for given id"));
+    */
         //return ratingRepository.getOne(id);
     }
 
@@ -46,13 +48,14 @@ public class RatingServiceImpl implements IRatingService {
     }
 
     @Override
-    public void deleteRatingById(Integer id) throws RecordNotFoundException {
+    public void deleteRatingById(Integer id) throws ResourceNotFoundException {
         Optional<Rating> rating = ratingRepository.findById(id);
 
         if(rating.isPresent()) {
             ratingRepository.deleteById(id);
         } else {
-            throw new RecordNotFoundException("No record exist for given id");
+            throw new ResourceNotFoundException(id);
+            //throw new RessourceNotFoundException(HttpStatus.NOT_FOUND, "No record exist for given id", id);
         }
 
         //ratingRepository.deleteById(id);

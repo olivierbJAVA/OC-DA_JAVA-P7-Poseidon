@@ -1,8 +1,7 @@
 package com.nnk.springboot.services;
 
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,16 +22,14 @@ public class CurvePointServiceImpl implements ICurvePointService {
     }
 
     @Override
-    public CurvePoint findCurvePointById(Integer id) throws RecordNotFoundException {
+    public CurvePoint findCurvePointById(Integer id) throws ResourceNotFoundException {
         Optional<CurvePoint> curvePoint = curvePointRepository.findById(id);
 
         if(curvePoint.isPresent()) {
             return curvePoint.get();
         } else {
-            throw new RecordNotFoundException("No record exist for given id");
+            throw new ResourceNotFoundException(id);
         }
-
-        //return curvePointRepository.getOne(id);
     }
 
     @Override
@@ -46,15 +43,13 @@ public class CurvePointServiceImpl implements ICurvePointService {
     }
 
     @Override
-    public void deleteCurvePointById(Integer id) throws RecordNotFoundException {
+    public void deleteCurvePointById(Integer id) throws ResourceNotFoundException {
         Optional<CurvePoint> curvePoint = curvePointRepository.findById(id);
 
         if(curvePoint.isPresent()) {
             curvePointRepository.deleteById(id);
         } else {
-            throw new RecordNotFoundException("No record exist for given id");
+            throw new ResourceNotFoundException(id);
         }
-
-        //curvePointRepository.deleteById(id);
     }
 }

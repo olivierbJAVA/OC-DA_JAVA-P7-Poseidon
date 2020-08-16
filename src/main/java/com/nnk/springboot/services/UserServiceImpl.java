@@ -1,8 +1,7 @@
 package com.nnk.springboot.services;
 
-import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.domain.User;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,15 +22,14 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User findUserById(Integer id) throws RecordNotFoundException {
+    public User findUserById(Integer id) throws ResourceNotFoundException {
         Optional<User> user = userRepository.findById(id);
 
         if(user.isPresent()) {
             return user.get();
         } else {
-            throw new RecordNotFoundException("No record exist for given id");
+            throw new ResourceNotFoundException(id);
         }
-        //return userRepository.getOne(id);
     }
 
     @Override
@@ -45,15 +43,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void deleteUserById(Integer id) throws RecordNotFoundException {
+    public void deleteUserById(Integer id) throws ResourceNotFoundException {
         Optional<User> user = userRepository.findById(id);
 
         if(user.isPresent()) {
             userRepository.deleteById(id);
         } else {
-            throw new RecordNotFoundException("No record exist for given id");
+            throw new ResourceNotFoundException(id);
         }
-
-        //userRepository.deleteById(id);
     }
 }

@@ -1,8 +1,7 @@
 package com.nnk.springboot.services;
 
-import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.TradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,16 +22,14 @@ public class TradeServiceImpl implements ITradeService {
     }
 
     @Override
-    public Trade findTradeById(Integer id) throws RecordNotFoundException {
+    public Trade findTradeById(Integer id) throws ResourceNotFoundException {
         Optional<Trade> trade = tradeRepository.findById(id);
 
         if(trade.isPresent()) {
             return trade.get();
         } else {
-            throw new RecordNotFoundException("No record exist for given id");
+            throw new ResourceNotFoundException(id);
         }
-
-        //return tradeRepository.getOne(id);
     }
 
     @Override
@@ -46,14 +43,13 @@ public class TradeServiceImpl implements ITradeService {
     }
 
     @Override
-    public void deleteTradeById(Integer id) throws RecordNotFoundException {
+    public void deleteTradeById(Integer id) throws ResourceNotFoundException {
         Optional<Trade> trade = tradeRepository.findById(id);
 
         if(trade.isPresent()) {
             tradeRepository.deleteById(id);
         } else {
-            throw new RecordNotFoundException("No record exist for given id");
+            throw new ResourceNotFoundException(id);
         }
-        //tradeRepository.deleteById(id);
     }
 }
