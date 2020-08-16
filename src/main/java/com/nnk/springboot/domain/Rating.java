@@ -28,13 +28,13 @@ public class Rating implements Serializable {
     @NotBlank(message = "FitchRating is mandatory")
     private String fitchRating;
 
-    @Digits(message = "OrderNumber must be integer number with a maximum of 4 digits", integer = 4, fraction = 0)
+    @Digits(message = "OrderNumber must be integer number with a maximum of 5 digits", integer = 5, fraction = 0)
     private Integer orderNumber;
 
     public Rating() {
     }
 
-    public Rating(@Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "MoodysRating is mandatory") String moodysRating, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "SandPRating is mandatory") String sandPRating, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "FitchRating is mandatory") String fitchRating, @Digits(message = "OrderNumber must be integer number with a maximum of 4 digits", integer = 4, fraction = 0) Integer orderNumber) {
+    public Rating(@Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "MoodysRating is mandatory") String moodysRating, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "SandPRating is mandatory") String sandPRating, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "FitchRating is mandatory") String fitchRating, @Digits(message = "OrderNumber must be integer number with a maximum of 5 digits", integer = 5, fraction = 0) Integer orderNumber) {
         this.moodysRating = moodysRating;
         this.sandPRating = sandPRating;
         this.fitchRating = fitchRating;
