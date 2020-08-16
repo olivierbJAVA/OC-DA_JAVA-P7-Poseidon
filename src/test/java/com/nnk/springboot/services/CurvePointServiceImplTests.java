@@ -52,6 +52,7 @@ public class CurvePointServiceImplTests {
         curvePointToUpdate.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
         curvePointToUpdate.setTerm(10d);
         curvePointToUpdate.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
+        doReturn(Optional.of(curvePointToUpdate)).when(mockCurvePointRepository).findById(curvePointToUpdate.getId());
         doReturn(curvePointToUpdate).when(mockCurvePointRepository).save(curvePointToUpdate);
 
         // ACT

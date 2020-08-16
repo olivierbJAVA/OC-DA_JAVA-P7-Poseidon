@@ -53,6 +53,7 @@ public class RatingServiceImplTests {
     public void updateRating() {
         // ARRANGE
         Rating ratingToUpdate = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        doReturn(Optional.of(ratingToUpdate)).when(mockRatingRepository).findById(ratingToUpdate.getId());
         doReturn(ratingToUpdate).when(mockRatingRepository).save(ratingToUpdate);
 
         // ACT

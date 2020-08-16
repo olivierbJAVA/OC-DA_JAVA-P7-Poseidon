@@ -45,6 +45,7 @@ public class RuleNameServiceImplTests {
     public void updateRuleName() {
         // ARRANGE
         RuleName ruleNameToUpdate = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
+        doReturn(Optional.of(ruleNameToUpdate)).when(mockRuleNameRepository).findById(ruleNameToUpdate.getId());
         doReturn(ruleNameToUpdate).when(mockRuleNameRepository).save(ruleNameToUpdate);
 
         // ACT

@@ -83,6 +83,7 @@ public class BidListServiceImplTests {
         bidListToUpdate.setDealType("DealType Test");
         bidListToUpdate.setSourceListId("SourceListId Test");
         bidListToUpdate.setSide("Side Test");
+        doReturn(Optional.of(bidListToUpdate)).when(mockBidListRepository).findById(bidListToUpdate.getBidListId());
         doReturn(bidListToUpdate).when(mockBidListRepository).save(bidListToUpdate);
 
         // ACT

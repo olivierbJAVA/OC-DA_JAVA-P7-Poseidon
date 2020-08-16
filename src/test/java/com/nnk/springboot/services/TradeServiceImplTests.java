@@ -80,6 +80,7 @@ public class TradeServiceImplTests {
         tradeToUpdate.setDealType("DealType");
         tradeToUpdate.setSourceListId("SourceListId");
         tradeToUpdate.setSide("Side");
+        doReturn(Optional.of(tradeToUpdate)).when(mockTradeRepository).findById(tradeToUpdate.getTradeId());
         doReturn(tradeToUpdate).when(mockTradeRepository).save(tradeToUpdate);
 
         // ACT
