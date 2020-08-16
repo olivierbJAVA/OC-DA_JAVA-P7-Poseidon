@@ -1,5 +1,6 @@
 package com.nnk.springboot.services;
 
+import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.RatingRepository;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -40,27 +42,43 @@ public class RatingServiceImplTests {
     public void createRating() {
         // ARRANGE
         Rating ratingToCreate = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        ratingToCreate.setId(1);
         doReturn(ratingToCreate).when(mockRatingRepository).save(ratingToCreate);
 
         // ACT
-        ratingImplServiceUnderTest.createRating(ratingToCreate);
+        Rating ratingCreated = ratingImplServiceUnderTest.createRating(ratingToCreate);
 
         // ASSERT
         verify(mockRatingRepository, times(1)).save(ratingToCreate);
+        assertEquals(ratingToCreate, ratingCreated);
     }
 
     @Test
-    public void updateRating() {
+    public void updateRating_whenIdExist() {
         // ARRANGE
         Rating ratingToUpdate = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        ratingToUpdate.setId(1);
         doReturn(Optional.of(ratingToUpdate)).when(mockRatingRepository).findById(ratingToUpdate.getId());
         doReturn(ratingToUpdate).when(mockRatingRepository).save(ratingToUpdate);
 
         // ACT
-        ratingImplServiceUnderTest.updateRating(ratingToUpdate);
+        Rating ratingUpdated = ratingImplServiceUnderTest.updateRating(ratingToUpdate);
 
         // ASSERT
         verify(mockRatingRepository, times(1)).save(ratingToUpdate);
+        assertEquals(ratingToUpdate, ratingUpdated);
+    }
+
+    @Test
+    public void updateRating_whenIdNotExist() {
+        // ARRANGE
+        doReturn(Optional.empty()).when(mockRatingRepository).findById(1);
+
+        // ACT & ASSERT
+        assertThrows(ResourceNotFoundException.class, () -> {
+            ratingImplServiceUnderTest.findRatingById(1);
+        });
+        verify(mockRatingRepository, never()).save(any(Rating.class));
     }
 
     @Test
@@ -71,16 +89,17 @@ public class RatingServiceImplTests {
         doReturn(Optional.of(ratingToFind)).when(mockRatingRepository).findById(ratingToFind.getId());
 
         // ACT
-        ratingImplServiceUnderTest.findRatingById(ratingToFind.getId());
+        Rating ratingFound = ratingImplServiceUnderTest.findRatingById(ratingToFind.getId());
 
         // ASSERT
         verify(mockRatingRepository, times(1)).findById(ratingToFind.getId());
+        assertEquals(ratingToFind, ratingFound);
     }
 
     @Test
     public void findRatingById_whenIdNotExist() {
         // ARRANGE
-        doReturn(Optional.empty()).when(mockRatingRepository).findById(anyInt());
+        doReturn(Optional.empty()).when(mockRatingRepository).findById(1);
 
         // ACT & ASSERT
         assertThrows(ResourceNotFoundException.class, () -> {
@@ -93,20 +112,25 @@ public class RatingServiceImplTests {
     public void findAllRatings() {
         // ARRANGE
         Rating ratingToFind1 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        ratingToFind1.setId(1);
         Rating ratingToFind2 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        ratingToFind2.setId(2);
         Rating ratingToFind3 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
-        List<Rating> listRatings = new ArrayList<>();
-        listRatings.add(ratingToFind1);
-        listRatings.add(ratingToFind2);
-        listRatings.add(ratingToFind3);
+        ratingToFind3.setId(3);
 
-        doReturn(listRatings).when(mockRatingRepository).findAll();
+        List<Rating> listRatingsToFind = new ArrayList<>();
+        listRatingsToFind.add(ratingToFind1);
+        listRatingsToFind.add(ratingToFind2);
+        listRatingsToFind.add(ratingToFind3);
+
+        doReturn(listRatingsToFind).when(mockRatingRepository).findAll();
 
         // ACT
-        ratingImplServiceUnderTest.findAllRatings();
+        List<Rating> listRatingsFound = ratingImplServiceUnderTest.findAllRatings();
 
         // ASSERT
         verify(mockRatingRepository, times(1)).findAll();
+        assertEquals(listRatingsToFind, listRatingsFound);
     }
 
     @Test
@@ -126,7 +150,7 @@ public class RatingServiceImplTests {
     @Test
     public void deleteRatingById_whenIdNotExist() {
         // ARRANGE
-        doReturn(Optional.empty()).when(mockRatingRepository).findById(anyInt());
+        doReturn(Optional.empty()).when(mockRatingRepository).findById(1);
 
         // ACT & ASSERT
         assertThrows(ResourceNotFoundException.class, () -> {

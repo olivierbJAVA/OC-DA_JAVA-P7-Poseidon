@@ -1,5 +1,6 @@
 package com.nnk.springboot.services;
 
+import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.TradeRepository;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.sql.Timestamp.valueOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -33,6 +35,7 @@ public class TradeServiceImplTests {
     public void createRating() {
         // ARRANGE
         Trade tradeToCreate = new Trade("Trade Account", "Type", 1000d);
+        tradeToCreate.setTradeId(1);
         tradeToCreate.setSellQuantity(100d);
         tradeToCreate.setBuyPrice(123.00d);
         tradeToCreate.setSellPrice(456.12d);
@@ -53,16 +56,18 @@ public class TradeServiceImplTests {
         doReturn(tradeToCreate).when(mockTradeRepository).save(tradeToCreate);
 
         // ACT
-        tradeServiceImplUnderTest.createTrade(tradeToCreate);
+        Trade tradeCreated = tradeServiceImplUnderTest.createTrade(tradeToCreate);
 
         // ASSERT
         verify(mockTradeRepository, times(1)).save(tradeToCreate);
+        assertEquals(tradeToCreate, tradeCreated);
     }
 
     @Test
-    public void updateTrade() {
+    public void updateTrade_whenIdExist() {
         // ARRANGE
         Trade tradeToUpdate = new Trade("Trade Account", "Type", 1000d);
+        tradeToUpdate.setTradeId(1);
         tradeToUpdate.setSellQuantity(100d);
         tradeToUpdate.setBuyPrice(123.00d);
         tradeToUpdate.setSellPrice(456.12d);
@@ -84,16 +89,30 @@ public class TradeServiceImplTests {
         doReturn(tradeToUpdate).when(mockTradeRepository).save(tradeToUpdate);
 
         // ACT
-        tradeServiceImplUnderTest.updateTrade(tradeToUpdate);
+        Trade tradeUpdated = tradeServiceImplUnderTest.updateTrade(tradeToUpdate);
 
         // ASSERT
         verify(mockTradeRepository, times(1)).save(tradeToUpdate);
+        assertEquals(tradeToUpdate, tradeUpdated);
+    }
+
+    @Test
+    public void updateTrade_whenIdNotExist() {
+        // ARRANGE
+        doReturn(Optional.empty()).when(mockTradeRepository).findById(1);
+
+        // ACT & ASSERT
+        assertThrows(ResourceNotFoundException.class, () -> {
+            tradeServiceImplUnderTest.findTradeById(1);
+        });
+        verify(mockTradeRepository, never()).save(any(Trade.class));
     }
 
     @Test
     public void findTradeById_whenIdExist() {
         // ARRANGE
         Trade tradeToFind = new Trade("Trade Account", "Type", 1000d);
+        tradeToFind.setTradeId(1);
         tradeToFind.setSellQuantity(100d);
         tradeToFind.setBuyPrice(123.00d);
         tradeToFind.setSellPrice(456.12d);
@@ -111,20 +130,20 @@ public class TradeServiceImplTests {
         tradeToFind.setDealType("DealType");
         tradeToFind.setSourceListId("SourceListId");
         tradeToFind.setSide("Side");
-        tradeToFind.setTradeId(1);
         doReturn(Optional.of(tradeToFind)).when(mockTradeRepository).findById(tradeToFind.getTradeId());
 
         // ACT
-        tradeServiceImplUnderTest.findTradeById(tradeToFind.getTradeId());
+        Trade tradeFound = tradeServiceImplUnderTest.findTradeById(tradeToFind.getTradeId());
 
         // ASSERT
         verify(mockTradeRepository, times(1)).findById(tradeToFind.getTradeId());
+        assertEquals(tradeToFind, tradeFound);
     }
 
     @Test
     public void findTradeById_whenIdNotExist() {
         // ARRANGE
-        doReturn(Optional.empty()).when(mockTradeRepository).findById(anyInt());
+        doReturn(Optional.empty()).when(mockTradeRepository).findById(1);
 
         // ACT & ASSERT
         assertThrows(ResourceNotFoundException.class, () -> {
@@ -137,6 +156,7 @@ public class TradeServiceImplTests {
     public void findAllTrades() {
         // ARRANGE
         Trade tradeToFind1 = new Trade("Trade Account", "Type", 1000d);
+        tradeToFind1.setTradeId(1);
         tradeToFind1.setSellQuantity(100d);
         tradeToFind1.setBuyPrice(123.00d);
         tradeToFind1.setSellPrice(456.12d);
@@ -156,6 +176,7 @@ public class TradeServiceImplTests {
         tradeToFind1.setSide("Side");
 
         Trade tradeToFind2 = new Trade("Trade Account", "Type", 1000d);
+        tradeToFind2.setTradeId(2);
         tradeToFind2.setSellQuantity(100d);
         tradeToFind2.setBuyPrice(123.00d);
         tradeToFind2.setSellPrice(456.12d);
@@ -175,6 +196,7 @@ public class TradeServiceImplTests {
         tradeToFind2.setSide("Side");
 
         Trade tradeToFind3 = new Trade("Trade Account", "Type", 1000d);
+        tradeToFind3.setTradeId(3);
         tradeToFind3.setSellQuantity(100d);
         tradeToFind3.setBuyPrice(123.00d);
         tradeToFind3.setSellPrice(456.12d);
@@ -193,18 +215,19 @@ public class TradeServiceImplTests {
         tradeToFind3.setSourceListId("SourceListId");
         tradeToFind3.setSide("Side");
 
-        List<Trade> listTrades = new ArrayList<>();
-        listTrades.add(tradeToFind1);
-        listTrades.add(tradeToFind2);
-        listTrades.add(tradeToFind3);
+        List<Trade> listTradesToFind = new ArrayList<>();
+        listTradesToFind.add(tradeToFind1);
+        listTradesToFind.add(tradeToFind2);
+        listTradesToFind.add(tradeToFind3);
 
-        doReturn(listTrades).when(mockTradeRepository).findAll();
+        doReturn(listTradesToFind).when(mockTradeRepository).findAll();
 
         // ACT
-        tradeServiceImplUnderTest.findAllTrades();
+        List<Trade> listTradesFound = tradeServiceImplUnderTest.findAllTrades();
 
         // ASSERT
         verify(mockTradeRepository, times(1)).findAll();
+        assertEquals(listTradesToFind, listTradesFound);
     }
 
     @Test
@@ -241,7 +264,7 @@ public class TradeServiceImplTests {
     @Test
     public void deleteTradeById_whenIdNotExist() {
         // ARRANGE
-        doReturn(Optional.empty()).when(mockTradeRepository).findById(anyInt());
+        doReturn(Optional.empty()).when(mockTradeRepository).findById(1);
 
         // ACT & ASSERT
         assertThrows(ResourceNotFoundException.class, () -> {

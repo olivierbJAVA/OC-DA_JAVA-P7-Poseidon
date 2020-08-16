@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.sql.Timestamp.valueOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -34,6 +35,7 @@ public class BidListServiceImplTests {
     public void createBidList() {
         // ARRANGE
         BidList bidListToCreate = new BidList("Account Test", "Type Test", 10d);
+        bidListToCreate.setBidListId(1);
         bidListToCreate.setAskQuantity(30d);
         bidListToCreate.setBid(123.45d);
         bidListToCreate.setAsk(321.54d);
@@ -55,16 +57,18 @@ public class BidListServiceImplTests {
         doReturn(bidListToCreate).when(mockBidListRepository).save(bidListToCreate);
 
         // ACT
-        bidListServiceImplUnderTest.createBidList(bidListToCreate);
+        BidList bidListCreated = bidListServiceImplUnderTest.createBidList(bidListToCreate);
 
         // ASSERT
         verify(mockBidListRepository, times(1)).save(bidListToCreate);
+        assertEquals(bidListToCreate, bidListCreated);
     }
 
     @Test
-    public void updateBidList() {
+    public void updateBidList_whenIdExist() {
         // ARRANGE
         BidList bidListToUpdate = new BidList("Account Test", "Type Test", 10d);
+        bidListToUpdate.setBidListId(1);
         bidListToUpdate.setAskQuantity(30d);
         bidListToUpdate.setBid(123.45d);
         bidListToUpdate.setAsk(321.54d);
@@ -87,16 +91,30 @@ public class BidListServiceImplTests {
         doReturn(bidListToUpdate).when(mockBidListRepository).save(bidListToUpdate);
 
         // ACT
-        bidListServiceImplUnderTest.updateBidList(bidListToUpdate);
+        BidList bidListUpdated = bidListServiceImplUnderTest.updateBidList(bidListToUpdate);
 
         // ASSERT
         verify(mockBidListRepository, times(1)).save(bidListToUpdate);
+        assertEquals(bidListToUpdate, bidListUpdated);
+    }
+
+    @Test
+    public void updateBidList_whenIdNotExist() {
+        // ARRANGE
+        doReturn(Optional.empty()).when(mockBidListRepository).findById(1);
+
+        // ACT & ASSERT
+        assertThrows(ResourceNotFoundException.class, () -> {
+            bidListServiceImplUnderTest.findBidListById(1);
+        });
+        verify(mockBidListRepository, never()).save(any(BidList.class));
     }
 
     @Test
     public void findBidListById_whenIdExist() {
         // ARRANGE
         BidList bidListToFind = new BidList("Account Test", "Type Test", 10d);
+        bidListToFind.setBidListId(1);
         bidListToFind.setAskQuantity(30d);
         bidListToFind.setBid(123.45d);
         bidListToFind.setAsk(321.54d);
@@ -115,20 +133,20 @@ public class BidListServiceImplTests {
         bidListToFind.setDealType("DealType Test");
         bidListToFind.setSourceListId("SourceListId Test");
         bidListToFind.setSide("Side Test");
-        bidListToFind.setBidListId(1);
         doReturn(Optional.of(bidListToFind)).when(mockBidListRepository).findById(bidListToFind.getBidListId());
 
         // ACT
-        bidListServiceImplUnderTest.findBidListById(bidListToFind.getBidListId());
+        BidList bidListFound = bidListServiceImplUnderTest.findBidListById(bidListToFind.getBidListId());
 
         // ASSERT
         verify(mockBidListRepository, times(1)).findById(bidListToFind.getBidListId());
+        assertEquals(bidListToFind, bidListFound);
     }
 
     @Test
     public void findBidListById_whenIdNotExist() {
         // ARRANGE
-        doReturn(Optional.empty()).when(mockBidListRepository).findById(anyInt());
+        doReturn(Optional.empty()).when(mockBidListRepository).findById(1);
 
         // ACT & ASSERT
         assertThrows(ResourceNotFoundException.class, () -> {
@@ -141,6 +159,7 @@ public class BidListServiceImplTests {
     public void findAllRatings() {
         // ARRANGE
         BidList bidListToFind1 = new BidList("Account Test", "Type Test", 10d);
+        bidListToFind1.setBidListId(1);
         bidListToFind1.setAskQuantity(30d);
         bidListToFind1.setBid(123.45d);
         bidListToFind1.setAsk(321.54d);
@@ -161,6 +180,7 @@ public class BidListServiceImplTests {
         bidListToFind1.setSide("Side Test");
 
         BidList bidListToFind2 = new BidList("Account Test", "Type Test", 10d);
+        bidListToFind2.setBidListId(2);
         bidListToFind2.setAskQuantity(30d);
         bidListToFind2.setBid(123.45d);
         bidListToFind2.setAsk(321.54d);
@@ -181,6 +201,7 @@ public class BidListServiceImplTests {
         bidListToFind2.setSide("Side Test");
 
         BidList bidListToFind3 = new BidList("Account Test", "Type Test", 10d);
+        bidListToFind3.setBidListId(3);
         bidListToFind3.setAskQuantity(30d);
         bidListToFind3.setBid(123.45d);
         bidListToFind3.setAsk(321.54d);
@@ -201,24 +222,26 @@ public class BidListServiceImplTests {
         bidListToFind3.setSide("Side Test");
         List<Rating> listRatings = new ArrayList<>();
 
-        List<BidList> listBidLists = new ArrayList<>();
-        listBidLists.add(bidListToFind1);
-        listBidLists.add(bidListToFind2);
-        listBidLists.add(bidListToFind3);
+        List<BidList> listBidListsToFind = new ArrayList<>();
+        listBidListsToFind.add(bidListToFind1);
+        listBidListsToFind.add(bidListToFind2);
+        listBidListsToFind.add(bidListToFind3);
 
-        doReturn(listBidLists).when(mockBidListRepository).findAll();
+        doReturn(listBidListsToFind).when(mockBidListRepository).findAll();
 
         // ACT
-        bidListServiceImplUnderTest.findAllBidLists();
+        List<BidList> listBidListsFound = bidListServiceImplUnderTest.findAllBidLists();
 
         // ASSERT
         verify(mockBidListRepository, times(1)).findAll();
+        assertEquals(listBidListsToFind, listBidListsFound);
     }
 
     @Test
     public void deleteBidListById_whenIdExist() {
         // ARRANGE
         BidList bidListToDelete = new BidList("Account Test", "Type Test", 10d);
+        bidListToDelete.setBidListId(1);
         bidListToDelete.setAskQuantity(30d);
         bidListToDelete.setBid(123.45d);
         bidListToDelete.setAsk(321.54d);
@@ -237,7 +260,6 @@ public class BidListServiceImplTests {
         bidListToDelete.setDealType("DealType Test");
         bidListToDelete.setSourceListId("SourceListId Test");
         bidListToDelete.setSide("Side Test");
-        bidListToDelete.setBidListId(1);
         doReturn(Optional.of(bidListToDelete)).when(mockBidListRepository).findById(bidListToDelete.getBidListId());
 
         // ACT
@@ -250,7 +272,7 @@ public class BidListServiceImplTests {
     @Test
     public void deleteBidListById_whenIdNotExist() {
         // ARRANGE
-        doReturn(Optional.empty()).when(mockBidListRepository).findById(anyInt());
+        doReturn(Optional.empty()).when(mockBidListRepository).findById(1);
 
         // ACT & ASSERT
         assertThrows(ResourceNotFoundException.class, () -> {
