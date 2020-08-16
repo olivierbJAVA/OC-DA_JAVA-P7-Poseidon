@@ -108,13 +108,16 @@ public class RatingController {
         logger.info("Request : GET /rating/delete/{}", id);
 
         //Rating rating = ratingService.findRatingById(id);
+        ratingService.deleteRatingById(id);
 
+        /*
         try {
             ratingService.deleteRatingById(id);
         } catch (RecordNotFoundException e) {
             System.out.println("Record not found");
-            return "errorRecordNotFound";
+            return "/errorRecordNotFound";
         }
+        */
 
         //model.addAttribute("ratings", ratingService.findAllRatings());
 
