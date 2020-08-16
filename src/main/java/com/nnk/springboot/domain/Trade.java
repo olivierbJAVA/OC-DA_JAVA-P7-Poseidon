@@ -12,7 +12,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "trade")
 public class Trade implements Serializable {
-    // TODO: Map columns in data table TRADE with corresponding java fields
 
     private static final long serialVersionUID = 1L;
 
@@ -28,17 +27,17 @@ public class Trade implements Serializable {
     @NotBlank(message = "Type is mandatory")
     private String type;
 
-    @Digits(message = "BuyQuantity must be digits number", integer = 6, fraction = 0)
+    @Digits(message = "BuyQuantity must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2)
     @NotNull(message = "BuyQuantity must not been null")
     private Double buyQuantity;
 
-    @Digits(message = "SellQuantity must be digits number", integer = 6, fraction = 0)
+    @Digits(message = "SellQuantity must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2)
     private Double sellQuantity;
 
-    @Digits(message = "BuyPrice must be digits number", integer = 3, fraction = 2)
+    @Digits(message = "BuyPrice must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2)
     private Double buyPrice;
 
-    @Digits(message = "SellPrice must be digits number", integer = 3, fraction = 2)
+    @Digits(message = "SellPrice must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2)
     private Double sellPrice;
 
     private String benchmark;
@@ -82,7 +81,7 @@ public class Trade implements Serializable {
     public Trade() {
     }
 
-    public Trade(@Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Account is mandatory") String account, @Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BuyQuantity must be digits number", integer = 6, fraction = 0) @NotNull(message = "BuyQuantity must not been null") Double buyQuantity) {
+    public Trade(@Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Account is mandatory") String account, @Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BuyQuantity must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2) @NotNull(message = "BuyQuantity must not been null") Double buyQuantity) {
         this.account = account;
         this.type = type;
         this.buyQuantity = buyQuantity;

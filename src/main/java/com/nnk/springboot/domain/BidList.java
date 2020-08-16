@@ -11,7 +11,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "bidlist")
 public class BidList implements Serializable {
-    // TODO: Map columns in data table BIDLIST with corresponding java fields
 
     private static final long serialVersionUID = 1L;
 
@@ -27,17 +26,17 @@ public class BidList implements Serializable {
     @NotBlank(message = "Type is mandatory")
     private String type;
 
-    @Digits(message = "BidQuantity must be digits number", integer = 6, fraction = 2)
+    @Digits(message = "BidQuantity must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2)
     @NotNull(message = "BidQuantity must not been null")
     private Double bidQuantity;
 
-    @Digits(message = "AskQuantity must be digits number", integer = 6, fraction = 2)
+    @Digits(message = "AskQuantity must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2)
     private Double askQuantity;
 
-    @Digits(message = "Bid must be digits number", integer = 6, fraction = 2)
+    @Digits(message = "Bid must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2)
     private Double bid;
 
-    @Digits(message = "Ask must be digits number", integer = 6, fraction = 2)
+    @Digits(message = "Ask must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2)
     private Double ask;
 
     @Size(max=125, message = "Maximum length = 125 characters")
@@ -85,7 +84,7 @@ public class BidList implements Serializable {
     public BidList() {
     }
 
-    public BidList(@Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Account is mandatory") String account, @Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BidQuantity must be digits number", integer = 6, fraction = 2) @NotNull(message = "BidQuantity must not been null") Double bidQuantity) {
+    public BidList(@Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Account is mandatory") String account, @Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BidQuantity must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2) @NotNull(message = "BidQuantity must not been null") Double bidQuantity) {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;

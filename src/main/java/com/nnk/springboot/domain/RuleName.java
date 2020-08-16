@@ -8,7 +8,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "rulename")
 public class RuleName implements Serializable {
-    // TODO: Map columns in data table RULENAME with corresponding java fields
 
     private static final long serialVersionUID = 1L;
 
