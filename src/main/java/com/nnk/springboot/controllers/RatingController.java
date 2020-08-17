@@ -1,13 +1,10 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.domain.User;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
 import com.nnk.springboot.services.IRatingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -102,6 +99,8 @@ public class RatingController {
         return "redirect:/rating/list";
     }
 
+
+    //@Secured(value="ROLE_ADMIN")
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
 

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -29,7 +28,6 @@ public class BidListController {
     @Autowired
     IBidListService bidListService;
 
-    @RolesAllowed({"USER","ADMIN"})
     @RequestMapping("/bidList/list")
     public String home(Model model) {
         logger.info("Request : GET /bidList/list");
@@ -42,7 +40,6 @@ public class BidListController {
         return "bidList/list";
     }
 
-    @RolesAllowed({"USER","ADMIN"})
     @GetMapping("/bidList/add")
     public String addBidForm(BidList bidList) {
 
@@ -52,7 +49,6 @@ public class BidListController {
         return "bidList/add";
     }
 
-    @RolesAllowed({"USER","ADMIN"})
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bidList, BindingResult result, Model model) {
 
@@ -73,7 +69,6 @@ public class BidListController {
         return "bidList/add";
     }
 
-    @RolesAllowed({"USER","ADMIN"})
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 
@@ -87,7 +82,6 @@ public class BidListController {
         return "bidList/update";
     }
 
-    @RolesAllowed({"USER","ADMIN"})
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@Valid BidList bidList, BindingResult result, Model model) {
 
@@ -110,7 +104,6 @@ public class BidListController {
         return "redirect:/bidList/list";
     }
 
-    @RolesAllowed({"ADMIN"})
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
 
