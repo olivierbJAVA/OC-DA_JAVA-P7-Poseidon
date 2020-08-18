@@ -201,11 +201,12 @@ public class TradeControllerTests {
 
         //ACT & ASSERT
         try {
+            // Error in account (mandatory field)
             mockMvc.perform(post("/trade/update/1")
                     .param("account", "")
                     .param("type", "Type")
                     .param("buyQuantity", "1000"))
-                    .andExpect(status().isOk())
+                    .andExpect(model().attributeHasFieldErrors("trade", "account"))
                     .andExpect(view().name("trade/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
@@ -308,12 +309,13 @@ public class TradeControllerTests {
 
         //ACT & ASSERT
         try {
+            // Error in account (mandatory field)
             mockMvc.perform(post("/trade/update/1")
                     .param("tradeId", "1")
                     .param("account", "")
                     .param("type", "Type")
                     .param("buyQuantity", "1000"))
-                    .andExpect(status().isOk())
+                    .andExpect(model().attributeHasFieldErrors("trade", "account"))
                     .andExpect(view().name("trade/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);

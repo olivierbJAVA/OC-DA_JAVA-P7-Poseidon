@@ -136,12 +136,13 @@ public class RatingControllerTests {
 
         //ACT & ASSERT
         try {
+            // Error in moodysRating (mandatory field)
             mockMvc.perform(post("/rating/update/1")
                     .param("moodysRating", "")
                     .param("sandPRating", "Sand PRating")
                     .param("fitchRating", "Fitch Rating")
                     .param("orderNumber", "10"))
-                    .andExpect(status().isOk())
+                    .andExpect(model().attributeHasFieldErrors("rating", "moodysRating"))
                     .andExpect(view().name("rating/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
@@ -213,13 +214,14 @@ public class RatingControllerTests {
 
         //ACT & ASSERT
         try {
+            // Error in moodysRating (mandatory field)
             mockMvc.perform(post("/rating/update/1")
                     .param("id","1")
                     .param("moodysRating", "")
                     .param("sandPRating", "Sand PRating")
                     .param("fitchRating", "Fitch Rating")
                     .param("orderNumber", "10"))
-                    .andExpect(status().isOk())
+                    .andExpect(model().attributeHasFieldErrors("rating", "moodysRating"))
                     .andExpect(view().name("rating/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);

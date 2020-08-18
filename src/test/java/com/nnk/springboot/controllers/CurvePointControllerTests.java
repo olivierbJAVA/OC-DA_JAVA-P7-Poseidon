@@ -142,11 +142,12 @@ public class CurvePointControllerTests {
 
         //ACT & ASSERT
         try {
+            // Error in curveId (mandatory field)
             mockMvc.perform(post("/curvePoint/update/1")
                     .param("curveId", "")
                     .param("term", "10")
                     .param("value", "30"))
-                    .andExpect(status().isOk())
+                    .andExpect(model().attributeHasFieldErrors("curvePoint", "curveId"))
                     .andExpect(view().name("curvePoint/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
@@ -200,7 +201,7 @@ public class CurvePointControllerTests {
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/curvePoint/update/1")
-                    .param("Id", "1")
+                    .param("id", "1")
                     .param("curveId", "10")
                     .param("term", "10")
                     .param("value", "30"))
@@ -220,12 +221,13 @@ public class CurvePointControllerTests {
 
         //ACT & ASSERT
         try {
+            // Error in curveId (mandatory field)
             mockMvc.perform(post("/curvePoint/update/1")
-                    .param("Id", "1")
+                    .param("id", "1")
                     .param("curveId", "")
                     .param("term", "10")
                     .param("value", "30"))
-                    .andExpect(status().isOk())
+                    .andExpect(model().attributeHasFieldErrors("curvePoint", "curveId"))
                     .andExpect(view().name("curvePoint/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);

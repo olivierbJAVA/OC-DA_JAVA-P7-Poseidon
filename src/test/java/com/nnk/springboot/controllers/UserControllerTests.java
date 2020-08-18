@@ -134,12 +134,13 @@ public class UserControllerTests {
 
         //ACT & ASSERT
         try {
+            // Error in username (mandatory field)
             mockMvc.perform(post("/user/update/1")
                     .param("username", "")
                     .param("password", "password")
                     .param("fullname", "User")
                     .param("role", "USER"))
-                    .andExpect(status().isOk())
+                    .andExpect(model().attributeHasFieldErrors("user", "username"))
                     .andExpect(view().name("user/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
@@ -212,13 +213,14 @@ public class UserControllerTests {
 
         //ACT & ASSERT
         try {
+            // Error in username (mandatory field)
             mockMvc.perform(post("/user/update/1")
                     .param("id", "1")
                     .param("username", "")
                     .param("password", "password")
                     .param("fullname", "User")
                     .param("role", "USER"))
-                    .andExpect(status().isOk())
+                    .andExpect(model().attributeHasFieldErrors("user", "username"))
                     .andExpect(view().name("user/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);

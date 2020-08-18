@@ -201,11 +201,12 @@ public class BidListControllerTests {
 
         //ACT & ASSERT
         try {
+            // Error in account (mandatory field)
             mockMvc.perform(post("/bidList/update/1")
-                    .param("acount", "")
+                    .param("account", "")
                     .param("type", "Type Test")
                     .param("bidQuantity", "10"))
-                    .andExpect(status().isOk())
+                    .andExpect(model().attributeHasFieldErrors("bidList", "account"))
                     .andExpect(view().name("bidList/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
@@ -290,7 +291,7 @@ public class BidListControllerTests {
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/bidList/update/1")
-                    .param("BidListId", "1")
+                    .param("bidListId", "1")
                     .param("account", "Account Test")
                     .param("type", "Type Test")
                     .param("bidQuantity", "10"))
@@ -310,12 +311,13 @@ public class BidListControllerTests {
 
         //ACT & ASSERT
         try {
+            // Error in account (mandatory field)
             mockMvc.perform(post("/bidList/update/1")
-                    .param("BidListId", "1")
+                    .param("bidListId", "1")
                     .param("account", "")
                     .param("type", "Type Test")
                     .param("bidQuantity", "10"))
-                    .andExpect(status().isOk())
+                    .andExpect(model().attributeHasFieldErrors("bidList", "account"))
                     .andExpect(view().name("bidList/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);

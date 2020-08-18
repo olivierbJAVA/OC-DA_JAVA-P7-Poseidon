@@ -143,6 +143,7 @@ public class RuleNameControllerTests {
 
         //ACT & ASSERT
         try {
+            // Error in name (mandatory field)
             mockMvc.perform(post("/ruleName/update/1")
                     .param("name", "")
                     .param("description", "Description")
@@ -150,7 +151,7 @@ public class RuleNameControllerTests {
                     .param("template", "Template")
                     .param("sqlStr", "SQL ")
                     .param("sqlPart", "SQL Part"))
-                    .andExpect(status().isOk())
+                    .andExpect(model().attributeHasFieldErrors("ruleName", "name"))
                     .andExpect(view().name("ruleName/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
@@ -206,7 +207,7 @@ public class RuleNameControllerTests {
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/ruleName/update/1")
-                    .param("Id", "1")
+                    .param("id", "1")
                     .param("name", "Rule Name")
                     .param("description", "Description")
                     .param("json", "Json")
@@ -229,15 +230,16 @@ public class RuleNameControllerTests {
 
         //ACT & ASSERT
         try {
+            // Error in name (mandatory field)
             mockMvc.perform(post("/ruleName/update/1")
-                    .param("Id", "1")
+                    .param("id", "1")
                     .param("name", "")
                     .param("description", "Description")
                     .param("json", "Json")
                     .param("template", "Template")
                     .param("sqlStr", "SQL ")
                     .param("sqlPart", "SQL Part"))
-                    .andExpect(status().isOk())
+                    .andExpect(model().attributeHasFieldErrors("ruleName", "name"))
                     .andExpect(view().name("ruleName/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
