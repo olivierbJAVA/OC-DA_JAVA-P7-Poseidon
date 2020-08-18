@@ -41,9 +41,15 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public ModelAndView login() {
+    public ModelAndView logout() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("logout");
         return mav;
     }
+/*
+    @GetMapping("/logout")
+    public String logoutString() {
+        return "logout";
+    }
+*/
 }
