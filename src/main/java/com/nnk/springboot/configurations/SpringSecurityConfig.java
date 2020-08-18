@@ -19,7 +19,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http
+             //.csrf().disable()
+             .authorizeRequests()
                 .antMatchers("/user/**", "/admin/home").hasRole("ADMIN")
                 .antMatchers("/", "/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**","/trade/**").hasAnyRole("USER","ADMIN")
                 .anyRequest().authenticated()
@@ -42,8 +44,10 @@ protected void configure (AuthenticationManagerBuilder auth, DataSource dataSour
     auth.jdbcAuthentication()
         .passwordEncoder(passwordEncoder())
         .dataSource(dataSource)
-        .usersByUsernameQuery("SELECT username AS principal, password AS credentials, true FROM users WHERE username = ?")
-        .authoritiesByUsernameQuery("SELECT username AS principal, role AS role FROM users WHERE username = ?");
+        .usersByUsernameQuery("SELECT username, password, true FROM users WHERE username = ?")
+        .authoritiesByUsernameQuery("SELECT username, role FROM users WHERE username = ?");
+        //.usersByUsernameQuery("SELECT username AS principal, password AS credentials, true FROM users WHERE username = ?")
+        //.authoritiesByUsernameQuery("SELECT username AS principal, role AS role FROM users WHERE username = ?");
 }
 
     @Bean
