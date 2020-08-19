@@ -2,6 +2,7 @@ package com.nnk.springboot.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
@@ -15,19 +16,19 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     @NotBlank(message = "Username is mandatory")
     private String username;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
-    @NotBlank(message = "Password is mandatory")
+    //@Pattern(regexp = "^(?=.*\\d)(?=.*[A-Z]).{6,8}$")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", message = "Password must contain at least 8 characters, a digit must occur at least once, an upper case letter must occur at least once, a special character must occur at least once and no whitespace allowed")
     private String password;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     @NotBlank(message = "FullName is mandatory")
     private String fullname;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     @NotBlank(message = "Role is mandatory")
     private String role;
 
