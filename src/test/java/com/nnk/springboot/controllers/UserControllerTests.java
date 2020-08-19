@@ -45,21 +45,21 @@ public class UserControllerTests {
         User userTest1 = new User();
         userTest1.setId(1);
         userTest1.setUsername("user");
-        userTest1.setPassword("password");
+        userTest1.setPassword("%Password1");
         userTest1.setFullname("User");
         userTest1.setRole("USER");
 
         User userTest2 = new User();
         userTest2.setId(2);
         userTest2.setUsername("user");
-        userTest2.setPassword("password");
+        userTest2.setPassword("%Password2");
         userTest2.setFullname("User");
         userTest2.setRole("USER");
 
         User userTest3 = new User();
         userTest3.setId(3);
         userTest3.setUsername("user");
-        userTest3.setPassword("password");
+        userTest3.setPassword("%Password3");
         userTest3.setFullname("User");
         userTest3.setRole("USER");
 
@@ -105,7 +105,7 @@ public class UserControllerTests {
         User userTest = new User();
         userTest.setId(1);
         userTest.setUsername("user");
-        userTest.setPassword("password");
+        userTest.setPassword("%Password1");
         userTest.setFullname("User");
         userTest.setRole("USER");
 
@@ -115,7 +115,7 @@ public class UserControllerTests {
         try {
             mockMvc.perform(post("/user/validate")
                     .param("username", "user")
-                    .param("password", "password")
+                    .param("password", "%Password1")
                     .param("fullname", "User")
                     .param("role", "USER"))
                     .andExpect(status().is3xxRedirection())
@@ -137,7 +137,7 @@ public class UserControllerTests {
             // Error in username (mandatory field)
             mockMvc.perform(post("/user/update/1")
                     .param("username", "")
-                    .param("password", "password")
+                    .param("password", "%Password1")
                     .param("fullname", "User")
                     .param("role", "USER"))
                     .andExpect(model().attributeHasFieldErrors("user", "username"))
@@ -156,7 +156,7 @@ public class UserControllerTests {
         User userTest = new User();
         userTest.setId(1);
         userTest.setUsername("user");
-        userTest.setPassword("password");
+        userTest.setPassword("");
         userTest.setFullname("User");
         userTest.setRole("USER");
 
@@ -183,7 +183,7 @@ public class UserControllerTests {
         User userTest = new User();
         userTest.setId(1);
         userTest.setUsername("user");
-        userTest.setPassword("password");
+        userTest.setPassword("%Password1");
         userTest.setFullname("User");
         userTest.setRole("USER");
 
@@ -194,7 +194,7 @@ public class UserControllerTests {
             mockMvc.perform(post("/user/update/1")
                     .param("id", "1")
                     .param("username", "user")
-                    .param("password", "password")
+                    .param("password", "%Password1")
                     .param("fullname", "User")
                     .param("role", "USER"))
                     .andExpect(status().is3xxRedirection())
@@ -217,7 +217,7 @@ public class UserControllerTests {
             mockMvc.perform(post("/user/update/1")
                     .param("id", "1")
                     .param("username", "")
-                    .param("password", "password")
+                    .param("password", "%Password1")
                     .param("fullname", "User")
                     .param("role", "USER"))
                     .andExpect(model().attributeHasFieldErrors("user", "username"))
@@ -236,7 +236,7 @@ public class UserControllerTests {
         User userTest = new User();
         userTest.setId(1);
         userTest.setUsername("user");
-        userTest.setPassword("password");
+        userTest.setPassword("%Password1");
         userTest.setFullname("User");
         userTest.setRole("USER");
 
