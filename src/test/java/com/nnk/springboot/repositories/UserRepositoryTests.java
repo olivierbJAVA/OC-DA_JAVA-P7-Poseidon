@@ -29,7 +29,7 @@ public class UserRepositoryTests {
     @Test
     public void saveUser() {
         // ARRANGE
-        User userToSave = new User("user", "password", "User", "USER");
+        User userToSave = new User("user", "%Password1", "User", "USER");
 
         // ACT
         User userSaved = userRepositoryUnderTest.save(userToSave);
@@ -45,7 +45,7 @@ public class UserRepositoryTests {
     @Test
     public void updateUser() {
         // ARRANGE
-        User userToUpdate = new User("user", "password", "User", "USER");
+        User userToUpdate = new User("user", "%Password1", "User", "USER");
         userRepositoryUnderTest.save(userToUpdate);
 
         // ACT
@@ -62,7 +62,7 @@ public class UserRepositoryTests {
     @Test
     public void findUserById() {
         // ARRANGE
-        User userToFind = new User("user", "password", "User", "USER");
+        User userToFind = new User("user", "%Password1", "User", "USER");
         userToFind = userRepositoryUnderTest.save(userToFind);
 
         // ACT
@@ -79,13 +79,13 @@ public class UserRepositoryTests {
     @Test
     public void findAllUsers() {
         // ARRANGE
-        User userToFind1 = new User("user1", "password", "User", "USER");
+        User userToFind1 = new User("user1", "%Password1", "User", "USER");
         userRepositoryUnderTest.save(userToFind1);
 
-        User userToFind2 = new User("user2", "password", "User", "USER");
+        User userToFind2 = new User("user2", "%Password2", "User", "USER");
         userRepositoryUnderTest.save(userToFind2);
 
-        User userToFind3 = new User("user3", "password", "User", "USER");
+        User userToFind3 = new User("user3", "%Password3", "User", "USER");
         userRepositoryUnderTest.save(userToFind3);
 
         // ACT
@@ -98,7 +98,7 @@ public class UserRepositoryTests {
     @Test
     public void deleteUserById() {
         // ARRANGE
-        User userToDelete = new User("user", "password", "User", "USER");
+        User userToDelete = new User("user", "%Password1", "User", "USER");
         userToDelete = userRepositoryUnderTest.save(userToDelete);
 
         // ACT
