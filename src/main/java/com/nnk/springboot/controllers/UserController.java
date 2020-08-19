@@ -1,6 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.exceptions.ResourceAlreadyExistException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +51,10 @@ public class UserController {
 
         logger.info("Request : POST /rating/validate");
 
+        if (userRepository.findUserByUsername(user.getUsername()) != null) {
+            throw new ResourceAlreadyExistException(user.getUsername());
+        }
+
         if (!result.hasErrors()) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
@@ -69,7 +75,7 @@ public class UserController {
 
         logger.info("Request : GET /user/update/{}", id);
 
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
         user.setPassword("");
         model.addAttribute("user", user);
 
@@ -82,6 +88,10 @@ public class UserController {
     public String updateUser(@Valid User user, BindingResult result, Model model) {
 
         logger.info("Request : POST /rating/update/{}", user.getId());
+
+        if (userRepository.findUserByUsername(user.getUsername()) != null && !userRepository.findById(user.getId()).get().getUsername().equals(user.getUsername()) ) {
+            throw new ResourceAlreadyExistException(user.getUsername());
+        }
 
         if (result.hasErrors()) {
 
@@ -104,7 +114,7 @@ public class UserController {
 
         logger.info("Request : GET /user/delete/{}", id);
 
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
         userRepository.delete(user);
 
         logger.info("Success : rating with id {} deleted, redirect to '/rating/list'", id);
