@@ -51,6 +51,7 @@ public class UserController {
 
         logger.info("Request : POST /rating/validate");
 
+        // username must be unique, so we check that the username for the new user to create does not already exist
         if (userRepository.findUserByUsername(user.getUsername()) != null) {
             throw new ResourceAlreadyExistException(user.getUsername());
         }
@@ -89,8 +90,11 @@ public class UserController {
 
         logger.info("Request : POST /rating/update/{}", user.getId());
 
-        if (userRepository.findUserByUsername(user.getUsername()) != null && !userRepository.findById(user.getId()).get().getUsername().equals(user.getUsername()) ) {
-            throw new ResourceAlreadyExistException(user.getUsername());
+        // username must be unique, so we check that the username for the new user to create does not already exist (except if it is the user to update)
+//      if (userRepository.findUserByUsername(user.getUsername()) != null && !userRepository.findById(user.getId()).get().getUsername().equals(user.getUsername()) ) {
+        User usernameAlreadyExist = userRepository.findUserByUsername(user.getUsername());
+        if ( usernameAlreadyExist != null && usernameAlreadyExist.getId() != user.getId() ) {
+                throw new ResourceAlreadyExistException(user.getUsername());
         }
 
         if (result.hasErrors()) {
