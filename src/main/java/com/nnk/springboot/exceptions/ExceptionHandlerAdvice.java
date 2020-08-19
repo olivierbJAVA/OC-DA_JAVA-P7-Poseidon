@@ -41,7 +41,6 @@ public class ExceptionHandlerAdvice {
         mav.addObject("id", e.getId());
         mav.setViewName("errorResourceNotFound");
         return mav;
-
     }
 
     /**
@@ -50,11 +49,16 @@ public class ExceptionHandlerAdvice {
      * @param e The exception
      */
     @ExceptionHandler(ResourceAlreadyExistException.class)
-    public ResponseEntity<String> handleException(ResourceAlreadyExistException e) {
+    @ResponseStatus(value= HttpStatus.BAD_REQUEST)
+    public ModelAndView handleException(ResourceAlreadyExistException e) {
 
-        logger.error("Error : ressource {} already exist", e.getId());
+        logger.error("Error : resource {} already exists", e.getUsername());
 
-        return new ResponseEntity<>(e.getMessage() + e.getId(), e.getHttpStatus());
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", e);
+        mav.addObject("username", e.getUsername());
+        mav.setViewName("errorResourceAlreadyExist");
+        return mav;
     }
 
     /**
@@ -69,5 +73,4 @@ public class ExceptionHandlerAdvice {
 
         return new ResponseEntity<>(e.getMessage(), e.getHttpStatus());
     }
-
 }

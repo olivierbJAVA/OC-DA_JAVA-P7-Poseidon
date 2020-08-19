@@ -1,38 +1,24 @@
 package com.nnk.springboot.exceptions;
 
-import org.springframework.http.HttpStatus;
-
 /**
- * Class for the RessourceAlreadyExistException.
+ * Class for the ResourceAlreadyExistException.
  */
 public class ResourceAlreadyExistException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    private HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
-    private int id;
+    private String username;
 
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
-    }
-
-    public int getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * Constructs a new runtime exception with the specified detail message.
+     * Constructs a new runtime exception.
      *
-     * @param httpStatus the httpStatus
-     *
-     * @param message    the detail message
-     *
-     * @param ressource  the resource already existing
+     * @param username  the resource that already exists
      */
-    public ResourceAlreadyExistException(HttpStatus httpStatus, String message, int id) {
-        super(message);
-        this.httpStatus = httpStatus;
-        this.id = id;
+    public ResourceAlreadyExistException(String username) {
+        this.username = username;
     }
-
 }

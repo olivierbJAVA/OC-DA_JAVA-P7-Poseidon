@@ -16,13 +16,9 @@ public class ResourceNotFoundException extends RuntimeException {
     }
 
     /**
-     * Constructs a new runtime exception with the specified detail message.
+     * Constructs a new runtime exception.
      *
-     * @param httpStatus the httpStatus
-     *
-     * @param message    the detail message
-     *
-     * @param ressource  the resource not found
+     * @param id  the resource not found
      */
     public ResourceNotFoundException(int id) {
         this.id = id;
