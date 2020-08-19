@@ -1,7 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.services.IBidListService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -348,13 +348,13 @@ public class BidListControllerTests {
     @Test
     public void deleteBid_whenBidNotExist() {
         //ARRANGE
-        doThrow(RecordNotFoundException.class).when(mockBidListService).deleteBidListById(1);
+        doThrow(ResourceNotFoundException.class).when(mockBidListService).deleteBidListById(1);
 
         //ACT & ASSERT
         try {
             mockMvc.perform(get("/bidList/delete/1"))
-                    .andExpect(status().isOk())
-                    .andExpect(view().name("errorRecordNotFound"));
+                    .andExpect(status().isNotFound())
+                    .andExpect(view().name("errorResourceNotFound"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }

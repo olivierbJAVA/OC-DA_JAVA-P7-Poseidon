@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -100,8 +101,10 @@ public class UserControllerTests {
 
     // @PostMapping(value = "/user/validate"")
     @Test
-    public void validate_whenNoError() {
+    public void validate_whenNoErrorAndUsernameNotAlreadyExist() {
         //ARRANGE
+        doReturn(null).when(mockUserRepository).findUserByUsername("user");
+
         User userTest = new User();
         userTest.setId(1);
         userTest.setUsername("user");
@@ -125,6 +128,37 @@ public class UserControllerTests {
         }
 
         verify(mockUserRepository, times(1)).save(any(User.class));
+        verify(mockUserRepository, times(1)).findUserByUsername("user");
+    }
+
+    // @PostMapping(value = "/user/validate"")
+    @Test
+    public void validate_whenNoErrorAndUsernameAlreadyExist() {
+        //ARRANGE
+        User usernameAlreadyExist = new User();
+        usernameAlreadyExist.setId(1);
+        usernameAlreadyExist.setUsername("user");
+        usernameAlreadyExist.setPassword("%Password1");
+        usernameAlreadyExist.setFullname("User");
+        usernameAlreadyExist.setRole("USER");
+
+        doReturn(usernameAlreadyExist).when(mockUserRepository).findUserByUsername("user");
+
+        //ACT & ASSERT
+        try {
+            mockMvc.perform(post("/user/validate")
+                    .param("username", "user")
+                    .param("password", "%Password2")
+                    .param("fullname", "User")
+                    .param("role", "USER"))
+                    .andExpect(status().isBadRequest())
+                    .andExpect(view().name("errorResourceAlreadyExist"));
+        } catch (Exception e) {
+            logger.error("Error in MockMvc", e);
+        }
+
+        verify(mockUserRepository, times(1)).findUserByUsername("user");
+        verify(mockUserRepository, never()).save(any(User.class));
     }
 
     // @PostMapping(value = "/user/validate"")
@@ -261,13 +295,13 @@ public class UserControllerTests {
     @Test
     public void deleteUser_whenUserNotExist() {
         //ARRANGE
-        doThrow(IllegalArgumentException.class).when(mockUserRepository).findById(1);
+        doThrow(ResourceNotFoundException.class).when(mockUserRepository).findById(1);
 
         //ACT & ASSERT
         try {
             mockMvc.perform(get("/user/delete/1"))
-                    .andExpect(status().isOk())
-                    .andExpect(view().name("errorRecordNotFound"));
+                    .andExpect(status().isNotFound())
+                    .andExpect(view().name("errorResourceNotFound"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }

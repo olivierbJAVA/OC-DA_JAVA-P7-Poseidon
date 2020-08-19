@@ -1,7 +1,7 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.domain.Rating;;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.services.IRatingService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -252,13 +252,13 @@ public class RatingControllerTests {
     @Test
     public void deleteRating_whenRatingNotExist() {
         //ARRANGE
-        doThrow(RecordNotFoundException.class).when(mockRatingService).deleteRatingById(1);
+        doThrow(ResourceNotFoundException.class).when(mockRatingService).deleteRatingById(1);
 
         //ACT & ASSERT
         try {
             mockMvc.perform(get("/rating/delete/1"))
-                    .andExpect(status().isOk())
-                    .andExpect(view().name("errorRecordNotFound"));
+                    .andExpect(status().isNotFound())
+                    .andExpect(view().name("errorResourceNotFound"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }

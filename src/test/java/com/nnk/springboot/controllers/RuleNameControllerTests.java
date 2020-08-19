@@ -1,7 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.services.IRuleNameService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -270,13 +270,13 @@ public class RuleNameControllerTests {
     @Test
     public void deleteRuleName_whenRuleNameNotExist() {
         //ARRANGE
-        doThrow(RecordNotFoundException.class).when(mockRuleNameService).deleteRuleNameById(1);
+        doThrow(ResourceNotFoundException.class).when(mockRuleNameService).deleteRuleNameById(1);
 
         //ACT & ASSERT
         try {
             mockMvc.perform(get("/ruleName/delete/1"))
-                    .andExpect(status().isOk())
-                    .andExpect(view().name("errorRecordNotFound"));
+                    .andExpect(status().isNotFound())
+                    .andExpect(view().name("errorResourceNotFound"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }

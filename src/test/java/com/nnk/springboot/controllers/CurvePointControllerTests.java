@@ -1,7 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.exceptions.RecordNotFoundException;
+import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.services.ICurvePointService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -258,13 +258,13 @@ public class CurvePointControllerTests {
     @Test
     public void deleteCurvePoint_whenCurvePointNotExist() {
         //ARRANGE
-        doThrow(RecordNotFoundException.class).when(mockCurvePointService).deleteCurvePointById(1);
+        doThrow(ResourceNotFoundException.class).when(mockCurvePointService).deleteCurvePointById(1);
 
         //ACT & ASSERT
         try {
             mockMvc.perform(get("/curvePoint/delete/1"))
-                    .andExpect(status().isOk())
-                    .andExpect(view().name("errorRecordNotFound"));
+                    .andExpect(status().isNotFound())
+                    .andExpect(view().name("errorResourceNotFound"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }
