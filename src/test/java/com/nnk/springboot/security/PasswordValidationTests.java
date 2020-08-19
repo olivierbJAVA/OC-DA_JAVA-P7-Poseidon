@@ -1,4 +1,4 @@
-package com.nnk.springboot.password;
+package com.nnk.springboot.security;
 
 import com.nnk.springboot.controllers.UserController;
 import com.nnk.springboot.domain.User;
@@ -12,10 +12,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;

@@ -1,4 +1,4 @@
-package com.nnk.springboot.password;
+package com.nnk.springboot.security;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
