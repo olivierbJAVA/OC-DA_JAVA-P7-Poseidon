@@ -212,8 +212,10 @@ public class UserControllerTests {
 
     // @PostMapping(value = "/user/update/{id}"")
     @Test
-    public void updateUser_whenNoError() {
+    public void updateUser_whenNoErrorAndUsernameNotAlreadyExist() {
         //ARRANGE
+        doReturn(null).when(mockUserRepository).findUserByUsername("user");
+
         User userTest = new User();
         userTest.setId(1);
         userTest.setUsername("user");
@@ -238,6 +240,88 @@ public class UserControllerTests {
         }
 
         verify(mockUserRepository, times(1)).save(any(User.class));
+    }
+
+    // @PostMapping(value = "/user/update/{id}"")
+    @Test
+    public void updateUser_whenNoErrorAndUsernameAlreadyExistAndIsUsernameToUpdate() {
+        //ARRANGE
+        User usernameAlreadyExist = new User();
+        // the username already existing is the one of the user to update so no issue
+        usernameAlreadyExist.setId(1);
+        usernameAlreadyExist.setUsername("user");
+        usernameAlreadyExist.setPassword("%Password1");
+        usernameAlreadyExist.setFullname("User");
+        usernameAlreadyExist.setRole("USER");
+
+        doReturn(usernameAlreadyExist).when(mockUserRepository).findUserByUsername("user");
+
+        User userTest = new User();
+        userTest.setId(1);
+        userTest.setUsername("user");
+        userTest.setPassword("%Password2");
+        userTest.setFullname("User");
+        userTest.setRole("USER");
+
+        doReturn(userTest).when(mockUserRepository).save(userTest);
+
+        //ACT & ASSERT
+        try {
+            mockMvc.perform(post("/user/update/1")
+                    .param("id", "1")
+                    .param("username", "user")
+                    .param("password", "%Password2")
+                    .param("fullname", "User")
+                    .param("role", "USER"))
+                    .andExpect(status().is3xxRedirection())
+                    .andExpect(header().string("Location", "/user/list"));
+        } catch (Exception e) {
+            logger.error("Error in MockMvc", e);
+        }
+
+        verify(mockUserRepository, times(1)).findUserByUsername("user");
+        verify(mockUserRepository, times(1)).save(any(User.class));
+    }
+
+    // @PostMapping(value = "/user/update/{id}"")
+    @Test
+    public void updateUser_whenNoErrorAndUsernameAlreadyExistAndIsNotUsernameToUpdate() {
+        //ARRANGE
+        User usernameAlreadyExist = new User();
+        // the username already existing belongs to anoter user than the one to update so there is an issue
+        usernameAlreadyExist.setId(1);
+        usernameAlreadyExist.setUsername("user");
+        usernameAlreadyExist.setPassword("%Password1");
+        usernameAlreadyExist.setFullname("User");
+        usernameAlreadyExist.setRole("USER");
+
+        doReturn(usernameAlreadyExist).when(mockUserRepository).findUserByUsername("user");
+
+        User userTest = new User();
+        userTest.setId(2);
+        userTest.setUsername("user");
+        userTest.setPassword("%Password2");
+        userTest.setFullname("User");
+        userTest.setRole("USER");
+
+        doReturn(userTest).when(mockUserRepository).save(userTest);
+
+        //ACT & ASSERT
+        try {
+            mockMvc.perform(post("/user/update/2")
+                    .param("id", "2")
+                    .param("username", "user")
+                    .param("password", "%Password2")
+                    .param("fullname", "User")
+                    .param("role", "USER"))
+                    .andExpect(status().isBadRequest())
+                    .andExpect(view().name("errorResourceAlreadyExist"));
+        } catch (Exception e) {
+            logger.error("Error in MockMvc", e);
+        }
+
+        verify(mockUserRepository, times(1)).findUserByUsername("user");
+        verify(mockUserRepository, never()).save(any(User.class));
     }
 
     // @PostMapping(value = "/user/update/{id}"")
