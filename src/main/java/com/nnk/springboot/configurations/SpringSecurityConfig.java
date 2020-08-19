@@ -26,12 +26,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**","/trade/**").hasAnyRole("USER","ADMIN")
                 .anyRequest().authenticated()
                 .and()
+             .httpBasic()
+                .and()
             .formLogin()
                 //.defaultSuccessUrl("/index.html")
                 .and()
             .exceptionHandling().accessDeniedPage("/403");
     }
-/*
+
     protected void configure (AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("user").password(passwordEncoder().encode("user")).roles("USER")
@@ -39,17 +41,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
                 //.withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN", "USER");
     }
-*/
+/*
 protected void configure (AuthenticationManagerBuilder auth, DataSource dataSource) throws Exception {
     auth.jdbcAuthentication()
         .passwordEncoder(passwordEncoder())
         .dataSource(dataSource)
-        .usersByUsernameQuery("SELECT username, password, true FROM users WHERE username = ?")
-        .authoritiesByUsernameQuery("SELECT username, role FROM users WHERE username = ?");
-        //.usersByUsernameQuery("SELECT username AS principal, password AS credentials, true FROM users WHERE username = ?")
-        //.authoritiesByUsernameQuery("SELECT username AS principal, role AS role FROM users WHERE username = ?");
+        .usersByUsernameQuery("SELECT username AS principal, password AS credentials, true FROM users WHERE username = ?")
+        .authoritiesByUsernameQuery("SELECT username AS principal, role AS role FROM users WHERE username = ?");
+        //.usersByUsernameQuery("SELECT username, password, true FROM users WHERE username = ?")
+        //.authoritiesByUsernameQuery("SELECT username, role FROM users WHERE username = ?");
 }
-
+*/
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
