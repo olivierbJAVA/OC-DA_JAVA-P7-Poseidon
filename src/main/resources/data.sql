@@ -26,5 +26,3 @@ insert into Trade(account, type, buyQuantity, sellQuantity, buyPrice, sellPrice,
 values ('Account2','Type2', 20, 2, 123.00, 321.00, '2020-08-10 10:20:30.0', 'Security2', 'Status2', 'Trader2', 'Benchmark2', 'Book2', 'CreationName2', '2020-07-23 10:20:30.0', 'RevisionName2', '2020-08-10 09:10:23.0', 'DealName2', 'DealType2', 'SourceListId2', 'Side2');
 insert into Trade(account, type, buyQuantity, sellQuantity, buyPrice, sellPrice, tradeDate, security, status, trader, benchmark, book, creationName, creationDate, revisionName, revisionDate, dealName, dealType, sourceListId, side)
 values ('Account3','Type3', 30, 3, 123.00, 321.00, '2020-08-10 10:20:30.0', 'Security3', 'Status3', 'Trader3', 'Benchmark3', 'Book3', 'CreationName3', '2020-07-23 10:20:30.0', 'RevisionName3', '2020-08-10 09:10:23.0', 'DealName3', 'DealType3', 'SourceListId3', 'Side3');
-
-
