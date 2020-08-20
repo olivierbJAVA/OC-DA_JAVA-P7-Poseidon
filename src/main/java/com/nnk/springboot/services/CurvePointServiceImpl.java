@@ -23,7 +23,7 @@ public class CurvePointServiceImpl implements ICurvePointService {
 
     @Override
     public CurvePoint findCurvePointById(Integer id) throws ResourceNotFoundException {
-        return curvePointRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        return curvePointRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id, "CurvePoint"));
     }
 
     @Override
@@ -33,13 +33,13 @@ public class CurvePointServiceImpl implements ICurvePointService {
 
     @Override
     public CurvePoint updateCurvePoint(CurvePoint curvePoint) {
-        curvePointRepository.findById(curvePoint.getId()).orElseThrow(()-> new ResourceNotFoundException(curvePoint.getId()));
+        curvePointRepository.findById(curvePoint.getId()).orElseThrow(()-> new ResourceNotFoundException(curvePoint.getId(), "CurvePoint"));
         return curvePointRepository.save(curvePoint);
     }
 
     @Override
     public void deleteCurvePointById(Integer id) throws ResourceNotFoundException {
-        curvePointRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        curvePointRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id, "CurvePoint"));
         curvePointRepository.deleteById(id);
     }
 }

@@ -23,7 +23,7 @@ public class RatingServiceImpl implements IRatingService {
 
     @Override
     public Rating findRatingById(Integer id) throws ResourceNotFoundException {
-        return ratingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        return ratingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id, "Rating"));
         /*
         Optional<Rating> rating = ratingRepository.findById(id);
 
@@ -44,13 +44,13 @@ public class RatingServiceImpl implements IRatingService {
 
     @Override
     public Rating updateRating(Rating rating) {
-        ratingRepository.findById(rating.getId()).orElseThrow(()-> new ResourceNotFoundException(rating.getId()));
+        ratingRepository.findById(rating.getId()).orElseThrow(()-> new ResourceNotFoundException(rating.getId(), "Rating"));
         return ratingRepository.save(rating);
     }
 
     @Override
     public void deleteRatingById(Integer id) throws ResourceNotFoundException {
-        ratingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        ratingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id, "Rating"));
         ratingRepository.deleteById(id);
         /*
         Optional<Rating> rating = ratingRepository.findById(id);
@@ -58,7 +58,7 @@ public class RatingServiceImpl implements IRatingService {
         if(rating.isPresent()) {
             ratingRepository.deleteById(id);
         } else {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException(id, "Rating");
             //throw new RessourceNotFoundException(HttpStatus.NOT_FOUND, "No record exist for given id", id);
         }
         */

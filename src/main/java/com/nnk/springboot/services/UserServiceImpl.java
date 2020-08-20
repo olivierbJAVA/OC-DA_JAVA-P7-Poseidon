@@ -23,7 +23,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User findUserById(Integer id) throws ResourceNotFoundException {
-        return userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        return userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id, "User"));
     }
 
     @Override
@@ -33,13 +33,13 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User updateUser(User user) {
-        userRepository.findById(user.getId()).orElseThrow(()-> new ResourceNotFoundException(user.getId()));
+        userRepository.findById(user.getId()).orElseThrow(()-> new ResourceNotFoundException(user.getId(), "User"));
         return userRepository.save(user);
     }
 
     @Override
     public void deleteUserById(Integer id) throws ResourceNotFoundException {
-        userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id, "User"));
         userRepository.deleteById(id);
     }
 }

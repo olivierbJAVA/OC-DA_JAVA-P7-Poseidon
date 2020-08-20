@@ -23,7 +23,7 @@ public class TradeServiceImpl implements ITradeService {
 
     @Override
     public Trade findTradeById(Integer id) throws ResourceNotFoundException {
-        return tradeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        return tradeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id, "Trade"));
     }
 
     @Override
@@ -33,13 +33,13 @@ public class TradeServiceImpl implements ITradeService {
 
     @Override
     public Trade updateTrade(Trade trade) {
-        tradeRepository.findById(trade.getTradeId()).orElseThrow(()-> new ResourceNotFoundException(trade.getTradeId()));
+        tradeRepository.findById(trade.getTradeId()).orElseThrow(()-> new ResourceNotFoundException(trade.getTradeId(), "Trade"));
         return tradeRepository.save(trade);
     }
 
     @Override
     public void deleteTradeById(Integer id) throws ResourceNotFoundException {
-        tradeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        tradeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id, "Trade"));
         tradeRepository.deleteById(id);
     }
 }

@@ -23,7 +23,7 @@ public class RuleNameServiceImpl implements IRuleNameService {
 
     @Override
     public RuleName findRuleNameById(Integer id) throws ResourceNotFoundException {
-        return ruleNameRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        return ruleNameRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id, "RuleName"));
     }
 
     @Override
@@ -33,13 +33,13 @@ public class RuleNameServiceImpl implements IRuleNameService {
 
     @Override
     public RuleName updateRuleName(RuleName ruleName) {
-        ruleNameRepository.findById(ruleName.getId()).orElseThrow(()-> new ResourceNotFoundException(ruleName.getId()));
+        ruleNameRepository.findById(ruleName.getId()).orElseThrow(()-> new ResourceNotFoundException(ruleName.getId(), "RuleName"));
         return ruleNameRepository.save(ruleName);
     }
 
     @Override
     public void deleteRuleNameById(Integer id) throws ResourceNotFoundException {
-        ruleNameRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
+        ruleNameRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id, "RuleName"));
         ruleNameRepository.deleteById(id);
     }
 }
