@@ -53,7 +53,7 @@ public class UserController {
 
         // username must be unique, so we check that the username for the new user to create does not already exist
         if (userRepository.findUserByUsername(user.getUsername()) != null) {
-            throw new ResourceAlreadyExistException(user.getUsername());
+            throw new ResourceAlreadyExistException(user.getUsername(), "User");
         }
 
         if (!result.hasErrors()) {
@@ -76,7 +76,7 @@ public class UserController {
 
         logger.info("Request : GET /user/update/{}", id);
 
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id, "User"));
         user.setPassword("");
         model.addAttribute("user", user);
 
@@ -94,7 +94,7 @@ public class UserController {
 //      if (userRepository.findUserByUsername(user.getUsername()) != null && !userRepository.findById(user.getId()).get().getUsername().equals(user.getUsername()) ) {
         User usernameAlreadyExist = userRepository.findUserByUsername(user.getUsername());
         if ( usernameAlreadyExist != null && usernameAlreadyExist.getId() != user.getId() ) {
-                throw new ResourceAlreadyExistException(user.getUsername());
+                throw new ResourceAlreadyExistException(user.getUsername(), "User");
         }
 
         if (result.hasErrors()) {
@@ -118,7 +118,7 @@ public class UserController {
 
         logger.info("Request : GET /user/delete/{}", id);
 
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id, "User"));
         userRepository.delete(user);
 
         logger.info("Success : rating with id {} deleted, redirect to '/rating/list'", id);
