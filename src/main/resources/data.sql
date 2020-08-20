@@ -1,4 +1,4 @@
-insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$smTQvk1nHLPwL30yR5c6S.H5kJNtIAZt7w/aT93ZkpFnFdk75XObK", "ADMIN");
+insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$xYJdSCmNkc1mTXtqqKC26ednsGLRQTS.D1IGJSioYGo/VHALEIpUa", "ADMIN");
 insert into Users(fullname, username, password, role) values('user', 'user', '$2a$10$r7CYrEaluh92skzKRu3llOWoPvLDZ/NnPDCxZtSAkPBn92gsZLtqK', 'USER');
 
 insert into Rating(moodysRating, sandPRating, fitchRating, orderNumber) values ('AAA', 'AA+', 'AA-', 1);
