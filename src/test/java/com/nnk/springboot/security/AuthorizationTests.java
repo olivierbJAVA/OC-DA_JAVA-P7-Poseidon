@@ -44,7 +44,7 @@ public class AuthorizationTests {
 
     @Test
     @WithMockUser(roles="ADMIN")
-    public void getAuthorizedForAllPage_whenAdminConnected() {
+    public void getPageAuthorizedForAdminAndUser_whenAdminConnected() {
         // ARRANGE, ACT & ASSERT
         try {
             mockMvc.perform(get("/"))
@@ -56,7 +56,7 @@ public class AuthorizationTests {
 
     @Test
     @WithMockUser(roles="USER")
-    public void getAuthorizedForAllPage_whenUserConnected() {
+    public void getPageAuthorizedForAdminAndUser_whenUserConnected() {
         // ARRANGE, ACT & ASSERT
         try {
             mockMvc.perform(get("/"))
@@ -68,7 +68,7 @@ public class AuthorizationTests {
 
     @Test
     @WithMockUser(roles="ADMIN")
-    public void getAdminAuthorizedOnlyPage_whenAdminConnected() {
+    public void getPageAuthorizedForAdminOnly_whenAdminConnected() {
         // ARRANGE, ACT & ASSERT
         try {
             mockMvc.perform(get("/admin/home"))
@@ -80,7 +80,7 @@ public class AuthorizationTests {
 
     @Test
     @WithMockUser(roles="USER")
-    public void getAdminAuthorizedOnlyPage_whenUserConnected() {
+    public void getPageAuthorizedForAdminOnly_whenUserConnected() {
         // ARRANGE, ACT & ASSERT
         try {
             mockMvc.perform(get("/admin/home"))

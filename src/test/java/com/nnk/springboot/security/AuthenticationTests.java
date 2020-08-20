@@ -42,7 +42,7 @@ public class AuthenticationTests {
     }
 
     @Test
-    public void loginPage() {
+    public void loginPageAccess() {
         // ARRANGE, ACT & ASSERT
         try {
             mockMvc.perform(get("/login"))
