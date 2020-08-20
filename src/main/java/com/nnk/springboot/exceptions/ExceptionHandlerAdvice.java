@@ -34,11 +34,12 @@ public class ExceptionHandlerAdvice {
     @ResponseStatus(value= HttpStatus.NOT_FOUND)
     public ModelAndView handleException(ResourceNotFoundException e) {
 
-        logger.error("Error : resource {} not found", e.getId());
+        logger.error("Error : resource {} with id {} not found", e.getResourceType(), e.getResourceId());
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", e);
-        mav.addObject("id", e.getId());
+        mav.addObject("resourceType", e.getResourceType());
+        mav.addObject("resourceId", e.getResourceId());
         mav.setViewName("errorResourceNotFound");
         return mav;
     }
@@ -52,11 +53,12 @@ public class ExceptionHandlerAdvice {
     @ResponseStatus(value= HttpStatus.BAD_REQUEST)
     public ModelAndView handleException(ResourceAlreadyExistException e) {
 
-        logger.error("Error : resource {} already exists", e.getUsername());
+        logger.error("Error : resource {} with username {} already exists", e.getResourceType(), e.getResourceId());
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", e);
-        mav.addObject("username", e.getUsername());
+        mav.addObject("resourceType", e.getResourceType());
+        mav.addObject("resourceId", e.getResourceId());
         mav.setViewName("errorResourceAlreadyExist");
         return mav;
     }

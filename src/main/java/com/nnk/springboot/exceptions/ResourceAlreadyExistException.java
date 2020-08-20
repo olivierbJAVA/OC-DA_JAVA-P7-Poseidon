@@ -7,18 +7,25 @@ public class ResourceAlreadyExistException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    private String username;
+    private String resourceId;
 
-    public String getUsername() {
-        return username;
-    }
+    private String resourceType;
 
     /**
      * Constructs a new runtime exception.
      *
      * @param username  the resource that already exists
      */
-    public ResourceAlreadyExistException(String username) {
-        this.username = username;
+    public ResourceAlreadyExistException(String resourceId, String resourceType) {
+        this.resourceId = resourceId;
+        this.resourceType = resourceType;
+    }
+
+    public String getResourceId() {
+        return resourceId;
+    }
+
+    public String getResourceType() {
+        return resourceType;
     }
 }
