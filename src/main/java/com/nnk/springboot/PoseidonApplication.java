@@ -16,13 +16,12 @@ public class PoseidonApplication {
         SpringApplication.run(PoseidonApplication.class, args);
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String password = "user";
+        String password = "admin";
         String encodedPassword = passwordEncoder.encode(password);
 
         System.out.println();
         System.out.println("Password is         : " + password);
         System.out.println("Encoded Password is : " + encodedPassword);
-        //System.out.println("Invalid Password is : " + encodedPassword + "junk");
         System.out.println();
 
         boolean isPasswordMatch = passwordEncoder.matches(password, encodedPassword);

@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 //@EnableGlobalMethodSecurity(securedEnabled = true)
@@ -25,8 +23,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**", "/admin/home").hasRole("ADMIN")
                 .antMatchers("/", "/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**","/trade/**").hasAnyRole("USER","ADMIN")
                 .anyRequest().authenticated()
-                .and()
-             .httpBasic()
                 .and()
             .formLogin()
                 //.defaultSuccessUrl("/index.html")
