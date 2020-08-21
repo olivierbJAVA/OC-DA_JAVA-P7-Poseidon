@@ -3,6 +3,7 @@ package com.nnk.springboot.security;
 import com.nnk.springboot.controllers.UserController;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.services.IUserService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ public class PasswordValidationTests {
     private MockMvc mockMvc;
 
     @MockBean
-    private UserRepository mockUserRepository;
+    private IUserService mockUserService;
 
     @Test
     public void validate_whenNoErrorInPassword() {
@@ -45,7 +46,7 @@ public class PasswordValidationTests {
         userTest.setFullname("User");
         userTest.setRole("USER");
 
-        doReturn(userTest).when(mockUserRepository).save(userTest);
+        doReturn(userTest).when(mockUserService).createUser(userTest);
 
         //ACT & ASSERT
         try {
@@ -60,7 +61,7 @@ public class PasswordValidationTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, times(1)).save(any(User.class));
+        verify(mockUserService, times(1)).createUser(any(User.class));
     }
 
     // @PostMapping(value = "/user/validate"")
@@ -81,7 +82,7 @@ public class PasswordValidationTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, never()).save(any(User.class));
+        verify(mockUserService, never()).createUser(any(User.class));
     }
 
     @Test
@@ -101,7 +102,7 @@ public class PasswordValidationTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, never()).save(any(User.class));
+        verify(mockUserService, never()).createUser(any(User.class));
     }
 
     @Test
@@ -121,7 +122,7 @@ public class PasswordValidationTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, never()).save(any(User.class));
+        verify(mockUserService, never()).createUser(any(User.class));
     }
 
     @Test
@@ -141,6 +142,6 @@ public class PasswordValidationTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, never()).save(any(User.class));
+        verify(mockUserService, never()).createUser(any(User.class));
     }
 }
