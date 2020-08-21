@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -24,6 +23,10 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User findUserById(Integer id) throws ResourceNotFoundException {
         return userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id, "User"));
+    }
+    @Override
+    public User findUserByUsername(String userName) throws ResourceNotFoundException {
+        return userRepository.findUserByUsername(userName);
     }
 
     @Override

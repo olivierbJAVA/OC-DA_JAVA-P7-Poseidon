@@ -11,6 +11,8 @@ public interface IUserService {
 
     User findUserById(Integer id) throws ResourceNotFoundException;
 
+    User findUserByUsername(String userName);
+
     User createUser(User user);
 
     User updateUser(User user) throws ResourceNotFoundException;

@@ -2,8 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.exceptions.ResourceAlreadyExistException;
-import com.nnk.springboot.exceptions.ResourceNotFoundException;
-import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.services.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -24,13 +24,14 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
-    private UserRepository userRepository;
+    IUserService userService;
 
     @RequestMapping("/user/list")
     public String home(Model model) {
         logger.info("Request : GET /user/list");
 
-        model.addAttribute("users", userRepository.findAll());
+        List<User> users = userService.findAllUsers();
+        model.addAttribute("users",users );
 
         logger.info("Success : users found, returning 'user/list' view");
 
@@ -52,14 +53,14 @@ public class UserController {
         logger.info("Request : POST /rating/validate");
 
         // username must be unique, so we check that the username for the new user to create does not already exist
-        if (userRepository.findUserByUsername(user.getUsername()) != null) {
+        if (userService.findUserByUsername(user.getUsername()) != null) {
             throw new ResourceAlreadyExistException(user.getUsername(), "User");
         }
 
         if (!result.hasErrors()) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);
+            userService.createUser(user);
 
             logger.info("Success : new user created, redirect to '/user/list' view");
 
@@ -76,7 +77,7 @@ public class UserController {
 
         logger.info("Request : GET /user/update/{}", id);
 
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id, "User"));
+        User user = userService.findUserById(id);
         user.setPassword("");
         model.addAttribute("user", user);
 
@@ -91,8 +92,7 @@ public class UserController {
         logger.info("Request : POST /rating/update/{}", user.getId());
 
         // username must be unique, so we check that the username for the new user to create does not already exist (except if it is the user to update)
-//      if (userRepository.findUserByUsername(user.getUsername()) != null && !userRepository.findById(user.getId()).get().getUsername().equals(user.getUsername()) ) {
-        User usernameAlreadyExist = userRepository.findUserByUsername(user.getUsername());
+        User usernameAlreadyExist = userService.findUserByUsername(user.getUsername());
         if ( usernameAlreadyExist != null && usernameAlreadyExist.getId() != user.getId() ) {
                 throw new ResourceAlreadyExistException(user.getUsername(), "User");
         }
@@ -106,7 +106,7 @@ public class UserController {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        userRepository.save(user);
+        userService.updateUser(user);
 
         logger.info("Success : user with id {} updated, redirect to '/user/list'", user.getId());
 
@@ -118,8 +118,8 @@ public class UserController {
 
         logger.info("Request : GET /user/delete/{}", id);
 
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id, "User"));
-        userRepository.delete(user);
+        User user = userService.findUserById(id);
+        userService.deleteUserById(id);
 
         logger.info("Success : rating with id {} deleted, redirect to '/rating/list'", id);
 
