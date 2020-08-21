@@ -2,7 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.exceptions.ResourceNotFoundException;
-import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.services.IUserService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -37,7 +36,7 @@ public class UserControllerTests {
     private MockMvc mockMvc;
 
     @MockBean
-    private UserRepository mockUserRepository;
+    private IUserService mockUserService;
 
     // @RequestMapping(value = "/user/list")
     @Test
@@ -69,7 +68,7 @@ public class UserControllerTests {
         allUsersToFind.add(userTest2);
         allUsersToFind.add(userTest3);
 
-        doReturn(allUsersToFind).when(mockUserRepository).findAll();
+        doReturn(allUsersToFind).when(mockUserService).findAllUsers();
 
         //ACT & ASSERT
         try {
@@ -81,7 +80,7 @@ public class UserControllerTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, times(1)).findAll();
+        verify(mockUserService, times(1)).findAllUsers();
     }
 
     // @GetMapping(value = "/user/add"")
@@ -103,7 +102,7 @@ public class UserControllerTests {
     @Test
     public void validate_whenNoErrorAndUsernameNotAlreadyExist() {
         //ARRANGE
-        doReturn(null).when(mockUserRepository).findUserByUsername("user");
+        doReturn(null).when(mockUserService).findUserByUsername("user");
 
         User userTest = new User();
         userTest.setId(1);
@@ -112,7 +111,7 @@ public class UserControllerTests {
         userTest.setFullname("User");
         userTest.setRole("USER");
 
-        doReturn(userTest).when(mockUserRepository).save(userTest);
+        doReturn(userTest).when(mockUserService).createUser(userTest);
 
         //ACT & ASSERT
         try {
@@ -127,8 +126,8 @@ public class UserControllerTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, times(1)).save(any(User.class));
-        verify(mockUserRepository, times(1)).findUserByUsername("user");
+        verify(mockUserService, times(1)).createUser(any(User.class));
+        verify(mockUserService, times(1)).findUserByUsername("user");
     }
 
     // @PostMapping(value = "/user/validate"")
@@ -142,7 +141,7 @@ public class UserControllerTests {
         usernameAlreadyExist.setFullname("User");
         usernameAlreadyExist.setRole("USER");
 
-        doReturn(usernameAlreadyExist).when(mockUserRepository).findUserByUsername("user");
+        doReturn(usernameAlreadyExist).when(mockUserService).findUserByUsername("user");
 
         //ACT & ASSERT
         try {
@@ -157,8 +156,8 @@ public class UserControllerTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, times(1)).findUserByUsername("user");
-        verify(mockUserRepository, never()).save(any(User.class));
+        verify(mockUserService, times(1)).findUserByUsername("user");
+        verify(mockUserService, never()).createUser(any(User.class));
     }
 
     // @PostMapping(value = "/user/validate"")
@@ -180,7 +179,7 @@ public class UserControllerTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, never()).save(any(User.class));
+        verify(mockUserService, never()).createUser(any(User.class));
     }
 
     // @GetMapping(value = "/user/update/{id}"")
@@ -194,8 +193,7 @@ public class UserControllerTests {
         userTest.setFullname("User");
         userTest.setRole("USER");
 
-        Optional<User> optUserTest = Optional.of(userTest);
-        doReturn(optUserTest).when(mockUserRepository).findById(1);
+        doReturn(userTest).when(mockUserService).findUserById(1);
 
         //ACT & ASSERT
         try {
@@ -207,14 +205,14 @@ public class UserControllerTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, times(1)).findById(1);
+        verify(mockUserService, times(1)).findUserById(1);
     }
 
     // @PostMapping(value = "/user/update/{id}"")
     @Test
     public void updateUser_whenNoErrorAndUsernameNotAlreadyExist() {
         //ARRANGE
-        doReturn(null).when(mockUserRepository).findUserByUsername("user");
+        doReturn(null).when(mockUserService).findUserByUsername("user");
 
         User userTest = new User();
         userTest.setId(1);
@@ -223,7 +221,7 @@ public class UserControllerTests {
         userTest.setFullname("User");
         userTest.setRole("USER");
 
-        doReturn(userTest).when(mockUserRepository).save(userTest);
+        doReturn(userTest).when(mockUserService).updateUser(userTest);
 
         //ACT & ASSERT
         try {
@@ -239,7 +237,7 @@ public class UserControllerTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, times(1)).save(any(User.class));
+        verify(mockUserService, times(1)).updateUser(any(User.class));
     }
 
     // @PostMapping(value = "/user/update/{id}"")
@@ -254,7 +252,7 @@ public class UserControllerTests {
         usernameAlreadyExist.setFullname("User");
         usernameAlreadyExist.setRole("USER");
 
-        doReturn(usernameAlreadyExist).when(mockUserRepository).findUserByUsername("user");
+        doReturn(usernameAlreadyExist).when(mockUserService).findUserByUsername("user");
 
         User userTest = new User();
         userTest.setId(1);
@@ -263,7 +261,7 @@ public class UserControllerTests {
         userTest.setFullname("User");
         userTest.setRole("USER");
 
-        doReturn(userTest).when(mockUserRepository).save(userTest);
+        doReturn(userTest).when(mockUserService).updateUser(userTest);
 
         //ACT & ASSERT
         try {
@@ -279,8 +277,8 @@ public class UserControllerTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, times(1)).findUserByUsername("user");
-        verify(mockUserRepository, times(1)).save(any(User.class));
+        verify(mockUserService, times(1)).findUserByUsername("user");
+        verify(mockUserService, times(1)).updateUser(any(User.class));
     }
 
     // @PostMapping(value = "/user/update/{id}"")
@@ -288,14 +286,14 @@ public class UserControllerTests {
     public void updateUser_whenNoErrorAndUsernameAlreadyExistAndIsNotUsernameToUpdate() {
         //ARRANGE
         User usernameAlreadyExist = new User();
-        // the username already existing belongs to anoter user than the one to update so there is an issue
+        // the username already existing belongs to another user than the one to update so there is an issue
         usernameAlreadyExist.setId(1);
         usernameAlreadyExist.setUsername("user");
         usernameAlreadyExist.setPassword("%Password1");
         usernameAlreadyExist.setFullname("User");
         usernameAlreadyExist.setRole("USER");
 
-        doReturn(usernameAlreadyExist).when(mockUserRepository).findUserByUsername("user");
+        doReturn(usernameAlreadyExist).when(mockUserService).findUserByUsername("user");
 
         User userTest = new User();
         userTest.setId(2);
@@ -304,7 +302,7 @@ public class UserControllerTests {
         userTest.setFullname("User");
         userTest.setRole("USER");
 
-        doReturn(userTest).when(mockUserRepository).save(userTest);
+        doReturn(userTest).when(mockUserService).updateUser(userTest);
 
         //ACT & ASSERT
         try {
@@ -320,8 +318,8 @@ public class UserControllerTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, times(1)).findUserByUsername("user");
-        verify(mockUserRepository, never()).save(any(User.class));
+        verify(mockUserService, times(1)).findUserByUsername("user");
+        verify(mockUserService, never()).updateUser(any(User.class));
     }
 
     // @PostMapping(value = "/user/update/{id}"")
@@ -344,7 +342,7 @@ public class UserControllerTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, never()).save(any(User.class));
+        verify(mockUserService, never()).updateUser(any(User.class));
     }
 
     // @GetMapping(value = "/user/delete/{id}"")
@@ -358,10 +356,9 @@ public class UserControllerTests {
         userTest.setFullname("User");
         userTest.setRole("USER");
 
-        Optional<User> optUserTest = Optional.of(userTest);
-        doReturn(optUserTest).when(mockUserRepository).findById(1);
+        doReturn(userTest).when(mockUserService).findUserById(1);
 
-        doNothing().when(mockUserRepository).delete(userTest);
+        doNothing().when(mockUserService).deleteUserById(1);
 
         //ACT & ASSERT
         try {
@@ -372,14 +369,14 @@ public class UserControllerTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, times(1)).delete(optUserTest.get());
+        verify(mockUserService, times(1)).deleteUserById(1);
     }
 
     // @GetMapping(value = "/user/delete/{id}"")
     @Test
     public void deleteUser_whenUserNotExist() {
         //ARRANGE
-        doThrow(ResourceNotFoundException.class).when(mockUserRepository).findById(1);
+        doThrow(ResourceNotFoundException.class).when(mockUserService).findUserById(1);
 
         //ACT & ASSERT
         try {
@@ -390,6 +387,6 @@ public class UserControllerTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserRepository, never()).deleteById(1);
+        verify(mockUserService, never()).deleteUserById(1);
     }
 }
