@@ -8,11 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.Arrays;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
@@ -25,6 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
+@Sql({"/schema-test.sql", "/data-test.sql"})
 public class AuthenticationTests {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationTests.class);
@@ -56,10 +62,13 @@ public class AuthenticationTests {
 
     @Test
     public void userLogin_whenPasswordIsCorrectAndWhenRoleUser() {
-        // ARRANGE, ACT & ASSERT
+        // ARRANGE
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("USER");
+
+        // ACT & ASSERT
         try {
-            mockMvc.perform(formLogin("/login").user("user").password("user"))
-                   .andExpect(authenticated().withRoles("USER"));
+            mockMvc.perform(formLogin("/login").user("utilisateur").password("%Password1User"))
+                   .andExpect(authenticated().withAuthorities(Arrays.asList(grantedAuthority)));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }
@@ -67,10 +76,13 @@ public class AuthenticationTests {
 
     @Test
     public void userLogin_whenPasswordIsCorrectAndWhenRoleAdmin() {
+        // ARRANGE
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ADMIN");
+
         // ARRANGE, ACT & ASSERT
         try {
-            mockMvc.perform(formLogin("/login").user("admin").password("admin"))
-                    .andExpect(authenticated().withRoles("ADMIN"));
+            mockMvc.perform(formLogin("/login").user("admin").password("%Password1Admin"))
+                    .andExpect(authenticated().withAuthorities(Arrays.asList(grantedAuthority)));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }

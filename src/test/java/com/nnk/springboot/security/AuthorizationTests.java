@@ -15,9 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -45,7 +42,7 @@ public class AuthorizationTests {
     }
 
     @Test
-    @WithMockUser(roles="ADMIN")
+    @WithMockUser(authorities="ADMIN")
     public void getPageAuthorizedForAdminAndUser_whenAdminConnected() {
         // ARRANGE, ACT & ASSERT
         try {
@@ -57,7 +54,7 @@ public class AuthorizationTests {
     }
 
     @Test
-    @WithMockUser(roles="USER")
+    @WithMockUser(authorities="USER")
     public void getPageAuthorizedForAdminAndUser_whenUserConnected() {
         // ARRANGE, ACT & ASSERT
         try {
@@ -69,7 +66,7 @@ public class AuthorizationTests {
     }
 
     @Test
-    @WithMockUser(roles="ADMIN")
+    @WithMockUser(authorities="ADMIN")
     public void getPageAuthorizedForAdminOnly_whenAdminConnected() {
         // ARRANGE, ACT & ASSERT
         try {
@@ -81,7 +78,7 @@ public class AuthorizationTests {
     }
 
     @Test
-    @WithMockUser(roles="USER")
+    @WithMockUser(authorities="USER")
     public void getPageAuthorizedForAdminOnly_whenUserConnected() {
         // ARRANGE, ACT & ASSERT
         try {
