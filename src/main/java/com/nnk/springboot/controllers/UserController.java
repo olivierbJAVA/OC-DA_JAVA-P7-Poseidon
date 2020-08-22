@@ -6,7 +6,6 @@ import com.nnk.springboot.services.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -58,8 +57,8 @@ public class UserController {
         }
 
         if (!result.hasErrors()) {
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));
+            //BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            //user.setPassword(encoder.encode(user.getPassword()));
             userService.createUser(user);
 
             logger.info("Success : new user created, redirect to '/user/list' view");
@@ -104,8 +103,8 @@ public class UserController {
             return "user/update";
         }
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));
+        //BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        //user.setPassword(encoder.encode(user.getPassword()));
         userService.updateUser(user);
 
         logger.info("Success : user with id {} updated, redirect to '/user/list'", user.getId());
