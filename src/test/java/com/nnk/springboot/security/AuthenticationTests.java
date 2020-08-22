@@ -67,7 +67,7 @@ public class AuthenticationTests {
 
         // ACT & ASSERT
         try {
-            mockMvc.perform(formLogin("/login").user("utilisateur").password("%Password1User"))
+            mockMvc.perform(formLogin("/login").user("user").password("%Password1User"))
                    .andExpect(authenticated().withAuthorities(Arrays.asList(grantedAuthority)));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
