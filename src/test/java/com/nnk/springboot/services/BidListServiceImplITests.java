@@ -18,10 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * BidList Service.
  */
 @ActiveProfiles("test")
-@SpringBootTest//(classes={com.nnk.springboot.repositories.BidListRepository.class, com.nnk.springboot.services.BidListImplService.class})
-//@ContextConfiguration(classes = {BidListRepository.class, BidListImplService.class})
-//@DataJpaTest
-//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@SpringBootTest
 @Sql({"/schema-test.sql"})
 public class BidListServiceImplITests {
 
