@@ -1,5 +1,5 @@
-insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$xYJdSCmNkc1mTXtqqKC26ednsGLRQTS.D1IGJSioYGo/VHALEIpUa", "ADMIN");
-insert into Users(fullname, username, password, role) values('user', 'user', '$2a$10$r7CYrEaluh92skzKRu3llOWoPvLDZ/NnPDCxZtSAkPBn92gsZLtqK', 'USER');
+insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pf0c3EX5/UqBLVZsj5BjoufMz1Aa03EHrbJaSci/1eWSkM7Zk7nNm", "ADMIN");
+insert into Users(fullname, username, password, role) values("Utilisateur", "utilisateur", "$2a$10$pf0c3EX5/UqBLVZsj5BjoufMz1Aa03EHrbJaSci/1eWSkM7Zk7nNm", "USER");
 
 insert into Rating(moodysRating, sandPRating, fitchRating, orderNumber) values ('AAA', 'AA+', 'AA-', 1);
 insert into Rating(moodysRating, sandPRating, fitchRating, orderNumber) values ('BBB', 'BB+', 'BB-', 2);
