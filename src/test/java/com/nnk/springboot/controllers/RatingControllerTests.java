@@ -1,6 +1,6 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.Rating;;
+import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.services.IRatingService;
 import org.junit.jupiter.api.Test;
