@@ -1,6 +1,5 @@
 package com.nnk.springboot.services;
 
-import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import com.nnk.springboot.repositories.RatingRepository;
@@ -23,15 +22,7 @@ import static org.mockito.Mockito.*;
  */
 @ExtendWith(MockitoExtension.class)
 public class RatingServiceImplTests {
-    /*
-        @TestConfiguration
-        static class RatingServiceImplTestContextConfiguration {
-            @Bean
-            public IRatingService iRatingService() {
-                return new RatingServiceImpl();
-            }
-        }
-    */
+
     @InjectMocks
     private RatingServiceImpl ratingImplServiceUnderTest;
 
