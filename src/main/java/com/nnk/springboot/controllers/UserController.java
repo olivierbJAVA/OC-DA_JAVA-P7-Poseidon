@@ -57,8 +57,6 @@ public class UserController {
         }
 
         if (!result.hasErrors()) {
-            //BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            //user.setPassword(encoder.encode(user.getPassword()));
             userService.createUser(user);
 
             logger.info("Success : new user created, redirect to '/user/list' view");
@@ -103,8 +101,6 @@ public class UserController {
             return "user/update";
         }
 
-        //BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        //user.setPassword(encoder.encode(user.getPassword()));
         userService.updateUser(user);
 
         logger.info("Success : user with id {} updated, redirect to '/user/list'", user.getId());
