@@ -1,6 +1,6 @@
-DROP SCHEMA IF EXISTS `PoseidonProd`;
-CREATE DATABASE `PoseidonProd`;
-USE `PoseidonProd`;
+DROP SCHEMA IF EXISTS `PoseidonDev`;
+CREATE DATABASE `PoseidonDev`;
+USE `PoseidonDev`;
 
 CREATE TABLE BidList (
   BidListId tinyint(4) NOT NULL AUTO_INCREMENT,
