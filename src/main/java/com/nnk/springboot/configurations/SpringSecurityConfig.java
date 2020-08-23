@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -23,9 +22,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     DataSource dataSource;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
 
     /**
      * Method managing the configuration for the Authentication to the application.
@@ -65,7 +61,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Method returning a password encoder using the BCypt algorithm.
+     * Method returning a password encoder using the BCrypt algorithm.
      * This algorithm is used to hash password before saving them in the database.
      *
      * @return The BCryptPasswordEncoder
