@@ -46,7 +46,7 @@ public class AuthorizationTests {
     public void getPageAuthorizedForAdminAndUser_whenAdminConnected() {
         // ARRANGE, ACT & ASSERT
         try {
-            mockMvc.perform(get("/"))
+            mockMvc.perform(get("/bidList/list"))
                     .andExpect(status().isOk());
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
@@ -58,7 +58,7 @@ public class AuthorizationTests {
     public void getPageAuthorizedForAdminAndUser_whenUserConnected() {
         // ARRANGE, ACT & ASSERT
         try {
-            mockMvc.perform(get("/"))
+            mockMvc.perform(get("/bidList/list"))
                     .andExpect(status().isOk());
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
@@ -70,8 +70,8 @@ public class AuthorizationTests {
     public void getPageAuthorizedForAdminOnly_whenAdminConnected() {
         // ARRANGE, ACT & ASSERT
         try {
-            mockMvc.perform(get("/admin/home"))
-                   .andExpect(status().isFound());
+            mockMvc.perform(get("/user/list"))
+                   .andExpect(status().isOk());
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }
@@ -82,7 +82,7 @@ public class AuthorizationTests {
     public void getPageAuthorizedForAdminOnly_whenUserConnected() {
         // ARRANGE, ACT & ASSERT
         try {
-            mockMvc.perform(get("/admin/home"))
+            mockMvc.perform(get("/user/list"))
                    .andExpect(status().isForbidden());
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
