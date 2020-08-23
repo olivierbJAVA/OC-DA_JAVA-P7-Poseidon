@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Class in charge of managing RessourceNotFoundException and RessourceAlreadyExistException.
+ * Class in charge of managing ResourceNotFoundException and ResourceAlreadyExistException.
  */
 @ControllerAdvice(basePackages = {"com.nnk.springboot"})
 public class ExceptionHandlerAdvice {
@@ -17,7 +17,7 @@ public class ExceptionHandlerAdvice {
     private static final Logger logger = LoggerFactory.getLogger(ExceptionHandlerAdvice.class);
 
     /**
-     * Method managing the RessourceNotFoundException.
+     * Method managing the ResourceNotFoundException.
      *
      * @param e The exception
      * @return A ModelAndView object including information for this exception
@@ -37,7 +37,7 @@ public class ExceptionHandlerAdvice {
     }
 
     /**
-     * Method managing the RessourceAlreadyExistException.
+     * Method managing the ResourceAlreadyExistException.
      *
      * @param e The exception
      * @return A ModelAndView object including information for this exception

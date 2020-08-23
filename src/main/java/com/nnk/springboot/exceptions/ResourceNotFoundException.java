@@ -1,7 +1,7 @@
 package com.nnk.springboot.exceptions;
 
 /**
- * Class for the RessourceNotFoundException.
+ * Class for the ResourceNotFoundException.
  */
 public class ResourceNotFoundException extends RuntimeException {
 
@@ -12,7 +12,7 @@ public class ResourceNotFoundException extends RuntimeException {
     private String resourceType;
 
     /**
-     * Constructs a new RessourceNotFoundException.
+     * Constructs a new ResourceNotFoundException.
      *
      * @param resourceId   the resourceId of the resource that is not found
      * @param resourceType the resourceType of the resource that is not found
