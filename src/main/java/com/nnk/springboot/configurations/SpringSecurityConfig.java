@@ -27,15 +27,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
              .authorizeRequests()
-                .antMatchers("/user/**", "/admin/home").hasAuthority("ADMIN")
                 .antMatchers("/", "/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**","/trade/**").hasAnyAuthority("USER","ADMIN")
+                .antMatchers("/user/**", "/admin/home").hasAuthority("ADMIN")
                 //.antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                //.defaultSuccessUrl("/index.html")
+                .defaultSuccessUrl("/bidList/list")
                 .and()
-            .exceptionHandling().accessDeniedPage("/403");
+            .exceptionHandling().accessDeniedPage("/error403");
     }
 
     protected void configure (AuthenticationManagerBuilder auth) throws Exception {
