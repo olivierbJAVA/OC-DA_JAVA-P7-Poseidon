@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Class including unit tests for the RuleNameController Class.
+ * Class including unit tests for the RuleNameController Class (security is disabled and has dedicated tests).
  */
 @WebMvcTest(value = RuleNameController.class)
 @ActiveProfiles("test")

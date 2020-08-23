@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Class including unit tests for the password validation.
+ * Class including tests for password validation.
  */
 @WebMvcTest(value = UserController.class)
 @ActiveProfiles("test")

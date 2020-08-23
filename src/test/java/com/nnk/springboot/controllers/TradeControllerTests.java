@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Class including unit tests for the TradeController Class.
+ * Class including unit tests for the TradeController Class (security is disabled and has dedicated tests).
  */
 @WebMvcTest(value = TradeController.class)
 @ActiveProfiles("test")

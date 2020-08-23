@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Class including unit tests for the CurvePointController Class.
+ * Class including unit tests for the CurvePointController Class (security is disabled and has dedicated tests).
  */
 @WebMvcTest(value = CurvePointController.class)
 @ActiveProfiles("test")

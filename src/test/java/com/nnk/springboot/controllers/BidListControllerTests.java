@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Class including unit tests for the BidListController Class.
+ * Class including unit tests for the BidListController Class (security is disabled and has dedicated tests).
  */
 @WebMvcTest(value = BidListController.class)
 @ActiveProfiles("test")
