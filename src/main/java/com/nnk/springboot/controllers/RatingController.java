@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * Controller in charge of managing the endpoints for the Ratings.
+ * Controller in charge of managing the endpoints for Rating entities.
  */
 @Controller
 public class RatingController {

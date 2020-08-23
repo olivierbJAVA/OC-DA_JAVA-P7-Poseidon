@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Class in charge of managing the services for the Users.
+ * Class in charge of managing the services for User entities.
  */
 @Service
 @Transactional

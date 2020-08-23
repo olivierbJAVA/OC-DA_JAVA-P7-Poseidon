@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Class in charge of managing the services for the CurvePoints.
+ * Class in charge of managing the services for CurvePoint entities.
  */
 @Service
 @Transactional

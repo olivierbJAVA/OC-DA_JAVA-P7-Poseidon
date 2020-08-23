@@ -20,7 +20,7 @@ import static java.sql.Timestamp.valueOf;
 import static java.time.LocalDateTime.now;
 
 /**
- * Controller in charge of managing the endpoints for the BidLists.
+ * Controller in charge of managing the endpoints for BidList entities.
  */
 @Controller
 public class BidListController {

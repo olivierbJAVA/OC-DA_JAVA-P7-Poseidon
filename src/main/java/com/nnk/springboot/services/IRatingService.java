@@ -6,7 +6,7 @@ import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import java.util.List;
 
 /**
- * Interface to implement for managing the services for the Ratings.
+ * Interface to implement for managing the services for Rating entities.
  */
 public interface IRatingService {
 

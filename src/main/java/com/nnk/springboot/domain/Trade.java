@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 
 
 /**
- * Class materializing a Trade.
+ * Class materializing a Trade entity.
  */
 @Entity
 @Table(name = "trade")

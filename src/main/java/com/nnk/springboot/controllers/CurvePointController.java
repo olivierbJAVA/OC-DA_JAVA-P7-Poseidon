@@ -17,7 +17,7 @@ import static java.sql.Timestamp.valueOf;
 import static java.time.LocalDateTime.now;
 
 /**
- * Controller in charge of managing the endpoints for the CurvePoints.
+ * Controller in charge of managing the endpoints for CurvePoint entities.
  */
 @Controller
 public class CurvePointController {

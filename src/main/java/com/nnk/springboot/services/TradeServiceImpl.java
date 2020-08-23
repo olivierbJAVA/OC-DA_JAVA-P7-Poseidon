@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Class in charge of managing the services for the Trades.
+ * Class in charge of managing the services for Trade entities.
  */
 @Service
 @Transactional

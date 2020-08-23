@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * Controller in charge of managing the endpoints for the RuleNames.
+ * Controller in charge of managing the endpoints for RuleName entities.
  */
 @Controller
 public class RuleNameController {

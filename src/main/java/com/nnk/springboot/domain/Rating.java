@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * Class materializing a Rating.
+ * Class materializing a Rating entity.
  */
 @Entity
 @Table(name = "rating")

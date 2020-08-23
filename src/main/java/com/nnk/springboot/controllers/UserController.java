@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * Controller in charge of managing the endpoints for the Users.
+ * Controller in charge of managing the endpoints for User entities.
  */
 @Controller
 public class UserController {
@@ -128,7 +128,7 @@ public class UserController {
 
         // username must be unique, so we check that the username for the new user to create does not already exist (except if it is the user to update)
         User usernameAlreadyExist = userService.findUserByUsername(user.getUsername());
-        if (usernameAlreadyExist != null && usernameAlreadyExist.getId() != user.getId()) {
+        if ( usernameAlreadyExist != null && !usernameAlreadyExist.getId().equals(user.getId()) ) {
             throw new ResourceAlreadyExistException(user.getUsername(), "User");
         }
 
@@ -158,7 +158,6 @@ public class UserController {
 
         logger.info("Request : GET /user/delete/{}", id);
 
-        User user = userService.findUserById(id);
         userService.deleteUserById(id);
 
         logger.info("Success : user with id {} deleted, redirect to '/user/list'", id);

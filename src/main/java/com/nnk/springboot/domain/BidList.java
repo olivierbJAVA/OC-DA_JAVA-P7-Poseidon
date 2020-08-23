@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * Class materializing a BidList.
+ * Class materializing a BidList entity.
  */
 @Entity
 @Table(name = "bidlist")

@@ -378,7 +378,7 @@ public class UserControllerTests {
     @Test
     public void deleteUser_whenUserNotExist() {
         //ARRANGE
-        doThrow(ResourceNotFoundException.class).when(mockUserService).findUserById(1);
+        doThrow(ResourceNotFoundException.class).when(mockUserService).deleteUserById(1);
 
         //ACT & ASSERT
         try {
@@ -389,6 +389,6 @@ public class UserControllerTests {
             logger.error("Error in MockMvc", e);
         }
 
-        verify(mockUserService, never()).deleteUserById(1);
+        verify(mockUserService, times(1)).deleteUserById(1);
     }
 }

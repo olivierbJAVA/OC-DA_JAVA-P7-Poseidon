@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 /**
- * Interface extending the JpaRepository interface to manage CRUD methods for Users, using Spring DataJPA.
+ * Interface extending the JpaRepository interface to manage CRUD methods for User entities, using Spring DataJPA.
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {

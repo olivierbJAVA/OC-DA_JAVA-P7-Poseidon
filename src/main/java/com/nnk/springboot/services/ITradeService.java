@@ -6,7 +6,7 @@ import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import java.util.List;
 
 /**
- * Interface to implement for managing the services for the Trades.
+ * Interface to implement for managing the services for Trade entities.
  */
 public interface ITradeService {
 

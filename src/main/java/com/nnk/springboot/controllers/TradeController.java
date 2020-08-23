@@ -20,7 +20,7 @@ import static java.sql.Timestamp.valueOf;
 import static java.time.LocalDateTime.now;
 
 /**
- * Controller in charge of managing the endpoints for the Trades.
+ * Controller in charge of managing the endpoints for Trade entities.
  */
 @Controller
 public class TradeController {

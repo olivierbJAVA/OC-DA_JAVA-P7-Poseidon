@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * Class materializing a User.
+ * Class materializing a User entity.
  */
 @Entity
 @Table(name = "users")

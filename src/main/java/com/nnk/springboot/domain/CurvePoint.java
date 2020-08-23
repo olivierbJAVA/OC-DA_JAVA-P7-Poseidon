@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * Class materializing a CurvePoint.
+ * Class materializing a CurvePoint entity.
  */
 @Entity
 @Table(name = "curvepoint")

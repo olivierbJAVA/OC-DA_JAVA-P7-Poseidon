@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * Class materializing a RuleName.
+ * Class materializing a RuleName entity.
  */
 @Entity
 @Table(name = "rulename")
