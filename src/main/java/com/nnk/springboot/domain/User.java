@@ -27,7 +27,7 @@ public class User implements Serializable {
     private String password;
 
     @Size(max = 125, message = "Maximum length = 125 characters")
-    @NotBlank(message = "FullName is mandatory")
+    @NotBlank(message = "Fullname is mandatory")
     private String fullname;
 
     @Size(max = 125, message = "Maximum length = 125 characters")
