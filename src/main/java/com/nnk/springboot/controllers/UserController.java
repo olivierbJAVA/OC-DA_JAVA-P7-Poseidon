@@ -36,7 +36,7 @@ public class UserController {
      */
     @RequestMapping("/user/list")
     public String home(Model model) {
-        logger.info("Request : GET /user/list");
+        logger.info("Request : /user/list");
 
         List<User> users = userService.findAllUsers();
         model.addAttribute("users", users);

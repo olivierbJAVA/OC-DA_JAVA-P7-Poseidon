@@ -38,7 +38,7 @@ public class BidListController {
      */
     @RequestMapping("/bidList/list")
     public String home(Model model) {
-        logger.info("Request : GET /bidList/list");
+        logger.info("Request : /bidList/list");
 
         List<BidList> bidLists = bidListService.findAllBidLists();
         model.addAttribute("bidLists", bidLists);

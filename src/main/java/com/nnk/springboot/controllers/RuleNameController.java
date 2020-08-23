@@ -35,7 +35,7 @@ public class RuleNameController {
      */
     @RequestMapping("/ruleName/list")
     public String home(Model model) {
-        logger.info("Request : GET /ruleName/list");
+        logger.info("Request : /ruleName/list");
 
         List<RuleName> ruleNames = ruleNameService.findAllRuleNames();
         model.addAttribute("ruleNames", ruleNames);

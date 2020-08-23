@@ -35,7 +35,7 @@ public class CurvePointController {
      */
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
-        logger.info("Request : GET /curvePoint/list");
+        logger.info("Request : /curvePoint/list");
 
         List<CurvePoint> curvePoints = curvePointService.findAllCurvePoints();
         model.addAttribute("curvePoints", curvePoints);

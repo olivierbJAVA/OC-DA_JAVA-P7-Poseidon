@@ -36,7 +36,7 @@ public class RatingController {
     @RequestMapping("/rating/list")
     public String home(Model model) {
 
-        logger.info("Request : GET /rating/list");
+        logger.info("Request : /rating/list");
 
         List<Rating> ratings = ratingService.findAllRatings();
         model.addAttribute("ratings", ratings);

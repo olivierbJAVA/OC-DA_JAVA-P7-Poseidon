@@ -5,22 +5,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Controller in charge of managing the endpoints for error403 page.
+ * Controller in charge of managing the endpoints for error pages.
  */
 @Controller
-public class LoginController {
+public class ErrorController {
 
     /**
-     * Method managing the "/error403" access denied.
+     * Method managing the "/errorAccessDenied" when access is not authorized.
      *
      * @return A ModelAndView object including information and the name of the View
      */
-    @GetMapping("/error403")
+    @GetMapping("/errorAccessDenied")
     public ModelAndView notAuthorized() {
         ModelAndView mav = new ModelAndView();
         String errorMessage = "You are not authorized for the requested data.";
         mav.addObject("errorMsg", errorMessage);
-        mav.setViewName("error403");
+        mav.setViewName("errorAccessDenied");
         return mav;
     }
 }
