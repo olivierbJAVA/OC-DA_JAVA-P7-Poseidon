@@ -66,17 +66,15 @@ public class RatingController {
      *
      * @param rating The Rating to add
      * @param result The BindingResult containing the result of the fields validation
-     * @param model The Model
      * @return The name of the View
      */
     @PostMapping("/rating/validate")
-    public String validate(@Valid Rating rating, BindingResult result, Model model) {
+    public String validate(@Valid Rating rating, BindingResult result) {
 
         logger.info("Request : POST /rating/validate");
 
         if (!result.hasErrors()) {
             ratingService.createRating(rating);
-            //model.addAttribute("ratings", ratingService.findAllRatings());
 
             logger.info("Success : new rating created, redirect to '/rating/list' view");
 
@@ -113,12 +111,10 @@ public class RatingController {
      *
      * @param rating The Rating to update
      * @param result The BindingResult containing the result of the fields validation
-     * @param model The Model
      * @return The name of the View
      */
     @PostMapping("/rating/update/{id}")
-    public String updateRating(@Valid Rating rating, BindingResult result, Model model) {
-        //public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,BindingResult result, Model model) {
+    public String updateRating(@Valid Rating rating, BindingResult result) {
 
         logger.info("Request : POST /rating/update/{}", rating.getId());
 
@@ -128,9 +124,8 @@ public class RatingController {
 
             return "rating/update";
         }
-        //rating.setId(id);// fonctionne ? -> oui car id dans le Rating
+
         ratingService.updateRating(rating);
-        //model.addAttribute("ratings", ratingService.findAllRatings());
 
         logger.info("Success : rating with id {} updated, redirect to '/rating/list'", rating.getId());
 
@@ -141,28 +136,15 @@ public class RatingController {
      * Method managing the GET "/rating/delete/{id}" endpoint HTTP request to delete a Rating.
      *
      * @param id The id of the Rating to delete
-     * @param model The Model
      * @return The name of the View
      */
     //@Secured(value="ROLE_ADMIN")
     @GetMapping("/rating/delete/{id}")
-    public String deleteRating(@PathVariable("id") Integer id, Model model) {
+    public String deleteRating(@PathVariable("id") Integer id) {
 
         logger.info("Request : GET /rating/delete/{}", id);
 
-        //Rating rating = ratingService.findRatingById(id);
         ratingService.deleteRatingById(id);
-
-        /*
-        try {
-            ratingService.deleteRatingById(id);
-        } catch (RecordNotFoundException e) {
-            System.out.println("Record not found");
-            return "/errorRecordNotFound";
-        }
-        */
-
-        //model.addAttribute("ratings", ratingService.findAllRatings());
 
         logger.info("Success : rating with id {} deleted, redirect to '/rating/list'", id);
 

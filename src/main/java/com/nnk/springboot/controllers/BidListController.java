@@ -68,12 +68,10 @@ public class BidListController {
      *
      * @param bidList The BidList to add
      * @param result The BindingResult containing the result of the fields validation
-     * @param model The Model
      * @return The name of the View
      */
     @PostMapping("/bidList/validate")
-    public String validate(@Valid BidList bidList, BindingResult result, Model model) {
-
+    public String validate(@Valid BidList bidList, BindingResult result) {
         logger.info("Request : POST /bidList/validate");
 
         if (!result.hasErrors()) {
@@ -116,12 +114,10 @@ public class BidListController {
      *
      * @param bidList The BidList to update
      * @param result The BindingResult containing the result of the fields validation
-     * @param model The Model
      * @return The name of the View
      */
     @PostMapping("/bidList/update/{id}")
-    public String updateBid(@Valid BidList bidList, BindingResult result, Model model) {
-
+    public String updateBid(@Valid BidList bidList, BindingResult result) {
         logger.info("Request : POST /bidList/update/{}", bidList.getBidListId());
 
         if (result.hasErrors()) {
@@ -145,12 +141,10 @@ public class BidListController {
      * Method managing the GET "/bidList/delete/{id}" endpoint HTTP request to delete a BidList.
      *
      * @param id The id of the BidList to delete
-     * @param model The Model
      * @return The name of the View
      */
     @GetMapping("/bidList/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
-
+    public String deleteBid(@PathVariable("id") Integer id) {
         logger.info("Request : GET /bidList/delete/{}", id);
 
         bidListService.deleteBidListById(id);

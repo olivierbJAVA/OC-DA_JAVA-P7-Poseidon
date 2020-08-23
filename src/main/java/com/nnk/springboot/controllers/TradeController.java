@@ -68,11 +68,10 @@ public class TradeController {
      *
      * @param trade The Trade to add
      * @param result The BindingResult containing the result of the fields validation
-     * @param model The Model
      * @return The name of the View
      */
     @PostMapping("/trade/validate")
-    public String validate(@Valid Trade trade, BindingResult result, Model model) {
+    public String validate(@Valid Trade trade, BindingResult result) {
 
         logger.info("Request : POST /trade/validate");
 
@@ -116,11 +115,10 @@ public class TradeController {
      *
      * @param trade The Trade to update
      * @param result The BindingResult containing the result of the fields validation
-     * @param model The Model
      * @return The name of the View
      */
     @PostMapping("/trade/update/{id}")
-    public String updateTrade(@Valid Trade trade, BindingResult result, Model model) {
+    public String updateTrade(@Valid Trade trade, BindingResult result) {
 
         logger.info("Request : POST /trade/update/{}", trade.getTradeId());
 
@@ -145,11 +143,10 @@ public class TradeController {
      * Method managing the GET "/trade/delete/{id}" endpoint HTTP request to delete a Trade.
      *
      * @param id The id of the Trade to delete
-     * @param model The Model
      * @return The name of the View
      */
     @GetMapping("/trade/delete/{id}")
-    public String deleteTrade(@PathVariable("id") Integer id, Model model) {
+    public String deleteTrade(@PathVariable("id") Integer id) {
 
         logger.info("Request : GET /trade/delete/{}", id);
 

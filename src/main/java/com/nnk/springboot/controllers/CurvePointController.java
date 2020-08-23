@@ -65,11 +65,10 @@ public class CurvePointController {
      *
      * @param curvePoint The CurvePoint to add
      * @param result The BindingResult containing the result of the fields validation
-     * @param model The Model
      * @return The name of the View
      */
     @PostMapping("/curvePoint/validate")
-    public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
+    public String validate(@Valid CurvePoint curvePoint, BindingResult result) {
 
         logger.info("Request : POST /curvePoint/validate");
 
@@ -113,11 +112,10 @@ public class CurvePointController {
      *
      * @param curvePoint The CurvePoint to update
      * @param result The BindingResult containing the result of the fields validation
-     * @param model The Model
      * @return The name of the View
      */
     @PostMapping("/curvePoint/update/{id}")
-    public String updateCurvePoint(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
+    public String updateCurvePoint(@Valid CurvePoint curvePoint, BindingResult result) {
 
         logger.info("Request : POST /curvePoint/update/{}", curvePoint.getId());
 
@@ -140,11 +138,10 @@ public class CurvePointController {
      * Method managing the GET "/curvePoint/delete/{id}" endpoint HTTP request to delete a CurvePoint.
      *
      * @param id The id of the CurvePoint to delete
-     * @param model The Model
      * @return The name of the View
      */
     @GetMapping("/curvePoint/delete/{id}")
-    public String deleteCurvePoint(@PathVariable("id") Integer id, Model model) {
+    public String deleteCurvePoint(@PathVariable("id") Integer id) {
 
         logger.info("Request : GET /curvePoint/delete/{}", id);
 

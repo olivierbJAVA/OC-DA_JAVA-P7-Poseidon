@@ -66,11 +66,10 @@ public class UserController {
      *
      * @param user The User to add
      * @param result The BindingResult containing the result of the fields validation
-     * @param model The Model
      * @return The name of the View
      */
     @PostMapping("/user/validate")
-    public String validate(@Valid User user, BindingResult result, Model model) {
+    public String validate(@Valid User user, BindingResult result) {
 
         logger.info("Request : POST /rating/validate");
 
@@ -118,11 +117,10 @@ public class UserController {
      *
      * @param user The User to update
      * @param result The BindingResult containing the result of the fields validation
-     * @param model The Model
      * @return The name of the View
      */
     @PostMapping("/user/update/{id}")
-    public String updateUser(@Valid User user, BindingResult result, Model model) {
+    public String updateUser(@Valid User user, BindingResult result) {
 
         logger.info("Request : POST /user/update/{}", user.getId());
 
@@ -150,11 +148,10 @@ public class UserController {
      * Method managing the GET "/user/delete/{id}" endpoint HTTP request to delete a User.
      *
      * @param id The id of the User to delete
-     * @param model The Model
      * @return The name of the View
      */
     @GetMapping("/user/delete/{id}")
-    public String deleteUser(@PathVariable("id") Integer id, Model model) {
+    public String deleteUser(@PathVariable("id") Integer id) {
 
         logger.info("Request : GET /user/delete/{}", id);
 

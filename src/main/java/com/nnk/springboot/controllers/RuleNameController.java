@@ -65,11 +65,10 @@ public class RuleNameController {
      *
      * @param ruleName The RuleName to add
      * @param result The BindingResult containing the result of the fields validation
-     * @param model The Model
      * @return The name of the View
      */
     @PostMapping("/ruleName/validate")
-    public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
+    public String validate(@Valid RuleName ruleName, BindingResult result) {
 
         logger.info("Request : POST /ruleName/validate");
 
@@ -111,11 +110,10 @@ public class RuleNameController {
      *
      * @param ruleName The RuleName to update
      * @param result The BindingResult containing the result of the fields validation
-     * @param model The Model
      * @return The name of the View
      */
     @PostMapping("/ruleName/update/{id}")
-    public String updateRuleName(@Valid RuleName ruleName, BindingResult result, Model model) {
+    public String updateRuleName(@Valid RuleName ruleName, BindingResult result) {
 
         logger.info("Request : POST /rating/update/{}", ruleName.getId());
 
@@ -137,11 +135,10 @@ public class RuleNameController {
      * Method managing the GET "/ruleName/delete/{id}" endpoint HTTP request to delete a RuleName.
      *
      * @param id The id of the RuleName to delete
-     * @param model The Model
      * @return The name of the View
      */
     @GetMapping("/ruleName/delete/{id}")
-    public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
+    public String deleteRuleName(@PathVariable("id") Integer id) {
 
         logger.info("Request : GET /ruleName/delete/{}", id);
 

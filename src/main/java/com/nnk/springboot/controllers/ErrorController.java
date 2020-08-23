@@ -16,7 +16,7 @@ public class ErrorController {
      * @return A ModelAndView object including information and the name of the View
      */
     @GetMapping("/errorAccessDenied")
-    public ModelAndView notAuthorized() {
+    public ModelAndView accessDenied() {
         ModelAndView mav = new ModelAndView();
         String errorMessage = "You are not authorized for the requested data.";
         mav.addObject("errorMsg", errorMessage);

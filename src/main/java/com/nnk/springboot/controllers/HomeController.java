@@ -1,7 +1,8 @@
 package com.nnk.springboot.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -10,27 +11,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController
 {
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
 	/**
 	 * Method managing the "/" endpoint HTTP request.
 	 *
-	 * @param model The Model
 	 * @return The name of the View
 	 */
 	@RequestMapping("/")
-	public String home(Model model)
+	public String home()
 	{
+		logger.info("Request : /");
+		logger.info("Success : returning '/bidList/list' view");
+
 		return "redirect:/bidList/list";
 	}
 
 	/**
 	 * Method managing the "/admin/home" endpoint HTTP request.
 	 *
-	 * @param model The Model
 	 * @return The name of the View
 	 */
 	@RequestMapping("/admin/home")
-	public String adminHome(Model model)
+	public String adminHome()
 	{
+		logger.info("Request : /admin/home");
+		logger.info("Success : returning '/user/list' view");
+
 		return "redirect:/user/list";
 	}
 }
