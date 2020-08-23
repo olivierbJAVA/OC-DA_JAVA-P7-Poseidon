@@ -27,19 +27,19 @@ public class RuleNameServiceImplITests {
     @Test
     public void createRuleName() {
         // ARRANGE
-        RuleName ruleNameToSave = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
+        RuleName ruleNameToCreate = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
 
         // ACT
-        RuleName ruleNameSaved = ruleNameServiceImplUnderTest.createRuleName(ruleNameToSave);
+        RuleName ruleNameCreated = ruleNameServiceImplUnderTest.createRuleName(ruleNameToCreate);
 
         // ASSERT
-        assertNotNull(ruleNameSaved.getId());
-        assertEquals(ruleNameToSave.getName(), ruleNameSaved.getName());
-        assertEquals(ruleNameToSave.getDescription(), ruleNameSaved.getDescription());
-        assertEquals(ruleNameToSave.getJson(), ruleNameSaved.getJson());
-        assertEquals(ruleNameToSave.getTemplate(), ruleNameSaved.getTemplate());
-        assertEquals(ruleNameToSave.getSqlStr(), ruleNameSaved.getSqlStr());
-        assertEquals(ruleNameToSave.getSqlPart(), ruleNameSaved.getSqlPart());
+        assertNotNull(ruleNameCreated.getId());
+        assertEquals(ruleNameToCreate.getName(), ruleNameCreated.getName());
+        assertEquals(ruleNameToCreate.getDescription(), ruleNameCreated.getDescription());
+        assertEquals(ruleNameToCreate.getJson(), ruleNameCreated.getJson());
+        assertEquals(ruleNameToCreate.getTemplate(), ruleNameCreated.getTemplate());
+        assertEquals(ruleNameToCreate.getSqlStr(), ruleNameCreated.getSqlStr());
+        assertEquals(ruleNameToCreate.getSqlPart(), ruleNameCreated.getSqlPart());
     }
 
     @Test

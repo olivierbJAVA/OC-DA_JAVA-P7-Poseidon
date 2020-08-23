@@ -28,21 +28,21 @@ public class CurvePointServiceImplITests {
     @Test
     public void createCurvePoint() {
         // ARRANGE
-        CurvePoint curvePointToSave = new CurvePoint(10, 10d, 30d);
-        curvePointToSave.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
-        curvePointToSave.setTerm(10d);
-        curvePointToSave.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
+        CurvePoint curvePointToCreate = new CurvePoint(10, 10d, 30d);
+        curvePointToCreate.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
+        curvePointToCreate.setTerm(10d);
+        curvePointToCreate.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
 
         // ACT
-        CurvePoint curvePointSaved = curvePointServiceImplUnderTest.createCurvePoint(curvePointToSave);
+        CurvePoint curvePointCreated = curvePointServiceImplUnderTest.createCurvePoint(curvePointToCreate);
 
         // ASSERT
-        assertNotNull(curvePointSaved.getId());
-        assertEquals(curvePointToSave.getCurveId(), curvePointSaved.getCurveId());
-        assertEquals(curvePointToSave.getAsOfDate(), curvePointSaved.getAsOfDate());
-        assertEquals(curvePointToSave.getTerm(), curvePointSaved.getTerm());
-        assertEquals(curvePointToSave.getValue(), curvePointSaved.getValue());
-        assertEquals(curvePointToSave.getCreationDate(), curvePointSaved.getCreationDate());
+        assertNotNull(curvePointCreated.getId());
+        assertEquals(curvePointToCreate.getCurveId(), curvePointCreated.getCurveId());
+        assertEquals(curvePointToCreate.getAsOfDate(), curvePointCreated.getAsOfDate());
+        assertEquals(curvePointToCreate.getTerm(), curvePointCreated.getTerm());
+        assertEquals(curvePointToCreate.getValue(), curvePointCreated.getValue());
+        assertEquals(curvePointToCreate.getCreationDate(), curvePointCreated.getCreationDate());
 
     }
 

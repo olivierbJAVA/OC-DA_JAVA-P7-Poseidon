@@ -27,17 +27,17 @@ public class RatingServiceImplITests {
     @Test
     public void createRating() {
         // ARRANGE
-        Rating ratingToSave = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToCreate = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
 
         // ACT
-        Rating ratingSaved = ratingServiceImplUnderTest.createRating(ratingToSave);
+        Rating ratingCreated = ratingServiceImplUnderTest.createRating(ratingToCreate);
 
         // ASSERT
-        assertNotNull(ratingSaved.getId());
-        assertEquals(ratingToSave.getOrderNumber(), ratingSaved.getOrderNumber());
-        assertEquals(ratingToSave.getFitchRating(), ratingSaved.getFitchRating());
-        assertEquals(ratingToSave.getMoodysRating(), ratingSaved.getMoodysRating());
-        assertEquals(ratingToSave.getSandPRating(), ratingSaved.getSandPRating());
+        assertNotNull(ratingCreated.getId());
+        assertEquals(ratingToCreate.getOrderNumber(), ratingCreated.getOrderNumber());
+        assertEquals(ratingToCreate.getFitchRating(), ratingCreated.getFitchRating());
+        assertEquals(ratingToCreate.getMoodysRating(), ratingCreated.getMoodysRating());
+        assertEquals(ratingToCreate.getSandPRating(), ratingCreated.getSandPRating());
     }
 
     @Test

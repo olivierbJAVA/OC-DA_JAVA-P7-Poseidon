@@ -28,50 +28,50 @@ public class TradeServiceImplITests {
     @Test
     public void createTrade() {
         // ARRANGE
-        Trade tradeToSave = new Trade("Trade Account", "Type", 1000d);
-        tradeToSave.setSellQuantity(100d);
-        tradeToSave.setBuyPrice(123.00d);
-        tradeToSave.setSellPrice(456.12d);
-        tradeToSave.setTradeDate(valueOf("2020-08-10 10:20:30.0"));
-        tradeToSave.setSecurity("Security");
-        tradeToSave.setStatus("Status");
-        tradeToSave.setTrader("Trader");
-        tradeToSave.setBenchmark("Benchmark");
-        tradeToSave.setBook("Book");
-        tradeToSave.setCreationName("CreationName");
-        tradeToSave.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
-        tradeToSave.setRevisionName("RevisionName");
-        tradeToSave.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
-        tradeToSave.setDealName("DealName");
-        tradeToSave.setDealType("DealType");
-        tradeToSave.setSourceListId("SourceListId");
-        tradeToSave.setSide("Side");
+        Trade tradeToCreate = new Trade("Trade Account", "Type", 1000d);
+        tradeToCreate.setSellQuantity(100d);
+        tradeToCreate.setBuyPrice(123.00d);
+        tradeToCreate.setSellPrice(456.12d);
+        tradeToCreate.setTradeDate(valueOf("2020-08-10 10:20:30.0"));
+        tradeToCreate.setSecurity("Security");
+        tradeToCreate.setStatus("Status");
+        tradeToCreate.setTrader("Trader");
+        tradeToCreate.setBenchmark("Benchmark");
+        tradeToCreate.setBook("Book");
+        tradeToCreate.setCreationName("CreationName");
+        tradeToCreate.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
+        tradeToCreate.setRevisionName("RevisionName");
+        tradeToCreate.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
+        tradeToCreate.setDealName("DealName");
+        tradeToCreate.setDealType("DealType");
+        tradeToCreate.setSourceListId("SourceListId");
+        tradeToCreate.setSide("Side");
 
         // ACT
-        Trade tradeSaved = tradeServiceImplUnderTest.createTrade(tradeToSave);
+        Trade tradeCreated = tradeServiceImplUnderTest.createTrade(tradeToCreate);
 
         // ASSERT
-        assertNotNull(tradeSaved.getTradeId());
-        assertEquals(tradeToSave.getAccount(), tradeSaved.getAccount());
-        assertEquals(tradeToSave.getType(), tradeSaved.getType());
-        assertEquals(tradeToSave.getBuyQuantity(), tradeSaved.getBuyQuantity());
-        assertEquals(tradeToSave.getSellQuantity(), tradeSaved.getSellQuantity());
-        assertEquals(tradeToSave.getBuyPrice(), tradeSaved.getBuyPrice());
-        assertEquals(tradeToSave.getSellPrice(), tradeSaved.getSellPrice());
-        assertEquals(tradeToSave.getTradeDate(), tradeSaved.getTradeDate());
-        assertEquals(tradeToSave.getSecurity(), tradeSaved.getSecurity());
-        assertEquals(tradeToSave.getStatus(), tradeSaved.getStatus());
-        assertEquals(tradeToSave.getTrader(), tradeSaved.getTrader());
-        assertEquals(tradeToSave.getBenchmark(), tradeSaved.getBenchmark());
-        assertEquals(tradeToSave.getBook(), tradeSaved.getBook());
-        assertEquals(tradeToSave.getCreationName(), tradeSaved.getCreationName());
-        assertEquals(tradeToSave.getCreationDate(), tradeSaved.getCreationDate());
-        assertEquals(tradeToSave.getRevisionName(), tradeSaved.getRevisionName());
-        assertEquals(tradeToSave.getRevisionDate(), tradeSaved.getRevisionDate());
-        assertEquals(tradeToSave.getDealName(), tradeSaved.getDealName());
-        assertEquals(tradeToSave.getDealType(), tradeSaved.getDealType());
-        assertEquals(tradeToSave.getSourceListId(), tradeSaved.getSourceListId());
-        assertEquals(tradeToSave.getSide(), tradeSaved.getSide());
+        assertNotNull(tradeCreated.getTradeId());
+        assertEquals(tradeToCreate.getAccount(), tradeCreated.getAccount());
+        assertEquals(tradeToCreate.getType(), tradeCreated.getType());
+        assertEquals(tradeToCreate.getBuyQuantity(), tradeCreated.getBuyQuantity());
+        assertEquals(tradeToCreate.getSellQuantity(), tradeCreated.getSellQuantity());
+        assertEquals(tradeToCreate.getBuyPrice(), tradeCreated.getBuyPrice());
+        assertEquals(tradeToCreate.getSellPrice(), tradeCreated.getSellPrice());
+        assertEquals(tradeToCreate.getTradeDate(), tradeCreated.getTradeDate());
+        assertEquals(tradeToCreate.getSecurity(), tradeCreated.getSecurity());
+        assertEquals(tradeToCreate.getStatus(), tradeCreated.getStatus());
+        assertEquals(tradeToCreate.getTrader(), tradeCreated.getTrader());
+        assertEquals(tradeToCreate.getBenchmark(), tradeCreated.getBenchmark());
+        assertEquals(tradeToCreate.getBook(), tradeCreated.getBook());
+        assertEquals(tradeToCreate.getCreationName(), tradeCreated.getCreationName());
+        assertEquals(tradeToCreate.getCreationDate(), tradeCreated.getCreationDate());
+        assertEquals(tradeToCreate.getRevisionName(), tradeCreated.getRevisionName());
+        assertEquals(tradeToCreate.getRevisionDate(), tradeCreated.getRevisionDate());
+        assertEquals(tradeToCreate.getDealName(), tradeCreated.getDealName());
+        assertEquals(tradeToCreate.getDealType(), tradeCreated.getDealType());
+        assertEquals(tradeToCreate.getSourceListId(), tradeCreated.getSourceListId());
+        assertEquals(tradeToCreate.getSide(), tradeCreated.getSide());
     }
 
     @Test
