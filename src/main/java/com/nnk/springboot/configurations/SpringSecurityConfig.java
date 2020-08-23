@@ -42,7 +42,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .defaultSuccessUrl("/bidList/list")
                 .and()
-                .exceptionHandling().accessDeniedPage("/error403");
+                .exceptionHandling().accessDeniedPage("/errorAccessDenied");
     }
 
     /**
@@ -62,7 +62,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Method returning a password encoder using the BCrypt algorithm.
-     * This algorithm is used to hash password before saving them in the database.
+     * This algorithm is used to hash passwords before saving them in the database.
      *
      * @return The BCryptPasswordEncoder
      */
