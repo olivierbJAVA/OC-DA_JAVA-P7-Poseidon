@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller in charge of managing the endpoints for the Ratings.
+ */
 @Controller
 public class RatingController {
 
@@ -24,6 +27,12 @@ public class RatingController {
     @Autowired
     IRatingService ratingService;
 
+    /**
+     * Method managing the "/rating/list" endpoint HTTP request to get the list of all Ratings.
+     *
+     * @param model The Model
+     * @return The name of the View
+     */
     @RequestMapping("/rating/list")
     public String home(Model model) {
 
@@ -37,6 +46,12 @@ public class RatingController {
         return "rating/list";
     }
 
+    /**
+     * Method managing the GET "/rating/add" endpoint HTTP request to add a Rating.
+     *
+     * @param rating The Rating
+     * @return The name of the View
+     */
     @GetMapping("/rating/add")
     public String addRatingForm(Rating rating) {
 
@@ -46,6 +61,14 @@ public class RatingController {
         return "rating/add";
     }
 
+    /**
+     * Method managing the POST "/rating/validate" endpoint HTTP request to add a Rating.
+     *
+     * @param rating The Rating to add
+     * @param result The BindingResult containing the result of the fields validation
+     * @param model The Model
+     * @return The name of the View
+     */
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
 
@@ -65,6 +88,13 @@ public class RatingController {
         return "rating/add";
     }
 
+    /**
+     * Method managing the GET "/rating/update/{id}" endpoint HTTP request to update a Rating.
+     *
+     * @param id The id of the Rating to update
+     * @param model The Model
+     * @return The name of the View
+     */
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 
@@ -78,6 +108,14 @@ public class RatingController {
         return "rating/update";
     }
 
+    /**
+     * Method managing the POST "/rating/update/{id}" endpoint HTTP request to update a Rating.
+     *
+     * @param rating The Rating to update
+     * @param result The BindingResult containing the result of the fields validation
+     * @param model The Model
+     * @return The name of the View
+     */
     @PostMapping("/rating/update/{id}")
     public String updateRating(@Valid Rating rating, BindingResult result, Model model) {
         //public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,BindingResult result, Model model) {
@@ -99,7 +137,13 @@ public class RatingController {
         return "redirect:/rating/list";
     }
 
-
+    /**
+     * Method managing the GET "/rating/delete/{id}" endpoint HTTP request to delete a Rating.
+     *
+     * @param id The id of the Rating to delete
+     * @param model The Model
+     * @return The name of the View
+     */
     //@Secured(value="ROLE_ADMIN")
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {

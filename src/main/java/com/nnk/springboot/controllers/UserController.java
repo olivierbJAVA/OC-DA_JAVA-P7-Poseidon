@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller in charge of managing the endpoints for the Users.
+ */
 @Controller
 public class UserController {
 
@@ -25,18 +28,30 @@ public class UserController {
     @Autowired
     IUserService userService;
 
+    /**
+     * Method managing the "/user/list" endpoint HTTP request to get the list of all Users.
+     *
+     * @param model The Model
+     * @return The name of the View
+     */
     @RequestMapping("/user/list")
     public String home(Model model) {
         logger.info("Request : GET /user/list");
 
         List<User> users = userService.findAllUsers();
-        model.addAttribute("users",users );
+        model.addAttribute("users", users);
 
         logger.info("Success : users found, returning 'user/list' view");
 
         return "user/list";
     }
 
+    /**
+     * Method managing the GET "/user/add" endpoint HTTP request to add a User.
+     *
+     * @param user The User
+     * @return The name of the View
+     */
     @GetMapping("/user/add")
     public String addUser(User user) {
 
@@ -46,6 +61,14 @@ public class UserController {
         return "user/add";
     }
 
+    /**
+     * Method managing the POST "/user/validate" endpoint HTTP request to add a User.
+     *
+     * @param user The User to add
+     * @param result The BindingResult containing the result of the fields validation
+     * @param model The Model
+     * @return The name of the View
+     */
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
 
@@ -69,6 +92,13 @@ public class UserController {
         return "user/add";
     }
 
+    /**
+     * Method managing the GET "/user/update/{id}" endpoint HTTP request to update a User.
+     *
+     * @param id The id of the User to update
+     * @param model The Model
+     * @return The name of the View
+     */
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 
@@ -83,15 +113,23 @@ public class UserController {
         return "user/update";
     }
 
+    /**
+     * Method managing the POST "/user/update/{id}" endpoint HTTP request to update a User.
+     *
+     * @param user The User to update
+     * @param result The BindingResult containing the result of the fields validation
+     * @param model The Model
+     * @return The name of the View
+     */
     @PostMapping("/user/update/{id}")
     public String updateUser(@Valid User user, BindingResult result, Model model) {
 
-        logger.info("Request : POST /rating/update/{}", user.getId());
+        logger.info("Request : POST /user/update/{}", user.getId());
 
         // username must be unique, so we check that the username for the new user to create does not already exist (except if it is the user to update)
         User usernameAlreadyExist = userService.findUserByUsername(user.getUsername());
-        if ( usernameAlreadyExist != null && usernameAlreadyExist.getId() != user.getId() ) {
-                throw new ResourceAlreadyExistException(user.getUsername(), "User");
+        if (usernameAlreadyExist != null && usernameAlreadyExist.getId() != user.getId()) {
+            throw new ResourceAlreadyExistException(user.getUsername(), "User");
         }
 
         if (result.hasErrors()) {
@@ -108,6 +146,13 @@ public class UserController {
         return "redirect:/user/list";
     }
 
+    /**
+     * Method managing the GET "/user/delete/{id}" endpoint HTTP request to delete a User.
+     *
+     * @param id The id of the User to delete
+     * @param model The Model
+     * @return The name of the View
+     */
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
 
@@ -116,7 +161,7 @@ public class UserController {
         User user = userService.findUserById(id);
         userService.deleteUserById(id);
 
-        logger.info("Success : rating with id {} deleted, redirect to '/rating/list'", id);
+        logger.info("Success : user with id {} deleted, redirect to '/user/list'", id);
 
         return "redirect:/user/list";
     }

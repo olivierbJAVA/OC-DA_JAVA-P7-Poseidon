@@ -19,7 +19,9 @@ import java.util.List;
 import static java.sql.Timestamp.valueOf;
 import static java.time.LocalDateTime.now;
 
-
+/**
+ * Controller in charge of managing the endpoints for the BidLists.
+ */
 @Controller
 public class BidListController {
 
@@ -28,6 +30,12 @@ public class BidListController {
     @Autowired
     IBidListService bidListService;
 
+    /**
+     * Method managing the "/bidList/list" endpoint HTTP request to get the list of all BidLists.
+     *
+     * @param model The Model
+     * @return The name of the View
+     */
     @RequestMapping("/bidList/list")
     public String home(Model model) {
         logger.info("Request : GET /bidList/list");
@@ -40,6 +48,12 @@ public class BidListController {
         return "bidList/list";
     }
 
+    /**
+     * Method managing the GET "/bidList/add" endpoint HTTP request to add a BidList.
+     *
+     * @param bidList The BidList
+     * @return The name of the View
+     */
     @GetMapping("/bidList/add")
     public String addBidForm(BidList bidList) {
 
@@ -49,6 +63,14 @@ public class BidListController {
         return "bidList/add";
     }
 
+    /**
+     * Method managing the POST "/bidList/validate" endpoint HTTP request to add a BidList.
+     *
+     * @param bidList The BidList to add
+     * @param result The BindingResult containing the result of the fields validation
+     * @param model The Model
+     * @return The name of the View
+     */
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bidList, BindingResult result, Model model) {
 
@@ -69,6 +91,13 @@ public class BidListController {
         return "bidList/add";
     }
 
+    /**
+     * Method managing the GET "/bidList/update/{id}" endpoint HTTP request to update a BidList.
+     *
+     * @param id The id of the BidList to update
+     * @param model The Model
+     * @return The name of the View
+     */
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 
@@ -82,6 +111,14 @@ public class BidListController {
         return "bidList/update";
     }
 
+    /**
+     * Method managing the POST "/bidList/update/{id}" endpoint HTTP request to update a BidList.
+     *
+     * @param bidList The BidList to update
+     * @param result The BindingResult containing the result of the fields validation
+     * @param model The Model
+     * @return The name of the View
+     */
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@Valid BidList bidList, BindingResult result, Model model) {
 
@@ -104,6 +141,13 @@ public class BidListController {
         return "redirect:/bidList/list";
     }
 
+    /**
+     * Method managing the GET "/bidList/delete/{id}" endpoint HTTP request to delete a BidList.
+     *
+     * @param id The id of the BidList to delete
+     * @param model The Model
+     * @return The name of the View
+     */
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
 

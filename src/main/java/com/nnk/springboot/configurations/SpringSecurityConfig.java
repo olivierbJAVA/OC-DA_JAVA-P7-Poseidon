@@ -13,6 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
+/**
+ * Class managing the configuration of the security of the application.
+ * This Class extends WebSecurityConfigurerAdapter and uses Spring Security.
+ */
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -23,29 +27,49 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    /**
+     * Method managing the configuration for the Authentication to the application.
+     *
+     * @param http The HttpSecurity object
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-             .authorizeRequests()
-                .antMatchers("/", "/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**","/trade/**").hasAnyAuthority("USER","ADMIN")
+                .authorizeRequests()
+                // Users having either a USER or ADMIN role are authorized to access and manage (Create, Read, Update, Delete) financial entities (BidList, CurvePoint, Rating, RuleName and Trade)
+                .antMatchers("/", "/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").hasAnyAuthority("USER", "ADMIN")
+                // Only users having a ADMIN role are authorized to access and manage (Create, Read, Update, Delete) Users
                 .antMatchers("/user/**", "/admin/home").hasAuthority("ADMIN")
                 //.antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-            .formLogin()
+                .formLogin()
                 .defaultSuccessUrl("/bidList/list")
                 .and()
-            .exceptionHandling().accessDeniedPage("/error403");
+                .exceptionHandling().accessDeniedPage("/error403");
     }
 
-    protected void configure (AuthenticationManagerBuilder auth) throws Exception {
-          auth.jdbcAuthentication()
-            .passwordEncoder(passwordEncoder())
-            .dataSource(dataSource)
-            .usersByUsernameQuery("SELECT username AS principal, password AS credentials, true FROM users WHERE username = ?")
-            .authoritiesByUsernameQuery("SELECT username AS principal, role AS role FROM users WHERE username = ?");
+    /**
+     * Method managing the configuration for the Authorization in the application.
+     *
+     * @param auth The AuthenticationManagerBuilder object
+     */
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
+                .passwordEncoder(passwordEncoder())
+                .dataSource(dataSource)
+                // SLQ request to get username and password of the user from the database
+                .usersByUsernameQuery("SELECT username AS principal, password AS credentials, true FROM users WHERE username = ?")
+                // SLQ request to get username and role of the user from the database
+                .authoritiesByUsernameQuery("SELECT username AS principal, role AS role FROM users WHERE username = ?");
     }
 
+    /**
+     * Method returning a password encoder using the BCypt algorithm.
+     * This algorithm is used to hash password before saving them in the database.
+     *
+     * @return The BCryptPasswordEncoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

@@ -6,6 +6,9 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+/**
+ * Class materializing a User.
+ */
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -20,7 +23,6 @@ public class User implements Serializable {
     @NotBlank(message = "Username is mandatory")
     private String username;
 
-    //@Pattern(regexp = "^(?=.*\\d)(?=.*[A-Z]).{6,8}$")
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", message = "Password must contain at least 8 characters, a digit must occur at least once, an upper case letter must occur at least once, a special character must occur at least once and no whitespace allowed")
     private String password;
 
@@ -35,6 +37,14 @@ public class User implements Serializable {
     public User() {
     }
 
+    /**
+     * Constructs a new User with the mandatory fields.
+     *
+     * @param username the username of the User
+     * @param password the password of the User
+     * @param fullname the fullname of the User
+     * @param role     the role of the User
+     */
     public User(@Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Username is mandatory") String username, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Password is mandatory") String password, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "FullName is mandatory") String fullname, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Role is mandatory") String role) {
         this.username = username;
         this.password = password;

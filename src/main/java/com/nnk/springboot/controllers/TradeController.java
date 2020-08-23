@@ -19,6 +19,9 @@ import java.util.List;
 import static java.sql.Timestamp.valueOf;
 import static java.time.LocalDateTime.now;
 
+/**
+ * Controller in charge of managing the endpoints for the Trades.
+ */
 @Controller
 public class TradeController {
 
@@ -27,6 +30,12 @@ public class TradeController {
     @Autowired
     ITradeService tradeService;
 
+    /**
+     * Method managing the "/trade/list" endpoint HTTP request to get the list of all Trades.
+     *
+     * @param model The Model
+     * @return The name of the View
+     */
     @RequestMapping("/trade/list")
     public String home(Model model) {
         logger.info("Request : GET /trade/list");
@@ -39,6 +48,12 @@ public class TradeController {
         return "trade/list";
     }
 
+    /**
+     * Method managing the GET "/trade/add" endpoint HTTP request to add a Trade.
+     *
+     * @param trade The Trade
+     * @return The name of the View
+     */
     @GetMapping("/trade/add")
     public String addUser(Trade trade) {
 
@@ -48,6 +63,14 @@ public class TradeController {
         return "trade/add";
     }
 
+    /**
+     * Method managing the POST "/trade/validate" endpoint HTTP request to add a Trade.
+     *
+     * @param trade The Trade to add
+     * @param result The BindingResult containing the result of the fields validation
+     * @param model The Model
+     * @return The name of the View
+     */
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
 
@@ -68,6 +91,13 @@ public class TradeController {
         return "trade/add";
     }
 
+    /**
+     * Method managing the GET "/trade/update/{id}" endpoint HTTP request to update a Trade.
+     *
+     * @param id The id of the Trade to update
+     * @param model The Model
+     * @return The name of the View
+     */
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 
@@ -81,6 +111,14 @@ public class TradeController {
         return "trade/update";
     }
 
+    /**
+     * Method managing the POST "/trade/update/{id}" endpoint HTTP request to update a Trade.
+     *
+     * @param trade The Trade to update
+     * @param result The BindingResult containing the result of the fields validation
+     * @param model The Model
+     * @return The name of the View
+     */
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@Valid Trade trade, BindingResult result, Model model) {
 
@@ -103,6 +141,13 @@ public class TradeController {
         return "redirect:/trade/list";
     }
 
+    /**
+     * Method managing the GET "/trade/delete/{id}" endpoint HTTP request to delete a Trade.
+     *
+     * @param id The id of the Trade to delete
+     * @param model The Model
+     * @return The name of the View
+     */
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
 

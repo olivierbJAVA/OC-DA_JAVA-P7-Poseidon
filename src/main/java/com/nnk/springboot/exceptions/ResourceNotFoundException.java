@@ -1,7 +1,5 @@
 package com.nnk.springboot.exceptions;
 
-import org.springframework.http.HttpStatus;
-
 /**
  * Class for the RessourceNotFoundException.
  */
@@ -13,10 +11,11 @@ public class ResourceNotFoundException extends RuntimeException {
 
     private String resourceType;
 
-     /**
-     * Constructs a new runtime exception.
+    /**
+     * Constructs a new RessourceNotFoundException.
      *
-     * @param id  the resource not found
+     * @param resourceId   the resourceId of the resource that is not found
+     * @param resourceType the resourceType of the resource that is not found
      */
     public ResourceNotFoundException(int resourceId, String resourceType) {
         this.resourceId = resourceId;

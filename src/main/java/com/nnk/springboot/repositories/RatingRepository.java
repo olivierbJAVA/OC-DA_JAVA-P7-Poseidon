@@ -4,6 +4,9 @@ import com.nnk.springboot.domain.Rating;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Interface extending the JpaRepository interface to manage CRUD methods for Ratings, using Spring DataJPA.
+ */
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, Integer> {
 

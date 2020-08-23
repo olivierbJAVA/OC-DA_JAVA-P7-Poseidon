@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller in charge of managing the endpoints for the RuleNames.
+ */
 @Controller
 public class RuleNameController {
 
@@ -24,6 +27,12 @@ public class RuleNameController {
     @Autowired
     IRuleNameService ruleNameService;
 
+    /**
+     * Method managing the "/ruleName/list" endpoint HTTP request to get the list of all RuleNames.
+     *
+     * @param model The Model
+     * @return The name of the View
+     */
     @RequestMapping("/ruleName/list")
     public String home(Model model) {
         logger.info("Request : GET /ruleName/list");
@@ -36,8 +45,14 @@ public class RuleNameController {
         return "ruleName/list";
     }
 
+    /**
+     * Method managing the GET "/ruleName/add" endpoint HTTP request to add a RuleName.
+     *
+     * @param ruleName The RuleName
+     * @return The name of the View
+     */
     @GetMapping("/ruleName/add")
-    public String addRuleForm(RuleName ruleName) {
+    public String addRuleNameForm(RuleName ruleName) {
 
         logger.info("Request : GET /ruleName/add");
         logger.info("Success : returning 'ruleName/add' view");
@@ -45,6 +60,14 @@ public class RuleNameController {
         return "ruleName/add";
     }
 
+    /**
+     * Method managing the POST "/ruleName/validate" endpoint HTTP request to add a RuleName.
+     *
+     * @param ruleName The RuleName to add
+     * @param result The BindingResult containing the result of the fields validation
+     * @param model The Model
+     * @return The name of the View
+     */
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
 
@@ -63,6 +86,13 @@ public class RuleNameController {
         return "ruleName/add";
     }
 
+    /**
+     * Method managing the GET "/ruleName/update/{id}" endpoint HTTP request to update a RuleName.
+     *
+     * @param id The id of the RuleName to update
+     * @param model The Model
+     * @return The name of the View
+     */
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 
@@ -76,6 +106,14 @@ public class RuleNameController {
         return "ruleName/update";
     }
 
+    /**
+     * Method managing the POST "/ruleName/update/{id}" endpoint HTTP request to update a RuleName.
+     *
+     * @param ruleName The RuleName to update
+     * @param result The BindingResult containing the result of the fields validation
+     * @param model The Model
+     * @return The name of the View
+     */
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@Valid RuleName ruleName, BindingResult result, Model model) {
 
@@ -95,6 +133,13 @@ public class RuleNameController {
         return "redirect:/ruleName/list";
     }
 
+    /**
+     * Method managing the GET "/ruleName/delete/{id}" endpoint HTTP request to delete a RuleName.
+     *
+     * @param id The id of the RuleName to delete
+     * @param model The Model
+     * @return The name of the View
+     */
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
 

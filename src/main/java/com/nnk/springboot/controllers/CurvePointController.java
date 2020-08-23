@@ -16,6 +16,9 @@ import java.util.List;
 import static java.sql.Timestamp.valueOf;
 import static java.time.LocalDateTime.now;
 
+/**
+ * Controller in charge of managing the endpoints for the CurvePoints.
+ */
 @Controller
 public class CurvePointController {
 
@@ -24,21 +27,32 @@ public class CurvePointController {
     @Autowired
     ICurvePointService curvePointService;
 
+    /**
+     * Method managing the "/curvePoint/list" endpoint HTTP request to get the list of all CurvePoints.
+     *
+     * @param model The Model
+     * @return The name of the View
+     */
     @RequestMapping("/curvePoint/list")
-    public String home(Model model)
-    {
+    public String home(Model model) {
         logger.info("Request : GET /curvePoint/list");
 
         List<CurvePoint> curvePoints = curvePointService.findAllCurvePoints();
-        model.addAttribute("curvePoints", curvePoints );
+        model.addAttribute("curvePoints", curvePoints);
 
         logger.info("Success : curvePoints found, returning 'curvePoint/list' view");
 
         return "curvePoint/list";
     }
 
+    /**
+     * Method managing the GET "/curvePoint/add" endpoint HTTP request to add a CurvePoint.
+     *
+     * @param curvePoint The CurvePoint
+     * @return The name of the View
+     */
     @GetMapping("/curvePoint/add")
-    public String addBidForm(CurvePoint curvePoint) {
+    public String addCurvePointForm(CurvePoint curvePoint) {
 
         logger.info("Request : GET /curvePoint/add");
         logger.info("Success : returning 'curvePoint/add' view");
@@ -46,6 +60,14 @@ public class CurvePointController {
         return "curvePoint/add";
     }
 
+    /**
+     * Method managing the POST "/curvePoint/validate" endpoint HTTP request to add a CurvePoint.
+     *
+     * @param curvePoint The CurvePoint to add
+     * @param result The BindingResult containing the result of the fields validation
+     * @param model The Model
+     * @return The name of the View
+     */
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
 
@@ -66,6 +88,13 @@ public class CurvePointController {
         return "curvePoint/add";
     }
 
+    /**
+     * Method managing the GET "/curvePoint/update/{id}" endpoint HTTP request to update a CurvePoint.
+     *
+     * @param id The id of the CurvePoint to update
+     * @param model The Model
+     * @return The name of the View
+     */
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 
@@ -79,8 +108,16 @@ public class CurvePointController {
         return "curvePoint/update";
     }
 
+    /**
+     * Method managing the POST "/curvePoint/update/{id}" endpoint HTTP request to update a CurvePoint.
+     *
+     * @param curvePoint The CurvePoint to update
+     * @param result The BindingResult containing the result of the fields validation
+     * @param model The Model
+     * @return The name of the View
+     */
     @PostMapping("/curvePoint/update/{id}")
-    public String updateBid(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
+    public String updateCurvePoint(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
 
         logger.info("Request : POST /curvePoint/update/{}", curvePoint.getId());
 
@@ -99,8 +136,15 @@ public class CurvePointController {
         return "redirect:/curvePoint/list";
     }
 
+    /**
+     * Method managing the GET "/curvePoint/delete/{id}" endpoint HTTP request to delete a CurvePoint.
+     *
+     * @param id The id of the CurvePoint to delete
+     * @param model The Model
+     * @return The name of the View
+     */
     @GetMapping("/curvePoint/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
+    public String deleteCurvePoint(@PathVariable("id") Integer id, Model model) {
 
         logger.info("Request : GET /curvePoint/delete/{}", id);
 

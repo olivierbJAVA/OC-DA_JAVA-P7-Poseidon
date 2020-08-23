@@ -8,6 +8,9 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+/**
+ * Class materializing a BidList.
+ */
 @Entity
 @Table(name = "bidlist")
 public class BidList implements Serializable {
@@ -18,11 +21,11 @@ public class BidList implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer bidListId;
 
-    @Size(max=30, message = "Maximum length = 30 characters")
+    @Size(max = 30, message = "Maximum length = 30 characters")
     @NotBlank(message = "Account is mandatory")
     private String account;
 
-    @Size(max=30, message = "Maximum length = 30 characters")
+    @Size(max = 30, message = "Maximum length = 30 characters")
     @NotBlank(message = "Type is mandatory")
     private String type;
 
@@ -39,51 +42,58 @@ public class BidList implements Serializable {
     @Digits(message = "Ask must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2)
     private Double ask;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String benchmark;
 
     private Timestamp bidListDate;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String commentary;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String security;
 
-    @Size(max=10, message = "Maximum length = 10 characters")
+    @Size(max = 10, message = "Maximum length = 10 characters")
     private String status;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String trader;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String book;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String creationName;
 
     private Timestamp creationDate;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String revisionName;
 
     private Timestamp revisionDate;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String dealName;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String dealType;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String sourceListId;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String side;
 
     public BidList() {
     }
 
+    /**
+     * Constructs a new BidList with the mandatory fields.
+     *
+     * @param account     the account of the BidList
+     * @param type        the type of the BidList
+     * @param bidQuantity the bidQuantity of the BidList
+     */
     public BidList(@Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Account is mandatory") String account, @Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BidQuantity must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2) @NotNull(message = "BidQuantity must not been null") Double bidQuantity) {
         this.account = account;
         this.type = type;

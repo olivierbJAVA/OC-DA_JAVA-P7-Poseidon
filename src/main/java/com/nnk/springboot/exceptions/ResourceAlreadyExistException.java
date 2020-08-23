@@ -12,9 +12,10 @@ public class ResourceAlreadyExistException extends RuntimeException {
     private String resourceType;
 
     /**
-     * Constructs a new runtime exception.
+     * Constructs a new ResourceAlreadyExistException.
      *
-     * @param username  the resource that already exists
+     * @param resourceId   the resourceId of the resource that already exists
+     * @param resourceType the resourceType of the resource that already exists
      */
     public ResourceAlreadyExistException(String resourceId, String resourceType) {
         this.resourceId = resourceId;

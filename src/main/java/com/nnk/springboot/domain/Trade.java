@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 
+/**
+ * Class materializing a Trade.
+ */
 @Entity
 @Table(name = "trade")
 public class Trade implements Serializable {
@@ -19,11 +22,11 @@ public class Trade implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer tradeId;
 
-    @Size(max=30, message = "Maximum length = 30 characters")
+    @Size(max = 30, message = "Maximum length = 30 characters")
     @NotBlank(message = "Account is mandatory")
     private String account;
 
-    @Size(max=30, message = "Maximum length = 30 characters")
+    @Size(max = 30, message = "Maximum length = 30 characters")
     @NotBlank(message = "Type is mandatory")
     private String type;
 
@@ -44,43 +47,50 @@ public class Trade implements Serializable {
 
     private Timestamp tradeDate;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String security;
 
-    @Size(max=10, message = "Maximum length = 10 characters")
+    @Size(max = 10, message = "Maximum length = 10 characters")
     private String status;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String trader;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String book;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String creationName;
 
     private Timestamp creationDate;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String revisionName;
 
     private Timestamp revisionDate;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String dealName;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String dealType;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String sourceListId;
 
-    @Size(max=125, message = "Maximum length = 125 characters")
+    @Size(max = 125, message = "Maximum length = 125 characters")
     private String side;
 
     public Trade() {
     }
 
+    /**
+     * Constructs a new Trade with the mandatory fields.
+     *
+     * @param account     the account of the Trade
+     * @param type        the type of the Trade
+     * @param buyQuantity the buyQuantity of the Trade
+     */
     public Trade(@Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Account is mandatory") String account, @Size(max = 30, message = "Maximum length = 30 characters") @NotBlank(message = "Type is mandatory") String type, @Digits(message = "BuyQuantity must be digits number with a maximum of 6 digits before the decimal point and 2 digits after", integer = 6, fraction = 2) @NotNull(message = "BuyQuantity must not been null") Double buyQuantity) {
         this.account = account;
         this.type = type;
