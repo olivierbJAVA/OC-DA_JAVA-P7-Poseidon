@@ -19,7 +19,7 @@ import java.util.Optional;
 
 /**
  * Class including integration (with the database) tests for the
- * Rating Repository.
+ * Rating entity Repository.
  */
 @ActiveProfiles("test")
 @DataJpaTest

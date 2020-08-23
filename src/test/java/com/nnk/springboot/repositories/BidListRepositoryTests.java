@@ -21,7 +21,7 @@ import java.util.Optional;
 
 /**
  * Class including integration (with the database) tests for the
- * BidList Repository.
+ * BidList entity Repository.
  */
 @ActiveProfiles("test")
 @DataJpaTest

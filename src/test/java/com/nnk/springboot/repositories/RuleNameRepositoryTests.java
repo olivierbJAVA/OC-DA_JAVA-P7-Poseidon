@@ -19,7 +19,7 @@ import java.util.Optional;
 
 /**
  * Class including integration (with the database) tests for the
- * RuleName Repository.
+ * RuleName entity Repository.
  */
 @ActiveProfiles("test")
 @DataJpaTest

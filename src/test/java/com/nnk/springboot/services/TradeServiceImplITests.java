@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Class including integration (with the repository layer) tests for the
- * Trade Service.
+ * Trade entity Service.
  */
 @ActiveProfiles("test")
 @SpringBootTest

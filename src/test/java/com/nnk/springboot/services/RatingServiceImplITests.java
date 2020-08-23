@@ -13,8 +13,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Class including integration (with the rapository layer) tests for the
- * Rating Service.
+ * Class including integration (with the repository layer) tests for the
+ * Rating entity Service.
  */
 @ActiveProfiles("test")
 @SpringBootTest

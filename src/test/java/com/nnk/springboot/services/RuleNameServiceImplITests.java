@@ -13,8 +13,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Class including integration (with the database) tests for the
- * RuleName Service.
+ * Class including integration (with the repository layer) tests for the
+ * RuleName entity Service.
  */
 @ActiveProfiles("test")
 @SpringBootTest

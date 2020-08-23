@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Class including integration (with the repository layer) tests for the
- * CurvePoint Service.
+ * CurvePoint entity Service.
  */
 @ActiveProfiles("test")
 @SpringBootTest

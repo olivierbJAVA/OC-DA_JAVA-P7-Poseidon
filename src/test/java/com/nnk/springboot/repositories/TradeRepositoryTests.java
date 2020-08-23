@@ -20,7 +20,7 @@ import java.util.Optional;
 
 /**
  * Class including integration (with the database) tests for the
- * Trade Repository.
+ * Trade entity Repository.
  */
 @ActiveProfiles("test")
 @DataJpaTest
