@@ -6,7 +6,7 @@ import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import java.util.List;
 
 /**
- * Interface to implement for managing the services for User entities.
+ * Interface to be implemented for managing the services for User entities.
  */
 public interface IUserService {
 
@@ -27,13 +27,13 @@ public interface IUserService {
     User findUserById(Integer id) throws ResourceNotFoundException;
 
     /**
-     * Return a User given its userName.
+     * Return a User given its username.
      *
-     * @param userName The userName of the User
-     * @return The User corresponding to the userName
-     * @throws ResourceNotFoundException if no User is found for the given userName
+     * @param username The username of the User
+     * @return The User corresponding to the username
+     * @throws ResourceNotFoundException if no User is found for the given username
      */
-    User findUserByUsername(String userName);
+    User findUserByUsername(String username);
 
     /**
      * Create a User.

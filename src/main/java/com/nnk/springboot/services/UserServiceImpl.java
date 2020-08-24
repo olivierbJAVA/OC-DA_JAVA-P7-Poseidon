@@ -42,15 +42,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
-     * Return a User given its userName.
+     * Return a User given its username.
      *
-     * @param userName The userName of the User
-     * @return The User corresponding to the userName
-     * @throws ResourceNotFoundException if no User is found for the given userName
+     * @param username The username of the User
+     * @return The User corresponding to the username
+     * @throws ResourceNotFoundException if no User is found for the given username
      */
     @Override
-    public User findUserByUsername(String userName) throws ResourceNotFoundException {
-        return userRepository.findUserByUsername(userName);
+    public User findUserByUsername(String username) throws ResourceNotFoundException {
+        return userRepository.findUserByUsername(username);
     }
 
     /**

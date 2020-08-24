@@ -6,7 +6,7 @@ import com.nnk.springboot.exceptions.ResourceNotFoundException;
 import java.util.List;
 
 /**
- * Interface to implement for managing the services for tRuleName entities.
+ * Interface to be implemented for managing the services for RuleName entities.
  */
 public interface IRuleNameService {
 
