@@ -19,8 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Class including integration (with the database) tests for the
- * CurvePoint entity Repository.
+ * Class including tests for the CurvePoint entity Repository.
  */
 @ActiveProfiles("test")
 @DataJpaTest
