@@ -18,15 +18,15 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableWebSecurity
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     /**
      * Method managing the configuration for the Authorization in the application.
      *
-     * @param http The HttpSecurity object
+     * @param http The HttpSecurity object used to manage Authorization in the application
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
