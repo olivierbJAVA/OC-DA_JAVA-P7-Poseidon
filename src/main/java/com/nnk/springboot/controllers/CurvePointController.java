@@ -30,11 +30,12 @@ public class CurvePointController {
     /**
      * Method managing the "/curvePoint/list" endpoint HTTP request to get the list of all CurvePoints.
      *
-     * @param model The Model
+     * @param model The Model containing the list of all curvePoints
      * @return The name of the View
      */
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
+
         logger.info("Request : /curvePoint/list");
 
         List<CurvePoint> curvePoints = curvePointService.findAllCurvePoints();
@@ -48,7 +49,7 @@ public class CurvePointController {
     /**
      * Method managing the GET "/curvePoint/add" endpoint HTTP request to add a CurvePoint.
      *
-     * @param curvePoint The CurvePoint
+     * @param curvePoint An empty CurvePoint
      * @return The name of the View
      */
     @GetMapping("/curvePoint/add")
@@ -73,8 +74,10 @@ public class CurvePointController {
         logger.info("Request : POST /curvePoint/validate");
 
         if (!result.hasErrors()) {
+            // We setup the relevant dates
             curvePoint.setCreationDate(valueOf(now()));
             curvePoint.setAsOfDate(valueOf(now()));
+
             curvePointService.createCurvePoint(curvePoint);
 
             logger.info("Success : new curvePoint created, redirect to '/curvePoint/list' view");
@@ -91,7 +94,7 @@ public class CurvePointController {
      * Method managing the GET "/curvePoint/update/{id}" endpoint HTTP request to update a CurvePoint.
      *
      * @param id The id of the CurvePoint to update
-     * @param model The Model
+     * @param model The Model containing the CurvePoint to update
      * @return The name of the View
      */
     @GetMapping("/curvePoint/update/{id}")
@@ -121,12 +124,15 @@ public class CurvePointController {
 
         if (result.hasErrors()) {
 
-            logger.error("Error in fields : curvePoint with id {} not updated, returning '/curvePoint/update' view", curvePoint.getId());
+            logger.error("Error in fields validation : curvePoint with id {} not updated, returning '/curvePoint/update' view", curvePoint.getId());
 
             return "curvePoint/update";
         }
+
+        // We update the relevant dates
         curvePoint.setCreationDate(curvePointService.findCurvePointById(curvePoint.getId()).getCreationDate());
         curvePoint.setAsOfDate(valueOf(now()));
+
         curvePointService.updateCurvePoint(curvePoint);
 
         logger.info("Success : curvePoint with id {} updated, redirect to '/rating/list'", curvePoint.getId());

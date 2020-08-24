@@ -33,11 +33,12 @@ public class TradeController {
     /**
      * Method managing the "/trade/list" endpoint HTTP request to get the list of all Trades.
      *
-     * @param model The Model
+     * @param model The Model containing the list of all trades
      * @return The name of the View
      */
     @RequestMapping("/trade/list")
     public String home(Model model) {
+
         logger.info("Request : /trade/list");
 
         List<Trade> trades = tradeService.findAllTrades();
@@ -51,7 +52,7 @@ public class TradeController {
     /**
      * Method managing the GET "/trade/add" endpoint HTTP request to add a Trade.
      *
-     * @param trade The Trade
+     * @param trade An empty Trade
      * @return The name of the View
      */
     @GetMapping("/trade/add")
@@ -76,8 +77,10 @@ public class TradeController {
         logger.info("Request : POST /trade/validate");
 
         if (!result.hasErrors()) {
+            // We setup the relevant dates
             trade.setCreationDate(valueOf(now()));
             trade.setTradeDate(valueOf(now()));
+
             tradeService.createTrade(trade);
 
             logger.info("Success : new trade created, redirect to '/trade/list' view");
@@ -94,7 +97,7 @@ public class TradeController {
      * Method managing the GET "/trade/update/{id}" endpoint HTTP request to update a Trade.
      *
      * @param id The id of the Trade to update
-     * @param model The Model
+     * @param model The Model containing the Trade to update
      * @return The name of the View
      */
     @GetMapping("/trade/update/{id}")
@@ -124,14 +127,16 @@ public class TradeController {
 
         if (result.hasErrors()) {
 
-            logger.error("Error in fields : trade with id {} not updated, returning '/trade/update' view", trade.getTradeId());
+            logger.error("Error in fields validation : trade with id {} not updated, returning '/trade/update' view", trade.getTradeId());
 
             return "trade/update";
         }
 
+        // We update the relevant dates
         trade.setCreationDate(tradeService.findTradeById(trade.getTradeId()).getCreationDate());
         trade.setRevisionDate(valueOf(now()));
         trade.setTradeDate(valueOf(now()));
+
         tradeService.updateTrade(trade);
 
         logger.info("Success : trade with id {} updated, redirect to '/trade/list'", trade.getTradeId());

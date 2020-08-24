@@ -17,10 +17,13 @@ public class ErrorController {
      */
     @GetMapping("/errorAccessDenied")
     public ModelAndView accessDenied() {
+
         ModelAndView mav = new ModelAndView();
+
         String errorMessage = "You are not authorized for the requested data.";
-        mav.addObject("errorMsg", errorMessage);
+        mav.addObject("errorMessage", errorMessage);
         mav.setViewName("errorAccessDenied");
+
         return mav;
     }
 }

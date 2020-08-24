@@ -22,7 +22,7 @@ public class HomeController
 	public String home()
 	{
 		logger.info("Request : /");
-		logger.info("Success : returning '/bidList/list' view");
+		logger.info("Success : redirect to '/bidList/list' view");
 
 		return "redirect:/bidList/list";
 	}
@@ -36,7 +36,7 @@ public class HomeController
 	public String adminHome()
 	{
 		logger.info("Request : /admin/home");
-		logger.info("Success : returning '/user/list' view");
+		logger.info("Success : redirect to '/user/list' view");
 
 		return "redirect:/user/list";
 	}

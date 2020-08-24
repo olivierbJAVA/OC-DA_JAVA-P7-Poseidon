@@ -33,11 +33,12 @@ public class BidListController {
     /**
      * Method managing the "/bidList/list" endpoint HTTP request to get the list of all BidLists.
      *
-     * @param model The Model
+     * @param model The Model containing the list of all bidLists
      * @return The name of the View
      */
     @RequestMapping("/bidList/list")
     public String home(Model model) {
+
         logger.info("Request : /bidList/list");
 
         List<BidList> bidLists = bidListService.findAllBidLists();
@@ -51,7 +52,7 @@ public class BidListController {
     /**
      * Method managing the GET "/bidList/add" endpoint HTTP request to add a BidList.
      *
-     * @param bidList The BidList
+     * @param bidList An empty BidList
      * @return The name of the View
      */
     @GetMapping("/bidList/add")
@@ -72,11 +73,14 @@ public class BidListController {
      */
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bidList, BindingResult result) {
+
         logger.info("Request : POST /bidList/validate");
 
         if (!result.hasErrors()) {
+            // We setup the relevant dates
             bidList.setCreationDate(valueOf(now()));
             bidList.setBidListDate(valueOf(now()));
+
             bidListService.createBidList(bidList);
 
             logger.info("Success : new bidList created, redirect to '/bidList/list' view");
@@ -93,7 +97,7 @@ public class BidListController {
      * Method managing the GET "/bidList/update/{id}" endpoint HTTP request to update a BidList.
      *
      * @param id The id of the BidList to update
-     * @param model The Model
+     * @param model The Model containing the BidList to update
      * @return The name of the View
      */
     @GetMapping("/bidList/update/{id}")
@@ -118,18 +122,21 @@ public class BidListController {
      */
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@Valid BidList bidList, BindingResult result) {
+
         logger.info("Request : POST /bidList/update/{}", bidList.getBidListId());
 
         if (result.hasErrors()) {
 
-            logger.error("Error in fields : bidList with id {} not updated, returning '/bidList/update' view", bidList.getBidListId());
+            logger.error("Error in fields validation : bidList with id {} not updated, returning '/bidList/update' view", bidList.getBidListId());
 
             return "bidList/update";
         }
 
+        // We update the relevant dates
         bidList.setCreationDate(bidListService.findBidListById(bidList.getBidListId()).getCreationDate());
         bidList.setRevisionDate(valueOf(now()));
         bidList.setBidListDate(valueOf(now()));
+
         bidListService.updateBidList(bidList);
 
         logger.info("Success : bidList with id {} updated, redirect to '/bidList/list'", bidList.getBidListId());
@@ -145,6 +152,7 @@ public class BidListController {
      */
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id) {
+
         logger.info("Request : GET /bidList/delete/{}", id);
 
         bidListService.deleteBidListById(id);

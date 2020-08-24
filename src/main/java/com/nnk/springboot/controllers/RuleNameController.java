@@ -30,11 +30,12 @@ public class RuleNameController {
     /**
      * Method managing the "/ruleName/list" endpoint HTTP request to get the list of all RuleNames.
      *
-     * @param model The Model
+     * @param model The Model containing the list of all ruleNames
      * @return The name of the View
      */
     @RequestMapping("/ruleName/list")
     public String home(Model model) {
+
         logger.info("Request : /ruleName/list");
 
         List<RuleName> ruleNames = ruleNameService.findAllRuleNames();
@@ -48,7 +49,7 @@ public class RuleNameController {
     /**
      * Method managing the GET "/ruleName/add" endpoint HTTP request to add a RuleName.
      *
-     * @param ruleName The RuleName
+     * @param ruleName An empty RuleName
      * @return The name of the View
      */
     @GetMapping("/ruleName/add")
@@ -89,7 +90,7 @@ public class RuleNameController {
      * Method managing the GET "/ruleName/update/{id}" endpoint HTTP request to update a RuleName.
      *
      * @param id The id of the RuleName to update
-     * @param model The Model
+     * @param model The Model containing the RuleName to update
      * @return The name of the View
      */
     @GetMapping("/ruleName/update/{id}")
@@ -119,7 +120,7 @@ public class RuleNameController {
 
         if (result.hasErrors()) {
 
-            logger.error("Error in fields : ruleName with id {} not updated, returning '/ruleName/update' view", ruleName.getId());
+            logger.error("Error in fields validation : ruleName with id {} not updated, returning '/ruleName/update' view", ruleName.getId());
 
             return "ruleName/update";
         }

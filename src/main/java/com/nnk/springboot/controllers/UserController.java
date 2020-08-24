@@ -31,11 +31,12 @@ public class UserController {
     /**
      * Method managing the "/user/list" endpoint HTTP request to get the list of all Users.
      *
-     * @param model The Model
+     * @param model The Model containing the list of all users
      * @return The name of the View
      */
     @RequestMapping("/user/list")
     public String home(Model model) {
+
         logger.info("Request : /user/list");
 
         List<User> users = userService.findAllUsers();
@@ -49,7 +50,7 @@ public class UserController {
     /**
      * Method managing the GET "/user/add" endpoint HTTP request to add a User.
      *
-     * @param user The User
+     * @param user An empty User
      * @return The name of the View
      */
     @GetMapping("/user/add")
@@ -95,7 +96,7 @@ public class UserController {
      * Method managing the GET "/user/update/{id}" endpoint HTTP request to update a User.
      *
      * @param id The id of the User to update
-     * @param model The Model
+     * @param model The Model containing the User to update
      * @return The name of the View
      */
     @GetMapping("/user/update/{id}")
@@ -132,7 +133,7 @@ public class UserController {
 
         if (result.hasErrors()) {
 
-            logger.error("Error in fields : user with id {} not updated, returning '/user/update' view", user.getId());
+            logger.error("Error in fields validation : user with id {} not updated, returning '/user/update' view", user.getId());
 
             return "user/update";
         }

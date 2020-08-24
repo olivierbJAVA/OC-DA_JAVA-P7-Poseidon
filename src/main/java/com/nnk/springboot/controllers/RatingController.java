@@ -30,7 +30,7 @@ public class RatingController {
     /**
      * Method managing the "/rating/list" endpoint HTTP request to get the list of all Ratings.
      *
-     * @param model The Model
+     * @param model The Model containing the list of all ratings
      * @return The name of the View
      */
     @RequestMapping("/rating/list")
@@ -49,7 +49,7 @@ public class RatingController {
     /**
      * Method managing the GET "/rating/add" endpoint HTTP request to add a Rating.
      *
-     * @param rating The Rating
+     * @param rating An empty Rating
      * @return The name of the View
      */
     @GetMapping("/rating/add")
@@ -90,7 +90,7 @@ public class RatingController {
      * Method managing the GET "/rating/update/{id}" endpoint HTTP request to update a Rating.
      *
      * @param id The id of the Rating to update
-     * @param model The Model
+     * @param model The Model containing the Rating to update
      * @return The name of the View
      */
     @GetMapping("/rating/update/{id}")
@@ -120,7 +120,7 @@ public class RatingController {
 
         if (result.hasErrors()) {
 
-            logger.error("Error in fields : rating with id {} not updated, returning '/rating/update' view", rating.getId());
+            logger.error("Error in fields validation : rating with id {} not updated, returning '/rating/update' view", rating.getId());
 
             return "rating/update";
         }
@@ -138,7 +138,6 @@ public class RatingController {
      * @param id The id of the Rating to delete
      * @return The name of the View
      */
-    //@Secured(value="ROLE_ADMIN")
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id) {
 
