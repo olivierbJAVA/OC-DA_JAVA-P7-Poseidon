@@ -22,7 +22,7 @@ public interface ITradeService {
      *
      * @param id The id of the Trade
      * @return The Trade corresponding to the id
-     * A ResourceNotFoundException is thrown if no Trade is found for the given id
+     * @throws ResourceNotFoundException if no Trade is found for the given id
      */
     Trade findTradeById(Integer id) throws ResourceNotFoundException;
 
@@ -39,7 +39,7 @@ public interface ITradeService {
      *
      * @param trade The Trade to update
      * @return The Trade updated
-     * A ResourceNotFoundException is thrown if the Trade to update does not exist
+     * @throws ResourceNotFoundException if the Trade to update does not exist
      */
     Trade updateTrade(Trade trade) throws ResourceNotFoundException;
 
@@ -47,7 +47,7 @@ public interface ITradeService {
      * Delete a Trade.
      *
      * @param id The id of the Trade
-     * A ResourceNotFoundException is thrown if the Trade to delete does not exist
+     * @throws ResourceNotFoundException if the Trade to delete does not exist
      */
     void deleteTradeById(Integer id) throws ResourceNotFoundException;
 }

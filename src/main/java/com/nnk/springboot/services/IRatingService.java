@@ -22,7 +22,7 @@ public interface IRatingService {
      *
      * @param id The id of the Rating
      * @return The Rating corresponding to the id
-     * A ResourceNotFoundException is thrown if no Rating is found for the given id
+     * @throws ResourceNotFoundException if no Rating is found for the given id
      */
     Rating findRatingById(Integer id) throws ResourceNotFoundException;
 
@@ -39,7 +39,7 @@ public interface IRatingService {
      *
      * @param rating The Rating to update
      * @return The Rating updated
-     * A ResourceNotFoundException is thrown if the Rating to update does not exist
+     * @throws ResourceNotFoundException if the Rating to update does not exist
      */
     Rating updateRating(Rating rating) throws ResourceNotFoundException;
 
@@ -47,7 +47,7 @@ public interface IRatingService {
      * Delete a Rating.
      *
      * @param id The id of the Rating
-     * A ResourceNotFoundException is thrown if the Rating to delete does not exist
+     * @throws ResourceNotFoundException if the Rating to delete does not exist
      */
     void deleteRatingById(Integer id) throws ResourceNotFoundException;
 }

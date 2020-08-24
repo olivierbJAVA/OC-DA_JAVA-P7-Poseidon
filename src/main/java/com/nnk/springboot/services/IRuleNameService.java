@@ -22,7 +22,7 @@ public interface IRuleNameService {
      *
      * @param id The id of the RuleName
      * @return The RuleName corresponding to the id
-     * A ResourceNotFoundException is thrown if no RuleName is found for the given id
+     * @throws ResourceNotFoundException if no RuleName is found for the given id
      */
     RuleName findRuleNameById(Integer id) throws ResourceNotFoundException;
 
@@ -39,7 +39,7 @@ public interface IRuleNameService {
      *
      * @param ruleName The RuleName to update
      * @return The RuleName updated
-     * A ResourceNotFoundException is thrown if the RuleName to update does not exist
+     * @throws ResourceNotFoundException if the RuleName to update does not exist
      */
     RuleName updateRuleName(RuleName ruleName) throws ResourceNotFoundException;
 
@@ -47,7 +47,7 @@ public interface IRuleNameService {
      * Delete a RuleName.
      *
      * @param id The id of the RuleName
-     * A ResourceNotFoundException is thrown if the RuleName to delete does not exist
+     * @throws ResourceNotFoundException if the RuleName to delete does not exist
      */
     void deleteRuleNameById(Integer id) throws ResourceNotFoundException;
 }

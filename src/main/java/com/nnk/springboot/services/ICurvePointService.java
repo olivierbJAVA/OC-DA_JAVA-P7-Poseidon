@@ -22,7 +22,7 @@ public interface ICurvePointService {
      *
      * @param id The id of the CurvePoint
      * @return The CurvePoint corresponding to the id
-     * A ResourceNotFoundException is thrown if no CurvePoint is found for the given id
+     * @throws ResourceNotFoundException if no CurvePoint is found for the given id
      */
     CurvePoint findCurvePointById(Integer id) throws ResourceNotFoundException;
 
@@ -39,7 +39,7 @@ public interface ICurvePointService {
      *
      * @param curvePoint The CurvePoint to update
      * @return The CurvePoint updated
-     * A ResourceNotFoundException is thrown if the CurvePoint to update does not exist
+     * @throws ResourceNotFoundException if the CurvePoint to update does not exist
      */
     CurvePoint updateCurvePoint(CurvePoint curvePoint) throws ResourceNotFoundException;
 
@@ -47,7 +47,7 @@ public interface ICurvePointService {
      * Delete a CurvePoint.
      *
      * @param id The id of the CurvePoint
-     * A ResourceNotFoundException is thrown if the CurvePoint to delete does not exist
+     * @throws ResourceNotFoundException if the CurvePoint to delete does not exist
      */
     void deleteCurvePointById(Integer id) throws ResourceNotFoundException;
 }

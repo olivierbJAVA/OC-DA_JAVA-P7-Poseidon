@@ -33,7 +33,7 @@ public class CurvePointServiceImpl implements ICurvePointService {
      *
      * @param id The id of the CurvePoint
      * @return The CurvePoint corresponding to the id
-     * A ResourceNotFoundException is thrown if no CurvePoint is found for the given id
+     * @throws ResourceNotFoundException if no CurvePoint is found for the given id
      */
     @Override
     public CurvePoint findCurvePointById(Integer id) throws ResourceNotFoundException {
@@ -56,7 +56,7 @@ public class CurvePointServiceImpl implements ICurvePointService {
      *
      * @param curvePoint The CurvePoint to update
      * @return The CurvePoint updated
-     * A ResourceNotFoundException is thrown if the CurvePoint to update does not exist
+     * @throws ResourceNotFoundException if the CurvePoint to update does not exist
      */
     @Override
     public CurvePoint updateCurvePoint(CurvePoint curvePoint) {
@@ -68,7 +68,7 @@ public class CurvePointServiceImpl implements ICurvePointService {
      * Delete a CurvePoint.
      *
      * @param id The id of the CurvePoint
-     * A ResourceNotFoundException is thrown if the CurvePoint to delete does not exist
+     * @throws ResourceNotFoundException if the CurvePoint to delete does not exist
      */
     @Override
     public void deleteCurvePointById(Integer id) throws ResourceNotFoundException {

@@ -33,7 +33,7 @@ public class TradeServiceImpl implements ITradeService {
      *
      * @param id The id of the Trade
      * @return The Trade corresponding to the id
-     * A ResourceNotFoundException is thrown if no Trade is found for the given id
+     * @throws ResourceNotFoundException if no Trade is found for the given id
      */
     @Override
     public Trade findTradeById(Integer id) throws ResourceNotFoundException {
@@ -56,7 +56,7 @@ public class TradeServiceImpl implements ITradeService {
      *
      * @param trade The Trade to update
      * @return The Trade updated
-     * A ResourceNotFoundException is thrown if the Trade to update does not exist
+     * @throws ResourceNotFoundException if the Trade to update does not exist
      */
     @Override
     public Trade updateTrade(Trade trade) {
@@ -68,7 +68,7 @@ public class TradeServiceImpl implements ITradeService {
      * Delete a Trade.
      *
      * @param id The id of the Trade
-     * A ResourceNotFoundException is thrown if the Trade to delete does not exist
+     * @throws ResourceNotFoundException if the Trade to delete does not exist
      */
     @Override
     public void deleteTradeById(Integer id) throws ResourceNotFoundException {

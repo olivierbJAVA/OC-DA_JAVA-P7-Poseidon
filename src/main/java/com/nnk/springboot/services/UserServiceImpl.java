@@ -34,7 +34,7 @@ public class UserServiceImpl implements IUserService {
      *
      * @param id The id of the User
      * @return The User corresponding to the id
-     * A ResourceNotFoundException is thrown if no User is found for the given id
+     * @throws ResourceNotFoundException if no User is found for the given id
      */
     @Override
     public User findUserById(Integer id) throws ResourceNotFoundException {
@@ -46,7 +46,7 @@ public class UserServiceImpl implements IUserService {
      *
      * @param userName The userName of the User
      * @return The User corresponding to the userName
-     * A ResourceNotFoundException is thrown if no User is found for the given userName
+     * @throws ResourceNotFoundException if no User is found for the given userName
      */
     @Override
     public User findUserByUsername(String userName) throws ResourceNotFoundException {
@@ -71,7 +71,7 @@ public class UserServiceImpl implements IUserService {
      *
      * @param user The User to update
      * @return The User updated
-     * A ResourceNotFoundException is thrown if the User to update does not exist
+     * @throws ResourceNotFoundException if the User to update does not exist
      */
     @Override
     public User updateUser(User user) {
@@ -85,7 +85,7 @@ public class UserServiceImpl implements IUserService {
      * Delete a User.
      *
      * @param id The id of the User
-     * A ResourceNotFoundException is thrown if the User to delete does not exist
+     * @throws ResourceNotFoundException if the User to delete does not exist
      */
     @Override
     public void deleteUserById(Integer id) throws ResourceNotFoundException {
