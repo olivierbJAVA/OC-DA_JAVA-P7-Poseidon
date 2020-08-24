@@ -30,7 +30,7 @@ public class RuleName implements Serializable {
     @NotBlank(message = "Json is mandatory")
     private String json;
 
-    @Size(max = 512, message = "Maximum length = 125 characters")
+    @Size(max = 512, message = "Maximum length = 512 characters")
     @NotBlank(message = "Template is mandatory")
     private String template;
 
@@ -55,7 +55,7 @@ public class RuleName implements Serializable {
      * @param sqlStr      the sqlStr of the RuleName
      * @param sqlPart     the sqlPart of the RuleName
      */
-    public RuleName(@Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Name is mandatory") String name, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Description is mandatory") String description, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Json is mandatory") String json, @Size(max = 512, message = "Maximum length = 125 characters") @NotBlank(message = "Template is mandatory") String template, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "SqlStr is mandatory") String sqlStr, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "SqlPart is mandatory") String sqlPart) {
+    public RuleName(@Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Name is mandatory") String name, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Description is mandatory") String description, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "Json is mandatory") String json, @Size(max = 512, message = "Maximum length = 512 characters") @NotBlank(message = "Template is mandatory") String template, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "SqlStr is mandatory") String sqlStr, @Size(max = 125, message = "Maximum length = 125 characters") @NotBlank(message = "SqlPart is mandatory") String sqlPart) {
         this.name = name;
         this.description = description;
         this.json = json;
