@@ -33,7 +33,7 @@ public class BidListServiceImpl implements IBidListService {
      *
      * @param id The id of the BidList
      * @return The BidList corresponding to the id
-     * A ResourceNotFoundException is thrown if no BidList is found for the given id
+     * @throws ResourceNotFoundException if no BidList is found for the given id
      */
     @Override
     public BidList findBidListById(Integer id) throws ResourceNotFoundException {
@@ -56,7 +56,7 @@ public class BidListServiceImpl implements IBidListService {
      *
      * @param bidList The BidList to update
      * @return The BidList updated
-     * A ResourceNotFoundException is thrown if the BidList to update does not exist
+     * @throws ResourceNotFoundException if the BidList to update does not exist
      */
     @Override
     public BidList updateBidList(BidList bidList) {
@@ -68,7 +68,7 @@ public class BidListServiceImpl implements IBidListService {
      * Delete a BidList.
      *
      * @param id The id of the BidList
-     * A ResourceNotFoundException is thrown if the BidList to delete does not exist
+     * @throws ResourceNotFoundException if the BidList to delete does not exist
      */
     @Override
     public void deleteBidListById(Integer id) throws ResourceNotFoundException {
