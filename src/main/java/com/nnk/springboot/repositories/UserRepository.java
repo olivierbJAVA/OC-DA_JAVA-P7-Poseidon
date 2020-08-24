@@ -9,14 +9,14 @@ import org.springframework.stereotype.Repository;
  * Interface extending the JpaRepository interface to manage CRUD methods for User entities, using Spring DataJPA.
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
     /**
-     * Method returning a User from the repository given its userName.
+     * Method returning a User from the repository given its username.
      *
-     * @param userName The userName of the user
-     * @return The User corresponding to the userName or null if there
-     * is no User for the given userName
+     * @param username The userName of the user
+     * @return The User corresponding to the username or null if there
+     * is no User for the given username
      */
-    User findUserByUsername(String userName);
+    User findUserByUsername(String username);
 }
