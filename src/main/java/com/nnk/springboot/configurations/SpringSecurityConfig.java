@@ -24,7 +24,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     DataSource dataSource;
 
     /**
-     * Method managing the configuration for the Authentication to the application.
+     * Method managing the configuration for the Authorization in the application.
      *
      * @param http The HttpSecurity object
      */
@@ -46,10 +46,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Method managing the configuration for the Authorization in the application.
+     * Method managing the configuration for the Authentication to the application.
      *
-     * @param auth The AuthenticationManagerBuilder object
+     * @param auth The AuthenticationManagerBuilder object used to manage Authentication to the application
      */
+    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .passwordEncoder(passwordEncoder())
