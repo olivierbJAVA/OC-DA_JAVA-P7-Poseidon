@@ -1,7 +1,7 @@
 package com.nnk.springboot.exceptions;
 
 /**
- * Class for the ResourceAlreadyExistException.
+ * Class materializing the ResourceAlreadyExistException.
  */
 public class ResourceAlreadyExistException extends RuntimeException {
 

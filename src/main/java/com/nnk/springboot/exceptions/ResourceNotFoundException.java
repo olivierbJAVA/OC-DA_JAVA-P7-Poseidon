@@ -1,7 +1,7 @@
 package com.nnk.springboot.exceptions;
 
 /**
- * Class for the ResourceNotFoundException.
+ * Class materializing the ResourceNotFoundException.
  */
 public class ResourceNotFoundException extends RuntimeException {
 
