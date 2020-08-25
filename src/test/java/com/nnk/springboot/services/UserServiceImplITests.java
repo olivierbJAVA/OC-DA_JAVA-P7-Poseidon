@@ -80,6 +80,24 @@ public class UserServiceImplITests {
 
     @Test
     @Sql("/cleandb-test.sql")
+    public void findUserByUsername() {
+        // ARRANGE
+        User userToFind = new User("user", "%Password1", "User", "USER");
+        userToFind = userServiceImplUnderTest.createUser(userToFind);
+
+        // ACT
+        User userFound = userServiceImplUnderTest.findUserByUsername(userToFind.getUsername());
+
+        // ASSERT
+        assertNotNull(userFound);
+        assertEquals(userToFind.getUsername(), userFound.getUsername());
+        assertEquals(userToFind.getPassword(), userFound.getPassword());
+        assertEquals(userToFind.getFullname(), userFound.getFullname());
+        assertEquals(userToFind.getRole(), userFound.getRole());
+    }
+
+    @Test
+    @Sql("/cleandb-test.sql")
     public void findAllUsers() {
         // ARRANGE
         User userToFind1 = new User("user1", "%Password1", "User1", "USER");
