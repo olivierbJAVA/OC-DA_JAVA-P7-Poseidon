@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 /**
- * Class including unit tests for the USerServiceImpl Class.
+ * Class including unit tests for the UserServiceImpl Class.
  */
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTests {
@@ -32,7 +32,7 @@ public class UserServiceImplTests {
     @Test
     public void createUser() {
         // ARRANGE
-        User userToCreate = new User("Username", "Password", "Fullname", "Role"  );
+        User userToCreate = new User("user", "%Password1", "User", "USER");
         userToCreate.setId(1);
         doReturn(userToCreate).when(mockUserRepository).save(userToCreate);
 
@@ -47,7 +47,7 @@ public class UserServiceImplTests {
     @Test
     public void updateUser_whenIdExist() {
         // ARRANGE
-        User userToUpdate = new User("Username", "Password", "Fullname", "Role"  );
+        User userToUpdate = new User("user", "%Password1", "User", "USER");
         userToUpdate.setId(1);
         doReturn(Optional.of(userToUpdate)).when(mockUserRepository).findById(userToUpdate.getId());
         doReturn(userToUpdate).when(mockUserRepository).save(userToUpdate);
@@ -75,7 +75,7 @@ public class UserServiceImplTests {
     @Test
     public void findUserById_whenIdExist() {
         // ARRANGE
-        User userToFind = new User("Username", "Password", "Fullname", "Role"  );
+        User userToFind = new User("user", "%Password1", "User", "USER");
         userToFind.setId(1);
         doReturn(Optional.of(userToFind)).when(mockUserRepository).findById(userToFind.getId());
 
@@ -102,11 +102,11 @@ public class UserServiceImplTests {
     @Test
     public void findAllUsers() {
         // ARRANGE
-        User userToFind1 = new User("Username1", "Password1", "Fullname1", "Role1"  );
+        User userToFind1 = new User("user1", "%Password1", "User1", "USER");
         userToFind1.setId(1);
-        User userToFind2 = new User("Username2", "Password2", "Fullname2", "Role2"  );
+        User userToFind2 = new User("user2", "%Password2", "User2", "USER");
         userToFind2.setId(2);
-        User userToFind3 = new User("Username3", "Password3", "Fullname3", "Role3"  );
+        User userToFind3 = new User("user3", "%Password3", "User3", "USER");
         userToFind3.setId(3);
 
         List<User> listUsersToFind = new ArrayList<>();
@@ -127,7 +127,7 @@ public class UserServiceImplTests {
     @Test
     public void deleteUserById_whenIdExist() {
         // ARRANGE
-        User userToDelete = new User("Username", "Password", "Fullname", "Role"  );
+        User userToDelete = new User("user", "%Password1", "User", "USER");
         userToDelete.setId(1);
         doReturn(Optional.of(userToDelete)).when(mockUserRepository).findById(userToDelete.getId());
 

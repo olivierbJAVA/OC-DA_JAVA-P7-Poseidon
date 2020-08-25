@@ -32,7 +32,7 @@ public class RatingServiceImplTests {
     @Test
     public void createRating() {
         // ARRANGE
-        Rating ratingToCreate = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToCreate = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingToCreate.setId(1);
         doReturn(ratingToCreate).when(mockRatingRepository).save(ratingToCreate);
 
@@ -47,7 +47,7 @@ public class RatingServiceImplTests {
     @Test
     public void updateRating_whenIdExist() {
         // ARRANGE
-        Rating ratingToUpdate = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToUpdate = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingToUpdate.setId(1);
         doReturn(Optional.of(ratingToUpdate)).when(mockRatingRepository).findById(ratingToUpdate.getId());
         doReturn(ratingToUpdate).when(mockRatingRepository).save(ratingToUpdate);
@@ -75,7 +75,7 @@ public class RatingServiceImplTests {
     @Test
     public void findRatingById_whenIdExist() {
         // ARRANGE
-        Rating ratingToFind = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToFind = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingToFind.setId(1);
         doReturn(Optional.of(ratingToFind)).when(mockRatingRepository).findById(ratingToFind.getId());
 
@@ -102,11 +102,11 @@ public class RatingServiceImplTests {
     @Test
     public void findAllRatings() {
         // ARRANGE
-        Rating ratingToFind1 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToFind1 = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingToFind1.setId(1);
-        Rating ratingToFind2 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToFind2 = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingToFind2.setId(2);
-        Rating ratingToFind3 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToFind3 = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingToFind3.setId(3);
 
         List<Rating> listRatingsToFind = new ArrayList<>();
@@ -127,7 +127,7 @@ public class RatingServiceImplTests {
     @Test
     public void deleteRatingById_whenIdExist() {
         // ARRANGE
-        Rating ratingToDelete = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToDelete = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingToDelete.setId(1);
         doReturn(Optional.of(ratingToDelete)).when(mockRatingRepository).findById(ratingToDelete.getId());
 
