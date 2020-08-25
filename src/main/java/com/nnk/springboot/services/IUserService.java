@@ -31,7 +31,6 @@ public interface IUserService {
      *
      * @param username The username of the User
      * @return The User corresponding to the username
-     * @throws ResourceNotFoundException if no User is found for the given username
      */
     User findUserByUsername(String username);
 
