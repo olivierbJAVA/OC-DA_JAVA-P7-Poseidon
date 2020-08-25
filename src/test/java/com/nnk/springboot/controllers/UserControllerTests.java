@@ -149,7 +149,7 @@ public class UserControllerTests {
         try {
             mockMvc.perform(post("/user/validate")
                     .param("username", "user")
-                    .param("password", "%Password2")
+                    .param("password", "%Password1")
                     .param("fullname", "User")
                     .param("role", "USER"))
                     .andExpect(status().isBadRequest())
@@ -170,13 +170,13 @@ public class UserControllerTests {
         //ACT & ASSERT
         try {
             // Error in username (mandatory field)
-            mockMvc.perform(post("/user/update/1")
+            mockMvc.perform(post("/user/validate")
                     .param("username", "")
                     .param("password", "%Password1")
                     .param("fullname", "User")
                     .param("role", "USER"))
                     .andExpect(model().attributeHasFieldErrors("user", "username"))
-                    .andExpect(view().name("user/update"));
+                    .andExpect(view().name("user/add"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }
@@ -230,7 +230,7 @@ public class UserControllerTests {
             mockMvc.perform(post("/user/update/1")
                     .param("id", "1")
                     .param("username", "user")
-                    .param("password", "%Password1")
+                    .param("password", "%Password2")
                     .param("fullname", "User")
                     .param("role", "USER"))
                     .andExpect(status().is3xxRedirection())
@@ -247,7 +247,7 @@ public class UserControllerTests {
     public void updateUser_whenNoErrorAndUsernameAlreadyExistAndIsUsernameToUpdate() {
         //ARRANGE
         User usernameAlreadyExist = new User();
-        // the username already existing is the one of the user to update so no issue
+        // The username already existing is the one to update (same id=1) -> no issue
         usernameAlreadyExist.setId(1);
         usernameAlreadyExist.setUsername("user");
         usernameAlreadyExist.setPassword("%Password1");
@@ -288,7 +288,7 @@ public class UserControllerTests {
     public void updateUser_whenNoErrorAndUsernameAlreadyExistAndIsNotUsernameToUpdate() {
         //ARRANGE
         User usernameAlreadyExist = new User();
-        // the username already existing belongs to another user than the one to update so there is an issue
+        // The username already existing belongs to another user (id=1) than the one to update (id=2) -> there is an issue
         usernameAlreadyExist.setId(1);
         usernameAlreadyExist.setUsername("user");
         usernameAlreadyExist.setPassword("%Password1");
@@ -328,17 +328,18 @@ public class UserControllerTests {
     @Test
     public void updateUser_whenError() {
         //ARRANGE
+        doReturn(null).when(mockUserService).findUserByUsername("user");
 
         //ACT & ASSERT
         try {
-            // Error in username (mandatory field)
+            // Error in password (mandatory field)
             mockMvc.perform(post("/user/update/1")
                     .param("id", "1")
-                    .param("username", "")
-                    .param("password", "%Password1")
+                    .param("username", "user")
+                    .param("password", "")
                     .param("fullname", "User")
                     .param("role", "USER"))
-                    .andExpect(model().attributeHasFieldErrors("user", "username"))
+                    .andExpect(model().attributeHasFieldErrors("user", "password"))
                     .andExpect(view().name("user/update"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);

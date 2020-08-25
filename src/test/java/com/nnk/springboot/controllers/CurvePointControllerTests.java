@@ -110,10 +110,8 @@ public class CurvePointControllerTests {
         //ARRANGE
         CurvePoint curvePointTest = new CurvePoint();
         curvePointTest.setCurveId(10);
-        curvePointTest.setAsOfDate(valueOf("2020-08-10 10:20:30.0"));
         curvePointTest.setTerm(10d);
         curvePointTest.setValue(30d);
-        curvePointTest.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
 
         doReturn(curvePointTest).when(mockCurvePointService).createCurvePoint(curvePointTest);
 
@@ -140,12 +138,12 @@ public class CurvePointControllerTests {
         //ACT & ASSERT
         try {
             // Error in curveId (mandatory field)
-            mockMvc.perform(post("/curvePoint/update/1")
+            mockMvc.perform(post("/curvePoint/validate")
                     .param("curveId", "")
                     .param("term", "10")
                     .param("value", "30"))
                     .andExpect(model().attributeHasFieldErrors("curvePoint", "curveId"))
-                    .andExpect(view().name("curvePoint/update"));
+                    .andExpect(view().name("curvePoint/add"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }

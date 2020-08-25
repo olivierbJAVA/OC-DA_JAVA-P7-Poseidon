@@ -47,21 +47,21 @@ public class RatingControllerTests {
         Rating ratingTest1 = new Rating();
         ratingTest1.setId(1);
         ratingTest1.setMoodysRating("Moodys Rating");
-        ratingTest1.setSandPRating("Sand PRating");
+        ratingTest1.setSandPRating("SandP Rating");
         ratingTest1.setFitchRating("Fitch Rating");
         ratingTest1.setOrderNumber(10);
 
         Rating ratingTest2 = new Rating();
         ratingTest2.setId(2);
         ratingTest2.setMoodysRating("Moodys Rating");
-        ratingTest2.setSandPRating("Sand PRating");
+        ratingTest2.setSandPRating("SandP Rating");
         ratingTest2.setFitchRating("Fitch Rating");
         ratingTest2.setOrderNumber(20);
 
         Rating ratingTest3 = new Rating();
         ratingTest3.setId(3);
         ratingTest3.setMoodysRating("Moodys Rating");
-        ratingTest3.setSandPRating("Sand PRating");
+        ratingTest3.setSandPRating("SandP Rating");
         ratingTest3.setFitchRating("Fitch Rating");
         ratingTest3.setOrderNumber(30);
 
@@ -107,7 +107,7 @@ public class RatingControllerTests {
         Rating ratingTest = new Rating();
         ratingTest.setId(1);
         ratingTest.setMoodysRating("Moodys Rating");
-        ratingTest.setSandPRating("Sand PRating");
+        ratingTest.setSandPRating("SandP Rating");
         ratingTest.setFitchRating("Fitch Rating");
         ratingTest.setOrderNumber(10);
 
@@ -117,7 +117,7 @@ public class RatingControllerTests {
         try {
             mockMvc.perform(post("/rating/validate")
                     .param("moodysRating", "MoodysRating")
-                    .param("sandPRating", "Sand PRating")
+                    .param("sandPRating", "SandP Rating")
                     .param("fitchRating", "Fitch Rating")
                     .param("orderNumber", "10"))
                     .andExpect(status().is3xxRedirection())
@@ -137,13 +137,13 @@ public class RatingControllerTests {
         //ACT & ASSERT
         try {
             // Error in moodysRating (mandatory field)
-            mockMvc.perform(post("/rating/update/1")
+            mockMvc.perform(post("/rating/validate")
                     .param("moodysRating", "")
-                    .param("sandPRating", "Sand PRating")
+                    .param("sandPRating", "SandP Rating")
                     .param("fitchRating", "Fitch Rating")
                     .param("orderNumber", "10"))
                     .andExpect(model().attributeHasFieldErrors("rating", "moodysRating"))
-                    .andExpect(view().name("rating/update"));
+                    .andExpect(view().name("rating/add"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }
@@ -158,7 +158,7 @@ public class RatingControllerTests {
         Rating ratingTest = new Rating();
         ratingTest.setId(1);
         ratingTest.setMoodysRating("Moodys Rating");
-        ratingTest.setSandPRating("Sand PRating");
+        ratingTest.setSandPRating("SandP Rating");
         ratingTest.setFitchRating("Fitch Rating");
         ratingTest.setOrderNumber(10);
 
@@ -184,7 +184,7 @@ public class RatingControllerTests {
         Rating ratingTest = new Rating();
         ratingTest.setId(1);
         ratingTest.setMoodysRating("Moodys Rating");
-        ratingTest.setSandPRating("Sand PRating");
+        ratingTest.setSandPRating("SandP Rating");
         ratingTest.setFitchRating("Fitch Rating");
         ratingTest.setOrderNumber(10);
 
@@ -195,7 +195,7 @@ public class RatingControllerTests {
             mockMvc.perform(post("/rating/update/1")
                     .param("id","1")
                     .param("moodysRating", "Moodys Rating")
-                    .param("sandPRating", "Sand PRating")
+                    .param("sandPRating", "SandP Rating")
                     .param("fitchRating", "Fitch Rating")
                     .param("orderNumber", "10"))
                     .andExpect(status().is3xxRedirection())
@@ -218,7 +218,7 @@ public class RatingControllerTests {
             mockMvc.perform(post("/rating/update/1")
                     .param("id","1")
                     .param("moodysRating", "")
-                    .param("sandPRating", "Sand PRating")
+                    .param("sandPRating", "SandP Rating")
                     .param("fitchRating", "Fitch Rating")
                     .param("orderNumber", "10"))
                     .andExpect(model().attributeHasFieldErrors("rating", "moodysRating"))

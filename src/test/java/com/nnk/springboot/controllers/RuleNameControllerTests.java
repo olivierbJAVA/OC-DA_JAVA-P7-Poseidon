@@ -50,7 +50,7 @@ public class RuleNameControllerTests {
         ruleNameTest1.setDescription("Description");
         ruleNameTest1.setJson("Json");
         ruleNameTest1.setTemplate("Template");
-        ruleNameTest1.setSqlStr("SQL ");
+        ruleNameTest1.setSqlStr("SQL");
         ruleNameTest1.setSqlPart("SQL Part");
 
         RuleName ruleNameTest2 = new RuleName();
@@ -59,7 +59,7 @@ public class RuleNameControllerTests {
         ruleNameTest2.setDescription("Description");
         ruleNameTest2.setJson("Json");
         ruleNameTest2.setTemplate("Template");
-        ruleNameTest2.setSqlStr("SQL ");
+        ruleNameTest2.setSqlStr("SQL");
         ruleNameTest2.setSqlPart("SQL Part");
 
         RuleName ruleNameTest3 = new RuleName();
@@ -68,13 +68,13 @@ public class RuleNameControllerTests {
         ruleNameTest3.setDescription("Description");
         ruleNameTest3.setJson("Json");
         ruleNameTest3.setTemplate("Template");
-        ruleNameTest3.setSqlStr("SQL ");
+        ruleNameTest3.setSqlStr("SQL");
         ruleNameTest3.setSqlPart("SQL Part");
 
         List<RuleName> allRuleNamesToFind = new ArrayList<>();
         allRuleNamesToFind.add(ruleNameTest1);
-        allRuleNamesToFind.add(ruleNameTest1);
-        allRuleNamesToFind.add(ruleNameTest1);
+        allRuleNamesToFind.add(ruleNameTest2);
+        allRuleNamesToFind.add(ruleNameTest3);
 
         doReturn(allRuleNamesToFind).when(mockRuleNameService).findAllRuleNames();
 
@@ -115,7 +115,7 @@ public class RuleNameControllerTests {
         ruleNameTest.setDescription("Description");
         ruleNameTest.setJson("Json");
         ruleNameTest.setTemplate("Template");
-        ruleNameTest.setSqlStr("SQL ");
+        ruleNameTest.setSqlStr("SQL");
         ruleNameTest.setSqlPart("SQL Part");
 
         doReturn(ruleNameTest).when(mockRuleNameService).createRuleName(ruleNameTest);
@@ -127,7 +127,7 @@ public class RuleNameControllerTests {
                     .param("description", "Description")
                     .param("json", "Json")
                     .param("template", "Template")
-                    .param("sqlStr", "SQL ")
+                    .param("sqlStr", "SQL")
                     .param("sqlPart", "SQL Part"))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(header().string("Location", "/ruleName/list"));
@@ -146,15 +146,15 @@ public class RuleNameControllerTests {
         //ACT & ASSERT
         try {
             // Error in name (mandatory field)
-            mockMvc.perform(post("/ruleName/update/1")
+            mockMvc.perform(post("/ruleName/validate")
                     .param("name", "")
                     .param("description", "Description")
                     .param("json", "Json")
                     .param("template", "Template")
-                    .param("sqlStr", "SQL ")
+                    .param("sqlStr", "SQL")
                     .param("sqlPart", "SQL Part"))
                     .andExpect(model().attributeHasFieldErrors("ruleName", "name"))
-                    .andExpect(view().name("ruleName/update"));
+                    .andExpect(view().name("ruleName/add"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }
@@ -172,7 +172,7 @@ public class RuleNameControllerTests {
         ruleNameTest.setDescription("Description");
         ruleNameTest.setJson("Json");
         ruleNameTest.setTemplate("Template");
-        ruleNameTest.setSqlStr("SQL ");
+        ruleNameTest.setSqlStr("SQL");
         ruleNameTest.setSqlPart("SQL Part");
 
         doReturn(ruleNameTest).when(mockRuleNameService).findRuleNameById(1);
@@ -200,7 +200,7 @@ public class RuleNameControllerTests {
         ruleNameTest.setDescription("Description");
         ruleNameTest.setJson("Json");
         ruleNameTest.setTemplate("Template");
-        ruleNameTest.setSqlStr("SQL ");
+        ruleNameTest.setSqlStr("SQL");
         ruleNameTest.setSqlPart("SQL Part");
 
         doReturn(ruleNameTest).when(mockRuleNameService).findRuleNameById(1);
@@ -214,7 +214,7 @@ public class RuleNameControllerTests {
                     .param("description", "Description")
                     .param("json", "Json")
                     .param("template", "Template")
-                    .param("sqlStr", "SQL ")
+                    .param("sqlStr", "SQL")
                     .param("sqlPart", "SQL Part"))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(header().string("Location", "/ruleName/list"));
@@ -239,7 +239,7 @@ public class RuleNameControllerTests {
                     .param("description", "Description")
                     .param("json", "Json")
                     .param("template", "Template")
-                    .param("sqlStr", "SQL ")
+                    .param("sqlStr", "SQL")
                     .param("sqlPart", "SQL Part"))
                     .andExpect(model().attributeHasFieldErrors("ruleName", "name"))
                     .andExpect(view().name("ruleName/update"));

@@ -62,7 +62,7 @@ public class TradeControllerTests {
         tradeTest1.setCreationName("CreationName");
         tradeTest1.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
         tradeTest1.setRevisionName("RevisionName");
-        tradeTest1.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
+        tradeTest1.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
         tradeTest1.setDealName("DealName");
         tradeTest1.setDealType("DealType");
         tradeTest1.setSourceListId("SourceListId");
@@ -85,7 +85,7 @@ public class TradeControllerTests {
         tradeTest2.setCreationName("CreationName");
         tradeTest2.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
         tradeTest2.setRevisionName("RevisionName");
-        tradeTest2.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
+        tradeTest2.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
         tradeTest2.setDealName("DealName");
         tradeTest2.setDealType("DealType");
         tradeTest2.setSourceListId("SourceListId");
@@ -108,7 +108,7 @@ public class TradeControllerTests {
         tradeTest3.setCreationName("CreationName");
         tradeTest3.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
         tradeTest3.setRevisionName("RevisionName");
-        tradeTest3.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
+        tradeTest3.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
         tradeTest3.setDealName("DealName");
         tradeTest3.setDealType("DealType");
         tradeTest3.setSourceListId("SourceListId");
@@ -116,8 +116,8 @@ public class TradeControllerTests {
 
         List<Trade> allTradesToFind = new ArrayList<>();
         allTradesToFind.add(tradeTest1);
-        allTradesToFind.add(tradeTest1);
-        allTradesToFind.add(tradeTest1);
+        allTradesToFind.add(tradeTest2);
+        allTradesToFind.add(tradeTest3);
 
         doReturn(allTradesToFind).when(mockTradeService).findAllTrades();
 
@@ -160,15 +160,12 @@ public class TradeControllerTests {
         tradeTest.setSellQuantity(100d);
         tradeTest.setBuyPrice(123.00d);
         tradeTest.setSellPrice(456.12d);
-        tradeTest.setTradeDate(valueOf("2020-08-10 10:20:30.0"));
         tradeTest.setSecurity("Security");
         tradeTest.setStatus("Status");
         tradeTest.setTrader("Trader");
         tradeTest.setBenchmark("Benchmark");
         tradeTest.setBook("Book");
         tradeTest.setCreationName("CreationName");
-        tradeTest.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
-        tradeTest.setRevisionName("RevisionName");
         tradeTest.setDealName("DealName");
         tradeTest.setDealType("DealType");
         tradeTest.setSourceListId("SourceListId");
@@ -199,12 +196,12 @@ public class TradeControllerTests {
         //ACT & ASSERT
         try {
             // Error in account (mandatory field)
-            mockMvc.perform(post("/trade/update/1")
+            mockMvc.perform(post("/trade/validate")
                     .param("account", "")
                     .param("type", "Type")
                     .param("buyQuantity", "1000"))
                     .andExpect(model().attributeHasFieldErrors("trade", "account"))
-                    .andExpect(view().name("trade/update"));
+                    .andExpect(view().name("trade/add"));
         } catch (Exception e) {
             logger.error("Error in MockMvc", e);
         }
@@ -232,7 +229,6 @@ public class TradeControllerTests {
         tradeTest.setBook("Book");
         tradeTest.setCreationName("CreationName");
         tradeTest.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
-        tradeTest.setRevisionName("RevisionName");
         tradeTest.setDealName("DealName");
         tradeTest.setDealType("DealType");
         tradeTest.setSourceListId("SourceListId");
@@ -265,7 +261,6 @@ public class TradeControllerTests {
         tradeTest.setSellQuantity(100d);
         tradeTest.setBuyPrice(123.00d);
         tradeTest.setSellPrice(456.12d);
-        tradeTest.setTradeDate(valueOf("2020-08-10 10:20:30.0"));
         tradeTest.setSecurity("Security");
         tradeTest.setStatus("Status");
         tradeTest.setTrader("Trader");
@@ -274,7 +269,6 @@ public class TradeControllerTests {
         tradeTest.setCreationName("CreationName");
         tradeTest.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
         tradeTest.setRevisionName("RevisionName");
-        tradeTest.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
         tradeTest.setDealName("DealName");
         tradeTest.setDealType("DealType");
         tradeTest.setSourceListId("SourceListId");
