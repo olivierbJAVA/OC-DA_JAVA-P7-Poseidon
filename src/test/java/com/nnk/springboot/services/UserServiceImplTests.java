@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
@@ -97,6 +96,34 @@ public class UserServiceImplTests {
             userImplServiceUnderTest.findUserById(1);
         });
         verify(mockUserRepository, times(1)).findById(1);
+    }
+
+    @Test
+    public void findUserByUsername_whenUsernameExist() {
+        // ARRANGE
+        User userToFind = new User("user", "%Password1", "User", "USER");
+        userToFind.setId(1);
+        doReturn(userToFind).when(mockUserRepository).findUserByUsername(userToFind.getUsername());
+
+        // ACT
+        User userFound = userImplServiceUnderTest.findUserByUsername(userToFind.getUsername());
+
+        // ASSERT
+        verify(mockUserRepository, times(1)).findUserByUsername(userToFind.getUsername());
+        assertEquals(userToFind, userFound);
+    }
+
+    @Test
+    public void findUserByUsername_whenUsernameNotExist() {
+        // ARRANGE
+        doReturn(null).when(mockUserRepository).findUserByUsername("UserNameNotExist");
+
+        // ACT
+        User userUsernameNotExist = userImplServiceUnderTest.findUserByUsername("UserNameNotExist");
+
+        // ASSERT
+        assertNull(userUsernameNotExist);
+        verify(mockUserRepository, times(1)).findUserByUsername("UserNameNotExist");
     }
 
     @Test
