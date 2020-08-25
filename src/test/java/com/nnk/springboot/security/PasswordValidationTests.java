@@ -46,6 +46,7 @@ public class PasswordValidationTests {
         userTest.setFullname("User");
         userTest.setRole("USER");
 
+        doReturn(null).when(mockUserService).findUserByUsername("user");
         doReturn(userTest).when(mockUserService).createUser(userTest);
 
         //ACT & ASSERT
@@ -62,17 +63,19 @@ public class PasswordValidationTests {
         }
 
         verify(mockUserService, times(1)).createUser(any(User.class));
+        verify(mockUserService, times(1)).findUserByUsername("user");
     }
 
     // @PostMapping(value = "/user/validate"")
     @Test
     public void validate_whenPasswordLessThanEightCharacters() {
         //ARRANGE
+        doReturn(null).when(mockUserService).findUserByUsername("user");
 
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/user/update/1")
-                    .param("username", "")
+                    .param("username", "user")
                     .param("password", "%Passw1") // password contains only 7 characters
                     .param("fullname", "User")
                     .param("role", "USER"))
@@ -83,16 +86,18 @@ public class PasswordValidationTests {
         }
 
         verify(mockUserService, never()).createUser(any(User.class));
+        verify(mockUserService, times(1)).findUserByUsername("user");
     }
 
     @Test
     public void validate_whenDigitIsMissingInPassword() {
         //ARRANGE
+        doReturn(null).when(mockUserService).findUserByUsername("user");
 
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/user/update/1")
-                    .param("username", "")
+                    .param("username", "user")
                     .param("password", "%Password") // digit is missing in password
                     .param("fullname", "User")
                     .param("role", "USER"))
@@ -103,16 +108,18 @@ public class PasswordValidationTests {
         }
 
         verify(mockUserService, never()).createUser(any(User.class));
+        verify(mockUserService, times(1)).findUserByUsername("user");
     }
 
     @Test
     public void validate_whenSpecialCharacterIsMissingInPassword() {
         //ARRANGE
+        doReturn(null).when(mockUserService).findUserByUsername("user");
 
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/user/update/1")
-                    .param("username", "")
+                    .param("username", "user")
                     .param("password", "Password1") // special character is missing in password
                     .param("fullname", "User")
                     .param("role", "USER"))
@@ -123,16 +130,18 @@ public class PasswordValidationTests {
         }
 
         verify(mockUserService, never()).createUser(any(User.class));
+        verify(mockUserService, times(1)).findUserByUsername("user");
     }
 
     @Test
     public void validate_whenUpperCaseIsMissing() {
         //ARRANGE
+        doReturn(null).when(mockUserService).findUserByUsername("user");
 
         //ACT & ASSERT
         try {
             mockMvc.perform(post("/user/update/1")
-                    .param("username", "")
+                    .param("username", "user")
                     .param("password", "%password1") // upper case letter is missing in password
                     .param("fullname", "User")
                     .param("role", "USER"))
@@ -143,5 +152,6 @@ public class PasswordValidationTests {
         }
 
         verify(mockUserService, never()).createUser(any(User.class));
+        verify(mockUserService, times(1)).findUserByUsername("user");
     }
 }

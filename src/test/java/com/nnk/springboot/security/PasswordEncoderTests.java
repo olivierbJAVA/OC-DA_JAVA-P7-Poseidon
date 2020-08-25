@@ -21,11 +21,11 @@ public class PasswordEncoderTests {
     public void testPassword_whenPasswordIsCorrect() {
         // ARRANGE
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String rawPassword = "user";
+        String rawPassword = "%Password1";
 
         // ACT
         String hashedPassword = encoder.encode(rawPassword);
-        System.out.println("[" + hashedPassword + "]");
+
         // ASSERT
         assertTrue(encoder.matches(rawPassword, hashedPassword));
     }
@@ -34,11 +34,11 @@ public class PasswordEncoderTests {
     public void testPassword_whenPasswordIsWrong() {
         // ARRANGE
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String rawPassword = "CorrectPassword";
+        String rawPassword = "%CorrectPassword1";
 
         // ACT
         String hashedPassword = encoder.encode(rawPassword);
-        System.out.println("[" + hashedPassword + "]");
+
         // ASSERT
         assertFalse(encoder.matches("WrongPassword", hashedPassword));
     }
