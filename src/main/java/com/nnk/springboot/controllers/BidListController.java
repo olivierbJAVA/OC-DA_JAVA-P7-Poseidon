@@ -56,7 +56,7 @@ public class BidListController {
      * @return The name of the View
      */
     @GetMapping("/bidList/add")
-    public String addBidForm(BidList bidList) {
+    public String addBidListForm(BidList bidList) {
 
         logger.info("Request : GET /bidList/add");
         logger.info("Success : returning 'bidList/add' view");
@@ -121,7 +121,7 @@ public class BidListController {
      * @return The name of the View
      */
     @PostMapping("/bidList/update/{id}")
-    public String updateBid(@Valid BidList bidList, BindingResult result) {
+    public String updateBidList(@Valid BidList bidList, BindingResult result) {
 
         logger.info("Request : POST /bidList/update/{}", bidList.getBidListId());
 
@@ -151,7 +151,7 @@ public class BidListController {
      * @return The name of the View
      */
     @GetMapping("/bidList/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id) {
+    public String deleteBidList(@PathVariable("id") Integer id) {
 
         logger.info("Request : GET /bidList/delete/{}", id);
 
