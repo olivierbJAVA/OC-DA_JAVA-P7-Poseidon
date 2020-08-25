@@ -19,20 +19,21 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @ActiveProfiles("test")
 @SpringBootTest
-@Sql({"/schema-test.sql"})
+@Sql("/schema-test.sql")
 public class TradeServiceImplITests {
 
     @Autowired
     private TradeServiceImpl tradeServiceImplUnderTest;
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void createTrade() {
         // ARRANGE
         Trade tradeToCreate = new Trade("Trade Account", "Type", 1000d);
         tradeToCreate.setSellQuantity(100d);
         tradeToCreate.setBuyPrice(123.00d);
         tradeToCreate.setSellPrice(456.12d);
-        tradeToCreate.setTradeDate(valueOf("2020-08-10 10:20:30.0"));
+        tradeToCreate.setTradeDate(valueOf("2020-07-23 10:20:30.0"));
         tradeToCreate.setSecurity("Security");
         tradeToCreate.setStatus("Status");
         tradeToCreate.setTrader("Trader");
@@ -40,8 +41,6 @@ public class TradeServiceImplITests {
         tradeToCreate.setBook("Book");
         tradeToCreate.setCreationName("CreationName");
         tradeToCreate.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
-        tradeToCreate.setRevisionName("RevisionName");
-        tradeToCreate.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
         tradeToCreate.setDealName("DealName");
         tradeToCreate.setDealType("DealType");
         tradeToCreate.setSourceListId("SourceListId");
@@ -75,6 +74,7 @@ public class TradeServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void updateTrade() {
         // ARRANGE
         Trade tradeToUpdate = new Trade("Trade Account", "Type", 1000d);
@@ -90,7 +90,7 @@ public class TradeServiceImplITests {
         tradeToUpdate.setCreationName("CreationName");
         tradeToUpdate.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
         tradeToUpdate.setRevisionName("RevisionName");
-        tradeToUpdate.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
+        tradeToUpdate.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
         tradeToUpdate.setDealName("DealName");
         tradeToUpdate.setDealType("DealType");
         tradeToUpdate.setSourceListId("SourceListId");
@@ -125,6 +125,7 @@ public class TradeServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void findTradeById() {
         // ARRANGE
         Trade tradeToFind = new Trade("Trade Account", "Type", 1000d);
@@ -140,7 +141,7 @@ public class TradeServiceImplITests {
         tradeToFind.setCreationName("CreationName");
         tradeToFind.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
         tradeToFind.setRevisionName("RevisionName");
-        tradeToFind.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
+        tradeToFind.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
         tradeToFind.setDealName("DealName");
         tradeToFind.setDealType("DealType");
         tradeToFind.setSourceListId("SourceListId");
@@ -175,6 +176,7 @@ public class TradeServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void findAllTrades() {
         Trade tradeToFind1 = new Trade("Trade Account", "Type", 1000d);
         tradeToFind1.setSellQuantity(100d);
@@ -189,7 +191,7 @@ public class TradeServiceImplITests {
         tradeToFind1.setCreationName("CreationName");
         tradeToFind1.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
         tradeToFind1.setRevisionName("RevisionName");
-        tradeToFind1.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
+        tradeToFind1.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
         tradeToFind1.setDealName("DealName");
         tradeToFind1.setDealType("DealType");
         tradeToFind1.setSourceListId("SourceListId");
@@ -209,7 +211,7 @@ public class TradeServiceImplITests {
         tradeToFind2.setCreationName("CreationName");
         tradeToFind2.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
         tradeToFind2.setRevisionName("RevisionName");
-        tradeToFind2.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
+        tradeToFind2.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
         tradeToFind2.setDealName("DealName");
         tradeToFind2.setDealType("DealType");
         tradeToFind2.setSourceListId("SourceListId");
@@ -229,7 +231,7 @@ public class TradeServiceImplITests {
         tradeToFind3.setCreationName("CreationName");
         tradeToFind3.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
         tradeToFind3.setRevisionName("RevisionName");
-        tradeToFind3.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
+        tradeToFind3.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
         tradeToFind3.setDealName("DealName");
         tradeToFind3.setDealType("DealType");
         tradeToFind3.setSourceListId("SourceListId");
@@ -244,6 +246,7 @@ public class TradeServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void deleteTradeById() {
         // ARRANGE
         Trade tradeToDelete = new Trade("Trade Account", "Type", 1000d);
@@ -259,7 +262,7 @@ public class TradeServiceImplITests {
         tradeToDelete.setCreationName("CreationName");
         tradeToDelete.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
         tradeToDelete.setRevisionName("RevisionName");
-        tradeToDelete.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
+        tradeToDelete.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
         tradeToDelete.setDealName("DealName");
         tradeToDelete.setDealType("DealType");
         tradeToDelete.setSourceListId("SourceListId");

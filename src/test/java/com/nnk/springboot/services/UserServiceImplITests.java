@@ -18,16 +18,17 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @ActiveProfiles("test")
 @SpringBootTest
-@Sql({"/schema-test.sql"})
+@Sql("/schema-test.sql")
 public class UserServiceImplITests {
 
     @Autowired
     private UserServiceImpl userServiceImplUnderTest;
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void createUser() {
         // ARRANGE
-        User userToCreate = new User("Username", "Password", "Fullname", "Role"  );
+        User userToCreate = new User("user", "%Password1", "User", "USER");
             
         // ACT
         User userCreated = userServiceImplUnderTest.createUser(userToCreate);
@@ -41,14 +42,15 @@ public class UserServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void updateUser() {
         // ARRANGE
-        User userToUpdate = new User("Username", "Password", "Fullname", "Role"  );
+        User userToUpdate = new User("user", "%Password1", "User", "USER");
 
         userServiceImplUnderTest.createUser(userToUpdate);
 
         // ACT
-        userToUpdate.setRole("UpdatedRole");
+        userToUpdate.setFullname("UserUpdated");
         User userUpdated = userServiceImplUnderTest.updateUser(userToUpdate);
 
         // ASSERT
@@ -59,9 +61,10 @@ public class UserServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void findUserById() {
         // ARRANGE
-        User userToFind = new User("Username", "Password", "Fullname", "Role"  );
+        User userToFind = new User("user", "%Password1", "User", "USER");
         userToFind = userServiceImplUnderTest.createUser(userToFind);
 
         // ACT
@@ -76,15 +79,16 @@ public class UserServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void findAllUsers() {
         // ARRANGE
-        User userToFind1 = new User("Username1", "Password1", "Fullname1", "Role1"  );
+        User userToFind1 = new User("user1", "%Password1", "User1", "USER");
         userServiceImplUnderTest.createUser(userToFind1);
 
-        User userToFind2 = new User("Username2", "Password2", "Fullname2", "Role2"  );
+        User userToFind2 = new User("user2", "%Password2", "User2", "USER");
         userServiceImplUnderTest.createUser(userToFind2);
 
-        User userToFind3 = new User("Username3", "Password3", "Fullname3", "Role3"  );
+        User userToFind3 = new User("user3", "%Password3", "User3", "USER");
         userServiceImplUnderTest.createUser(userToFind3);
 
         // ACT
@@ -95,9 +99,10 @@ public class UserServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void deleteUserById() {
         // ARRANGE
-        User userToDelete = new User("Username", "Password", "Fullname", "Role"  );
+        User userToDelete = new User("user", "%Password1", "User", "USER");
         userToDelete = userServiceImplUnderTest.createUser(userToDelete);
 
         // ACT

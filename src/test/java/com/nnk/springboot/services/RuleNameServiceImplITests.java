@@ -18,13 +18,14 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @ActiveProfiles("test")
 @SpringBootTest
-@Sql({"/schema-test.sql"})
+@Sql("/schema-test.sql")
 public class RuleNameServiceImplITests {
 
     @Autowired
     private RuleNameServiceImpl ruleNameServiceImplUnderTest;
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void createRuleName() {
         // ARRANGE
         RuleName ruleNameToCreate = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
@@ -43,6 +44,7 @@ public class RuleNameServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void updateRuleName() {
         // ARRANGE
         RuleName ruleNameToUpdate = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
@@ -50,18 +52,19 @@ public class RuleNameServiceImplITests {
 
         // ACT
         ruleNameToUpdate.setName("Rule Name Update");
-        RuleName ruleNameToUpdated = ruleNameServiceImplUnderTest.updateRuleName(ruleNameToUpdate);
+        RuleName ruleNameUpdated = ruleNameServiceImplUnderTest.updateRuleName(ruleNameToUpdate);
 
         // ASSERT
-        assertEquals(ruleNameToUpdate.getName(), ruleNameToUpdated.getName());
-        assertEquals(ruleNameToUpdate.getDescription(), ruleNameToUpdated.getDescription());
-        assertEquals(ruleNameToUpdate.getJson(), ruleNameToUpdated.getJson());
-        assertEquals(ruleNameToUpdate.getTemplate(), ruleNameToUpdated.getTemplate());
-        assertEquals(ruleNameToUpdate.getSqlStr(), ruleNameToUpdated.getSqlStr());
-        assertEquals(ruleNameToUpdate.getSqlPart(), ruleNameToUpdated.getSqlPart());
+        assertEquals(ruleNameToUpdate.getName(), ruleNameUpdated.getName());
+        assertEquals(ruleNameToUpdate.getDescription(), ruleNameUpdated.getDescription());
+        assertEquals(ruleNameToUpdate.getJson(), ruleNameUpdated.getJson());
+        assertEquals(ruleNameToUpdate.getTemplate(), ruleNameUpdated.getTemplate());
+        assertEquals(ruleNameToUpdate.getSqlStr(), ruleNameUpdated.getSqlStr());
+        assertEquals(ruleNameToUpdate.getSqlPart(), ruleNameUpdated.getSqlPart());
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void findRuleNameById() {
         // ARRANGE
         RuleName ruleNameToFind = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
@@ -81,10 +84,11 @@ public class RuleNameServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void findAllRuleNames() {
         // ARRANGE
-        RuleName ruleNameToFind = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
-        ruleNameServiceImplUnderTest.createRuleName(ruleNameToFind);
+        RuleName ruleNameToFind1 = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
+        ruleNameServiceImplUnderTest.createRuleName(ruleNameToFind1);
 
         RuleName ruleNameToFind2 = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
         ruleNameServiceImplUnderTest.createRuleName(ruleNameToFind2);
@@ -100,6 +104,7 @@ public class RuleNameServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void deleteRuleNameById() {
         // ARRANGE
         RuleName ruleNameToDelete = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");

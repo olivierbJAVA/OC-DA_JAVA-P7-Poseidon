@@ -18,16 +18,17 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @ActiveProfiles("test")
 @SpringBootTest
-@Sql({"/schema-test.sql"})
+@Sql("/schema-test.sql")
 public class RatingServiceImplITests {
 
     @Autowired
     private RatingServiceImpl ratingServiceImplUnderTest;
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void createRating() {
         // ARRANGE
-        Rating ratingToCreate = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToCreate = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
 
         // ACT
         Rating ratingCreated = ratingServiceImplUnderTest.createRating(ratingToCreate);
@@ -41,9 +42,10 @@ public class RatingServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void updateRating() {
         // ARRANGE
-        Rating ratingToUpdate = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToUpdate = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingServiceImplUnderTest.createRating(ratingToUpdate);
 
         // ACT
@@ -58,9 +60,10 @@ public class RatingServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void findRatingById() {
         // ARRANGE
-        Rating ratingToFind = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToFind = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingToFind = ratingServiceImplUnderTest.createRating(ratingToFind);
 
         // ACT
@@ -75,15 +78,16 @@ public class RatingServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void findAllRatings() {
         // ARRANGE
-        Rating ratingToFind1 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToFind1 = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingServiceImplUnderTest.createRating(ratingToFind1);
 
-        Rating ratingToFind2 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToFind2 = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingServiceImplUnderTest.createRating(ratingToFind2);
 
-        Rating ratingToFind3 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToFind3 = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingServiceImplUnderTest.createRating(ratingToFind3);
 
         // ACT
@@ -94,9 +98,10 @@ public class RatingServiceImplITests {
     }
 
     @Test
+    @Sql("/cleandb-test.sql")
     public void deleteRatingById() {
         // ARRANGE
-        Rating ratingToDelete = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToDelete = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingToDelete = ratingServiceImplUnderTest.createRating(ratingToDelete);
 
         // ACT
