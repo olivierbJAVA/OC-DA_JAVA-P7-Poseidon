@@ -55,15 +55,15 @@ public class RuleNameRepositoryTests {
 
         // ACT
         ruleNameToUpdate.setName("Rule Name Update");
-        RuleName ruleNameToUpdated = ruleNameRepositoryUnderTest.save(ruleNameToUpdate);
+        RuleName ruleNameUpdated = ruleNameRepositoryUnderTest.save(ruleNameToUpdate);
 
         // ASSERT
-        assertEquals(ruleNameToUpdate.getName(), ruleNameToUpdated.getName());
-        assertEquals(ruleNameToUpdate.getDescription(), ruleNameToUpdated.getDescription());
-        assertEquals(ruleNameToUpdate.getJson(), ruleNameToUpdated.getJson());
-        assertEquals(ruleNameToUpdate.getTemplate(), ruleNameToUpdated.getTemplate());
-        assertEquals(ruleNameToUpdate.getSqlStr(), ruleNameToUpdated.getSqlStr());
-        assertEquals(ruleNameToUpdate.getSqlPart(), ruleNameToUpdated.getSqlPart());
+        assertEquals(ruleNameToUpdate.getName(), ruleNameUpdated.getName());
+        assertEquals(ruleNameToUpdate.getDescription(), ruleNameUpdated.getDescription());
+        assertEquals(ruleNameToUpdate.getJson(), ruleNameUpdated.getJson());
+        assertEquals(ruleNameToUpdate.getTemplate(), ruleNameUpdated.getTemplate());
+        assertEquals(ruleNameToUpdate.getSqlStr(), ruleNameUpdated.getSqlStr());
+        assertEquals(ruleNameToUpdate.getSqlPart(), ruleNameUpdated.getSqlPart());
     }
 
     @Test

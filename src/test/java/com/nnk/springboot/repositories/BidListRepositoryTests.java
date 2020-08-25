@@ -34,25 +34,23 @@ public class BidListRepositoryTests {
     @Test
     public void saveBidList() {
         // ARRANGE
-        BidList bidListToSave = new BidList("Account Test", "Type Test", 10d);
+        BidList bidListToSave = new BidList("Account", "Type", 10d);
         bidListToSave.setAskQuantity(30d);
         bidListToSave.setBid(123.45d);
         bidListToSave.setAsk(321.54d);
-        bidListToSave.setBenchmark("Benchmark Test");
-        bidListToSave.setBidListDate(valueOf("2020-08-10 10:20:30.0"));
-        bidListToSave.setCommentary("Commentary Test");
-        bidListToSave.setSecurity("Security Test");
-        bidListToSave.setStatus("StatusTest");
-        bidListToSave.setTrader("Trader Test");
-        bidListToSave.setBook("Book Test");
-        bidListToSave.setCreationName("CreationName Test");
+        bidListToSave.setBenchmark("Benchmark");
+        bidListToSave.setBidListDate(valueOf("2020-07-23 10:20:30.0"));
+        bidListToSave.setCommentary("Commentary");
+        bidListToSave.setSecurity("Security");
+        bidListToSave.setStatus("Status");
+        bidListToSave.setTrader("Trader");
+        bidListToSave.setBook("Book");
+        bidListToSave.setCreationName("CreationName");
         bidListToSave.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
-        bidListToSave.setRevisionName("RevisionName Test");
-        bidListToSave.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
-        bidListToSave.setDealName("DealName Test");
-        bidListToSave.setDealType("DealType Test");
-        bidListToSave.setSourceListId("SourceListId Test");
-        bidListToSave.setSide("Side Test");
+        bidListToSave.setDealName("DealName");
+        bidListToSave.setDealType("DealType");
+        bidListToSave.setSourceListId("SourceListId");
+        bidListToSave.setSide("Side");
 
         // ACT
         BidList bidListSaved = bidListRepositoryUnderTest.save(bidListToSave);
@@ -85,25 +83,25 @@ public class BidListRepositoryTests {
     @Test
     public void updateBidList() {
         // ARRANGE
-        BidList bidListToUpdate = new BidList("Account Test", "Type Test", 10d);
+        BidList bidListToUpdate = new BidList("Account", "Type", 10d);
         bidListToUpdate.setAskQuantity(30d);
         bidListToUpdate.setBid(123.45d);
         bidListToUpdate.setAsk(321.54d);
-        bidListToUpdate.setBenchmark("Benchmark Test");
+        bidListToUpdate.setBenchmark("Benchmark");
         bidListToUpdate.setBidListDate(valueOf("2020-08-10 10:20:30.0"));
-        bidListToUpdate.setCommentary("Commentary Test");
-        bidListToUpdate.setSecurity("Security Test");
+        bidListToUpdate.setCommentary("Commentary");
+        bidListToUpdate.setSecurity("Security");
         bidListToUpdate.setStatus("StatusTest");
-        bidListToUpdate.setTrader("Trader Test");
-        bidListToUpdate.setBook("Book Test");
-        bidListToUpdate.setCreationName("CreationName Test");
+        bidListToUpdate.setTrader("Trader");
+        bidListToUpdate.setBook("Book");
+        bidListToUpdate.setCreationName("CreationName");
         bidListToUpdate.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
-        bidListToUpdate.setRevisionName("RevisionName Test");
-        bidListToUpdate.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
-        bidListToUpdate.setDealName("DealName Test");
-        bidListToUpdate.setDealType("DealType Test");
-        bidListToUpdate.setSourceListId("SourceListId Test");
-        bidListToUpdate.setSide("Side Test");
+        bidListToUpdate.setRevisionName("RevisionName");
+        bidListToUpdate.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
+        bidListToUpdate.setDealName("DealName");
+        bidListToUpdate.setDealType("DealType");
+        bidListToUpdate.setSourceListId("SourceListId");
+        bidListToUpdate.setSide("Side");
         bidListRepositoryUnderTest.save(bidListToUpdate);
 
         // ACT
@@ -137,25 +135,25 @@ public class BidListRepositoryTests {
     @Test
     public void findBidListById() {
         // ARRANGE
-        BidList bidListToFind = new BidList("Account Test", "Type Test", 10d);
+        BidList bidListToFind = new BidList("Account", "Type", 10d);
         bidListToFind.setAskQuantity(30d);
         bidListToFind.setBid(123.45d);
         bidListToFind.setAsk(321.54d);
-        bidListToFind.setBenchmark("Benchmark Test");
+        bidListToFind.setBenchmark("Benchmark");
         bidListToFind.setBidListDate(valueOf("2020-08-10 10:20:30.0"));
-        bidListToFind.setCommentary("Commentary Test");
-        bidListToFind.setSecurity("Security Test");
+        bidListToFind.setCommentary("Commentary");
+        bidListToFind.setSecurity("Security");
         bidListToFind.setStatus("StatusTest");
-        bidListToFind.setTrader("Trader Test");
-        bidListToFind.setBook("Book Test");
-        bidListToFind.setCreationName("CreationName Test");
+        bidListToFind.setTrader("Trader");
+        bidListToFind.setBook("Book");
+        bidListToFind.setCreationName("CreationName");
         bidListToFind.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
-        bidListToFind.setRevisionName("RevisionName Test");
-        bidListToFind.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
-        bidListToFind.setDealName("DealName Test");
-        bidListToFind.setDealType("DealType Test");
-        bidListToFind.setSourceListId("SourceListId Test");
-        bidListToFind.setSide("Side Test");
+        bidListToFind.setRevisionName("RevisionName");
+        bidListToFind.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
+        bidListToFind.setDealName("DealName");
+        bidListToFind.setDealType("DealType");
+        bidListToFind.setSourceListId("SourceListId");
+        bidListToFind.setSide("Side");
         bidListToFind = bidListRepositoryUnderTest.save(bidListToFind);
 
         // ACT
@@ -187,67 +185,67 @@ public class BidListRepositoryTests {
     @Test
     public void findAllBidLists() {
         // ARRANGE
-        BidList bidListToFind1 = new BidList("Account Test", "Type Test", 10d);
+        BidList bidListToFind1 = new BidList("Account", "Type", 10d);
         bidListToFind1.setAskQuantity(30d);
         bidListToFind1.setBid(123.45d);
         bidListToFind1.setAsk(321.54d);
-        bidListToFind1.setBenchmark("Benchmark Test");
+        bidListToFind1.setBenchmark("Benchmark");
         bidListToFind1.setBidListDate(valueOf("2020-08-10 10:20:30.0"));
-        bidListToFind1.setCommentary("Commentary Test");
-        bidListToFind1.setSecurity("Security Test");
+        bidListToFind1.setCommentary("Commentary");
+        bidListToFind1.setSecurity("Security");
         bidListToFind1.setStatus("StatusTest");
-        bidListToFind1.setTrader("Trader Test");
-        bidListToFind1.setBook("Book Test");
-        bidListToFind1.setCreationName("CreationName Test");
+        bidListToFind1.setTrader("Trader");
+        bidListToFind1.setBook("Book");
+        bidListToFind1.setCreationName("CreationName");
         bidListToFind1.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
-        bidListToFind1.setRevisionName("RevisionName Test");
-        bidListToFind1.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
-        bidListToFind1.setDealName("DealName Test");
-        bidListToFind1.setDealType("DealType Test");
-        bidListToFind1.setSourceListId("SourceListId Test");
-        bidListToFind1.setSide("Side Test");
+        bidListToFind1.setRevisionName("RevisionName");
+        bidListToFind1.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
+        bidListToFind1.setDealName("DealName");
+        bidListToFind1.setDealType("DealType");
+        bidListToFind1.setSourceListId("SourceListId");
+        bidListToFind1.setSide("Side");
         bidListRepositoryUnderTest.save(bidListToFind1);
 
-        BidList bidListToFind2 = new BidList("Account Test", "Type Test", 10d);
+        BidList bidListToFind2 = new BidList("Account", "Type", 10d);
         bidListToFind2.setAskQuantity(30d);
         bidListToFind2.setBid(123.45d);
         bidListToFind2.setAsk(321.54d);
-        bidListToFind2.setBenchmark("Benchmark Test");
+        bidListToFind2.setBenchmark("Benchmark");
         bidListToFind2.setBidListDate(valueOf("2020-08-10 10:20:30.0"));
-        bidListToFind2.setCommentary("Commentary Test");
-        bidListToFind2.setSecurity("Security Test");
+        bidListToFind2.setCommentary("Commentary");
+        bidListToFind2.setSecurity("Security");
         bidListToFind2.setStatus("StatusTest");
-        bidListToFind2.setTrader("Trader Test");
-        bidListToFind2.setBook("Book Test");
-        bidListToFind2.setCreationName("CreationName Test");
+        bidListToFind2.setTrader("Trader");
+        bidListToFind2.setBook("Book");
+        bidListToFind2.setCreationName("CreationName");
         bidListToFind2.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
-        bidListToFind2.setRevisionName("RevisionName Test");
-        bidListToFind2.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
-        bidListToFind2.setDealName("DealName Test");
-        bidListToFind2.setDealType("DealType Test");
-        bidListToFind2.setSourceListId("SourceListId Test");
-        bidListToFind2.setSide("Side Test");
+        bidListToFind2.setRevisionName("RevisionName");
+        bidListToFind2.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
+        bidListToFind2.setDealName("DealName");
+        bidListToFind2.setDealType("DealType");
+        bidListToFind2.setSourceListId("SourceListId");
+        bidListToFind2.setSide("Side");
         bidListRepositoryUnderTest.save(bidListToFind2);
 
-        BidList bidListToFind3 = new BidList("Account Test", "Type Test", 10d);
+        BidList bidListToFind3 = new BidList("Account", "Type", 10d);
         bidListToFind3.setAskQuantity(30d);
         bidListToFind3.setBid(123.45d);
         bidListToFind3.setAsk(321.54d);
-        bidListToFind3.setBenchmark("Benchmark Test");
+        bidListToFind3.setBenchmark("Benchmark");
         bidListToFind3.setBidListDate(valueOf("2020-08-10 10:20:30.0"));
-        bidListToFind3.setCommentary("Commentary Test");
-        bidListToFind3.setSecurity("Security Test");
+        bidListToFind3.setCommentary("Commentary");
+        bidListToFind3.setSecurity("Security");
         bidListToFind3.setStatus("StatusTest");
-        bidListToFind3.setTrader("Trader Test");
-        bidListToFind3.setBook("Book Test");
-        bidListToFind3.setCreationName("CreationName Test");
+        bidListToFind3.setTrader("Trader");
+        bidListToFind3.setBook("Book");
+        bidListToFind3.setCreationName("CreationName");
         bidListToFind3.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
-        bidListToFind3.setRevisionName("RevisionName Test");
-        bidListToFind3.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
-        bidListToFind3.setDealName("DealName Test");
-        bidListToFind3.setDealType("DealType Test");
-        bidListToFind3.setSourceListId("SourceListId Test");
-        bidListToFind3.setSide("Side Test");
+        bidListToFind3.setRevisionName("RevisionName");
+        bidListToFind3.setRevisionDate(valueOf("2020-08-10 10:20:30.0"));
+        bidListToFind3.setDealName("DealName");
+        bidListToFind3.setDealType("DealType");
+        bidListToFind3.setSourceListId("SourceListId");
+        bidListToFind3.setSide("Side");
         bidListRepositoryUnderTest.save(bidListToFind3);
 
         // ACT
@@ -260,25 +258,25 @@ public class BidListRepositoryTests {
     @Test
     public void deleteBidListById() {
         // ARRANGE
-        BidList bidListToDelete = new BidList("Account Test", "Type Test", 10d);
+        BidList bidListToDelete = new BidList("Account", "Type", 10d);
         bidListToDelete.setAskQuantity(30d);
         bidListToDelete.setBid(123.45d);
         bidListToDelete.setAsk(321.54d);
-        bidListToDelete.setBenchmark("Benchmark Test");
+        bidListToDelete.setBenchmark("Benchmark");
         bidListToDelete.setBidListDate(valueOf("2020-08-10 10:20:30.0"));
-        bidListToDelete.setCommentary("Commentary Test");
-        bidListToDelete.setSecurity("Security Test");
+        bidListToDelete.setCommentary("Commentary");
+        bidListToDelete.setSecurity("Security");
         bidListToDelete.setStatus("StatusTest");
-        bidListToDelete.setTrader("Trader Test");
-        bidListToDelete.setBook("Book Test");
-        bidListToDelete.setCreationName("CreationName Test");
+        bidListToDelete.setTrader("Trader");
+        bidListToDelete.setBook("Book");
+        bidListToDelete.setCreationName("CreationName");
         bidListToDelete.setCreationDate(valueOf("2020-07-23 10:20:30.0"));
-        bidListToDelete.setRevisionName("RevisionName Test");
+        bidListToDelete.setRevisionName("RevisionName");
         bidListToDelete.setRevisionDate(valueOf("2020-08-10 09:10:23.0"));
-        bidListToDelete.setDealName("DealName Test");
-        bidListToDelete.setDealType("DealType Test");
-        bidListToDelete.setSourceListId("SourceListId Test");
-        bidListToDelete.setSide("Side Test");
+        bidListToDelete.setDealName("DealName");
+        bidListToDelete.setDealType("DealType");
+        bidListToDelete.setSourceListId("SourceListId");
+        bidListToDelete.setSide("Side");
         bidListToDelete = bidListRepositoryUnderTest.save(bidListToDelete);
 
         // ACT

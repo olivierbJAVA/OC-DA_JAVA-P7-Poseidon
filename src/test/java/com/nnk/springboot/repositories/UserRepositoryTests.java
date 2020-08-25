@@ -78,13 +78,13 @@ public class UserRepositoryTests {
     @Test
     public void findAllUsers() {
         // ARRANGE
-        User userToFind1 = new User("user1", "%Password1", "User", "USER");
+        User userToFind1 = new User("user1", "%Password1", "User1", "USER");
         userRepositoryUnderTest.save(userToFind1);
 
-        User userToFind2 = new User("user2", "%Password2", "User", "USER");
+        User userToFind2 = new User("user2", "%Password2", "User2", "USER");
         userRepositoryUnderTest.save(userToFind2);
 
-        User userToFind3 = new User("user3", "%Password3", "User", "USER");
+        User userToFind3 = new User("user3", "%Password3", "User3", "USER");
         userRepositoryUnderTest.save(userToFind3);
 
         // ACT

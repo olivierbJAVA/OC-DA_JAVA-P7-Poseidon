@@ -32,7 +32,7 @@ public class RatingRepositoryTests {
     @Test
     public void saveRating() {
         // ARRANGE
-        Rating ratingToSave = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToSave = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
 
         // ACT
         Rating ratingSaved = ratingRepositoryUnderTest.save(ratingToSave);
@@ -48,7 +48,7 @@ public class RatingRepositoryTests {
     @Test
     public void updateRating() {
         // ARRANGE
-        Rating ratingToUpdate = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToUpdate = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingRepositoryUnderTest.save(ratingToUpdate);
 
         // ACT
@@ -65,7 +65,7 @@ public class RatingRepositoryTests {
     @Test
     public void findRatingById() {
         // ARRANGE
-        Rating ratingToFind = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToFind = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingToFind = ratingRepositoryUnderTest.save(ratingToFind);
 
         // ACT
@@ -82,13 +82,13 @@ public class RatingRepositoryTests {
     @Test
     public void findAllRatings() {
         // ARRANGE
-        Rating ratingToFind1 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToFind1 = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingRepositoryUnderTest.save(ratingToFind1);
 
-        Rating ratingToFind2 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToFind2 = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingRepositoryUnderTest.save(ratingToFind2);
 
-        Rating ratingToFind3 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToFind3 = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingRepositoryUnderTest.save(ratingToFind3);
 
         // ACT
@@ -101,7 +101,7 @@ public class RatingRepositoryTests {
     @Test
     public void deleteRatingById() {
         // ARRANGE
-        Rating ratingToDelete = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        Rating ratingToDelete = new Rating("Moodys Rating", "SandP Rating", "Fitch Rating", 10);
         ratingToDelete = ratingRepositoryUnderTest.save(ratingToDelete);
 
         // ACT
