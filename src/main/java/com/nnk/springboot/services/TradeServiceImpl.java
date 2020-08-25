@@ -59,7 +59,7 @@ public class TradeServiceImpl implements ITradeService {
      * @throws ResourceNotFoundException if the Trade to update does not exist
      */
     @Override
-    public Trade updateTrade(Trade trade) {
+    public Trade updateTrade(Trade trade) throws ResourceNotFoundException {
         tradeRepository.findById(trade.getTradeId()).orElseThrow(() -> new ResourceNotFoundException(trade.getTradeId(), "Trade"));
         return tradeRepository.save(trade);
     }

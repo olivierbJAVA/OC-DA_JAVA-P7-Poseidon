@@ -74,7 +74,7 @@ public class UserServiceImpl implements IUserService {
      * @throws ResourceNotFoundException if the User to update does not exist
      */
     @Override
-    public User updateUser(User user) {
+    public User updateUser(User user) throws ResourceNotFoundException {
         userRepository.findById(user.getId()).orElseThrow(() -> new ResourceNotFoundException(user.getId(), "User"));
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));

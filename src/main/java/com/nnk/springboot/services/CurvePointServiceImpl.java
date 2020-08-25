@@ -59,7 +59,7 @@ public class CurvePointServiceImpl implements ICurvePointService {
      * @throws ResourceNotFoundException if the CurvePoint to update does not exist
      */
     @Override
-    public CurvePoint updateCurvePoint(CurvePoint curvePoint) {
+    public CurvePoint updateCurvePoint(CurvePoint curvePoint) throws ResourceNotFoundException {
         curvePointRepository.findById(curvePoint.getId()).orElseThrow(() -> new ResourceNotFoundException(curvePoint.getId(), "CurvePoint"));
         return curvePointRepository.save(curvePoint);
     }

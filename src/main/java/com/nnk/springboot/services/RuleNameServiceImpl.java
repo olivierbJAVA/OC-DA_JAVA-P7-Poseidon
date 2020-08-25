@@ -59,7 +59,7 @@ public class RuleNameServiceImpl implements IRuleNameService {
      * @throws ResourceNotFoundException if the RuleName to update does not exist
      */
     @Override
-    public RuleName updateRuleName(RuleName ruleName) {
+    public RuleName updateRuleName(RuleName ruleName) throws ResourceNotFoundException {
         ruleNameRepository.findById(ruleName.getId()).orElseThrow(() -> new ResourceNotFoundException(ruleName.getId(), "RuleName"));
         return ruleNameRepository.save(ruleName);
     }

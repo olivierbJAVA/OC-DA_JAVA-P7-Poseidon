@@ -59,7 +59,7 @@ public class RatingServiceImpl implements IRatingService {
      * @throws ResourceNotFoundException if the Rating to update does not exist
      */
     @Override
-    public Rating updateRating(Rating rating) {
+    public Rating updateRating(Rating rating) throws ResourceNotFoundException {
         ratingRepository.findById(rating.getId()).orElseThrow(() -> new ResourceNotFoundException(rating.getId(), "Rating"));
         return ratingRepository.save(rating);
     }

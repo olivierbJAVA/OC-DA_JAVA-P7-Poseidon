@@ -59,7 +59,7 @@ public class BidListServiceImpl implements IBidListService {
      * @throws ResourceNotFoundException if the BidList to update does not exist
      */
     @Override
-    public BidList updateBidList(BidList bidList) {
+    public BidList updateBidList(BidList bidList) throws ResourceNotFoundException {
         bidListRepository.findById(bidList.getBidListId()).orElseThrow(() -> new ResourceNotFoundException(bidList.getBidListId(), "BidList"));
         return bidListRepository.save(bidList);
     }
