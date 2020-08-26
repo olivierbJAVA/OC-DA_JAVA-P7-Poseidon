@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -31,15 +30,15 @@ public class TradeController {
     ITradeService tradeService;
 
     /**
-     * Method managing the "/trade/list" endpoint HTTP request to get the list of all Trades.
+     * Method managing the GET "/trade/list" endpoint HTTP request to get the list of all Trades.
      *
      * @param model The Model containing the list of all trades
      * @return The name of the View
      */
-    @RequestMapping("/trade/list")
+    @GetMapping("/trade/list")
     public String home(Model model) {
 
-        logger.info("Request : /trade/list");
+        logger.info("Request : GET /trade/list");
 
         List<Trade> trades = tradeService.findAllTrades();
         model.addAttribute("trades", trades);

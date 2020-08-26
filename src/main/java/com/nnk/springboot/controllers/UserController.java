@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -29,15 +28,15 @@ public class UserController {
     IUserService userService;
 
     /**
-     * Method managing the "/user/list" endpoint HTTP request to get the list of all Users.
+     * Method managing the GET "/user/list" endpoint HTTP request to get the list of all Users.
      *
      * @param model The Model containing the list of all users
      * @return The name of the View
      */
-    @RequestMapping("/user/list")
+    @GetMapping("/user/list")
     public String home(Model model) {
 
-        logger.info("Request : /user/list");
+        logger.info("Request : GET /user/list");
 
         List<User> users = userService.findAllUsers();
         model.addAttribute("users", users);

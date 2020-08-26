@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -28,15 +27,15 @@ public class RatingController {
     IRatingService ratingService;
 
     /**
-     * Method managing the "/rating/list" endpoint HTTP request to get the list of all Ratings.
+     * Method managing the GET "/rating/list" endpoint HTTP request to get the list of all Ratings.
      *
      * @param model The Model containing the list of all ratings
      * @return The name of the View
      */
-    @RequestMapping("/rating/list")
+    @GetMapping("/rating/list")
     public String home(Model model) {
 
-        logger.info("Request : /rating/list");
+        logger.info("Request : GET /rating/list");
 
         List<Rating> ratings = ratingService.findAllRatings();
         model.addAttribute("ratings", ratings);

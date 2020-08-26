@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -31,15 +30,15 @@ public class BidListController {
     IBidListService bidListService;
 
     /**
-     * Method managing the "/bidList/list" endpoint HTTP request to get the list of all BidLists.
+     * Method managing the GET "/bidList/list" endpoint HTTP request to get the list of all BidLists.
      *
      * @param model The Model containing the list of all bidLists
      * @return The name of the View
      */
-    @RequestMapping("/bidList/list")
+    @GetMapping("/bidList/list")
     public String home(Model model) {
 
-        logger.info("Request : /bidList/list");
+        logger.info("Request : GET /bidList/list");
 
         List<BidList> bidLists = bidListService.findAllBidLists();
         model.addAttribute("bidLists", bidLists);
