@@ -7,9 +7,9 @@ public class ResourceAlreadyExistException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    private String resourceId;
+    private final String resourceId;
 
-    private String resourceType;
+    private final String resourceType;
 
     /**
      * Constructs a new ResourceAlreadyExistException.
