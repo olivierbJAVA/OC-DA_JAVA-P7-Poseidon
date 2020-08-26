@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * CurvePoint entity Service.
  */
 @ActiveProfiles("test")
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql("/schema-test.sql")
 public class CurvePointServiceImplITests {
 

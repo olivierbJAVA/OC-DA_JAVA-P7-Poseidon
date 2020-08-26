@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Trade entity Service.
  */
 @ActiveProfiles("test")
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql("/schema-test.sql")
 public class TradeServiceImplITests {
 

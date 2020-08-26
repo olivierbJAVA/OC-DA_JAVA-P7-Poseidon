@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * User entity Service.
  */
 @ActiveProfiles("test")
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql("/schema-test.sql")
 public class UserServiceImplITests {
 
