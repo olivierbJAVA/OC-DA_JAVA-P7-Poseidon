@@ -27,7 +27,7 @@ public class HomeControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-    // @RequestMapping(value = "/")
+    // @GetMapping(value = "/")
     @Test
     public void home() {
         //ARRANGE
@@ -42,7 +42,7 @@ public class HomeControllerTests {
         }
     }
 
-    // @RequestMapping(value = "/admin/home")
+    // @GetMapping(value = "/admin/home")
     @Test
     public void adminHome() {
         //ARRANGE

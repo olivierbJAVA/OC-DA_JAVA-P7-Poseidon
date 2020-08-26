@@ -41,7 +41,7 @@ public class BidListControllerTests {
     @MockBean
     private IBidListService mockBidListService;
 
-    // @RequestMapping(value = "/bidList/list")
+    // @GetMapping(value = "/bidList/list")
     @Test
     public void home() {
         //ARRANGE

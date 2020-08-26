@@ -41,7 +41,7 @@ public class CurvePointControllerTests {
     @MockBean
     private ICurvePointService mockCurvePointService;
 
-    // @RequestMapping(value = "/curvePoint/list")
+    // @GetMapping(value = "/curvePoint/list")
     @Test
     public void home() {
         //ARRANGE

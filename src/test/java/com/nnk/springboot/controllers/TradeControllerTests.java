@@ -41,7 +41,7 @@ public class TradeControllerTests {
     @MockBean
     private ITradeService mockTradeService;
 
-    // @RequestMapping(value = "/trade/list")
+    // @GetMapping(value = "/trade/list")
     @Test
     public void home() {
         //ARRANGE

@@ -40,7 +40,7 @@ public class RuleNameControllerTests {
     @MockBean
     private IRuleNameService mockRuleNameService;
 
-    // @RequestMapping(value = "/ruleName/list")
+    // @GetMapping(value = "/ruleName/list")
     @Test
     public void home() {
         //ARRANGE

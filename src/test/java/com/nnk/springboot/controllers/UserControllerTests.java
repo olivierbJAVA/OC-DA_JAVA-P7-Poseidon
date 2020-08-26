@@ -40,7 +40,7 @@ public class UserControllerTests {
     @MockBean
     private IUserService mockUserService;
 
-    // @RequestMapping(value = "/user/list")
+    // @GetMapping(value = "/user/list")
     @Test
     public void home() {
         //ARRANGE

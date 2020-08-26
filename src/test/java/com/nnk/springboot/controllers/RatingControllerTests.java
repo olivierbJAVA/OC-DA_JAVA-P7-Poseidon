@@ -40,7 +40,7 @@ public class RatingControllerTests {
     @MockBean
     private IRatingService mockRatingService;
 
-    // @RequestMapping(value = "/rating/list")
+    // @GetMapping(value = "/rating/list")
     @Test
     public void home() {
         //ARRANGE
