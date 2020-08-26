@@ -101,7 +101,7 @@ public class RuleNameRepositoryTests {
         List<RuleName> listRuleNames = ruleNameRepositoryUnderTest.findAll();
 
         // ASSERT
-        assertTrue(listRuleNames.size() == 3);
+        assertEquals(3, listRuleNames.size());
     }
 
     @Test

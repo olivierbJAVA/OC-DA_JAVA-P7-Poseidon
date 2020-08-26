@@ -109,7 +109,7 @@ public class CurvePointRepositoryTests {
         curvePointRepositoryUnderTest.save(curvePointToFind3);
 
         List<CurvePoint> listCurvePoints = curvePointRepositoryUnderTest.findAll();
-        assertTrue(listCurvePoints.size() == 3);
+        assertEquals(3, listCurvePoints.size());
     }
 
     @Test

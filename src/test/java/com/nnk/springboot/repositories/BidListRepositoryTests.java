@@ -252,7 +252,7 @@ public class BidListRepositoryTests {
         List<BidList> listBidLists = bidListRepositoryUnderTest.findAll();
 
         // ASSERT
-        assertTrue(listBidLists.size() == 3);
+        assertEquals(3, listBidLists.size());
     }
 
     @Test

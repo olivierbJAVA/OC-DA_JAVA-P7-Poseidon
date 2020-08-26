@@ -95,7 +95,7 @@ public class RatingRepositoryTests {
         List<Rating> listRatings = ratingRepositoryUnderTest.findAll();
 
         // ASSERT
-        assertTrue(listRatings.size() == 3);
+        assertEquals(3, listRatings.size());
     }
 
     @Test

@@ -243,7 +243,7 @@ public class TradeRepositoryTests {
         List<Trade> listTrades = tradeRepositoryUnderTest.findAll();
 
         // ASSERT
-        assertTrue(listTrades.size() == 3);
+        assertEquals(3, listTrades.size());
     }
 
     @Test
