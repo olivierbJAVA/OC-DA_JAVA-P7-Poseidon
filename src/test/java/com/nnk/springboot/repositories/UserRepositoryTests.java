@@ -14,7 +14,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Class including tests for the User entity Repository.
+ * Class including unit tests for the User entity Repository.
  */
 @ActiveProfiles("test")
 @DataJpaTest

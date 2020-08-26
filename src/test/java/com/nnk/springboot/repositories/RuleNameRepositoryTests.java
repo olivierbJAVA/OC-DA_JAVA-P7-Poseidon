@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Class including tests for the RuleName entity Repository.
+ * Class including unit tests for the RuleName entity Repository.
  */
 @ActiveProfiles("test")
 @DataJpaTest
