@@ -100,7 +100,7 @@ public class RuleNameServiceImplITests {
         List<RuleName> listRuleNames = ruleNameServiceImplUnderTest.findAllRuleNames();
 
         // ASSERT
-        assertTrue(listRuleNames.size() == 3);
+        assertEquals(3, listRuleNames.size());
     }
 
     @Test

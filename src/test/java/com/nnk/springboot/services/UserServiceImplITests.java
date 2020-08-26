@@ -113,7 +113,7 @@ public class UserServiceImplITests {
         List<User> listUsers = userServiceImplUnderTest.findAllUsers();
 
         // ASSERT
-        assertTrue(listUsers.size() == 3);
+        assertEquals(3, listUsers.size());
     }
 
     @Test

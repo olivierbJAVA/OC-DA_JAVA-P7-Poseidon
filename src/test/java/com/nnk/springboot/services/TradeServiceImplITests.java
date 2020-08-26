@@ -242,7 +242,7 @@ public class TradeServiceImplITests {
         List<Trade> listTrades = tradeServiceImplUnderTest.findAllTrades();
 
         // ASSERT
-        assertTrue(listTrades.size() == 3);
+        assertEquals(3, listTrades.size());
     }
 
     @Test

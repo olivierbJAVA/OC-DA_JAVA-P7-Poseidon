@@ -107,8 +107,11 @@ public class CurvePointServiceImplITests {
         curvePointToFind3.setCreationDate(valueOf("2020-08-10 10:20:30.0"));
         curvePointServiceImplUnderTest.createCurvePoint(curvePointToFind3);
 
+        // ACT
         List<CurvePoint> listCurvePoints = curvePointServiceImplUnderTest.findAllCurvePoints();
-        assertTrue(listCurvePoints.size() == 3);
+
+        // ASSERT
+        assertEquals(3, listCurvePoints.size());
     }
 
     @Test

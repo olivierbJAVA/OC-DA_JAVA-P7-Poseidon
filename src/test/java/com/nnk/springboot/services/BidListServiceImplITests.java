@@ -2,7 +2,6 @@ package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.exceptions.ResourceNotFoundException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -251,7 +250,7 @@ public class BidListServiceImplITests {
         List<BidList> listBidLists = bidListServiceImplUnderTest.findAllBidLists();
 
         // ASSERT
-        assertTrue(listBidLists.size() == 3);
+        assertEquals(3, listBidLists.size());
     }
 
     @Test

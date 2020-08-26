@@ -94,7 +94,7 @@ public class RatingServiceImplITests {
         List<Rating> listRatings = ratingServiceImplUnderTest.findAllRatings();
 
         // ASSERT
-        assertTrue(listRatings.size() == 3);
+        assertEquals(3, listRatings.size());
     }
 
     @Test
