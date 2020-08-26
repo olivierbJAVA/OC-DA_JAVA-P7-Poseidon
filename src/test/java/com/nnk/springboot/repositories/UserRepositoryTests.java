@@ -91,7 +91,7 @@ public class UserRepositoryTests {
         List<User> listUsers = userRepositoryUnderTest.findAll();
 
         // ASSERT
-        assertTrue(listUsers.size() == 3);
+        assertEquals(3, listUsers.size());
     }
 
     @Test
