@@ -22,13 +22,13 @@
         </div>
     </div>
 </div>
-<h3>ERROR : Access Denied</h3>
+<h3>Error : Access Denied</h3>
    <div>
 	    Logged in user: <b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b>
 	    <form th:action="@{/logout}" method="POST">
 	         <input type="submit" value="Logout"/>
 	    </form>
    </div>
-    <p class="error" th:text="${errorMessage}">Error</p>
+    <p class="text-danger" th:text="${errorMessage}">Error</p>
 </body>
 </html>
