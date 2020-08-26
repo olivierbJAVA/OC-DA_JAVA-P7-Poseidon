@@ -32,16 +32,15 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                // Users having either a USER or ADMIN role are authorized to access and manage (Create, Read, Update, Delete) financial entities (BidList, CurvePoint, Rating, RuleName and Trade)
-                .antMatchers("/", "/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").hasAnyAuthority("USER", "ADMIN")
-                // Only users having a ADMIN role are authorized to access and manage (Create, Read, Update, Delete) Users
-                .antMatchers("/user/**", "/admin/home").hasAuthority("ADMIN")
-                //.antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                    // Users having either a USER or ADMIN role are authorized to access and manage (Create, Read, Update, Delete) financial entities (BidList, CurvePoint, Rating, RuleName and Trade)
+                    .antMatchers("/", "/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").hasAnyAuthority("USER", "ADMIN")
+                    // Only users having a ADMIN role are authorized to access and manage (Create, Read, Update, Delete) Users
+                    .antMatchers("/user/**", "/admin/home").hasAuthority("ADMIN")
+                    .anyRequest().authenticated()
+                    .and()
                 .formLogin()
-                .defaultSuccessUrl("/bidList/list")
-                .and()
+                    .defaultSuccessUrl("/bidList/list")
+                    .and()
                 .exceptionHandling().accessDeniedPage("/errorAccessDenied");
     }
 
