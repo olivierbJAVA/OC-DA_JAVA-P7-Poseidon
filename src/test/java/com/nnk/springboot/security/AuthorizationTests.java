@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Class including tests for security authorization.
+ * Class including unit tests for security authorization.
  */
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")

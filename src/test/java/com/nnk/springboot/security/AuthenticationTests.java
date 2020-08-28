@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Class including tests for security authentication.
+ * Class including unit tests for security authentication.
  */
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
- * Class including tests for password encoder.
+ * Class including unit tests for password encoder.
  */
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
