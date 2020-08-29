@@ -60,8 +60,10 @@ These SQL scripts are automatically run by SpringBoot.
 
 >During installing, application running or tests launching you may have an issue (depending on your configuration) related to Time zone configuration.
 It is an issue due the configuration of MySQL server.
+
 >To solve this issue, you can add the following line in the MySQL server configuration file (*my.ini* or *my.cfg*) that is in your MySQL directory :
 *default-time-zone='+02:00'*.
+
 >This line must be added in the [mysqld] section of the configuration file and may be adapted to your own local timezone obviously.
 
 ### Application running
