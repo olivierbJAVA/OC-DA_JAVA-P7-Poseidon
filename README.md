@@ -55,14 +55,14 @@ The username and password for connection to the database are stored in the confi
 You must fill these properties files with your own username and password.
 
 A dedicated database is created for each profile (with name : *PoseidonProfileName*) using the files : *schema-profileName.sql*.
-Databases are initialized with some data using the files : *data-profileName.sql*.
+Then databases are initialized with some data using the files : *data-profileName.sql*.
 These SQL scripts are automatically run by SpringBoot.
 
 >During installing, application running or tests launching you may have an issue (depending on your configuration) related to Time zone configuration.
 It is an issue due the configuration of MySQL server.
-To solve this issue, you can add the following line in the MySQL server configuration file (*my.ini* or *my.cfg*) that is in your MySQL directory :
-*default-time-zone='+02:00'*
-This line must be added in the [mysqld] section of the configuration file and may be updated to your local timezone obviously.
+>To solve this issue, you can add the following line in the MySQL server configuration file (*my.ini* or *my.cfg*) that is in your MySQL directory :
+*default-time-zone='+02:00'*.
+>This line must be added in the [mysqld] section of the configuration file and may be adapted to your own local timezone obviously.
 
 ### Application running
 
@@ -76,7 +76,7 @@ A Security layer is included within the application.
 
 1.Authentication : Every user needs to authenticate to the application with username and password.
 
-2.Authorization : Two roles are available in the application : ADMIN and USER.
+2.Authorization : Two roles are available within the application : ADMIN and USER.
 - Users with ADMIN role are authorized to access and manage financial entites AND users
 - Users with USER role are authorized to access and manage financial entites but are NOT authorized to acces and manage users
 
@@ -93,7 +93,7 @@ Endpoints are available for managing financial entities with CRUD methods.
 Endpoints are available for each entity : 
 - Rating, BidList, CurvePoint, RuleName and Trade.
 
-You will find below an endpoints for *Rating* management :
+You will find below endpoints for *Rating* management :
 
 1.Read :
 - GET  <http://localhost:8080/rating/list> to list all Ratings
@@ -104,7 +104,7 @@ You will find below an endpoints for *Rating* management :
 
 3.Update :
 - GET  <http://localhost:8080/rating/update/{id}> to get the form to fill to update the Rating which id is in parameter
-- GET  <http://localhost:8080/rating/update/{id}> to post the form filled to update the Rating which id is in parameter
+- POST <http://localhost:8080/rating/update/{id}> to post the form filled to update the Rating which id is in parameter
 
 4.Delete :
 - GET  <http://localhost:8080/rating/delete/{id}> to delete the Rating which id is in parameter
@@ -122,7 +122,7 @@ There are endpoints for *Users* management as well :
 
 3.Update :
 - GET  <http://localhost:8080/user/update/{id}> to get the form to fill to update the User which id is in parameter
-- GET  <http://localhost:8080/user/update/{id}> to post the form filled to update the User which id is in parameter
+- POST <http://localhost:8080/user/update/{id}> to post the form filled to update the User which id is in parameter
 
 4.Delete :
 - GET  <http://localhost:8080/user/delete/{id}> to delete the User which id is in parameter
@@ -138,8 +138,8 @@ You can produce a standalone executable JAR file of the application, by running 
 The tool Logback is used for logging. Logs are sent to the console and to a file.
 You can configure the logging to your own needs by using the configuration file : *logback.xml*.
 
-Each request and result to endpoints are loggued.
+Each request and result for endpoints are logged.
 
 ### Tests
 
-Tests are included, you can run them using JUnit runner (`Run as JUnit test`) or using Maven (`Run as Maven test`).
+Tests are included for each layer. You can run them using JUnit runner (`Run as JUnit test`) or using Maven (`Run as Maven test`).
