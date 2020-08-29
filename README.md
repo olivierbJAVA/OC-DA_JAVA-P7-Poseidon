@@ -2,10 +2,10 @@
 Welcome to Poseidon !
 
 Poseidon is a web application which goal is to store and manage information related to fixed income financial products.
-Information related to these products are stored in financial entities : *BidList, CurvePoint, Rating, RuleName and Trade*.
-The application allow manage the users of the application as well : *User* entity.
+Information related to these products are stored in financial entities : *Rating, BidList, CurvePoint, RuleName and Trade*.
+The application allows to manage the users of the application as well (*User* entity).
 
-It is a Java SpringBoot web application based on the MVC pattern and a REST API.
+On the Backend side, it is a Java SpringBoot web application based on the MVC pattern and a REST API.
 Data are recorded in a MySQL database.
 Maven is used to run the tests, build and package the application.
 
@@ -41,29 +41,28 @@ You will find below a step by step explanation that tell you how to get a develo
 ### Profiles and Configuration
 
 Three Spring profiles are available for each following phase :
-- PROD profile : profile used for *Production* phase
-- DEV profile  : profile used for *Development* phase
-- TEST profile : profile used for *Test* phase
+- PROD profile used for *Production* phase
+- DEV profile used for *Development* phase
+- TEST profile used for *Test* phase
 
 There is a global Spring configuration properties file : *application.properties*, and a dedicated configuration properties file for each profile : *application-profileName.properties*.
-These files are stored in the *src/main/java/resources* directory for PROD and DEV profiles and the *src/test/java/resources* directory for the TEST profile.
+These files are stored in the *src/main/java/resources* directory for PROD and DEV profiles and in the *src/test/java/resources* directory for the TEST profile.
 
 
 ### DataBase creation and initialization
 
-The *username* and *password* for connection to the database are stored in the configuration *application-profileName.properties* file.
-You must fill these properties file with your own username and password.
+The username and password for connection to the database are stored in the configuration *application-profileName.properties* files.
+You must fill these properties files with your own username and password.
 
 A dedicated database is created for each profile (with name : *PoseidonProfileName*) using the files : *schema-profileName.sql*.
 Databases are initialized with some data using the files : *data-profileName.sql*.
 These SQL scripts are automatically run by SpringBoot.
 
-During installing, application running or tests launching you may have an issue (depending on your configuration) related to Time zone configuration.
+>During installing, application running or tests launching you may have an issue (depending on your configuration) related to Time zone configuration.
 It is an issue due the configuration of MySQL server.
 To solve this issue, you can add the following line in the MySQL server configuration file (*my.ini* or *my.cfg*) that is in your MySQL directory :
 *default-time-zone='+02:00'*
- 
-Please ensure to add this line in the [mysqld] section of the configuration file.
+This line must be added in the [mysqld] section of the configuration file and may be updated to your local timezone obviously.
 
 ### Application running
 
@@ -75,9 +74,9 @@ Please note that the application is secured and you must authenticate before hav
 
 A Security layer is included within the application.   
 
-1.Authentication : Every user needs to authenticate to the application with username and password
+1.Authentication : Every user needs to authenticate to the application with username and password.
 
-2.Authorization : Two roles are available in the application : ADMIN and USER 
+2.Authorization : Two roles are available in the application : ADMIN and USER.
 - Users with ADMIN role are authorized to access and manage financial entites AND users
 - Users with USER role are authorized to access and manage financial entites but are NOT authorized to acces and manage users
 
@@ -92,38 +91,38 @@ You can use these credentials to connect to the application.
 ### Endpoints
 Endpoints are available for managing financial entities with CRUD methods.
 Endpoints are available for each entity : 
-- BidList, CurvePoint, Rating, RuleName and Trade.
+- Rating, BidList, CurvePoint, RuleName and Trade.
 
-You will find below an example for *Rating* management :
+You will find below an endpoints for *Rating* management :
 
 1.Read :
 - GET  <http://localhost:8080/rating/list> to list all Ratings
 
 2.Create :
-- GET  <http://localhost:8080/rating/add> to get the formula to fill to add a new Rating
-- POST <http://localhost:8080/rating/validate> to post the formula to filled to add a new Rating
+- GET  <http://localhost:8080/rating/add> to get the form to fill to add a new Rating
+- POST <http://localhost:8080/rating/validate> to post the form filled to add a new Rating
 
 3.Update :
-- GET  <http://localhost:8080/rating/update/{id}> to get the formula to fill to update the Rating which id is in parameter
-- GET  <http://localhost:8080/rating/update/{id}> to post the formula to filled to update the Rating which id is in parameter
+- GET  <http://localhost:8080/rating/update/{id}> to get the form to fill to update the Rating which id is in parameter
+- GET  <http://localhost:8080/rating/update/{id}> to post the form filled to update the Rating which id is in parameter
 
 4.Delete :
 - GET  <http://localhost:8080/rating/delete/{id}> to delete the Rating which id is in parameter
         
-Same Endpoints are available for BidList, CurvePoint, RuleName and Trade.
+Same endpoints are available for other financial entities : BidList, CurvePoint, RuleName and Trade.
 
-There are Endpoints for *Users* management as well :
+There are endpoints for *Users* management as well :
 
 1.Read :
 - GET  <http://localhost:8080/user/list> to list all Users
 
 2.Create :
-- GET  <http://localhost:8080/user/add> to get the formula to fill to add a new User
-- POST <http://localhost:8080/user/validate> to post the formula to filled to add a new User
+- GET  <http://localhost:8080/user/add> to get the form to fill to add a new User
+- POST <http://localhost:8080/user/validate> to post the form filled to add a new User
 
 3.Update :
-- GET  <http://localhost:8080/user/update/{id}> to get the formula to fill to update the User which id is in parameter
-- GET  <http://localhost:8080/user/update/{id}> to post the formula to filled to update the User which id is in parameter
+- GET  <http://localhost:8080/user/update/{id}> to get the form to fill to update the User which id is in parameter
+- GET  <http://localhost:8080/user/update/{id}> to post the form filled to update the User which id is in parameter
 
 4.Delete :
 - GET  <http://localhost:8080/user/delete/{id}> to delete the User which id is in parameter
@@ -137,7 +136,7 @@ You can produce a standalone executable JAR file of the application, by running 
 ### Logging
 
 The tool Logback is used for logging. Logs are sent to the console and to a file.
-You can configure the logging to your own needs by using the configuration file : *'logback.xml'*.
+You can configure the logging to your own needs by using the configuration file : *logback.xml*.
 
 Each request and result to endpoints are loggued.
 
