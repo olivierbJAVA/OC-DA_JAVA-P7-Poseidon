@@ -244,7 +244,7 @@ public class UserControllerTests {
 
     // @PostMapping(value = "/user/update/{id}"")
     @Test
-    public void updateUser_whenNoErrorAndUsernameAlreadyExistAndIsUsernameToUpdate() {
+    public void updateUser_whenNoErrorAndUsernameAlreadyExistAndUsernameBelongsToUserToUpdate() {
         //ARRANGE
         User usernameAlreadyExist = new User();
         // The username already existing is the one to update (same id=1) -> no issue
@@ -285,7 +285,7 @@ public class UserControllerTests {
 
     // @PostMapping(value = "/user/update/{id}"")
     @Test
-    public void updateUser_whenNoErrorAndUsernameAlreadyExistAndIsNotUsernameToUpdate() {
+    public void updateUser_whenNoErrorAndUsernameAlreadyExistAndUsernameNotBelongToUserToUpdate() {
         //ARRANGE
         User usernameAlreadyExist = new User();
         // The username already existing belongs to another user (id=1) than the one to update (id=2) -> there is an issue
