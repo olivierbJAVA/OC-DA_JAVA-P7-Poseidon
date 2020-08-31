@@ -46,7 +46,7 @@ Three Spring profiles are available for each following phase :
 - TEST profile used for *Test* phase
 
 There is a global Spring configuration properties file : *application.properties*, and a dedicated configuration properties file for each profile : *application-profileName.properties*.
-These files are stored in the *src/main/java/resources* directory for PROD and DEV profiles and in the *src/test/java/resources* directory for the TEST profile.
+These files are stored in the *src/main/resources* directory for PROD and DEV profiles and in the *src/test/resources* directory for the TEST profile.
 
 
 ### DataBase creation and initialization
@@ -79,8 +79,8 @@ A Security layer is included within the application.
 1.Authentication : Every user needs to authenticate to the application with username and password.
 
 2.Authorization : Two roles are available within the application : ADMIN and USER.
-- Users with ADMIN role are authorized to access and manage financial entites AND users
-- Users with USER role are authorized to access and manage financial entites but are NOT authorized to acces and manage users
+- Users with ADMIN role are authorized to access and manage financial entities AND users
+- Users with USER role are authorized to access and manage financial entities but are NOT authorized to access and manage users
 
 3.Password : Users passwords are hashed before being stored in the database.
 
