@@ -145,4 +145,3 @@ Each request and result for endpoints are logged.
 ### Tests
 
 Tests are included for each layer of the application. You can run them using JUnit runner (`Run as JUnit test`) or using Maven (`Run as Maven test`).
-
